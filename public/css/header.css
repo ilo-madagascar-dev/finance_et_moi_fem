@@ -1,0 +1,71 @@
+.mail, .phone{
+    color: var(--dark-01);
+}
+
+.header{
+}
+
+.header-top-bar{
+    display: grid;
+    grid-template-columns: 18em auto;
+    gap: 2em;
+    width: 100%;
+    box-sizing: border-box;
+    position: -webkit-sticky;
+    position: sticky;
+    padding: 2.5em 3em 1.5em;
+    top: 0;
+    transition: .4s;
+}
+
+.header-top-bar.shrinked{
+    grid-template-columns: 13.5em auto;
+    padding: 1.5em 3em 1em;
+    transition: .4s;
+}
+
+.logo img{
+    width: 100%;
+}
+
+.header-things{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.nav-bar{
+    width: 100%;
+}
+
+.nav-list{
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+}
+
+.contact-stuff{
+    display: flex;
+    gap: 1em;
+}
+
+.contact-stuff img{
+    width: 1.5em;
+}
+
+.list-item a{
+    text-decoration: none;
+    color: var(--light-01);
+}
+
+.list-item a:hover{
+    color: var(--dark-01);
+}
+
+.hero{
+    width: 100%;
+}
+.hero img{
+    width: 100%;
+}

@@ -1,0 +1,7 @@
+*{
+    --dark-01: #203c76;
+    --light-01: #1c9fd9;
+    --bg--01: #f5f5ff;
+    --white--ish-01: #fefefe;
+    background-color: var(--bg--01);
+}
