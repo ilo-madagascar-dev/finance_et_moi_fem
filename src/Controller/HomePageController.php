@@ -17,4 +17,14 @@ class HomePageController extends AbstractController
             'controller_name' => 'HomePageController',
         ]);
     }
+    
+    /**
+     * @Route("/home", name="home_mqbaka")
+     */
+    public function mqbaka_home(): Response
+    {
+        return $this->render('mqbaka_home/index.html.twig', [
+            'controller_name' => 'MqbakaHomeController',
+        ]);
+    }
 }
