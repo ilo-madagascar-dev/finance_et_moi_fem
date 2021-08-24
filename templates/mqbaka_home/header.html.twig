@@ -1,0 +1,81 @@
+<link rel="stylesheet" href={{ asset('css/header.css') }}>
+<div class="header-top-bar">
+    <div class="logo">
+        <img src={{ asset('images/icon/favicon.png') }} alt="logo">
+    </div>
+    <div class="header-things">
+        <div class="contact-stuff">
+            <div class="phone">
+                <img src={{ asset('images/icon/phone.png') }}  alt="">
+                06 xxx xx xxx xx
+            </div>
+            <div class="mail">
+                <img src={{ asset('images/icon/mail.png') }}  alt="">
+                email@domain.com
+            </div>
+        </div>
+        <div class="nav-bar">
+            <div class="menu-list">
+                <ul class="nav-list">
+                    <li class="list-item">
+                        <a href="#">
+                            Accueil
+                        </a>
+                    </li>
+                    <li class="list-item">
+                        <a href="#">
+                            A propos
+                        </a>
+                    </li>
+                    <li class="list-item">
+                        <a href="#">
+                                Assurance emprunteur
+                            </a>
+                        </li>
+                        <li class="list-item">
+                            <a href="#">
+                                Services
+                            </a>
+                        </li>
+                        <li class="list-item">
+                            <a href="#">
+                                Tarif
+                            </a>
+                        </li>
+                        <li class="list-item">
+                            <a href="#">
+                                Votre concièrgerie
+                            </a>
+                        </li>
+                        <li class="list-item">
+                            <a href="#">
+                                Compte
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="header">
+    <div class="hero">
+        <img src={{ asset('images/groupe.png') }}  alt="hero">
+    </div>
+</div>
+
+<script title="the one that shrinks the header">
+    let top__bar= document.querySelector('.header-top-bar');
+    let header= document.querySelector('.header');
+
+    const scroller= function(event){
+        console.log(window.scrollY);
+        console.log(header.offsetHeight);
+        if(window.scrollY> header.offsetHeight){
+            top__bar.classList.add('shrinked');
+        } else {
+            top__bar.classList.remove('shrinked');
+        }
+    }
+
+    document.addEventListener('scroll', scroller);
+</script>
