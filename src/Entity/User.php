@@ -47,7 +47,12 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nomEntreprise;
+    protected $nomEntreprise;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Client::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $client;
 
     public function getId(): ?int
     {
@@ -162,6 +167,23 @@ class User implements UserInterface
     public function setNomEntreprise(string $nomEntreprise): self
     {
         $this->nomEntreprise = $nomEntreprise;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(Client $client): self
+    {
+        // set the owning side of the relation if necessary
+        if ($client->getUser() !== $this) {
+            $client->setUser($this);
+        }
+
+        $this->client = $client;
 
         return $this;
     }

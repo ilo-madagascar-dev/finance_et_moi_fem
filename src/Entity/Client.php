@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=ClientRepository::class)
  */
-class Client
+class Client extends User
 {
     /**
      * @ORM\Id
@@ -51,6 +51,12 @@ class Client
      * @ORM\Column(type="text", nullable=true)
      */
     private $siren;
+
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="yes", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function getId(): ?int
     {
@@ -137,6 +143,18 @@ class Client
     public function setSiren(?string $siren): self
     {
         $this->siren = $siren;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
