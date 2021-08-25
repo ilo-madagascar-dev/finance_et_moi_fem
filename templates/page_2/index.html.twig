@@ -1,23 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'mqbaka_home/index.html.twig' %}
+
 
 {% block title %}Hello HomePageController!{% endblock %}
 
-{% block stylesheets %}
-    {# <link href="stylesheets/fonts/stylesheet-01.css" rel="text/css"/> #}
-    <link href={{ asset('css/app.css') }} rel="stylesheet">
-    <link href={{ asset('css/stylesheet.css') }} rel="stylesheet">
-    <link href={{ asset('css/colors.css') }} rel="stylesheet">
-    
-    {% block addstyle %}
-    {% endblock %}
-{% endblock %}
 
 {% block body %}
-
-{% block header %}
 {% include "mqbaka_home/header.html.twig" %}
-{% endblock %}
-
+<link href={{ asset('css/app.css') }} rel="stylesheet">
 <div class="grid-container">
     <div>
         <img src={{ asset('images/image_apropos/Capture2.png') }}>
