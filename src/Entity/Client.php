@@ -62,6 +62,11 @@ class Client extends User
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Paiement::class, mappedBy="client", cascade={"persist", "remove"})
+     */
+    private $paiement;
     
 
     public function getId(): ?int
@@ -175,6 +180,23 @@ class Client extends User
     public function setUser(User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getPaiement(): ?Paiement
+    {
+        return $this->paiement;
+    }
+
+    public function setPaiement(Paiement $paiement): self
+    {
+        // set the owning side of the relation if necessary
+        if ($paiement->getClient() !== $this) {
+            $paiement->setClient($this);
+        }
+
+        $this->paiement = $paiement;
 
         return $this;
     }
