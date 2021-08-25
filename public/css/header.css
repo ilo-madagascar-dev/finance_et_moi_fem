@@ -1,5 +1,8 @@
 .mail, .phone{
     color: var(--dark-01);
+    display: flex;
+    align-items: center;
+    gap: .5em;
 }
 
 .header{
@@ -16,12 +19,19 @@
     padding: 2.5em 3em 1.5em;
     top: 0;
     transition: .4s;
+    z-index: 2;
 }
 
 .header-top-bar.shrinked{
     grid-template-columns: 13.5em auto;
-    padding: 1.5em 3em 1em;
+    padding: .8em 3em .4em;
     transition: .4s;
+    box-shadow: 0 5px 5px 0 #2223;
+    align-items: center;
+}
+
+.header-top-bar.header-top-bar.shrinked .contact-stuff{
+    display: none;
 }
 
 .logo img{
@@ -47,7 +57,7 @@
 
 .contact-stuff{
     display: flex;
-    gap: 1em;
+    gap: 2em;
 }
 
 .contact-stuff img{

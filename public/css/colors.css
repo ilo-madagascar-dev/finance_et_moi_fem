@@ -2,6 +2,7 @@
     --dark-01: #203c76;
     --light-01: #1c9fd9;
     --bg--01: #f5f5ff;
+    --bg--02: #fff;
     --white--ish-01: #fefefe;
-    background-color: var(--bg--01);
+    background-color: var(--bg--02);
 }
