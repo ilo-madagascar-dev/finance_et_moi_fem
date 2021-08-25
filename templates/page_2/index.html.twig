@@ -1,20 +1,123 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello OneMoreController!{% endblock %}
+{% block title %}Hello HomePageController!{% endblock %}
+
+{% block stylesheets %}
+    {# <link href="stylesheets/fonts/stylesheet-01.css" rel="text/css"/> #}
+    <link href={{ asset('css/app.css') }} rel="stylesheet">
+    <link href={{ asset('css/stylesheet.css') }} rel="stylesheet">
+    <link href={{ asset('css/colors.css') }} rel="stylesheet">
+    
+    {% block addstyle %}
+    {% endblock %}
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+{% block header %}
+{% include "mqbaka_home/header.html.twig" %}
+{% endblock %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/PHP/financer_et_moi/src/Controller/OneMoreController.php'|file_link(0) }}">src/Controller/OneMoreController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/PHP/financer_et_moi/templates/one_more/index.html.twig'|file_link(0) }}">templates/one_more/index.html.twig</a></code></li>
-    </ul>
+<div class="grid-container">
+    <div>
+        <img src={{ asset('images/image_apropos/Capture2.png') }}>
+    </div>
+    <div class="titre">
+        <div>
+            <h1>Avec FEM, votre rentabilité est Dynamisée, la compétitivité de votre entreprise et de vos équipes sont démultipliées</h1>
+        </div>
+    </div>
 </div>
+<hr>
+<div class="grid-container2">
+    <div class="border">
+        <div class="text_interne">
+            <div class="marge">
+                <h3>Augmentez vos ventes avec nos solutions de<br>financement sur masures</h3>
+                    <div class="grid">
+                        <div>
+                            <img src={{ asset('images/icon/checked.png') }}>
+                        </div>
+                            <p>Pepuis votre point de vente de site web, offrez à vos clients<br>des mensualités qui corresponds à leur budget enqueleques secondes</p>
+                    </div>
+        
+                    <div class="grid">
+                            <div>
+                                <img src={{ asset('images/icon/checked.png') }}>
+                            </div>
+                            <p>Des offres de 50€ à 100 000€, de 3 à 84mois.</p>
+                    </div>
+            </div>
+        </div>
+    </div>
+        <div>
+            <img class="image" src={{ asset('images/image_apropos/rachat-credit-immobilier-780x300.png') }}>
+        </div>
+</div>
+<hr>
+<div class="grid-container3">
+    <div>
+        <img class="image2" src={{ asset('images/image_apropos/courtier-pret-immobilier_opt.png') }}>
+    </div>
+    <div class="border2">
+        <div class="text_interne2">
+            <div class="marge">
+                <h3>Créditaffectés</h3>
+                    <div>
+                        <p>Le crédit affecté est accordé par un établissement de crédit ou
+une banque.Il est utilisé pour un achat déterminé : un bien
+mobilier,crédit automobile, pour financer une télévision
+voyage ou toutes autres prestations.Il est souvent contracté
+directement sur le lieu de vente. Le crédit obtenu doit servir
+uniquement à payer le bien ou la prestation définie. Si le
+contrat de vente ne se réalise pas (désistement de votre part...),
+l'annulation du contrat de crédit sera automatique,même si
+rétablissement a accepté de vous l'accorder.</p>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="grid-container4">
+    <div class="border">
+        <div class="text_interne">
+            <div class="marge">
+                <h3>Prêt personnel</h3>
+                <div>
+                            <p>Le prêt personnel permet de disposer librement de la somme
+empruntée : aucun justificatif d’utilisation n’est à fournir. Ce
+prêt peut permettre de financer intégralement un ou plusieurs
+achat(s) (voiture,équipement ménager, etc.) ou de répondre à
+un besoin de trésorerie</p>
+        </div>
+    </div>
+    </div>
+    </div>
+        <div>
+            <img class="image3" src={{ asset('images/image_apropos/cropped-a1.png') }}>
+        </div>
+</div>
+<hr>
+<div class="grid-container5">
+    <div>
+        <img class="image4" src={{ asset('images/image_apropos/pret-personnel.png') }}>
+    </div>
+    <div class="border3">
+        <div class="text_interne2">
+            <div class="marge">
+                <h3>Des paiements en x4 ou en xlO fois de 50
+jusqu'à 6 000 euros.</h3>
+                    <div>
+                        <p>Aucune pièce justificative demandée. Des paiements en
+quelques secondes. Le meilleur taux d'acceptation du
+marché.</p>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 {% endblock %}
