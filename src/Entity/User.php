@@ -44,6 +44,11 @@ class User implements UserInterface
      */
     private $active;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nomEntreprise;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -145,6 +150,18 @@ class User implements UserInterface
     public function setActive(bool $active): self
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    public function getNomEntreprise(): ?string
+    {
+        return $this->nomEntreprise;
+    }
+
+    public function setNomEntreprise(string $nomEntreprise): self
+    {
+        $this->nomEntreprise = $nomEntreprise;
 
         return $this;
     }
