@@ -20,6 +20,11 @@ class Client extends User
     /**
      * @ORM\Column(type="string", length=255)
      */
+    protected $nomEntreprise;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $telMobile;
 
     /**
@@ -57,10 +62,25 @@ class Client extends User
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+    
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    
+
+    public function getNomEntreprise(): ?string
+    {
+        return $this->nomEntreprise;
+    }
+
+    public function setNomEntreprise(string $nomEntreprise): self
+    {
+        $this->nomEntreprise = $nomEntreprise;
+
+        return $this;
     }
 
     public function getTelMobile(): ?string
