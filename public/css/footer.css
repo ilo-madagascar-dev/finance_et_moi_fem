@@ -193,3 +193,7 @@ img[alt='orias-logo']{
     text-decoration: none;
     color: var(--dark-01);
 }
+
+.item-footer a:hover{
+    color: var(--light-01);
+}
