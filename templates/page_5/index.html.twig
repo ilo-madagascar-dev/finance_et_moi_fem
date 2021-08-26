@@ -1,20 +1,137 @@
-{% extends 'base.html.twig' %}
+{% extends 'mqbaka_home/index.html.twig' %}
 
 {% block title %}Hello OneMoreController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% include "mqbaka_home/header.html.twig" %}
+<link href="/css/serviceCreditRemere.css" rel="stylesheet">
+<div class="container">
+    <div style="height: 100px"></div>
+    <div class="grid">
+        <img style="width: 400px" src="/images/Capture.png">
+        <div style="position: relative">
+            <div class="gridIntern">
+                <img style="width: 60px" src="/images/Fleche.png">
+                <p>Éviter une saisie</p>
+            </div>
+            <div class="gridIntern escalier2">
+                <img style="width: 60px" src="/images/Fleche.png">
+                <p>Solder vos dettes</p>
+            </div>
+            <div class="gridIntern escalier3">
+                <img style="width: 60px" src="/images/Fleche.png">
+                <p>Financer vos projets</p>
+            </div>
+            <div class="gridIntern escalier4">
+                <img style="width: 60px" src="/images/Fleche.png">
+                <p>Lever vos fichages</p>
+            </div>
+            <div class="gridIntern escalier5">
+                <img style="width: 60px" src="/images/Fleche.png">
+                <p>Disposer de temps pour revendre</p>
+            </div>
+        </div>
+    </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div style="height: 100px"></div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/PHP/financer_et_moi/src/Controller/OneMoreController.php'|file_link(0) }}">src/Controller/OneMoreController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/PHP/financer_et_moi/templates/one_more/index.html.twig'|file_link(0) }}">templates/one_more/index.html.twig</a></code></li>
-    </ul>
+    <div class="grid2">
+        <div class="downl">
+            <img src="/images/icone.png" class="imgdownl">
+            <p>Vendez votre bien sans déménager.</p><br>
+            <p>Vous vendez temporairement votre bien à un acquéreur tout en continuant à l’occuper.</p>
+        </div>
+        <div class="downl">
+            <img src="/images/icone.png" class="imgdownl">
+            <p>Soldez vos dettes ou obtenez des fonds.</p>
+            <p>Vos dettes sont remboursées grâce au produit de la vente.</p><br>
+            <p>Vous ne réglez plus qu'une indemnité d'occupation.</p>
+        </div>
+        <div class="downl downlcenter">
+            <img src="/images/icone.png" class="imgdownl">
+            <p>Rachetez votre bien ou vendez le définitivement.</p><br>
+            <p>Vous pouvez racheter votre bien au prix convenu au départ de l'opération ou le vendre au prix du marché.</p>
+        </div>
+    </div>
+
+    <div style="height: 100px"></div>
+
+    <div class="grid3">
+        <img style="width: 450px" src="/images/equipmentprotection3.png">
+        <div class="bigPaletD">
+            <div style="font-size: 30px; font-weight: 700; color: var(--light-01)">LA VENTE RÉMÉRÉ ÉTHIQUE : LE PORTAGE IMMOBILIER</div>
+            <p>La vente réméré et le portage immobilier désignent la même opération juridique à
+                savoir une vente temporaire d'un bien immobilier avec la possibilité pour le vendeur
+                de le racheter pendant une durée limitée.
+            </p>
+            <p>Auparavant, il existait certains montages de vente réméré où vous deviez
+                supporter des coûts très élevés,et le financement pour le rachat n'avait pas été
+                correctement anticipé.
+            </p>
+            <p>Pour se démarquer de ces méthodes pratiquées,le terme de portage
+                immobilier est ainsi apparu avec le souci de respecter un équilibre entre vos
+                intérêts et ceux de l'acquéreur.
+            </p>
+        </div>
+    </div>
+
+    <div style="height: 100px"></div>
+    <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+    <div style="height: 100px"></div>
+
+    <div id="titreBgBleu">LES AVANTAGES DE LA VENTE RÉMÉRÉ</div>
+    <div style="height: 50px"></div>
+
+    <div class="grid4">
+        <div class="Listes">
+            <div class="LG">
+                <img style="width: 35px; margin-right: 10px" src="/images/pngegg(1).png">Stopper la saisie
+            </div>
+            <div class="LD">
+                <img style="width: 30px; margin-right: 8px" src="/images/icon/bullet.png">La procédure de saisie de votre bien est immédiatement arrêtée.
+            </div>
+            <div class="LG">
+                <img style="width: 35px; margin-right: 10px" src="/images/pngegg(1).png">Obtenir des fonds
+            </div>
+            <div class="LD">
+                <img style="width: 30px; margin-right: 8px" src="/images/icon/bullet.png">Vous obtenez la trésorerie dont vous avez besoin.
+            </div>
+            <div class="LG">
+                <img style="width: 35px; margin-right: 10px" src="/images/pngegg(1).png">Défichage BDF
+            </div>
+            <div class="LD">
+                <img style="width: 30px; margin-right: 8px" src="/images/icon/bullet.png">La banque de France régularise votre situation.
+            </div>
+            <div class="LG">
+                <img style="width: 35px; margin-right: 10px" src="/images/pngegg(1).png">Discrétion
+            </div>
+            <div class="LD">
+                <img style="width: 30px; margin-right: 8px" src="/images/icon/bullet.png">Vos proches (voisins, amis, collègues) ne sont pas informés.
+            </div>
+        </div>
+        <img src="/images/2.png" style="width: 400px; margin-top: 10px">
+    </div>
+
+    <div style="height: 50px"></div>
+    <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+    <div style="height: 50px"></div>
+
+    <div class="procedure">
+        <div id="titreBgWhite">Procédure rapide</div>
+        <p>Durée de deux mois entre le premier contact et le remboursement des créanciers.</p>
+    </div>
+    
+    <div class="mifanindry">
+        <img id="img1" src="/images/rachat-credit-rentabiliteopt.png">
+        <img id="img2" src="/images/capture1.png">
+    </div>
 </div>
+{% include "mqbaka_home/footer.html.twig" %}
 {% endblock %}
+
+{# <div class="grid5">
+    <div class="mifanindry">
+        <img id="img1" src="/images/rachat-credit-rentabiliteopt.png">
+        <img id="img2" src="/images/capture1.png">
+    </div>
+</div> #}
