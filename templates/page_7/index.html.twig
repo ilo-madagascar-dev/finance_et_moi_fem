@@ -1,20 +1,44 @@
-{% extends 'base.html.twig' %}
+{% extends 'mqbaka_home/index.html.twig' %}
 
-{% block title %}Hello OneMoreController!{% endblock %}
+
+{% block title %}Hello HomePageController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    {% include "mqbaka_home/header.html.twig" %}
+<link href={{ asset('css/app2.css') }} rel="stylesheet">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/PHP/financer_et_moi/src/Controller/OneMoreController.php'|file_link(0) }}">src/Controller/OneMoreController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/PHP/financer_et_moi/templates/one_more/index.html.twig'|file_link(0) }}">templates/one_more/index.html.twig</a></code></li>
-    </ul>
+<div>
+    <h1 class="tritre">CREDIT IMMOBILIER</h1>
+    <p class="para">Renégocier son emprunt rapporte plus que jamais</p>
+</div>
+<div class="grandgrid" >
+ <div>
+     <img class="image1" src={{ asset('images/Services-renegociation-credit/credit-immobilier-072626.png') }}>
+ </div>
+ <div>
+ <div>
+     <p>Dans votre intérêt, pensez à renégocier votre prêt à un taux plus avantageux.</p>
+</div>
+<div class="gridinterne">
+    <div>
+         <img class="image2" src={{ asset('images/Services-renegociation-credit/Flèche.png') }}>
+    </div>
+    <div>
+        <p class="para1">
+            Les taux sont plus bas, il est plus que jamais JUDICIEUX.
+        </p>
+    </div>
+</div>
+<div class="gridinterne">
+    <div>
+         <img class="image3" src={{ asset('images/Services-renegociation-credit/flèche.png') }}>
+    </div>
+    <div>
+        <p class="para1">
+            L'operation peut rapporter de très grands profits.
+        </p>
+    </div>
+</div>
+ </div>    
 </div>
 {% endblock %}

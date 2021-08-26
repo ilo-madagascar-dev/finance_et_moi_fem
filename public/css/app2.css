@@ -1,0 +1,47 @@
+.tritre{
+	text-align: center;
+	color: var(--dark-01);
+	margin-top: 100px;
+}
+.para{
+	color: var(--dark-01);
+	font-size: 30px;
+	text-align: center;
+}
+.grandgrid{
+	display: grid;
+  
+  grid-template-columns: auto auto;
+  padding: 50px 100px;
+}
+.grandgrid > div {
+  
+  text-align: center;
+  padding: 20px 0;
+
+}
+.gridinterne{
+	display: grid;
+  
+  grid-template-columns: auto auto;
+ 
+}
+.gridinterne > div {
+  
+
+  padding: 20px 0;
+ padding: 0px 100px;
+}
+.image1{
+	width: 100%;
+}
+.image2{
+	width: 40%;
+}
+.image3{
+	width: 40%;
+}
+.para1{
+	margin-left: -233px;
+margin-top: 16px;
+}
