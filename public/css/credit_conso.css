@@ -384,12 +384,29 @@ p.sub{
     width: max-content;
     gap: 2em;
     justify-content: center;
+    margin-bottom: 150px;
+    left: -2em;
+    position: relative;
 }
 
 .im-over-txt{
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin: 3em 4em;
+    position: relative;
+}
+
+.im-over-txt::after{
+    content: '';
+    display: block;
+    width: 80%;
+    height: 1px;
+    background: var(--dark-01);
+    margin: auto;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, .5em);
 }
 
 .textbox-tt{
@@ -401,4 +418,7 @@ p.sub{
 
 .im-over-txt img{
     width: 100%;
+    position: relative;
+    margin-top: 150px;
+    left: 2em;
 }
