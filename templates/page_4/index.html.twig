@@ -1,20 +1,135 @@
-{% extends 'base.html.twig' %}
+{% extends 'mqbaka_home/index.html.twig' %}
 
-{% block title %}Hello OneMoreController!{% endblock %}
+
+{% block title %}Service rachat{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% include "mqbaka_home/header.html.twig" %}
+<link href="/css/serviceRachat.css" rel="stylesheet">
+<img src="/images/avant-apres-rac.png" class="imgcenter">
+<div class="container">
+    <div class="grid2">
+        <div class="palet">
+            <h4>Le rachat de crédits consiste à regrouper tous vos crédits:</h4>
+            <div class="margeG">
+                <div class="gridIntern">
+                    <img style="width: 30px" src="/images/checked.png">
+                    <p>Prêts à la consommation</p>
+                </div>
+                <div class="gridIntern">
+                    <img style="width: 30px" src="/images/checked.png">
+                    <p>Prêts Immobiliers</p>
+                </div>
+                <div class="gridIntern">
+                    <img style="width: 30px" src="/images/checked.png">
+                    <p>Crédits Revolving</p>
+                </div>
+                <div class="gridIntern">
+                    <img style="width: 30px" src="/images/checked.png">
+                    <p>Crédits Permanents</p>
+                </div>
+            </div>
+            <div class="gridIntern2">
+                <img style="width: 40px" src="/images/pngegg(1).png">
+                <p>Possibilité d’ajouter de la trésorerie et de les transformer en un seul prêt.</p>
+            </div>
+        </div>
+        <img src="/images/rachat-de-crédit-image-2-e1568020902180.png" class="imgD">
+    </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div style="height: 50px"></div>
+    <hr style="width: 400px; margin: auto; color:var(--dark-01)">
+    <div style="height: 50px"></div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/PHP/financer_et_moi/src/Controller/OneMoreController.php'|file_link(0) }}">src/Controller/OneMoreController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/PHP/financer_et_moi/templates/one_more/index.html.twig'|file_link(0) }}">templates/one_more/index.html.twig</a></code></li>
-    </ul>
+    <div class="grid2">
+        <img class="imgG" src="/images/rachat-de-credit-rapide.png">
+        <div class="palet">
+            <h4>Les bonnes raisons d'opter pour le rachat de crédit:</h4>
+            <div>
+                <div class="gridIntern">
+                    <img style="width: 30px" src="/images/checked.png">
+                    <p>Réduire les mensualités en rallongeant la durée du prêt.</p>
+                </div>
+                <div class="gridIntern">
+                    <img style="width: 30px" src="/images/checked.png">
+                    <p>Rééquilibrer les finances en cas de changement dans la vie. (évènements familliaux, professionnels,départ en retraite,etc...)</p>
+                </div>
+                <div class="gridIntern">
+                    <img style="width: 30px" src="/images/checked.png">
+                    <p>Réduire la durée en augmentant les mensualités.</p>
+                </div>
+                <div class="gridIntern">
+                    <img style="width: 30px" src="/images/checked.png">
+                    <p>Redonner un nouveau souffle dans la vie au quotidien.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="height: 50px"></div>
+    <hr style="width: 400px; margin: auto; color:var(--dark-01)">
+    <div style="height: 50px"></div>
+
+    <div class="grid2">
+        <div class="palet">
+            <h3>Les raisons essentielles d’un rachat de crédits</h3>
+            <div class="margeG">
+                <div class="gridIntern3">
+                    <img style="width: 30px" src="/images/checked.png">
+                    <p>Réduire son endettement</p>
+                </div>
+                <div class="gridIntern3">
+                    <img style="width: 30px" src="/images/checked.png">
+                    <p>Améliorer son pouvoir d'achat</p>
+                </div>
+                <div class="gridIntern3">
+                    <img style="width: 30px" src="/images/checked.png">
+                    <p>Envisager une accession à la</p>
+                </div>
+                <div class="gridIntern3">
+                    <img style="width: 30px" src="/images/checked.png">
+                    <p>Alléger et faciliter son budget</p>
+                </div>
+                <div class="gridIntern3">
+                    <img style="width: 30px" src="/images/checked.png">
+                    <p>Prévoir son passage en retraite</p>
+                </div>
+                <div class="gridIntern3">
+                    <img style="width: 30px" src="/images/checked.png">
+                    <p>Constituer de l'épargne</p>
+                </div>
+                <div class="gridIntern3">
+                    <img style="width: 30px" src="/images/checked.png">
+                    <p>Financer un nouveau projet</p>
+                </div>
+            </div>
+        </div>
+        <img src="/images/unnamed.png" class="imgD">
+    </div>
+
+    <div style="height: 80px"></div>
+
+    <div class="treepalet">
+        <div class="palet2">
+            <img class="arabesque" src="/images/arabesque-fem.png">
+            <p>Nous nous efforçons de <strong>trouver les solutions les mieux adaptées</strong> à votre dossier.</p><br>
+            <p>Chaque situation est particulière: (locataire, propriétaire, logement de fonction, hébergé).</p>
+        </div>
+        <div class="palet2">
+            <img class="arabesque" src="/images/arabesque-fem.png">
+            <p>Intervenir à temps, ne pas attendre.</p><br>
+            <p>Les difficultés financières sont difficiles à surmonter,voir souvent impossibles et s'aggravent au fil du temps.</p><br>
+            <p>Plus une situation est compliquée, plus les chances de trouver une solution seront réduites.</p><br>
+            <h4>N'attendez pas d'arriver au surendettement !</h4>
+        </div>
+        <div class="palet2 paletcenter">
+            <img class="arabesque" src="/images/arabesque-fem.png">
+            <p>Prenez une décision pendant qu'il en est encore temps.</p><br>
+            <p>Redémarrez vers une situation stable, saine avec un taux d'endettement réduit.</p><br>
+            <p>Redonnez un nouveau souffle à votre vie.</p><br><br>
+            <p style="font-size: 20px"><strong>Repartez avec des nouveaux projets plein la tête !</strong></p>
+        </div>
+    </div>
 </div>
+{% include "mqbaka_home/footer.html.twig" %}
 {% endblock %}

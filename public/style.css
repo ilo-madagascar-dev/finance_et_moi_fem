@@ -1,0 +1,28 @@
+body{
+    margin: 0px;
+}
+header{
+    background-color: #fefefe;
+}
+header nav ul li{
+    list-style-type: none;
+    display: inline;
+    margin-left: 15px;
+}
+header nav ul li a{
+    text-decoration: none;
+}
+header nav ul{
+    background-color: rgb(151, 151, 173);
+    padding: 20px;
+    text-align: center;
+}
+
+.grid-container{
+    display: grid;
+    grid-template-columns: 25% auto auto;
+    padding: 10px;
+}
+.logo{
+    grid-row: 1 / 3;
+}
