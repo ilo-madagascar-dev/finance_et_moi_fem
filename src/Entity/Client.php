@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=ClientRepository::class)
  */
-class Client extends User
+class Client
 {
     /**
      * @ORM\Id
@@ -67,6 +67,16 @@ class Client extends User
      * @ORM\OneToOne(targetEntity=Paiement::class, mappedBy="client", cascade={"persist", "remove"})
      */
     private $paiement;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $password;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $email;
     
 
     public function getId(): ?int
@@ -197,6 +207,30 @@ class Client extends User
         }
 
         $this->paiement = $paiement;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
 
         return $this;
     }
