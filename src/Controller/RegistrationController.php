@@ -30,6 +30,8 @@ class RegistrationController extends AbstractController
             //Le User relatif à ce client ne sera créé que lorsque les deux dernières étapes (càd le paiement et la création d'un compte sur Lenbox seront validées) 
             $session->set('possibleNewUser', $newClient);
             //dd($session->get('possibleNewUser'));
+
+            return $this->redirectToRoute('registration_second_step');
         }
 
         return $this->render('registration/index.html.twig', [
@@ -39,31 +41,23 @@ class RegistrationController extends AbstractController
     }
 
     /**
+     * @Route("/registration/second-step", name="registration_second_step")
+     */
+    public function registrationSeconStep(SessionInterface $session)
+    {
+        dd($session->get('possibleNewUser'));
+    }
+
+    /**
      * @Route("/registration/payment", name="registration_payment") 
      */
     public function registrationPayment(){
         //Stripe::setApiKey('sk_test_51JSbdPBW8SyIFHAgGLf2rFeDFKCcS0UfKFRuGifDaCKnQg9t1m6PSK1NxwSuf23JcmY5HK8ZTcV0Pvaex4E2RaIt00fbf8PcYC');
         Stripe::setApiKey($_ENV['STRIPE_SECRET']);
         $priceId = 'price_1JT0YJBW8SyIFHAgmEuizs6Z';
-
-        /* $session = \Stripe\Checkout\Session::create([
-            'payment_method_types' => ['card'],
-            'line_items' => [[
-              'price_data' => [
-                'currency' => 'usd',
-                'product_data' => [
-                  'name' => 'T-shirt',
-                ],
-                'unit_amount' => 2000,
-              ],
-              'quantity' => 1,
-            ]],
-            'mode' => 'subscription',
-            'success_url' => $this->generateUrl('success_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
-            'cancel_url' => $this->generateUrl('cancel_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
-          ]); */
-          $session = \Stripe\Checkout\Session::create([
-            'success_url' => 'http://localhost:8000/success-url?session_id={CHECKOUT_SESSION_ID}',
+        
+          $paymentSession = \Stripe\Checkout\Session::create([
+            'success_url' => $this->generateUrl('success_url', ['session_id'=>'{CHECKOUT_SESSION_ID}'], UrlGeneratorInterface::ABSOLUTE_URL),
             'cancel_url' => $this->generateUrl('cancel_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
             'payment_method_types' => ['card'],
             'mode' => 'subscription',
@@ -77,13 +71,32 @@ class RegistrationController extends AbstractController
 
         //return $response->withHeader('Location', $session->url)->withStatus(303);;
 
-        return $this->redirect($session->url, 303);
+        return $this->redirect($paymentSession->url, 303);
     }
 
     /**
      * @Route("/registration/payment/success", name="registration_payment_success")
      */
-    public function registrationPaymentSuccess(){
+    public function registrationPaymentSuccess(Request $request){
+        $session_id = $request->get('session_id');
 
+        Stripe::setApiKey($_ENV['STRIPE_SECRET']);
+
+        $session = \Stripe\Checkout\Session::retrieve(
+          $session_id,
+          []
+        );
+
+        dd($session);
+
+        return $this->render('registration/successPayment.html.twig');
+    }
+
+    /**
+     * @Route("/registration/payment/failed", name="registration_payment_success")
+     */
+    public function registrationPaymentFailed(){
+        //paymentFailure.html.twig
+        return $this->render('registration/paymentFailure.html.twig');
     }
 }
