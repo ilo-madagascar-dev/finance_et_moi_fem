@@ -91,6 +91,11 @@ class Client
      * @ORM\Column(type="string", length=255)
      */
     private $prenom;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Subscription::class, mappedBy="client", cascade={"persist", "remove"})
+     */
+    private $subscription;
     
 
     public function getId(): ?int
@@ -269,6 +274,23 @@ class Client
     public function setPrenom(string $prenom): self
     {
         $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getSubscription(): ?Subscription
+    {
+        return $this->subscription;
+    }
+
+    public function setSubscription(Subscription $subscription): self
+    {
+        // set the owning side of the relation if necessary
+        if ($subscription->getClient() !== $this) {
+            $subscription->setClient($this);
+        }
+
+        $this->subscription = $subscription;
 
         return $this;
     }

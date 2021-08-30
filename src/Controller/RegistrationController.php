@@ -45,20 +45,22 @@ class RegistrationController extends AbstractController
      */
     public function registrationSeconStep(SessionInterface $session)
     {
-        dd($session->get('possibleNewUser'));
+        //dd($session->get('possibleNewUser'));
+        return $this->render('registration/secondStepRegistration_trial.html.twig');
     }
 
     /**
      * @Route("/registration/payment", name="registration_payment") 
      */
-    public function registrationPayment(){
+    public function registrationPayment():Response
+    {
         //Stripe::setApiKey('sk_test_51JSbdPBW8SyIFHAgGLf2rFeDFKCcS0UfKFRuGifDaCKnQg9t1m6PSK1NxwSuf23JcmY5HK8ZTcV0Pvaex4E2RaIt00fbf8PcYC');
         Stripe::setApiKey($_ENV['STRIPE_SECRET']);
         $priceId = 'price_1JT0YJBW8SyIFHAgmEuizs6Z';
         
           $paymentSession = \Stripe\Checkout\Session::create([
-            'success_url' => $this->generateUrl('success_url', ['session_id'=>'{CHECKOUT_SESSION_ID}'], UrlGeneratorInterface::ABSOLUTE_URL),
-            'cancel_url' => $this->generateUrl('cancel_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'success_url' => 'http://localhost:8000/registration/payment/success?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' => $this->generateUrl('registration_payment_failed', [], UrlGeneratorInterface::ABSOLUTE_URL),
             'payment_method_types' => ['card'],
             'mode' => 'subscription',
             'line_items' => [[
@@ -77,25 +79,27 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/registration/payment/success", name="registration_payment_success")
      */
-    public function registrationPaymentSuccess(Request $request){
+    public function registrationPaymentSuccess(Request $request, SessionInterface $session):Response
+    {
         $session_id = $request->get('session_id');
 
         Stripe::setApiKey($_ENV['STRIPE_SECRET']);
 
-        $session = \Stripe\Checkout\Session::retrieve(
+        $stripe_session = \Stripe\Checkout\Session::retrieve(
           $session_id,
           []
         );
 
-        dd($session);
+        dd($stripe_session, $session->get('possibleNewUser'));
 
         return $this->render('registration/successPayment.html.twig');
     }
 
     /**
-     * @Route("/registration/payment/failed", name="registration_payment_success")
+     * @Route("/registration/payment/failed", name="registration_payment_failed")
      */
-    public function registrationPaymentFailed(){
+    public function registrationPaymentFailed():Response
+    {
         //paymentFailure.html.twig
         return $this->render('registration/paymentFailure.html.twig');
     }
