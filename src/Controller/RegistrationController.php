@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Abonnement;
 use App\Entity\Client;
 use App\Form\ClientType;
 use Symfony\Component\HttpFoundation\Request;
@@ -90,7 +91,14 @@ class RegistrationController extends AbstractController
           []
         );
 
-        dd($stripe_session, $session->get('possibleNewUser'));
+        //Création d'un nouvel abonnement
+        $nouvelAbonnementPotentiel = new Abonnement();
+
+        dd($stripe_session);
+
+        $nouvelAbonnementPotentiel->setStripeSubscriptionId($stripe_session->subscription);
+        $nouvelAbonnementPotentiel->setStripeCusId($stripe_session->customer);
+
 
         return $this->render('registration/successPayment.html.twig');
     }
