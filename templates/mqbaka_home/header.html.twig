@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="nav-bar">
-            <div class="menu-list">
+            <div class="menu-list ham">
                 <div class="hamburger">
                     <div class="layer"></div>
                     <div class="layer"></div>
@@ -48,7 +48,7 @@
                         </li>
                         <li class="list-item">
                             <a href="#">
-                                Tarif
+                                Tarifs
                             </a>
                         </li>
                         <li class="list-item">
@@ -87,4 +87,28 @@
     }
 
     document.addEventListener('scroll', scroller);
+</script>
+
+<script title="menu toggler 1200px and lower">
+    let ham= document.querySelector('.hamburger');
+    let cro= document.querySelector('.cross');
+
+    let container= document.querySelector('.menu-list');
+    let menu= document.querySelector('.nav-list');
+
+    function showMenuList(){
+        menu.classList.remove('mob-thing');
+        container.classList.add('cro');
+        container.classList.remove('ham');
+    }
+
+    function hideMenuList(){
+        menu.classList.add('mob-thing');
+        container.classList.add('ham');
+        container.classList.remove('cro');
+    }
+
+    ham.addEventListener('click', showMenuList);
+    cro.addEventListener('click', hideMenuList);
+
 </script>

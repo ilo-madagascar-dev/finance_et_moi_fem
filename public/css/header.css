@@ -93,6 +93,9 @@
 
 .hamburger, .cross{
     display: none;
+    width: 2.7em;
+    height: 2.5em;
+    cursor: pointer;
 }
 
 .invisible{
@@ -101,27 +104,126 @@
 
 .hamburger{
     display: flex;
-    width: 1.5em;
-    height: 1.5em;
     flex-direction: column;
     justify-content: space-between;
     background: transparent;
 }
 
-.hamburger .layers{
+.hamburger .layer{
     background: var(--dark-01);
     width: 100%;
     height: 10px;
+    border-radius: 4px;
+}
+
+.cross{
+    flex-direction: column;
+    position: relative;
+    margin-left: auto;
+}
+
+.cross .lines{
+    width: 100%;
+    height: 10px;
+    background: var(--dark-01);
+    position: absolute;
+    top: 50%; left: 0;
+    transform: translate(0, -50%) rotate(45deg);
+}
+
+.cross .lines+.lines{
+    transform: translate(0, -50%) rotate(135deg);
 }
 
 @media only screen and (max-width: 1200px){
     .header-top-bar{
-        position: static;
+        position: relative;
     }
-    .hamburger{
-        display: block;
+    .menu-list.ham .hamburger{
+        display: flex;
+        /* display: none; */
+        margin-left: auto;
+    }
+    .menu-list.cro .hamburger{
+        display: none;
+    }
+    .menu-list.ham .cross{
+        display: none;
+    }
+    .menu-list.cro .cross{
+        display: flex;
+    }
+    /* .cross{
+        display: flex;
+    } */
+    .nav-list{
+        /* display: none; */
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background: var(--white--ish-01);
+        left: 0;
+        padding: 1em 2em;
+        transform: translate(0, 100%);
+        opacity: 1;
+        pointer-events: all;
+        transition: .3s;
     }
     .nav-list.mob-thing{
-        display: none;
+        opacity: 0;
+        pointer-events: none;
+        transition: .3s;
+    }
+}
+
+@keyframes slide{
+    from{
+        transform: translate(-100%, 100%);
+    }
+    to{
+        transform: translate(0%, 100%);
+    }
+}
+
+@media only screen and (max-width: 800px){
+    .contact-stuff{
+        flex-direction: column;
+        gap: 1em;
+    }
+    .nav-list{
+        flex-direction: column;
+        gap: 1em;
+        background: #222a;
+    }
+    .nav-list:not(.mob-thing){
+        animation: slide linear .4s;
+    }
+    .nav-list .list-item a, .nav-list .list-item{
+        background: transparent;
+        color: var(--white--ish-01);
+    }
+    .nav-list .list-item a:hover{
+        color: var(--dark-01);
+    }
+}
+
+@media only screen and (max-width: 600px){
+    .header-top-bar{
+        grid-template-columns: 1fr;
+    }
+    .logo{
+        text-align: center;
+    }
+    .logo img{
+        max-width: 300px;
+    }
+    .contact-stuff, .header-things{
+        align-items: center;
+    }
+    .header-things{
+        gap: 2em;
+    }
+    .hamburger, .cross{
+        margin: auto;
     }
 }
