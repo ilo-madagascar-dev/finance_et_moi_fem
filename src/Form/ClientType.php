@@ -18,6 +18,12 @@ class ClientType extends AbstractType
             ->add('email', TextType::class, [
                 'label' => 'e-mail'
             ])
+            ->add('nom', TextType::class, [
+                'label' => 'nom'
+            ])
+            ->add('prenom', TextType::class, [
+                'label' => 'prenom'
+            ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
