@@ -90,3 +90,38 @@
 .hero img{
     width: 100%;
 }
+
+.hamburger, .cross{
+    display: none;
+}
+
+.invisible{
+    display: none!important;
+}
+
+.hamburger{
+    display: flex;
+    width: 1.5em;
+    height: 1.5em;
+    flex-direction: column;
+    justify-content: space-between;
+    background: transparent;
+}
+
+.hamburger .layers{
+    background: var(--dark-01);
+    width: 100%;
+    height: 10px;
+}
+
+@media only screen and (max-width: 1200px){
+    .header-top-bar{
+        position: static;
+    }
+    .hamburger{
+        display: block;
+    }
+    .nav-list.mob-thing{
+        display: none;
+    }
+}
