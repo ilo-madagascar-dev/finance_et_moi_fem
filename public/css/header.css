@@ -29,7 +29,7 @@
 
 .header-top-bar.shrinked.compact{
     box-shadow: none;
-    position: static;
+    position: relative;
 }
 
 .header-top-bar.shrinked .contact-stuff{
@@ -208,7 +208,7 @@
 }
 
 @media only screen and (max-width: 600px){
-    .header-top-bar{
+    .header-top-bar, .header-top-bar.shrinked{
         grid-template-columns: 1fr;
     }
     .logo{
