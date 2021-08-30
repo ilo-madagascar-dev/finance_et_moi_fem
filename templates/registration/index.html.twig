@@ -1,11 +1,81 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello RegistrationController!{% endblock %}
+{% block stylesheets %}
+<link href={{ asset('css/stylesheet.css') }} rel="stylesheet">
+<link href={{ asset('css/colors.css') }} rel="stylesheet">
+{% endblock %}
 
 {% block body %}
+<link rel="stylesheet" href={{ asset('css/registration.css') }}>
+
+{% block header %}
+    {% include "mqbaka_home/header-compact.html.twig" %}
+{% endblock %}
+
+<div class="form-register">
+    <div class="inner-bg">
+        <div class="the-img">
+            <img src={{ asset('images/vectors/19.png') }} alt="">
+        </div>
+        <div class="form-container">
+            <div class="double-line">
+                <div class="line">
+                    {{ form_label(form.name) }}
+                    {{ form_widget(form.name) }}
+                </div>
+                <div class="line">
+                    {{ form_label(form.firstname) }}
+                    {{ form_widget(form.firstname) }}
+                </div>
+            </div>
+
+            <div class="double-line">
+                <div class="line">
+                    {{ form_label(form.nomEntreprise) }}
+                    {{ form_widget(form.nomEntreprise) }}
+                </div>
+                <div class="line">
+                    {{ form_label(form.email) }}
+                    {{ form_widget(form.email) }}
+                </div>
+            </div>
+
+            <div class="double-line">
+                <div class="line">
+                    {{ form_label(form.telMobile }}
+                    {{ form_widget(form.telMobile) }}
+                </div>
+                <div class="line">
+                    {{ form_label(form.telFixe) }}
+                    {{ form_widget(form.telFixe) }}
+                </div>
+            </div>
+
+            <div class="double-line">
+                <div class="line">
+                    {{ form_label(form.telMobile }}
+                    {{ form_widget(form.telMobile) }}
+                </div>
+                <div class="line">
+                    {{ form_label(form.telFixe) }}
+                    {{ form_widget(form.telFixe) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-        {{ form_widget(form) }}
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email) }}
+        {{ form_row(form.password) }}
+        {{ form_row(form.nomEntreprise) }}
+        {{ form_row(form.telMobile) }}
+        {{ form_row(form.telFixe) }}
+        {{ form_row(form.address) }}
+        {{ form_row(form.siren) }}
         <button type="submit">Valider</button>
     {{ form_end(form) }}
 </div>
