@@ -10,6 +10,9 @@
   padding: 20px 0;
 
 }
+.image0{
+  width: 100%;
+}
 .titre{
   color: var(--dark-01);
   margin-top: 175px;
@@ -26,7 +29,6 @@ background: transparent;
 }
 .image{
 width: 100%;
-margin-left: -65px;
 margin-top: 113px;
 }
 .text_interne{
@@ -68,8 +70,7 @@ background: transparent;
 margin-top: -87px;
 }
 .image2{
-  width: 126%;
-margin-top: 113px;
+  width: 100%;
 margin-top: 23px;
 }
 .text_interne2{
@@ -86,19 +87,15 @@ color: var(--dark-01);
   padding: 0px 100px;
 }
 .image3{
-  width: 100%;
-margin-left: -65px;
-margin-top: 69px;
+  width: 50%;
 }
 .grid-container5 {
-  display: grid;
-  
+  display: grid;  
   grid-template-columns: auto auto;
   padding: 0px 100px;
 }
 .image4{
-  width: 126%;
-margin-top: 113px;
+  width: 100%;
 margin-top: 23px;
 }
 .border3{
@@ -121,13 +118,11 @@ background: transparent;
 border-style: solid;
 border-width: 1px;
 margin: 5%;
-margin-top: 190px;
 color: var(--dark-01);
 
 }
 .image5{
-    width: 101%;
-    margin-left: -116px;
+    width: 75%;
     margin-top: 30px;
 }
 p{
@@ -135,7 +130,7 @@ p{
 }
 
         
-@media (max-width: 600px){
+@media (max-width: 750px){
   .grid-container {
     display: grid;
     grid-template-columns: auto;
@@ -145,7 +140,8 @@ grid-container > div {
     padding: 0px 0px;
 }
 .text_interne{
-  margin: 1%;
+  margin: -5%;
+  border-radius: 50px 50px;
 }
 .grid-container2 {
     display: grid;
@@ -153,8 +149,10 @@ grid-container > div {
     padding: 0px 50px;
 }
 .image {
-    width: 100%;
-    margin: auto;
+    width: 75%;
+margin: auto;
+display: block;
+margin-top: 10px;
 }
 .grid-container3 {
     display: grid;
@@ -177,8 +175,9 @@ margin: auto;
     padding: 0px 50px;
     }
     .image3{
-       width: 100%;
+   width: 50%;
 margin: auto;
+display: block;
     }
     .grid-container5{
          display: grid;
@@ -187,8 +186,9 @@ margin: auto;
 
     }
     .image4{
-      width: 100%;
+   width: 75%;
 margin: auto;
+display: block;
     }
     .border3{
       margin-top: 0px;
@@ -198,15 +198,10 @@ margin: auto;
       margin: 1%;
     }
     .image5{
-      width: 100%;
+width: 75%;
 margin: auto;
-
+display: block;
     }
-    .grid-container6 {
-     display: grid;
-    grid-template-columns: auto;
-    padding: 0px 50px;
-}
 }
 
 /*.image6{
