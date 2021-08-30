@@ -16,29 +16,61 @@ class ClientType extends AbstractType
     {
         $builder
             ->add('email', TextType::class, [
-                'label' => 'e-mail'
+                'label' => 'e-mail',
+                'attr' => array(
+                    'placeholder' => 'Adresse email'
+                )
             ])
             ->add('nom', TextType::class, [
-                'label' => 'nom'
+                'label' => 'nom',
+                'attr' => array(
+                    'placeholder' => 'Nom'
+                )
             ])
             ->add('prenom', TextType::class, [
-                'label' => 'prenom'
+                'label' => 'prenom',
+                'attr' => array(
+                    'placeholder' => 'Prénom'
+                )
             ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'first_options'  => ['label' => 'Password', 'attr' => array('placeholder' => 'Mot de passe')],
+                'second_options' => ['label' => 'Repeat Password', 'attr' => array('placeholder' => 'Mot de passe')],
             ])
             ->add('nomEntreprise', TextType::class, [
-                'label' => 'nom de votre entreprise'
+                'label' => 'nom de votre entreprise',
+                'attr' => array(
+                    'placeholder' => 'Nom de votre entreprise'
+                )
             ])
-            ->add('telMobile')
-            ->add('telFixe')
-            ->add('address')
-            ->add('siren')
+            ->add('telMobile', TextType::class, [
+                'label' => 'Téléphone mobile',
+                'attr' => array(
+                    'placeholder' => 'Téléphone mobile'
+                )
+            ])
+            ->add('telFixe', TextType::class, [
+                'label' => 'Téléphone fixe',
+                'attr' => array(
+                    'placeholder' => 'Téléphone fixe'
+                )
+            ])
+            ->add('address', TextType::class, [
+                'label' => 'adresse',
+                'attr' => array(
+                    'placeholder' => 'Adresse'
+                )
+            ])
+            ->add('siren', TextType::class, [
+                'label' => 'siren',
+                'attr' => array(
+                    'placeholder' => 'SIREN'
+                )
+            ])
         ;
     }
 

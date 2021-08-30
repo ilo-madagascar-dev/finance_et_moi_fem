@@ -21,12 +21,12 @@
         <div class="form-container">
             <div class="double-line">
                 <div class="line">
-                    {{ form_label(form.name) }}
-                    {{ form_widget(form.name) }}
+                    {{ form_label(form.nom) }}
+                    {{ form_widget(form.nom) }}
                 </div>
                 <div class="line">
-                    {{ form_label(form.firstname) }}
-                    {{ form_widget(form.firstname) }}
+                    {{ form_label(form.prenom) }}
+                    {{ form_widget(form.prenom) }}
                 </div>
             </div>
 
@@ -43,7 +43,7 @@
 
             <div class="double-line">
                 <div class="line">
-                    {{ form_label(form.telMobile }}
+                    {{ form_label(form.telMobile) }}
                     {{ form_widget(form.telMobile) }}
                 </div>
                 <div class="line">
@@ -54,12 +54,23 @@
 
             <div class="double-line">
                 <div class="line">
-                    {{ form_label(form.telMobile }}
-                    {{ form_widget(form.telMobile) }}
+                    {{ form_label(form.password.first) }}
+                    {{ form_widget(form.password.first) }}
                 </div>
                 <div class="line">
-                    {{ form_label(form.telFixe) }}
-                    {{ form_widget(form.telFixe) }}
+                    {{ form_label(form.password.second) }}
+                    {{ form_widget(form.password.second) }}
+                </div>
+            </div>
+
+            <div class="double-line">
+                <div class="line">
+                    {{ form_label(form.siren) }}
+                    {{ form_widget(form.siren) }}
+                </div>
+                <div class="line">
+                    {{ form_label(form.address) }}
+                    {{ form_widget(form.address) }}
                 </div>
             </div>
         </div>
@@ -79,4 +90,5 @@
         <button type="submit">Valider</button>
     {{ form_end(form) }}
 </div>
+
 {% endblock %}
