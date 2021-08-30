@@ -27,4 +27,14 @@ class HomePageController extends AbstractController
             'controller_name' => 'MqbakaHomeController',
         ]);
     }
+    
+    /**
+     * @Route("/credit_conso", name="credit_conso")
+     */
+    public function credit_conso(): Response
+    {
+        return $this->render('mqbaka_home/credit_conso.html.twig', [
+            'controller_name' => 'MqbakaHomeController',
+        ]);
+    }
 }
