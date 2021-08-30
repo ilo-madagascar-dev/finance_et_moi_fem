@@ -1,0 +1,101 @@
+.form-register{
+    position: relative;
+    margin: 2em auto 0;
+}
+
+.form-register *{
+    background: transparent;
+}
+
+.background{
+    position: absolute;
+    width: 100%;
+    z-index: 0;
+    opacity: .05;
+}
+
+.background img{
+    width: 100%;;
+}
+
+.inner-bg{
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    margin: 0 4em;
+}
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    justify-content: center;
+    align-items: center;
+}
+
+.double-line{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4em;
+    width: 100%;
+}
+
+.line{
+    width: 100%;
+}
+
+.line input{
+    width: 100%;
+    border: none;
+    color: var(--dark-01);
+    border-bottom: 1px solid var(--dark-01);
+}
+
+.line input:focus{
+    border: none;
+    outline: none;
+    box-shadow: 0 2px 0 0 var(--dark-01);
+}
+
+.inner-bg .form-container button{
+    background: var(--white--ish-1);
+    border: var(--dark-01) solid 1px;
+    border-radius: 5px;
+    color: var(--dark-01);
+    padding: .3em 2em;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.inner-bg .form-container button:hover{
+    background: var(--dark-01);
+    color: var(--white--ish-01);
+    transition: .2s;
+}
+
+@media only screen and (max-width: 1024px){
+    .double-line{
+        grid-template-columns: 1fr;
+        row-gap: 1em;
+    }
+}
+
+@media only screen and (max-width: 870px){
+    .inner-bg{
+        grid-template-columns: 1fr;
+        row-gap: 3em;
+    }
+    .double-line{
+        max-width: 500px;
+    }
+    .line input{
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 600px){
+    .the-img img{
+        width: 100%;
+    }
+}

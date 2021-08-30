@@ -14,6 +14,9 @@
 {% endblock %}
 
 <div class="form-register">
+    <div class="background">
+        <img src={{ asset('images/favicon.png') }} alt="">
+    </div>
     <div class="inner-bg">
         <div class="the-img">
             <img src={{ asset('images/vectors/19.png') }} alt="">
@@ -21,74 +24,51 @@
         <div class="form-container">
             <div class="double-line">
                 <div class="line">
-                    {{ form_label(form.nom) }}
                     {{ form_widget(form.nom) }}
                 </div>
                 <div class="line">
-                    {{ form_label(form.prenom) }}
                     {{ form_widget(form.prenom) }}
                 </div>
             </div>
 
             <div class="double-line">
                 <div class="line">
-                    {{ form_label(form.nomEntreprise) }}
                     {{ form_widget(form.nomEntreprise) }}
                 </div>
                 <div class="line">
-                    {{ form_label(form.email) }}
                     {{ form_widget(form.email) }}
                 </div>
             </div>
 
             <div class="double-line">
                 <div class="line">
-                    {{ form_label(form.telMobile) }}
                     {{ form_widget(form.telMobile) }}
                 </div>
                 <div class="line">
-                    {{ form_label(form.telFixe) }}
                     {{ form_widget(form.telFixe) }}
                 </div>
             </div>
 
             <div class="double-line">
                 <div class="line">
-                    {{ form_label(form.password.first) }}
                     {{ form_widget(form.password.first) }}
                 </div>
                 <div class="line">
-                    {{ form_label(form.password.second) }}
                     {{ form_widget(form.password.second) }}
                 </div>
             </div>
 
             <div class="double-line">
                 <div class="line">
-                    {{ form_label(form.siren) }}
                     {{ form_widget(form.siren) }}
                 </div>
                 <div class="line">
-                    {{ form_label(form.address) }}
                     {{ form_widget(form.address) }}
                 </div>
             </div>
+            <button type="submit">Inscription</button>
         </div>
     </div>
-</div>
-
-<div class="container">
-    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-        {{ form_label(form.email) }}
-        {{ form_widget(form.email) }}
-        {{ form_row(form.password) }}
-        {{ form_row(form.nomEntreprise) }}
-        {{ form_row(form.telMobile) }}
-        {{ form_row(form.telFixe) }}
-        {{ form_row(form.address) }}
-        {{ form_row(form.siren) }}
-        <button type="submit">Valider</button>
-    {{ form_end(form) }}
 </div>
 
 {% endblock %}

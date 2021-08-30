@@ -39,7 +39,7 @@ class ClientType extends AbstractType
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
                 'first_options'  => ['label' => 'Password', 'attr' => array('placeholder' => 'Mot de passe')],
-                'second_options' => ['label' => 'Repeat Password', 'attr' => array('placeholder' => 'Mot de passe')],
+                'second_options' => ['label' => 'Repeat Password', 'attr' => array('placeholder' => 'Confirmez le mot de passe')],
             ])
             ->add('nomEntreprise', TextType::class, [
                 'label' => 'nom de votre entreprise',

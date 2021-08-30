@@ -29,18 +29,19 @@
 
 .header-top-bar.shrinked.compact{
     box-shadow: none;
+    position: static;
 }
 
-.header-top-bar.header-top-bar.shrinked .contact-stuff{
+.header-top-bar.shrinked .contact-stuff{
     display: none;
 }
 
-.header-top-bar.header-top-bar.shrinked.compact .contact-stuff{
+.header-top-bar.shrinked.compact .contact-stuff{
     display: flex;
     font-size: .8em;
 }
 
-.header-top-bar.header-top-bar.shrinked.compact .header-things{
+.header-top-bar.shrinked.compact .header-things{
     height: 100%;
 }
 
