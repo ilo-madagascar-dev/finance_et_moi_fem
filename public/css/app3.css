@@ -29,9 +29,11 @@ border-width: 1px;
 margin: 4%;
 color: var(--dark-01);
 padding: 5px;
+background: #ffffff82;
 }
 .para3{
-	padding: 10px;;
+	padding: 10px;
+	background: #ffffff82;
 }
 .section{
 	z-index: 1;
@@ -39,6 +41,7 @@ padding: 5px;
 }
 .sous-border{
 	padding: 38px;
+	background: #ffffff03;
 }
 .image2{
 	width: 142%;
@@ -75,4 +78,7 @@ background: transparent;
 .image3{
 	width: 29%;
 position: absolute;
+left: 130px;
 }
+
+@media screem(max-wi)
