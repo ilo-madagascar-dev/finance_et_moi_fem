@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ClientRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -93,9 +95,19 @@ class Client
     private $prenom;
 
     /**
-     * @ORM\OneToOne(targetEntity=Subscription::class, mappedBy="client", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Abonnement::class, mappedBy="client", cascade={"persist", "remove"})
      */
-    private $subscription;
+    private $abonnement;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Pret::class, mappedBy="client", orphanRemoval=true)
+     */
+    private $prets;
+
+    public function __construct()
+    {
+        $this->prets = new ArrayCollection();
+    }
     
 
     public function getId(): ?int
@@ -278,19 +290,49 @@ class Client
         return $this;
     }
 
-    public function getSubscription(): ?Subscription
+    public function getAbonnement(): ?Abonnement
     {
-        return $this->subscription;
+        return $this->abonnement;
     }
 
-    public function setSubscription(Subscription $subscription): self
+    public function setAbonnement(Abonnement $abonnement): self
     {
         // set the owning side of the relation if necessary
-        if ($subscription->getClient() !== $this) {
-            $subscription->setClient($this);
+        if ($abonnement->getClient() !== $this) {
+            $abonnement->setClient($this);
         }
 
-        $this->subscription = $subscription;
+        $this->abonnement = $abonnement;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Pret[]
+     */
+    public function getPrets(): Collection
+    {
+        return $this->prets;
+    }
+
+    public function addPret(Pret $pret): self
+    {
+        if (!$this->prets->contains($pret)) {
+            $this->prets[] = $pret;
+            $pret->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removePret(Pret $pret): self
+    {
+        if ($this->prets->removeElement($pret)) {
+            // set the owning side to null (unless already changed)
+            if ($pret->getClient() === $this) {
+                $pret->setClient(null);
+            }
+        }
 
         return $this;
     }

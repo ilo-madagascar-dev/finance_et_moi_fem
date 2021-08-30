@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\SubscriptionRepository;
+use App\Repository\AbonnementRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=SubscriptionRepository::class)
+ * @ORM\Entity(repositoryClass=AbonnementRepository::class)
  */
-class Subscription
+class Abonnement
 {
     /**
      * @ORM\Id
@@ -28,12 +28,12 @@ class Subscription
     private $date_fin_abonnement;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $actif;
 
     /**
-     * @ORM\OneToOne(targetEntity=Client::class, inversedBy="subscription", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=client::class, inversedBy="abonnement", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $client;
@@ -72,19 +72,19 @@ class Subscription
         return $this->actif;
     }
 
-    public function setActif(bool $actif): self
+    public function setActif(?bool $actif): self
     {
         $this->actif = $actif;
 
         return $this;
     }
 
-    public function getClient(): ?Client
+    public function getClient(): ?client
     {
         return $this->client;
     }
 
-    public function setClient(Client $client): self
+    public function setClient(client $client): self
     {
         $this->client = $client;
 

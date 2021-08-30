@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\LoanRepository;
+use App\Repository\PretRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=LoanRepository::class)
+ * @ORM\Entity(repositoryClass=PretRepository::class)
  */
-class Loan
+class Pret
 {
     /**
      * @ORM\Id
@@ -26,6 +26,18 @@ class Loan
      * @ORM\Column(type="datetime")
      */
     private $date_fin_pret;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="prets")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $client;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=StatusPret::class, inversedBy="prets")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $status;
 
     public function getId(): ?int
     {
@@ -52,6 +64,30 @@ class Loan
     public function setDateFinPret(\DateTimeInterface $date_fin_pret): self
     {
         $this->date_fin_pret = $date_fin_pret;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    public function getStatus(): ?StatusPret
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?StatusPret $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
