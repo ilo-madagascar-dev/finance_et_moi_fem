@@ -55,6 +55,16 @@ class Abonnement
      */
     private $factures;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $mode;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $statut_paiement;
+
     public function __construct()
     {
         $this->factures = new ArrayCollection();
@@ -163,6 +173,30 @@ class Abonnement
                 $facture->setAbonnement(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMode(): ?string
+    {
+        return $this->mode;
+    }
+
+    public function setMode(string $mode): self
+    {
+        $this->mode = $mode;
+
+        return $this;
+    }
+
+    public function getStatutPaiement(): ?bool
+    {
+        return $this->statut_paiement;
+    }
+
+    public function setStatutPaiement(bool $statut_paiement): self
+    {
+        $this->statut_paiement = $statut_paiement;
 
         return $this;
     }
