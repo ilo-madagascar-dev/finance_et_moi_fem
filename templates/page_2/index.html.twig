@@ -5,7 +5,12 @@
 
 
 {% block body %}
+
+{% block header %}
 {% include "mqbaka_home/header.html.twig" %}
+{% endblock %}
+
+
 <link href={{ asset('css/app.css') }} rel="stylesheet">
 <div class="grid-container">
     <div>
@@ -75,10 +80,10 @@
                 <h3>Prêt personnel</h3>
                 <div>
                             <p class="para">Le prêt personnel permet de disposer librement de la somme
-empruntée : aucun justificatif d’utilisation n’est à fournir. Ce
-prêt peut permettre de financer intégralement un ou plusieurs
-achat(s) (voiture,équipement ménager, etc.) ou de répondre à
-un besoin de trésorerie</p>
+    empruntée : aucun justificatif d’utilisation n’est à fournir. Ce
+    prêt peut permettre de financer intégralement un ou plusieurs
+    achat(s) (voiture,équipement ménager, etc.) ou de répondre à
+    un besoin de trésorerie</p>
         </div>
     </div>
     </div>
@@ -95,12 +100,9 @@ un besoin de trésorerie</p>
     <div class="border3">
         <div class="text_interne2">
             <div class="marge">
-                <h3>Des paiements en x4 ou en xlO fois de 50
-jusqu'à 6 000 euros.</h3>
+                <h3>Des paiements en x4 ou en xlO fois de 50 jusqu'à 6 000 euros.</h3>
                     <div>
-                        <p class="para">Aucune pièce justificative demandée. Des paiements en
-quelques secondes. Le meilleur taux d'acceptation du
-marché.</p>
+                        <p class="para">Aucune pièce justificative demandée. Des paiements en quelques secondes. Le meilleur taux d'acceptation du marché.</p>
                     </div>
             </div>
         </div>
@@ -111,20 +113,20 @@ marché.</p>
     <div class="border4">
         <div class="text_interne3">
             <div class="marge">
-                <h3>Vous ne vous occupez de rien,
-n'avez pas à remplir les dossiers</h3>
+                <h3>Vous ne vous occupez de rien, n'avez pas à remplir les dossiers</h3>
                 <div>
-                            <p class="para">Votre partenaire F E M via notre plateforme s'occupe
-de toute la partie administravtive, nous sommes
-enregistré à l'ORIAS et habilité à gérer et traiter les
-dossiers de financements pour vous. Envoyez une 
-demande de financement à votre client depuis
-votre interface n'a jamais été aussi simple, en 30
-secondes et le tour est joué ! Nous sommes votre
-finance manager.</p>
+                    <p class="para">Votre partenaire F E M via notre plateforme s'occupe
+                        de toute la partie administravtive, nous sommes
+                        enregistré à l'ORIAS et habilité à gérer et traiter les
+                        dossiers de financements pour vous. Envoyez une 
+                        demande de financement à votre client depuis
+                        votre interface n'a jamais été aussi simple, en 30
+                        secondes et le tour est joué ! Nous sommes votre
+                        finance manager.
+                    </p>
+                </div>
+            </div>
         </div>
-    </div>
-    </div>
     </div>
         <div>
             <img class="image5" src={{ asset('images/image_apropos/1.png') }}>
