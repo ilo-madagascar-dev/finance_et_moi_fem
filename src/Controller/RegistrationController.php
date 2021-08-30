@@ -4,7 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Abonnement;
 use App\Entity\Client;
+use App\Entity\Facture;
+use App\Entity\User;
 use App\Form\ClientType;
+use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,6 +16,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Stripe\Stripe;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -80,7 +85,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/registration/payment/success", name="registration_payment_success")
      */
-    public function registrationPaymentSuccess(Request $request, SessionInterface $session):Response
+    public function registrationPaymentSuccess(Request $request, SessionInterface $session, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder):Response
     {
         $session_id = $request->get('session_id');
 
@@ -91,14 +96,62 @@ class RegistrationController extends AbstractController
           []
         );
 
+        $potentialClient = $session->get('possibleNewUser');
+
         //Création d'un nouvel abonnement
         $nouvelAbonnementPotentiel = new Abonnement();
-
-        dd($stripe_session);
-
+        
         $nouvelAbonnementPotentiel->setStripeSubscriptionId($stripe_session->subscription);
         $nouvelAbonnementPotentiel->setStripeCusId($stripe_session->customer);
+        $nouvelAbonnementPotentiel->setMode($stripe_session->mode);
+        $nouvelAbonnementPotentiel->setStatutPaiement($stripe_session->payment_status);
+        $nouvelAbonnementPotentiel->setDateDebutAbonnement(new DateTime());
+        $nouvelAbonnementPotentiel->setClient($potentialClient);
+        
+        $session->set('abonnementPotentiel', $nouvelAbonnementPotentiel);
+        //dd($stripe_session->amount_total/100);
+        
+        //Création de la facture potentielle relative à l'abonneement
+        $nouvelleFacturePotentielle = new Facture;
 
+        $statutFacture = $stripe_session->payment_status === "paid" ? true : false;
+
+        $nouvelleFacturePotentielle->setDateEmissionFacture(new DateTime());
+        $nouvelleFacturePotentielle->setFactureAcquitee($statutFacture);
+        $nouvelleFacturePotentielle->setMontantTtcFacture($stripe_session->amount_total/100);
+        $nouvelleFacturePotentielle->setAbonnement($nouvelAbonnementPotentiel);
+        $nouvelleFacturePotentielle->setPourcentageTva(20);
+        
+        //dd($stripe_session);
+        $session->set('facturePotentielle', $nouvelleFacturePotentielle);
+        
+        //dd($session->get('possibleNewUser'), $session->get('abonnementPotentiel'), $session->get('facturePotentielle'));
+        
+       
+        //Création de l'entité user relatif au client
+        $userRelatedToPotentialClient = new User;
+
+        $encryptedPassword = $passwordEncoder->encodePassword($userRelatedToPotentialClient, $potentialClient->getPassword());
+        $userRelatedToPotentialClient->setEmail($potentialClient->getEmail());
+        $userRelatedToPotentialClient->setPassword($encryptedPassword);
+        $userRelatedToPotentialClient->setDateCreationUtilisateur(new DateTime());
+        $userRelatedToPotentialClient->setActive(true);
+        $userRelatedToPotentialClient->setRoles(["ROLE_CLIENT"]);
+
+        //Données client à enregistrer
+        $potentialClient->setUniqid(md5(uniqid()));
+        $potentialClient->setUniqid(md5(uniqid()));
+        $potentialClient->setVd(md5(uniqid()));
+        $potentialClient->setStripeToken(md5(uniqid()));
+        $potentialClient->setPassword($encryptedPassword);
+        $potentialClient->setUser($userRelatedToPotentialClient);
+        
+        //$potentialSubscriber = $session->get('abonnementPotentiel');
+        $facturePotentielle = $session->get('facturePotentielle');
+
+        $em->persist($potentialClient);
+        $em->persist($facturePotentielle);
+        $em->flush();
 
         return $this->render('registration/successPayment.html.twig');
     }
