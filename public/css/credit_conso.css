@@ -38,10 +38,6 @@
 }
 
 .bank-logos{
-    /* display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-column-gap: 1em;
-    grid-row-gap: .8em; */
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
