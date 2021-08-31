@@ -250,6 +250,7 @@
     }
     .bigPaletD p {
         margin-top: 20px;
+        font-size: 14px;
     }
     #titreBgBleu {
         font-size: 15px;
@@ -275,5 +276,11 @@
         margin-bottom: 30px;
         margin-top: 20px;
         color: var(--light-01);
+    }
+    .grid5{
+        display: none;
+    }
+    .container > hr:nth-child(14){
+        display: none;
     }
 }
