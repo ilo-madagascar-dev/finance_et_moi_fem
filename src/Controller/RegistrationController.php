@@ -7,6 +7,7 @@ use App\Entity\Client;
 use App\Entity\Facture;
 use App\Entity\User;
 use App\Form\ClientType;
+use App\Service\ApiService;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,8 +35,8 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             //Les informations de la première étape seront enregistrées dans la premimère étape et seront flushées si l'utiliseur valide son abonnement et qu'il obtient un vd
             //Le User relatif à ce client ne sera créé que lorsque les deux dernières étapes (càd le paiement et la création d'un compte sur Lenbox seront validées) 
+            //dd($newClient);
             $session->set('possibleNewUser', $newClient);
-            //dd($session->get('possibleNewUser'));
 
             return $this->redirectToRoute('registration_second_step');
         }
@@ -85,7 +86,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/registration/payment/success", name="registration_payment_success")
      */
-    public function registrationPaymentSuccess(Request $request, SessionInterface $session, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder):Response
+    public function registrationPaymentSuccess(Request $request, SessionInterface $session, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, ApiService $apiService):Response
     {
         $session_id = $request->get('session_id');
 
@@ -97,7 +98,6 @@ class RegistrationController extends AbstractController
         );
 
         $potentialClient = $session->get('possibleNewUser');
-
         //Création d'un nouvel abonnement
         $nouvelAbonnementPotentiel = new Abonnement();
         
@@ -130,18 +130,26 @@ class RegistrationController extends AbstractController
        
         //Création de l'entité user relatif au client
         $userRelatedToPotentialClient = new User;
-
+        
+        //Password encrypting
         $encryptedPassword = $passwordEncoder->encodePassword($userRelatedToPotentialClient, $potentialClient->getPassword());
+
         $userRelatedToPotentialClient->setEmail($potentialClient->getEmail());
         $userRelatedToPotentialClient->setPassword($encryptedPassword);
         $userRelatedToPotentialClient->setDateCreationUtilisateur(new DateTime());
         $userRelatedToPotentialClient->setActive(true);
         $userRelatedToPotentialClient->setRoles(["ROLE_CLIENT"]);
 
+        $uniqId = md5(uniqid());
+        $clientsInfosFromLenbox = $apiService->postLenbox($potentialClient->getNomEntreprise(), $potentialClient->getEmail(), $potentialClient->getTelMobile(), $uniqId);
+        
+        //dd($clientsInfosFromLenbox['response']['vd']);
+        $clientsVd = $clientsInfosFromLenbox['response']['vd'];
+
         //Données client à enregistrer
-        $potentialClient->setUniqid(md5(uniqid()));
-        $potentialClient->setUniqid(md5(uniqid()));
-        $potentialClient->setVd(md5(uniqid()));
+        $potentialClient->setUniqid($uniqId);
+        $potentialClient->setUniqid($uniqId);
+        $potentialClient->setVd($clientsVd);
         $potentialClient->setStripeToken(md5(uniqid()));
         $potentialClient->setPassword($encryptedPassword);
         $potentialClient->setUser($userRelatedToPotentialClient);
