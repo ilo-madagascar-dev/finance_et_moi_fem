@@ -308,4 +308,31 @@ img[alt='orias-logo']{
     .item-footer{
         flex-basis: 100%;
     }
+    .footer-menu{
+        width: max-content;
+    }
+    .menu-list-footer{
+        flex-direction: column;
+        width: max-content;
+    }
+    .item-footer{
+        text-align: left;
+    }
+    .b-buttons{
+        gap: auto;
+        justify-content: unset;
+        padding: 0 1em;
+    }
+}
+
+@media only screen and (max-width: 450px){
+    .bloc-thing:nth-child(2){
+        flex-direction: column;
+    }
+    .b-buttons{
+        flex-direction: column;
+    }
+    .mini-bloc p{
+        text-align: center;
+    }
 }
