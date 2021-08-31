@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Make your payment!{% endblock %}
+
+{% block body %}
+
+    <section>
+        <h1 class="mt-3">Abonnement</h1>
+        <p>
+            Afin de finaliser votre inscription, vous devez d'abord vous abonner !!!
+        </p>
+        <form action="{{ path('registration_payment') }}" method="POST" class="mt-3">
+            <button type="submit" class="btn btn-primary btn-lg">S'abonner</button>
+        </form>
+    </section>
+
+{% endblock %}
