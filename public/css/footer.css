@@ -237,7 +237,75 @@ img[alt='orias-logo']{
     .item-footer{
         padding: 0 1em;
     }
+    .over-flow{
+        padding: 3em 2em;
+    }
 }
 
 @media only screen and (max-width: 740px){
+    .item-footer::after{
+        display: none!important;
+    }
+    .item-footer{
+        flex-basis: 50%;
+        flex-shrink: 1;
+        text-align: center;
+    }
+    .menu-list-footer{
+        width: 100%;
+        flex-basis: 50%;
+        flex-wrap: wrap;
+        row-gap: 1em;
+        border-radius: 20px;
+    }
+    .footer-menu{
+        width: 80%;
+        border-radius: 20px;
+        transform: translate(-50%, 80%);
+        box-shadow: -3px 3px 4px 0 var(--dark-01-half);
+    }
+    .over-flow{
+        padding: 3em 1em;
+    }
+}
+
+@media only screen and (max-width: 650px){
+    .b-buttons{
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 4em;
+        gap: 2em;
+    }
+    .title-bullet{
+        grid-column: 1;
+    }
+    .bloc-thing:last-child{
+        grid-template-columns: 100%;
+    }
+}
+
+@media only screen and (max-width: 550px){
+    .b-buttons{
+        gap: .5em;
+    }
+    .three-bloc-thing{
+        grid-template-columns: 100%;
+    }
+    .bloc-thing:last-child{
+        grid-column: 1;
+    }
+    .bloc-thing:first-child{
+        max-width: 400px;
+        margin: auto;
+    }
+    .title-bullet{
+        margin: 0 auto;
+    }
+    .bloc-thing:nth-child(2){
+        display: flex;
+        flex-direction: row-reverse;
+    }
+    .item-footer{
+        flex-basis: 100%;
+    }
 }
