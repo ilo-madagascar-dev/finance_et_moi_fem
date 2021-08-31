@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\ClientRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ClientRepository::class)
@@ -75,8 +78,36 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
      */
     private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nom;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $prenom;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Abonnement::class, mappedBy="client", cascade={"persist", "remove"})
+     */
+    private $abonnement;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Pret::class, mappedBy="client", orphanRemoval=true)
+     */
+    private $prets;
+
+    public function __construct()
+    {
+        $this->prets = new ArrayCollection();
+    }
     
 
     public function getId(): ?int
@@ -231,6 +262,77 @@ class Client
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getAbonnement(): ?Abonnement
+    {
+        return $this->abonnement;
+    }
+
+    public function setAbonnement(Abonnement $abonnement): self
+    {
+        // set the owning side of the relation if necessary
+        if ($abonnement->getClient() !== $this) {
+            $abonnement->setClient($this);
+        }
+
+        $this->abonnement = $abonnement;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Pret[]
+     */
+    public function getPrets(): Collection
+    {
+        return $this->prets;
+    }
+
+    public function addPret(Pret $pret): self
+    {
+        if (!$this->prets->contains($pret)) {
+            $this->prets[] = $pret;
+            $pret->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removePret(Pret $pret): self
+    {
+        if ($this->prets->removeElement($pret)) {
+            // set the owning side to null (unless already changed)
+            if ($pret->getClient() === $this) {
+                $pret->setClient(null);
+            }
+        }
 
         return $this;
     }

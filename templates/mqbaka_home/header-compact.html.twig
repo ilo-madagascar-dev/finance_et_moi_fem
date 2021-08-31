@@ -1,5 +1,5 @@
 <link rel="stylesheet" href={{ asset('css/header.css') }}>
-<div class="header-top-bar">
+<div class="header-top-bar shrinked compact">
     <div class="logo">
         <img src={{ asset('images/icon/favicon.png') }} alt="logo">
     </div>
@@ -66,28 +66,7 @@
             </div>
         </div>
     </div>
-<div class="header">
-    <div class="hero">
-        <img src={{ asset('images/groupe.png') }}  alt="hero">
-    </div>
 </div>
-
-<script title="the one that shrinks the header">
-    let top__bar= document.querySelector('.header-top-bar');
-    let header= document.querySelector('.header');
-
-    const scroller= function(event){
-        console.log(window.scrollY);
-        console.log(header.offsetHeight);
-        if(window.scrollY> header.offsetHeight){
-            top__bar.classList.add('shrinked');
-        } else {
-            top__bar.classList.remove('shrinked');
-        }
-    }
-
-    document.addEventListener('scroll', scroller);
-</script>
 
 <script title="menu toggler 1200px and lower">
     let ham= document.querySelector('.hamburger');
