@@ -197,3 +197,48 @@ img[alt='orias-logo']{
 .item-footer a:hover{
     color: var(--light-01);
 }
+
+@media only screen and (max-width: 1050px){
+    .three-bloc-thing{
+        grid-template-columns: 1fr 1fr;
+    }
+    .bloc-thing:not(:last-child)::after{
+        display: none;
+    }
+    .bloc-thing:last-child{
+        grid-column: 1 / 3;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .slided{
+        position: static;
+        grid-column: 1 / 3;
+        margin: auto;
+    }
+    .b-buttons{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    [alt='male-phone']{
+        margin: auto;
+        width: unset;
+    }
+    .title-bullet{
+        margin: auto;
+    }
+    .logo-label{
+        width: max-content;
+    }
+}
+
+@media only screen and (max-width: 900px){
+    .item-footer{
+        padding: 0 1em;
+    }
+}
+
+@media only screen and (max-width: 700px){
+    
+}
