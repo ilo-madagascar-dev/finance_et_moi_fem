@@ -45,7 +45,9 @@ color: var(--dark-01);
    padding: 10px;
 }
 hr{
-	margin: 37px 213px;
+	margin: auto;
+    width: 50%;
+    border-top: 1px;
 	color: var(--dark-01);
 }
 .grid-container2 {
@@ -126,4 +128,9 @@ margin-top: 13px;
 .marge {
     margin: 7%;
 }
+}
+@media (max-width: 500px){
+    .gpara{
+        margin: auto;
+    }
 }

@@ -21,13 +21,14 @@ width: 100%;
 margin: 39px 79px 23px;
 color: var(--dark-01);
 }
-.button1{
-padding: 14px;
-border-radius: 49px;
-background-color: var(--light-01);
-color: white;
-border-width: 0px;
-margin-left: 386px;
+.button1 {
+    padding: 14px;
+    border-radius: 49px;
+    background-color: var(--light-01);
+    color: white;
+    border-width: 0px;
+    margin: auto;
+    float: right;
 }
 .grand_border{
     border-radius: 20px 20px;
@@ -40,7 +41,7 @@ padding: 10px;
 .grid1{
   display: grid;
   
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 35% 35% 35%;
   padding: 0px 100px;
 }
 .grid1 > div {
@@ -49,13 +50,16 @@ padding: 10px;
   padding: 20px 0;
 
 }
+.imggrid{
+  width: 50%;
+}
 #franfinance2{
   display: none;
 }
 .grid2{
   display: grid;
   
-  grid-template-columns: auto auto ;
+  grid-template-columns: 35% 35% ;
   padding: 0px 200px;
 }
 .grid2 > div {
@@ -73,10 +77,11 @@ padding: 10px;
   text-align: center;
   color: var(--light-01);
 }
+
 .tt{
   text-align: center;
   color: var(--light-01);
-  margin: 56px 80px;
+  margin: 56px px;
 }
 .grid3{
   display: grid;
@@ -163,10 +168,10 @@ margin-left: 1000px;
   padding: 20px 0;
 
 }
-.img{
-  width: 50%;
+.img {
+    width: 75%;
+    padding: 20px;
 }
-
 /* R E S P O N S I V E */
 
 @media (max-width: 750px){
@@ -228,6 +233,9 @@ display: block;
   margin: auto;
   display: block;
 }
+.titre-secion{
+  margin: auto 32px;
+}
 .button2{
   margin: auto;
 display: block;
@@ -241,4 +249,14 @@ display: block;
 .gridcheck{
   padding: 0px 100px;
 }
+.gridimage {
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 0px 10px;
+}
+}
+@media (max-width: 500px){
+  .paraghaphe{
+    font-size: 14px;
+  }
 }

@@ -54,9 +54,12 @@ background: #ffffff82;
 margin-top: 559px;
 }
 hr{
-	margin: 37px 213px;
+	margin: auto;
+    width: 50%;
+    border-top: 1px;
 	color: var(--dark-01);
 }
+
 .grid-container3{
 	  display: grid;
   grid-template-columns: 30% auto;
@@ -120,4 +123,12 @@ background: transparent;
     grid-template-columns: auto;
     padding: 0px 50px;
 }
+}
+@media (max-width: 500px){
+	.para1{
+		margin: auto;
+	}
+	.para2{
+		margin: auto;
+	}
 }

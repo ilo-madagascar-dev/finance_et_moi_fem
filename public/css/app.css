@@ -7,7 +7,6 @@
 .grid-container > div {
   
   text-align: center;
-  padding: 20px 0;
 
 }
 .image0{
@@ -39,9 +38,12 @@ margin: 4%;
 color: var(--dark-01);
 }
 hr{
-  margin: 37px 213px;
-  color: var(--light-01);
+  margin: 50px auto;
+    width: 50%;
+    border-top: 1px;
+  color: var(--dark-01);
 }
+
 h3{
   color: var(--light-01);
   text-align: center;
@@ -143,16 +145,26 @@ grid-container > div {
   margin: -5%;
   border-radius: 50px 50px;
 }
+.titre {
+    margin-top: 0px;
+}
 .grid-container2 {
     display: grid;
     grid-template-columns: auto;
     padding: 0px 50px;
 }
+.text_interne2{
+  margin: -5%;
+  border-radius: 50px 50px;
+}
+.marge {
+    margin: 6%;
+}
 .image {
     width: 75%;
 margin: auto;
 display: block;
-margin-top: 10px;
+margin-top: 30px;
 }
 .grid-container3 {
     display: grid;
@@ -161,24 +173,22 @@ margin-top: 10px;
     }
     .image2{
       width: 100%;
-margin: auto;
+margin: 40px auto;
     }
     .border2{
       margin-top: 0px;
     }
-    .text_interne2{
-      margin: 1%;
-    }
+   
     .grid-container4{
         display: grid;
     grid-template-columns: auto;
     padding: 0px 50px;
     }
-    .image3{
-   width: 50%;
-margin: auto;
-display: block;
-    }
+    .image3 {
+    width: 50%;
+    margin: 40px auto auto;
+    display: block;
+}
     .grid-container5{
          display: grid;
     grid-template-columns: auto;
@@ -187,19 +197,19 @@ display: block;
     }
     .image4{
    width: 75%;
-margin: auto;
+margin: 40px auto;
 display: block;
     }
     .border3{
       margin-top: 0px;
     }
-    .text_interne3{
-      margin-top: 0px;
-      margin: 1%;
-    }
+ .text_interne3{
+  margin: -5%;
+  border-radius: 50px 50px;
+}
     .image5{
 width: 75%;
-margin: auto;
+margin: 40px auto;
 display: block;
     }
 }
