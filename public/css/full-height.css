@@ -1,0 +1,46 @@
+body{
+    height: 100vh;
+    display: flex;
+    background: var(--light-01-half);
+}
+
+.all-the{
+    width: max-content;
+    margin: auto;
+    color: var(--light-01);
+    background: transparent;
+}
+
+.all-the *{
+    background: transparent;
+}
+
+.sec-step-title{
+    font-size: 3em;
+    margin-bottom: .4em;
+}
+
+.all-the p{
+    text-align: center;
+}
+
+.finale-form{
+    width: max-content;
+    margin: 3em auto;
+}
+
+.finale-form button{
+    border: none;
+    background: var(--white--ish-01);
+    padding: 1em 3em;
+    color: var(--light-01);
+    border-radius: 40px;
+    font-size: 1.1em;
+    cursor: pointer;
+    box-shadow: inset 0px 0px 0px 4px var(--light-01-half);
+    transition: .3s;
+}
+
+.finale-form button:hover{
+    box-shadow: inset 0px 0px 0px 4px var(--light-01);
+}
