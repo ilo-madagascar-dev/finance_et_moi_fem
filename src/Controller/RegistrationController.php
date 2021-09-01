@@ -65,17 +65,22 @@ class RegistrationController extends AbstractController
         Stripe::setApiKey($_ENV['STRIPE_SECRET']);
         $priceId = 'price_1JT0YJBW8SyIFHAgmEuizs6Z';
         
-          $paymentSession = \Stripe\Checkout\Session::create([
-            'success_url' => 'http://localhost:8000/registration/payment/success?session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url' => $this->generateUrl('registration_payment_failed', [], UrlGeneratorInterface::ABSOLUTE_URL),
-            'payment_method_types' => ['card'],
-            'mode' => 'subscription',
-            'line_items' => [[
-              'price' => $priceId,
-              // For metered billing, do not pass quantity
-              'quantity' => 1,
-            ]],
-          ]);
+        //Local success_url :
+        //'success_url' => 'http://localhost:8000/registration/payment/success?session_id={CHECKOUT_SESSION_ID}',
+        //Production success_url :
+        //'success_url' => 'http://femcreditconso.fr/registration/payment/success?session_id={CHECKOUT_SESSION_ID}',
+        
+        $paymentSession = \Stripe\Checkout\Session::create([
+          'success_url' => 'http://femcreditconso.fr/registration/payment/success?session_id={CHECKOUT_SESSION_ID}',
+          'cancel_url' => $this->generateUrl('registration_payment_failed', [], UrlGeneratorInterface::ABSOLUTE_URL),
+          'payment_method_types' => ['card'],
+          'mode' => 'subscription',
+          'line_items' => [[
+            'price' => $priceId,
+            // For metered billing, do not pass quantity
+            'quantity' => 1,
+          ]],
+        ]);
         //dd($session); //Sauvegarder le payement intent de l'utilisateur dans la base de données afin d'avoir une référence quant à son paiement
 
         //return $response->withHeader('Location', $session->url)->withStatus(303);;
