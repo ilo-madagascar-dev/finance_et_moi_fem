@@ -23,6 +23,14 @@
         </div>
         
         {{ form_start(form, {'attr': {'id': 'registration-form'}}) }}
+        
+        {#% Flash message %#}
+        {% for message in app.flashes('danger') %}
+            <div class="flash-notice">
+                {{ message }}
+            </div>
+        {% endfor %}
+        
         <div class="form-container">
                 <div class="double-line">
                     <div class="line">
