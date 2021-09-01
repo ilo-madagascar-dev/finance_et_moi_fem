@@ -2,6 +2,7 @@ body{
     height: 100vh;
     display: flex;
     background: var(--light-01-half);
+    flex-direction: column;
 }
 
 .all-the{
@@ -119,4 +120,85 @@ body{
     to{
         transform: translate(0, 20%);
     }
+}
+
+/*
+                L o g i n
+*/
+
+.login-form{
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.login-inner{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 4fr 3fr;
+    padding: 0em 4em;
+    box-sizing: border-box;
+}
+
+.main-form{
+    background: var(--dark-01);
+    height: max-content;
+    width: 100%;
+    margin: auto;
+    padding: 3em 5em;
+    border-radius: 20px;
+}
+
+.main-form *{
+    background: transparent;
+}
+
+.login-image img{
+    max-width: 100%;
+}
+
+.label-and-stuff{
+    display: flex;
+    flex-direction: column;
+    gap: 1.2em;
+    padding: 1em 2em
+}
+
+.label-and-stuff input{
+    border: none;
+    background: var(--white--ish-01);
+    height: 2.5em;
+    padding: 0 1em;
+    border-radius: 10px;
+}
+
+.login-wrapper{
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+}
+
+.login-title{
+    color: var(--white--ish-01);
+}
+
+.log-button{
+    display: flex;
+    justify-content: center;
+}
+
+.sign-in-button{
+    padding: .6em 2em;
+    background: var(--light-01);
+    color: var(--white--ish-01);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 0 0 0 var(--white--ish-01);
+    transition: .2s ease-in-out;
+}
+
+.sign-in-button:hover{
+    box-shadow: 0 0 0 3px var(--white--ish-01);
+    transition: .2s ease-in-out;
 }
