@@ -9,6 +9,8 @@ body{
     margin: auto;
     color: var(--light-01);
     background: transparent;
+    position: relative;
+    z-index: 1;
 }
 
 .all-the *{
@@ -37,10 +39,61 @@ body{
     border-radius: 40px;
     font-size: 1.1em;
     cursor: pointer;
-    box-shadow: inset 0px 0px 0px 4px var(--light-01-half);
+    box-shadow: inset 0px 0px 0px 2px var(--light-01-half);
     transition: .3s;
 }
 
 .finale-form button:hover{
-    box-shadow: inset 0px 0px 0px 4px var(--light-01);
+    box-shadow: inset 0px 0px 0px 2px var(--light-01);
+}
+
+.floatters{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: transparent;
+    z-index: 0;
+    --distance: 5%;
+}
+
+.floatter{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: calc(50% - 100px);
+    height: 200px;
+    background: var(--white--ish-01);
+    opacity: .2;
+    mix-blend-mode: saturation;
+    animation: upAndDown infinite alternate ease-in-out 2s;
+}
+
+.floatter:nth-child(1){
+    top: calc(50% - 100px - var(--distance));
+    animation-delay: 0s;
+}
+
+.floatter:nth-child(2){
+    animation-delay: .5s;
+}
+
+.floatter:nth-child(3){
+    top: calc(50% - 100px + 2 * var(--distance));
+    animation-delay: 1s;
+}
+
+.floatter:nth-child(4){
+    top: calc(50% - 100px + 3 * var(--distance));
+    animation-delay: 1.5s;
+}
+
+@keyframes upAndDown{
+    from{
+        transform: translate(0, -50px);
+    }
+    to{
+        transform: translate(0, 50px);
+    }
 }
