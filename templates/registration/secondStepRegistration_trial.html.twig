@@ -2,16 +2,28 @@
 
 {% block title %}Make your payment!{% endblock %}
 
+
+{% block stylesheets %}
+    {# <link href="stylesheets/fonts/stylesheet-01.css" rel="text/css"/> #}
+    <link href={{ asset('css/stylesheet.css') }} rel="stylesheet">
+    <link href={{ asset('css/colors.css') }} rel="stylesheet">
+    <link href={{ asset('css/full-height.css') }} rel="stylesheet">
+    {% block addstyle %}
+    {% endblock %}
+{% endblock %}
+
 {% block body %}
 
-    <section>
-        <h1 class="mt-3">Abonnement</h1>
+    <section class="all-the">
+        <h1 class="sec-step-title">Finalisez votre inscription</h1>
         <p>
             Afin de finaliser votre inscription, vous devez d'abord vous abonner !!!
         </p>
-        <form action="{{ path('registration_payment') }}" method="POST" class="mt-3">
-            <button type="submit" class="btn btn-primary btn-lg">S'abonner</button>
+        <form action="{{ path('registration_payment') }}" method="POST" class="finale-form">
+            <button type="submit" class="">S'abonner</button>
         </form>
     </section>
+    <style>
+    </style>
 
 {% endblock %}
