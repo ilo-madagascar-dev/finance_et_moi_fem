@@ -9,6 +9,8 @@ body{
     margin: auto;
     color: var(--light-01);
     background: transparent;
+    position: relative;
+    z-index: 1;
 }
 
 .all-the *{
@@ -37,10 +39,84 @@ body{
     border-radius: 40px;
     font-size: 1.1em;
     cursor: pointer;
-    box-shadow: inset 0px 0px 0px 4px var(--light-01-half);
+    box-shadow: inset 0px 0px 0px 0px var(--light-01),
+                inset 0px 0px 0px 2px var(--light-01-half);
     transition: .3s;
 }
 
 .finale-form button:hover{
-    box-shadow: inset 0px 0px 0px 4px var(--light-01);
+    box-shadow: inset 0px 0px 0px 7px var(--light-01),
+                inset 0px 0px 0px 10px var(--light-01-half);
+    transition: .3s;
+}
+
+.floatters{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 0;
+    background: transparent;
+    --delay: 5s;
+    transform: scale(1.2, 1) translate(0, 200px) rotate(10deg);
+}
+
+.floatters+.floatters{
+    transform: scale(1.2, 1) translate(0, 200px) rotate(-10deg);
+}
+
+.floatter{
+    width: 100%;
+    height: 200px;
+    background: var(--white--ish-01);
+    opacity: .3;
+    position: absolute;
+    animation: upAndDown infinite alternate var(--delay);
+    top: calc(50% - 100px);
+}
+
+.floatter:nth-child(1){
+    top: calc(50% - 100px - 50px);
+    animation-delay: calc(0);
+}
+
+.floatter:nth-child(2){
+    top: calc(50% - 100px - 25px);
+    animation-delay: calc(var(--delay) / 4);
+}
+
+.floatter:nth-child(3){
+    top: calc(50% - 100px);
+    animation-delay: calc(var(--delay) / 2);
+}
+
+.floatter:nth-child(4){
+    top: calc(50% - 100px + 25px);
+    animation-delay: calc(3 * var(--delay) / 4);
+}
+
+.floatters+.floatters .floatter:nth-child(3){
+    animation-delay: calc(0);
+}
+
+.floatters+.floatters .floatter:nth-child(4){
+    animation-delay: calc(var(--delay) / 4);
+}
+
+.floatters+.floatters .floatter:nth-child(1){
+    animation-delay: calc(var(--delay) / 2);
+}
+
+.floatters+.floatters .floatter:nth-child(2){
+    animation-delay: calc(3 * var(--delay) / 4);
+}
+
+@keyframes upAndDown{
+    from{
+        transform: translate(0, -20%);
+    }
+    to{
+        transform: translate(0, 20%);
+    }
 }
