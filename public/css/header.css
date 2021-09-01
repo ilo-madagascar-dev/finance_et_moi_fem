@@ -227,3 +227,29 @@
         margin: auto;
     }
 }
+
+.hoverable-drop{
+    position: relative;
+    color: var(--light-01);
+}
+
+.hoverable-drop .hoverable-content{
+    position: absolute;
+    bottom: 0;
+    transform: translate(-50%, 100%);
+    background: var(--white--ish-01);
+    display: none;
+    width: max-content;
+    padding: 1em 1.5em;
+    left: 50%;
+}
+
+.hoverable-drop:hover .hover-main-title{
+    color: var(--dark-01);
+}
+
+.hoverable-drop:hover .hoverable-content{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
