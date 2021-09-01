@@ -71,7 +71,7 @@ class RegistrationController extends AbstractController
         //'success_url' => 'http://femcreditconso.fr/registration/payment/success?session_id={CHECKOUT_SESSION_ID}',
         
         $paymentSession = \Stripe\Checkout\Session::create([
-          'success_url' => 'http://femcreditconso.fr/registration/payment/success?session_id={CHECKOUT_SESSION_ID}',
+            'success_url' => 'http://localhost:8000/registration/payment/success?session_id={CHECKOUT_SESSION_ID}',
           'cancel_url' => $this->generateUrl('registration_payment_failed', [], UrlGeneratorInterface::ABSOLUTE_URL),
           'payment_method_types' => ['card'],
           'mode' => 'subscription',
