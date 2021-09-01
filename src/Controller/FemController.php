@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class FemController extends AbstractController
 {
     /**
-    * @Route("/fem", name="accueil")
+    * @Route("/", name="accueil")
     */
     public function femAccueil(): Response
     {
