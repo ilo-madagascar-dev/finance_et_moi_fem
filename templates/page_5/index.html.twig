@@ -4,30 +4,31 @@
 
 {% block body %}
 {% include "mqbaka_home/header.html.twig" %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="/css/serviceCreditRemere.css" rel="stylesheet">
 <div class="container">
     <div style="height: 100px"></div>
     <div class="grid">
-        <img style="width: 400px" src="/images/Capture.png">
+        <img class="imgLoup" src="/images/Capture.png">
         <div style="position: relative">
             <div class="gridIntern">
-                <img style="width: 60px" src="/images/Fleche.png">
+                <img class="imgFleche" src="/images/Fleche.png">
                 <p>Éviter une saisie</p>
             </div>
             <div class="gridIntern escalier2">
-                <img style="width: 60px" src="/images/Fleche.png">
+                <img class="imgFleche" src="/images/Fleche.png">
                 <p>Solder vos dettes</p>
             </div>
             <div class="gridIntern escalier3">
-                <img style="width: 60px" src="/images/Fleche.png">
+                <img class="imgFleche" src="/images/Fleche.png">
                 <p>Financer vos projets</p>
             </div>
             <div class="gridIntern escalier4">
-                <img style="width: 60px" src="/images/Fleche.png">
+                <img class="imgFleche" src="/images/Fleche.png">
                 <p>Lever vos fichages</p>
             </div>
             <div class="gridIntern escalier5">
-                <img style="width: 60px" src="/images/Fleche.png">
+                <img class="imgFleche" src="/images/Fleche.png">
                 <p>Disposer de temps pour revendre</p>
             </div>
         </div>
@@ -59,7 +60,7 @@
     <div class="grid3">
         <img style="width: 100%" src="/images/equipmentprotection3.png">
         <div class="bigPaletD">
-            <div style="font-size: 30px; font-weight: 700; color: var(--light-01)">LA VENTE RÉMÉRÉ ÉTHIQUE : LE PORTAGE IMMOBILIER</div>
+            <div class="titreBigPaletD">LA VENTE RÉMÉRÉ ÉTHIQUE : LE PORTAGE IMMOBILIER</div>
             <p>La vente réméré et le portage immobilier désignent la même opération juridique à
                 savoir une vente temporaire d'un bien immobilier avec la possibilité pour le vendeur
                 de le racheter pendant une durée limitée.
@@ -85,43 +86,45 @@
     <div class="grid4">
         <div class="Listes">
             <div class="LG">
-                <img style="width: 35px; margin-right: 10px" src="/images/pngegg(1).png">Stopper la saisie
+                <img class="imgchecked" src="/images/pngegg(1).png">Stopper la saisie
             </div>
             <div class="LD">
-                <img style="width: 30px; margin-right: 8px" src="/images/icon/bullet.png">La procédure de saisie de votre bien est immédiatement arrêtée.
+                <img class="imgchecked2" src="/images/icon/bullet.png">La procédure de saisie de votre bien est immédiatement arrêtée.
             </div>
             <div class="LG">
-                <img style="width: 35px; margin-right: 10px" src="/images/pngegg(1).png">Obtenir des fonds
+                <img class="imgchecked" src="/images/pngegg(1).png">Obtenir des fonds
             </div>
             <div class="LD">
-                <img style="width: 30px; margin-right: 8px" src="/images/icon/bullet.png">Vous obtenez la trésorerie dont vous avez besoin.
+                <img class="imgchecked2" src="/images/icon/bullet.png">Vous obtenez la trésorerie dont vous avez besoin.
             </div>
             <div class="LG">
-                <img style="width: 35px; margin-right: 10px" src="/images/pngegg(1).png">Défichage BDF
+                <img class="imgchecked" src="/images/pngegg(1).png">Défichage BDF
             </div>
             <div class="LD">
-                <img style="width: 30px; margin-right: 8px" src="/images/icon/bullet.png">La banque de France régularise votre situation.
+                <img class="imgchecked2" src="/images/icon/bullet.png">La banque de France régularise votre situation.
             </div>
             <div class="LG">
-                <img style="width: 35px; margin-right: 10px" src="/images/pngegg(1).png">Discrétion
+                <img class="imgchecked" src="/images/pngegg(1).png">Discrétion
             </div>
             <div class="LD">
-                <img style="width: 30px; margin-right: 8px" src="/images/icon/bullet.png">Vos proches (voisins, amis, collègues) ne sont pas informés.
+                <img class="imgchecked2" src="/images/icon/bullet.png">Vos proches (voisins, amis, collègues) ne sont pas informés.
             </div>
         </div>
-        <img src="/images/08.png" style="width: 400px; margin-top: 10px">
+        <img src="/images/08.png" class="img08">
     </div>
 
     <div style="height: 50px"></div>
     <hr style="height:1px;border-width:0;color:gray;background-color:gray">
     <div style="height: 50px"></div>
 
-    <div class="procedure">
-        <div id="titreBgWhite">Procédure rapide</div>
-        <p>Durée de deux mois entre le premier contact et le remboursement des créanciers.</p>
+    <div class="grid5">
+        <div class="procedure">
+            <div id="titreBgWhite">Procédure rapide</div>
+            <p>Durée de deux mois entre le premier contact et le remboursement des créanciers.</p>
+        </div>
+        
+        <img id="imgJiro" src="/images/09.png">
     </div>
-    
-    <img src="/images/09.png">
     {# <div class="mifanindry">
         <img id="img1" src="/images/rachat-credit-rentabiliteopt.png">
         <img id="img2" src="/images/capture1.png">
