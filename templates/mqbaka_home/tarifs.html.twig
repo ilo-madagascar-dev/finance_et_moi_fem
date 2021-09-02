@@ -64,7 +64,7 @@
             </div>
             <div class="ilany">
                 <h3 class="ilany-title">Essentiel</h3>
-                <p class="ilany-p">89€ HT/Mois Agence tête de reseau</p>
+                <p class="ilany-p"><span id="priceThing">89</span>€ HT/Mois Agence tête de reseau</p>
                 <div class="li-checks">
                     <div class="el">
                         <img src={{ asset('images/icon/check-dark.svg') }} alt="">
@@ -99,6 +99,44 @@
                 </div>
                 <button class="full-blue">Créer un compte</button>
             </div>
+        </div>
+        <div class="switcher">
+            <div class="switcher-inner">
+                <div class="circle on" id='one'>
+                    <div class="the-c" data-indic="mensuel" id="c-1"></div>
+                    <div class="the-t">
+                        Mensuel
+                    </div>
+                </div>
+                <div class="circle" id='two'>
+                    <div class="the-c" data-indic="annuel" id="c-2"></div>
+                    <div class="the-t">
+                        Annuel
+                    </div>
+                </div>
+            </div>
+            <script title="for the switcher">
+                let c1= document.querySelector('#c-1');
+                let c2= document.querySelector('#c-2');
+
+                let p1= document.querySelector('#one');
+                let p2= document.querySelector('#two');
+
+                c1.addEventListener('click', switchTo);
+                c2.addEventListener('click', switchTo);
+
+                function switchTo(event){
+                    if(event.target.getAttribute('data-indic')== 'mensuel'){
+                        p1.classList.add('on');
+                        p2.classList.remove('on');
+                        document.querySelector('#priceThing').innerHTML= "89";
+                    } else {
+                        p2.classList.add('on');
+                        p1.classList.remove('on');
+                        document.querySelector('#priceThing').innerHTML= "109";
+                    }
+                }
+            </script>
         </div>
     </div>
 

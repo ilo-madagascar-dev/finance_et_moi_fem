@@ -71,3 +71,75 @@ p.deal{
 .el img{
     width: 1.1em;
 }
+
+.ilany-p{
+    text-align: center;
+}
+
+.switcher{
+    padding: 3em 0;
+}
+
+.switcher-inner{
+    margin: 0 auto;
+    width: max-content;
+    display: flex;
+    gap: 3em;
+    border: 1px solid var(--dark-01);
+    border-radius: 40px;
+    padding: .4em 2em;
+}
+
+.circle{
+    display: flex;
+    gap: .6em;
+}
+
+.circle .the-c{
+    width: 1.5em;
+    height: 1.5em;
+    box-sizing: border-box;
+    border: 1px solid var(--dark-01);
+    border-radius: 50%;
+    transition: .4s;
+    cursor: pointer;
+}
+
+.circle.on .the-c{
+    background: var(--dark-01);
+}
+
+@media only screen and (max-width: 750px){
+    .ilany{
+        font-size: .8em;
+    }
+}
+
+@media only screen and (max-width: 650px){
+    .two-columns{
+        padding: 0 3em;
+    }
+}
+
+@media only screen and (max-width: 572px){
+    .two-columns{
+        padding: 0 1em;
+    }
+}
+
+@media only screen and (max-width: 510px){
+    .two-columns{
+        padding: 0 .5em;
+        gap: .5em;
+    }
+}
+
+@media only screen and (max-width: 480px){
+    .two-columns{
+        grid-template-columns: 1fr;
+    }
+    .ilany{
+        font-size: 1em;
+        margin: auto!important;
+    }
+}
