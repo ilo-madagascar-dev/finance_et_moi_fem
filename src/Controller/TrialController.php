@@ -16,17 +16,17 @@ class TrialController {
      */
     public function clientGetter(ClientRepository $clientRepository, UserRepository $userRepository, AbonnementRepository $abonnementRepository, FactureRepository $factureRepository):Response
     {
-        //$user = $userRepository->find(4);
-        //dd($user);
+        /* $user = $userRepository->find(1);
+        dd($user); */
 
-        //$clients = $clientRepository->find(1);
-        //dd($clients);
+        /* $clients = $clientRepository->find(1);
+        dd($clients); */
         
-        //$abonnement = $abonnementRepository->findAll();
-        //dd($abonnement);
+        /* $abonnement = $abonnementRepository->findAll();
+        dd($abonnement); */
         
-        $facture = $factureRepository->find(1);
-        dd($facture);
+        /* $facture = $factureRepository->find(1);
+        dd($facture); */
 
         return new Response('Hello world');
     }
