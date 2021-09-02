@@ -19,6 +19,12 @@
     font-size: 20px;
     color: var(--light-01);
 }
+.imgLoup{
+    width: 36vw;
+}
+.imgFleche{
+    width: 60px;
+}
 .escalier2{
     top: 50px;
     left: 20px;
@@ -38,15 +44,15 @@
 .grid2{
     display: grid;
     grid-template-columns: auto auto;
-    grid-column-gap: 150px;
+    grid-column-gap: 8vw;
     justify-content: center;
     border: 1px solid var(--dark-01);
     border-radius: 60px 60px;
+    padding: 50px 20px;
 }
 .downl{
-    width: 450px;
-    height: 250px;
-    margin-top: 50px;
+    width: 35vw;
+    height: max-content;
 }
 .downl p{
     font-size: 20px;
@@ -56,7 +62,6 @@
     grid-column: 1 / 3;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 30px;
     margin-top: 0px !important;
 }
 .imgdownl{
@@ -78,6 +83,11 @@
 .bigPaletD p{
     margin-top: 50px;
     color: var(--dark-01);
+}
+.titreBigPaletD{
+    font-size: 30px; 
+    font-weight: 700; 
+    color: var(--light-01);
 }
 #titreBgBleu{
     font-size: 25px; 
@@ -106,6 +116,18 @@
     margin-left: 40px;
     margin-bottom: 5px;
 }
+.imgchecked{
+    width: 35px;
+    margin-right: 10px;
+}
+.imgchecked2{
+    width: 30px; 
+    margin-right: 8px
+}
+.img08{
+    width: 35vw; 
+    margin-top: 10px;
+}
 #titreBgWhite{
     font-size: 25px; 
     font-weight: 700; 
@@ -119,6 +141,12 @@
     margin-right: auto;
     margin-bottom: 50px;
     display: block;
+}
+.grid5{
+    display: grid;
+    grid-template-columns: 55% auto;
+    grid-column-gap: 0px;
+    justify-content: center;
 }
 .procedure{
     width: 500px;
@@ -144,6 +172,10 @@
     right: 0px;
     top: 120px;
 }
+#imgJiro{
+    width: 200px;
+    margin-top: 150px;
+}
 
 
 /* .grid5{
@@ -165,3 +197,90 @@
     right: 0px;
     top: 100px;
 } */
+
+/*RESPONSIVE*/
+@media (max-width: 767px){
+    .grid{
+        grid-template-columns: auto;
+    }
+    .gridIntern{
+        grid-template-columns: 48px auto;
+        position: initial;
+        align-items: center;
+        padding-left: 15%;
+        margin-bottom: 15px;
+    }
+    .gridIntern p{
+        padding-top: 0px;
+        font-size: 16px;
+    }
+    .imgLoup {
+        width: 60%;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+    .imgFleche{
+        width: 30px;
+    }
+    .grid2{
+        grid-template-columns: auto;
+        border: 0px;
+    }
+    .downlcenter{
+        grid-column: 1 / 2;
+    }
+    .downl {
+        width: 85%;
+        height: max-content;
+        margin: auto;
+        margin-bottom: 30px;
+    }
+    .downl p {
+        font-size: 15px;
+    }
+    .grid3{
+        grid-template-columns: auto;
+    }
+    .bigPaletD {
+        border-radius: 60px 60px;
+    }
+    .titreBigPaletD {
+        font-size: 20px;
+        text-align: center;
+    }
+    .bigPaletD p {
+        margin-top: 20px;
+        font-size: 14px;
+    }
+    #titreBgBleu {
+        font-size: 15px;
+        margin: auto;
+    }
+    .grid4{
+        grid-template-columns: auto;
+    }
+    .img08 {
+        width: 90%;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .imgchecked {
+        width: 23px;
+    }
+    .imgchecked2 {
+        width: 20px;
+    }
+    .LD{
+        font-size: 15px;
+        margin-bottom: 30px;
+        margin-top: 20px;
+        color: var(--light-01);
+    }
+    .grid5{
+        display: none;
+    }
+    .container > hr:nth-child(14){
+        display: none;
+    }
+}

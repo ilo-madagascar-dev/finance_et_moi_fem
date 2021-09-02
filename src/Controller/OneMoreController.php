@@ -67,4 +67,14 @@ class OneMoreController extends AbstractController
             'controller_name' => 'PageSevenController',
         ]);
     }
+
+    /**
+     * @Route("/page/tarifs", name="page_tarifs")
+     */
+    public function pageTarifs(): Response
+    {
+        return $this->render('mqbaka_home/tarifs.html.twig', [
+            'controller_name' => 'TarifsController',
+        ]);
+    }
 }

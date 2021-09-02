@@ -1,0 +1,145 @@
+.main-content *{
+    background: transparent;
+    color: var(--dark-01);
+}
+
+.two-columns{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5%;
+    padding: 0 5em;
+}
+
+.title-block{
+    display: flex;
+    flex-direction: column;
+    gap: 1.2em;
+    padding: 3em 0;
+    font-size: 1.2em;
+}
+
+h1.block{
+    color: var(--dark-01);
+    text-align: center;
+}
+p.deal{
+    text-align: center;
+    color: var(--dark-01);
+    font-size: 1.1em;
+}
+
+.ilany{
+    border: 1px solid var(--dark-01);
+    border-radius: 40px;
+    padding: 2em 1.5em;
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 2.2em;
+    align-items: center;
+}
+
+.ilany:nth-child(1){
+    margin-left: auto;
+}
+.ilany:nth-child(2){
+    margin-right: auto;
+}
+
+.ilany-title{
+    font-size: 1.2em;
+    color: var(--dark-01);
+}
+
+.el.b .el-p{
+    color: var(--light-01);
+}
+
+.el{
+    display: flex;
+    align-items: flex-start;
+    gap: 1em;
+}
+
+.li-checks{
+    display: flex;
+    flex-direction: column;
+    gap: 1.2em;
+}
+
+.el img{
+    width: 1.1em;
+}
+
+.ilany-p{
+    text-align: center;
+}
+
+.switcher{
+    padding: 3em 0;
+}
+
+.switcher-inner{
+    margin: 0 auto;
+    width: max-content;
+    display: flex;
+    gap: 3em;
+    border: 1px solid var(--dark-01);
+    border-radius: 40px;
+    padding: .4em 2em;
+}
+
+.circle{
+    display: flex;
+    gap: .6em;
+}
+
+.circle .the-c{
+    width: 1.5em;
+    height: 1.5em;
+    box-sizing: border-box;
+    border: 1px solid var(--dark-01);
+    border-radius: 50%;
+    transition: .4s;
+    cursor: pointer;
+}
+
+.circle.on .the-c{
+    background: var(--dark-01);
+}
+
+@media only screen and (max-width: 750px){
+    .ilany{
+        font-size: .8em;
+    }
+}
+
+@media only screen and (max-width: 650px){
+    .two-columns{
+        padding: 0 3em;
+    }
+}
+
+@media only screen and (max-width: 572px){
+    .two-columns{
+        padding: 0 1em;
+    }
+}
+
+@media only screen and (max-width: 510px){
+    .two-columns{
+        padding: 0 .5em;
+        gap: .5em;
+    }
+}
+
+@media only screen and (max-width: 480px){
+    .two-columns{
+        grid-template-columns: 1fr;
+    }
+    .ilany{
+        font-size: 1em;
+        margin: auto!important;
+    }
+}

@@ -15,48 +15,89 @@
             </div>
         </div>
         <div class="nav-bar">
-            <div class="menu-list">
-                <ul class="nav-list">
+            <div class="menu-list ham">
+                <div class="hamburger">
+                    <div class="layer"></div>
+                    <div class="layer"></div>
+                    <div class="layer"></div>
+                </div>
+                <div class="cross">
+                    <div class="lines"></div>
+                    <div class="lines"></div>
+                </div>
+                <ul class="nav-list mob-thing">
                     <li class="list-item">
-                        <a href="#">
+                        <a href={{path('accueil')}}>
                             Accueil
                         </a>
                     </li>
                     <li class="list-item">
-                        <a href="#">
+                        <a href={{path('page_two')}}>
                             A propos
                         </a>
                     </li>
                     <li class="list-item">
                         <a href="#">
-                                Assurance emprunteur
-                            </a>
-                        </li>
-                        <li class="list-item">
-                            <a href="#">
-                                Services
-                            </a>
-                        </li>
-                        <li class="list-item">
-                            <a href="#">
-                                Tarif
-                            </a>
-                        </li>
-                        <li class="list-item">
-                            <a href="#">
-                                Votre concièrgerie
-                            </a>
-                        </li>
-                        <li class="list-item">
-                            <a href="#">
-                                Compte
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                            Assurance emprunteur
+                        </a>
+                    </li>
+                    <li class="list-item">
+                        <div class="hoverable-drop">
+                            <div class="hover-main-title">
+                                Services <div class="tri-down"></div>
+                            </div>
+                            <div class="hoverable-content">    
+                                <a href={{path('page_four')}}>
+                                    Service rachat
+                                </a>
+                                <a href={{path('page_five')}}>
+                                    Service reméré
+                                </a>
+                                <a href={{path('page_six')}}>
+                                    Service in fine
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-item">
+                        <a href={{ path('page_tarifs') }}>
+                            Tarifs
+                        </a>
+                    </li>
+                    <li class="list-item">
+                        <a href="#">
+                            Votre concièrgerie
+                        </a>
+                    </li>
+                    <li class="list-item">
+                        <div class="hoverable-drop">
+                            <div class="hover-main-title">
+                                Compte <div class="tri-down"></div>
+                            </div>
+                            <div class="hoverable-content">
+                                {% if app.user %}
+                                <a href="#">
+                                    Mon profil
+                                </a>
+                                <a href={{ path('app_logout') }}>
+                                    Déconnexion
+                                </a>
+                                {% else %}
+                                <a href={{ path('app_login') }}>
+                                    Connexion
+                                </a>
+                                <a href={{ path('registration') }}>
+                                    Inscription
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
+</div>
 <div class="header">
     <div class="hero">
         <img src={{ asset('images/groupe.png') }}  alt="hero">
@@ -78,4 +119,28 @@
     }
 
     document.addEventListener('scroll', scroller);
+</script>
+
+<script title="menu toggler 1200px and lower">
+    let ham= document.querySelector('.hamburger');
+    let cro= document.querySelector('.cross');
+
+    let container= document.querySelector('.menu-list');
+    let menu= document.querySelector('.nav-list');
+
+    function showMenuList(){
+        menu.classList.remove('mob-thing');
+        container.classList.add('cro');
+        container.classList.remove('ham');
+    }
+
+    function hideMenuList(){
+        menu.classList.add('mob-thing');
+        container.classList.add('ham');
+        container.classList.remove('cro');
+    }
+
+    ham.addEventListener('click', showMenuList);
+    cro.addEventListener('click', hideMenuList);
+
 </script>

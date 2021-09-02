@@ -1,12 +1,85 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello RegistrationController!{% endblock %}
+{% block stylesheets %}
+<link href={{ asset('css/stylesheet.css') }} rel="stylesheet">
+<link href={{ asset('css/colors.css') }} rel="stylesheet">
+{% endblock %}
 
 {% block body %}
-<div class="container">
-    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-        {{ form_widget(form) }}
-        <button type="submit">Valider</button>
-    {{ form_end(form) }}
+<link rel="stylesheet" href={{ asset('css/registration.css') }}>
+
+{% block header %}
+    {% include "mqbaka_home/header-compact.html.twig" %}
+{% endblock %}
+
+<div class="form-register">
+    <div class="background">
+        <img src={{ asset('images/favicon.png') }} alt="">
+    </div>
+    <div class="inner-bg">
+        <div class="the-img">
+            <img src={{ asset('images/vectors/19.png') }} alt="">
+        </div>
+        
+        {{ form_start(form, {'attr': {'id': 'registration-form'}}) }}
+        
+        {#% Flash message %#}
+        {% for message in app.flashes('danger') %}
+            <div class="flash-notice">
+                {{ message }}
+            </div>
+        {% endfor %}
+        
+        <div class="form-container">
+                <div class="double-line">
+                    <div class="line">
+                        {{ form_widget(form.nom) }}
+                    </div>
+                    <div class="line">
+                        {{ form_widget(form.prenom) }}
+                    </div>
+                </div>
+
+                <div class="double-line">
+                    <div class="line">
+                        {{ form_widget(form.nomEntreprise) }}
+                    </div>
+                    <div class="line">
+                        {{ form_widget(form.email) }}
+                    </div>
+                </div>
+
+                <div class="double-line">
+                    <div class="line">
+                        {{ form_widget(form.telMobile) }}
+                    </div>
+                    <div class="line">
+                        {{ form_widget(form.telFixe) }}
+                    </div>
+                </div>
+
+                <div class="double-line">
+                    <div class="line">
+                        {{ form_widget(form.password.first) }}
+                    </div>
+                    <div class="line">
+                        {{ form_widget(form.password.second) }}
+                    </div>
+                </div>
+
+                <div class="double-line">
+                    <div class="line">
+                        {{ form_widget(form.siren) }}
+                    </div>
+                    <div class="line">
+                        {{ form_widget(form.address) }}
+                    </div>
+                </div>
+                <button type="submit">Inscription</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
 </div>
+
 {% endblock %}
