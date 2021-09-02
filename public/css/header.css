@@ -231,6 +231,7 @@
 .hoverable-drop{
     position: relative;
     color: var(--light-01);
+    cursor: pointer;
 }
 
 .hoverable-drop .hoverable-content{
@@ -242,6 +243,7 @@
     width: max-content;
     padding: 1em 1.5em;
     left: 50%;
+    box-shadow: 0 2px 2px 1px var(--light-01-half);
 }
 
 .hoverable-drop:hover .hover-main-title{
@@ -252,4 +254,18 @@
     display: flex;
     flex-direction: column;
     gap: 1em;
+}
+
+.tri-down{
+    width: 0;
+    height: 0;
+    border: 7px solid transparent;
+    border-top: 7px solid var(--light-01);
+    display: inline-block;
+    border-bottom: 2px solid transparent;
+    margin-left: .5em;
+}
+
+.hoverable-drop:hover .tri-down{
+    border-top: 7px solid var(--dark-01);
 }
