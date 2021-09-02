@@ -35,12 +35,6 @@ class Abonnement
     private $actif;
 
     /**
-     * @ORM\OneToOne(targetEntity=client::class, inversedBy="abonnement", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $client;
-
-    /**
      * @ORM\Column(type="text")
      */
     private $stripe_subscription_id;
@@ -107,18 +101,6 @@ class Abonnement
     public function setActif(?bool $actif): self
     {
         $this->actif = $actif;
-
-        return $this;
-    }
-
-    public function getClient(): ?client
-    {
-        return $this->client;
-    }
-
-    public function setClient(client $client): self
-    {
-        $this->client = $client;
 
         return $this;
     }
