@@ -59,6 +59,12 @@ class Abonnement
      */
     private $statut_paiement;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Client::class, inversedBy="abonnement", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $client;
+
     public function __construct()
     {
         $this->factures = new ArrayCollection();
@@ -179,6 +185,18 @@ class Abonnement
     public function setStatutPaiement(bool $statut_paiement): self
     {
         $this->statut_paiement = $statut_paiement;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(Client $client): self
+    {
+        $this->client = $client;
 
         return $this;
     }

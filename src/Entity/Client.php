@@ -99,6 +99,11 @@ class Client
      */
     private $prets;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Abonnement::class, mappedBy="client", cascade={"persist", "remove"})
+     */
+    private $abonnement;
+
     public function __construct()
     {
         $this->prets = new ArrayCollection();
@@ -311,6 +316,23 @@ class Client
                 $pret->setClient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAbonnement(): ?Abonnement
+    {
+        return $this->abonnement;
+    }
+
+    public function setAbonnement(Abonnement $abonnement): self
+    {
+        // set the owning side of the relation if necessary
+        if ($abonnement->getClient() !== $this) {
+            $abonnement->setClient($this);
+        }
+
+        $this->abonnement = $abonnement;
 
         return $this;
     }
