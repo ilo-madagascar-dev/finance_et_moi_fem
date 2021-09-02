@@ -7,6 +7,7 @@ use App\Entity\Client;
 use App\Entity\Facture;
 use App\Entity\User;
 use App\Form\ClientType;
+use App\Repository\UserRepository;
 use App\Service\ApiService;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,7 +25,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/registration", name="registration")
      */
-    public function index(Request $request, SessionInterface $session): Response
+    public function index(Request $request, SessionInterface $session, UserRepository $userRepository): Response
     {
         $newClient = new Client();
         
@@ -35,7 +36,15 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             //Les informations de la première étape seront enregistrées dans la premimère étape et seront flushées si l'utiliseur valide son abonnement et qu'il obtient un vd
             //Le User relatif à ce client ne sera créé que lorsque les deux dernières étapes (càd le paiement et la création d'un compte sur Lenbox seront validées) 
-            //dd($newClient);
+            $userExistence = $userRepository->findBy(['email' => $newClient->getEmail()]);
+            
+            if ($userExistence) {
+
+                $this->addFlash('danger', 'Cet e-mail est déjà relié à un utilisateur');
+
+                return $this->redirectToRoute('registration');
+            }
+
             $session->set('possibleNewUser', $newClient);
 
             return $this->redirectToRoute('registration_second_step');
@@ -61,7 +70,6 @@ class RegistrationController extends AbstractController
      */
     public function registrationPayment():Response
     {
-        //Stripe::setApiKey('sk_test_51JSbdPBW8SyIFHAgGLf2rFeDFKCcS0UfKFRuGifDaCKnQg9t1m6PSK1NxwSuf23JcmY5HK8ZTcV0Pvaex4E2RaIt00fbf8PcYC');
         Stripe::setApiKey($_ENV['STRIPE_SECRET']);
         $priceId = 'price_1JT0YJBW8SyIFHAgmEuizs6Z';
         
@@ -81,9 +89,6 @@ class RegistrationController extends AbstractController
             'quantity' => 1,
           ]],
         ]);
-        //dd($session); //Sauvegarder le payement intent de l'utilisateur dans la base de données afin d'avoir une référence quant à son paiement
-
-        //return $response->withHeader('Location', $session->url)->withStatus(303);;
 
         return $this->redirect($paymentSession->url, 303);
     }
@@ -114,7 +119,6 @@ class RegistrationController extends AbstractController
         $nouvelAbonnementPotentiel->setClient($potentialClient);
         
         $session->set('abonnementPotentiel', $nouvelAbonnementPotentiel);
-        //dd($stripe_session->amount_total/100);
         
         //Création de la facture potentielle relative à l'abonneement
         $nouvelleFacturePotentielle = new Facture;
@@ -126,12 +130,8 @@ class RegistrationController extends AbstractController
         $nouvelleFacturePotentielle->setMontantTtcFacture($stripe_session->amount_total/100);
         $nouvelleFacturePotentielle->setAbonnement($nouvelAbonnementPotentiel);
         $nouvelleFacturePotentielle->setPourcentageTva(20);
-        
-        //dd($stripe_session);
+
         $session->set('facturePotentielle', $nouvelleFacturePotentielle);
-        
-        //dd($session->get('possibleNewUser'), $session->get('abonnementPotentiel'), $session->get('facturePotentielle'));
-        
        
         //Création de l'entité user relatif au client
         $userRelatedToPotentialClient = new User;
@@ -147,8 +147,6 @@ class RegistrationController extends AbstractController
 
         $uniqId = md5(uniqid());
         $clientsInfosFromLenbox = $apiService->postLenbox($potentialClient->getNomEntreprise(), $potentialClient->getEmail(), $potentialClient->getTelMobile(), $uniqId);
-        
-        //dd($clientsInfosFromLenbox['response']['vd']);
         $clientsVd = $clientsInfosFromLenbox['response']['vd'];
 
         //Données client à enregistrer
@@ -159,7 +157,6 @@ class RegistrationController extends AbstractController
         $potentialClient->setPassword($encryptedPassword);
         $potentialClient->setUser($userRelatedToPotentialClient);
         
-        //$potentialSubscriber = $session->get('abonnementPotentiel');
         $facturePotentielle = $session->get('facturePotentielle');
 
         $em->persist($potentialClient);
