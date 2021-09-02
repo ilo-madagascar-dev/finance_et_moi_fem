@@ -1,11 +1,12 @@
 .main-content *{
     background: transparent;
+    color: var(--dark-01);
 }
 
 .two-columns{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2em;
+    gap: 5%;
     padding: 0 5em;
 }
 
@@ -14,6 +15,7 @@
     flex-direction: column;
     gap: 1.2em;
     padding: 3em 0;
+    font-size: 1.2em;
 }
 
 h1.block{
@@ -30,4 +32,42 @@ p.deal{
     border: 1px solid var(--dark-01);
     border-radius: 40px;
     padding: 2em 1.5em;
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 2.2em;
+    align-items: center;
+}
+
+.ilany:nth-child(1){
+    margin-left: auto;
+}
+.ilany:nth-child(2){
+    margin-right: auto;
+}
+
+.ilany-title{
+    font-size: 1.2em;
+    color: var(--dark-01);
+}
+
+.el.b .el-p{
+    color: var(--light-01);
+}
+
+.el{
+    display: flex;
+    align-items: flex-start;
+    gap: 1em;
+}
+
+.li-checks{
+    display: flex;
+    flex-direction: column;
+    gap: 1.2em;
+}
+
+.el img{
+    width: 1.1em;
 }
