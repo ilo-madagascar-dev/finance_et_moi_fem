@@ -1,0 +1,145 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tarifs{% endblock %}
+
+
+{% block stylesheets %}
+    {# <link href="stylesheets/fonts/stylesheet-01.css" rel="text/css"/> #}
+    <link href={{ asset('css/stylesheet.css') }} rel="stylesheet">
+    <link href={{ asset('css/colors.css') }} rel="stylesheet">
+    <link href={{ asset('css/tarifs.css') }} rel="stylesheet">
+    {% block addstyle %}
+    {% endblock %}
+{% endblock %}
+{% block body %}
+    {% include "mqbaka_home/header.html.twig" %}
+
+    <div class="main-content">
+        <div class="title-block">
+            <h1 class="block">
+                Nos offres
+            </h1>
+            <p class="deal">
+                Lorem ipsum dolor sit<br/>
+                Amet consectetur adipisicing elit. Animi, ad.
+            </p>
+        </div>
+        <div class="two-columns">
+            <div class="ilany">
+                <h3 class="ilany-title">Starter</h3>
+                <p class="ilany-p">59€ HT/Mois Agence tête de reseau</p>
+                <div class="li-checks">
+                    <div class="el">
+                        <img src={{ asset('images/icon/check-dark.svg') }} alt="">
+                        <p class="el-p">
+                            Lorem ipsum dolor (sit amet consectetur adipisicing elit).
+                        </p>
+                    </div>
+                    <div class="el">
+                        <img src={{ asset('images/icon/check-dark.svg') }} alt="">
+                        <p class="el-p">
+                            Lorem ipsum dolor (sit amet consectetur adipisicing elit).
+                        </p>
+                    </div>
+                    <div class="el b">
+                        <img src={{ asset('images/icon/check.svg') }} alt="">
+                        <p class="el-p">
+                            Lorem ipsum dolor (sit amet consectetur adipisicing elit).
+                        </p>
+                    </div>
+                    <div class="el b">
+                        <img src={{ asset('images/icon/check.svg') }} alt="">
+                        <p class="el-p">
+                            Lorem ipsum dolor (sit amet consectetur adipisicing elit).
+                        </p>
+                    </div>
+                    <div class="el b">
+                        <img src={{ asset('images/icon/check.svg') }} alt="">
+                        <p class="el-p">
+                            Lorem ipsum dolor (sit amet consectetur adipisicing elit).
+                        </p>
+                    </div>
+                </div>
+                <button class="full-blue">Créer un compte</button>
+            </div>
+            <div class="ilany">
+                <h3 class="ilany-title">Essentiel</h3>
+                <p class="ilany-p"><span id="priceThing">89</span>€ HT/Mois Agence tête de reseau</p>
+                <div class="li-checks">
+                    <div class="el">
+                        <img src={{ asset('images/icon/check-dark.svg') }} alt="">
+                        <p class="el-p">
+                            Lorem ipsum dolor (sit amet consectetur adipisicing elit).
+                        </p>
+                    </div>
+                    <div class="el">
+                        <img src={{ asset('images/icon/check-dark.svg') }} alt="">
+                        <p class="el-p">
+                            Lorem ipsum dolor (sit amet consectetur adipisicing elit).
+                        </p>
+                    </div>
+                    <div class="el b">
+                        <img src={{ asset('images/icon/check.svg') }} alt="">
+                        <p class="el-p">
+                            Lorem ipsum dolor (sit amet consectetur adipisicing elit).
+                        </p>
+                    </div>
+                    <div class="el b">
+                        <img src={{ asset('images/icon/check.svg') }} alt="">
+                        <p class="el-p">
+                            Lorem ipsum dolor (sit amet consectetur adipisicing elit).
+                        </p>
+                    </div>
+                    <div class="el b">
+                        <img src={{ asset('images/icon/check.svg') }} alt="">
+                        <p class="el-p">
+                            Lorem ipsum dolor (sit amet consectetur adipisicing elit).
+                        </p>
+                    </div>
+                </div>
+                <button class="full-blue">Créer un compte</button>
+            </div>
+        </div>
+        <div class="switcher">
+            <div class="switcher-inner">
+                <div class="circle on" id='one'>
+                    <div class="the-c" data-indic="mensuel" id="c-1"></div>
+                    <div class="the-t">
+                        Mensuel
+                    </div>
+                </div>
+                <div class="circle" id='two'>
+                    <div class="the-c" data-indic="annuel" id="c-2"></div>
+                    <div class="the-t">
+                        Annuel
+                    </div>
+                </div>
+            </div>
+            <script title="for the switcher">
+                let c1= document.querySelector('#c-1');
+                let c2= document.querySelector('#c-2');
+
+                let p1= document.querySelector('#one');
+                let p2= document.querySelector('#two');
+
+                c1.addEventListener('click', switchTo);
+                c2.addEventListener('click', switchTo);
+
+                function switchTo(event){
+                    if(event.target.getAttribute('data-indic')== 'mensuel'){
+                        p1.classList.add('on');
+                        p2.classList.remove('on');
+                        document.querySelector('#priceThing').innerHTML= "89";
+                    } else {
+                        p2.classList.add('on');
+                        p1.classList.remove('on');
+                        document.querySelector('#priceThing').innerHTML= "109";
+                    }
+                }
+            </script>
+        </div>
+    </div>
+
+    {% include "mqbaka_home/footer.html.twig" %}
+
+{% endblock %}

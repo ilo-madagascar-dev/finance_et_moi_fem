@@ -135,6 +135,48 @@
     transform: translate(0, -50%) rotate(135deg);
 }
 
+.hoverable-drop{
+    position: relative;
+    color: var(--light-01);
+    cursor: pointer;
+}
+
+.hoverable-drop .hoverable-content{
+    position: absolute;
+    bottom: 0;
+    transform: translate(-50%, 100%);
+    background: var(--white--ish-01);
+    display: none;
+    width: max-content;
+    padding: 1em 1.5em;
+    left: 50%;
+    box-shadow: 0 2px 2px 1px var(--light-01-half);
+}
+
+.hoverable-drop:hover .hover-main-title{
+    color: var(--dark-01);
+}
+
+.hoverable-drop:hover .hoverable-content{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.tri-down{
+    width: 0;
+    height: 0;
+    border: 7px solid transparent;
+    border-top: 7px solid var(--light-01);
+    display: inline-block;
+    border-bottom: 2px solid transparent;
+    margin-left: .5em;
+}
+
+.hoverable-drop:hover .tri-down{
+    border-top: 7px solid var(--dark-01);
+}
+
 @media only screen and (max-width: 1200px){
     .header-top-bar{
         position: relative;
@@ -204,6 +246,26 @@
     }
     .nav-list .list-item a:hover{
         color: var(--dark-01);
+    }
+    .hoverable-drop .hoverable-content{
+        display: flex;
+        position: static;
+        background: transparent;
+        flex-direction: column;
+        transform: none;
+        box-shadow: none;
+        gap: unset!important;
+        padding: 0 1.5em;
+    }
+    .hoverable-drop .hover-main-title{
+        background: transparent;
+        color: var(--white--ish-01);
+    }
+    .hoverable-drop, .hoverable-drop *{
+        background: transparent;
+    }
+    .tri-down{
+        display: none;
     }
 }
 

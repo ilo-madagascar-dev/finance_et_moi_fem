@@ -27,42 +27,73 @@
                 </div>
                 <ul class="nav-list mob-thing">
                     <li class="list-item">
-                        <a href="#">
+                        <a href={{path('accueil')}}>
                             Accueil
                         </a>
                     </li>
                     <li class="list-item">
-                        <a href="#">
+                        <a href={{path('page_two')}}>
                             A propos
                         </a>
                     </li>
                     <li class="list-item">
                         <a href="#">
-                                Assurance emprunteur
-                            </a>
-                        </li>
-                        <li class="list-item">
-                            <a href="#">
-                                Services
-                            </a>
-                        </li>
-                        <li class="list-item">
-                            <a href="#">
-                                Tarifs
-                            </a>
-                        </li>
-                        <li class="list-item">
-                            <a href="#">
-                                Votre concièrgerie
-                            </a>
-                        </li>
-                        <li class="list-item">
-                            <a href="#">
-                                Compte
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                            Assurance emprunteur
+                        </a>
+                    </li>
+                    <li class="list-item">
+                        <div class="hoverable-drop">
+                            <div class="hover-main-title">
+                                Services <div class="tri-down"></div>
+                            </div>
+                            <div class="hoverable-content">    
+                                <a href={{path('page_four')}}>
+                                    Service rachat
+                                </a>
+                                <a href={{path('page_five')}}>
+                                    Service reméré
+                                </a>
+                                <a href={{path('page_six')}}>
+                                    Service in fine
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-item">
+                        <a href={{ path('page_tarifs') }}>
+                            Tarifs
+                        </a>
+                    </li>
+                    <li class="list-item">
+                        <a href="#">
+                            Votre concièrgerie
+                        </a>
+                    </li>
+                    <li class="list-item">
+                        <div class="hoverable-drop">
+                            <div class="hover-main-title">
+                                Compte <div class="tri-down"></div>
+                            </div>
+                            <div class="hoverable-content">
+                                {% if app.user %}
+                                <a href="#">
+                                    Mon profil
+                                </a>
+                                <a href={{ path('app_logout') }}>
+                                    Déconnexion
+                                </a>
+                                {% else %}
+                                <a href={{ path('app_login') }}>
+                                    Connexion
+                                </a>
+                                <a href={{ path('registration') }}>
+                                    Inscription
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

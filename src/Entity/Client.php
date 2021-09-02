@@ -61,7 +61,7 @@ class Client
     private $siren;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="yes", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="client", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -95,14 +95,14 @@ class Client
     private $prenom;
 
     /**
-     * @ORM\OneToOne(targetEntity=Abonnement::class, mappedBy="client", cascade={"persist", "remove"})
-     */
-    private $abonnement;
-
-    /**
      * @ORM\OneToMany(targetEntity=Pret::class, mappedBy="client", orphanRemoval=true)
      */
     private $prets;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Abonnement::class, mappedBy="client", cascade={"persist", "remove"})
+     */
+    private $abonnement;
 
     public function __construct()
     {
@@ -290,23 +290,6 @@ class Client
         return $this;
     }
 
-    public function getAbonnement(): ?Abonnement
-    {
-        return $this->abonnement;
-    }
-
-    public function setAbonnement(Abonnement $abonnement): self
-    {
-        // set the owning side of the relation if necessary
-        if ($abonnement->getClient() !== $this) {
-            $abonnement->setClient($this);
-        }
-
-        $this->abonnement = $abonnement;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Pret[]
      */
@@ -333,6 +316,23 @@ class Client
                 $pret->setClient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAbonnement(): ?Abonnement
+    {
+        return $this->abonnement;
+    }
+
+    public function setAbonnement(Abonnement $abonnement): self
+    {
+        // set the owning side of the relation if necessary
+        if ($abonnement->getClient() !== $this) {
+            $abonnement->setClient($this);
+        }
+
+        $this->abonnement = $abonnement;
 
         return $this;
     }
