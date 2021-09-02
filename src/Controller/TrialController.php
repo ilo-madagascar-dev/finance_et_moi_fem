@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\AbonnementRepository;
 use App\Repository\ClientRepository;
+use App\Repository\FactureRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,17 +14,20 @@ class TrialController {
     /**
      * @Route("/client-trial/get", name="client_getter_trial")
      */
-    public function clientGetter(ClientRepository $clientRepository, UserRepository $userRepository, AbonnementRepository $abonnementRepository):Response
+    public function clientGetter(ClientRepository $clientRepository, UserRepository $userRepository, AbonnementRepository $abonnementRepository, FactureRepository $factureRepository):Response
     {
         //$user = $userRepository->find(4);
         //dd($user);
 
-        $clients = $clientRepository->findAll();
-
-        dd($clients);
+        //$clients = $clientRepository->find(1);
+        //dd($clients);
+        
         //$abonnement = $abonnementRepository->findAll();
         //dd($abonnement);
         
+        $facture = $factureRepository->find(1);
+        dd($facture);
+
         return new Response('Hello world');
     }
 }

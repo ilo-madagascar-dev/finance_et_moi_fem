@@ -120,18 +120,6 @@ class RegistrationController extends AbstractController
         
         $session->set('abonnementPotentiel', $nouvelAbonnementPotentiel);
         
-        //Création de la facture potentielle relative à l'abonneement
-        $nouvelleFacturePotentielle = new Facture;
-
-        $statutFacture = $stripe_session->payment_status === "paid" ? true : false;
-
-        $nouvelleFacturePotentielle->setDateEmissionFacture(new DateTime());
-        $nouvelleFacturePotentielle->setFactureAcquitee($statutFacture);
-        $nouvelleFacturePotentielle->setMontantTtcFacture($stripe_session->amount_total/100);
-        $nouvelleFacturePotentielle->setAbonnement($nouvelAbonnementPotentiel);
-        $nouvelleFacturePotentielle->setPourcentageTva(20);
-
-        $session->set('facturePotentielle', $nouvelleFacturePotentielle);
        
         //Création de l'entité user relatif au client
         $userRelatedToPotentialClient = new User;
@@ -144,11 +132,10 @@ class RegistrationController extends AbstractController
         $userRelatedToPotentialClient->setDateCreationUtilisateur(new DateTime());
         $userRelatedToPotentialClient->setActive(true);
         $userRelatedToPotentialClient->setRoles(["ROLE_CLIENT"]);
-
         $uniqId = md5(uniqid());
         $clientsInfosFromLenbox = $apiService->postLenbox($potentialClient->getNomEntreprise(), $potentialClient->getEmail(), $potentialClient->getTelMobile(), $uniqId);
         $clientsVd = $clientsInfosFromLenbox['response']['vd'];
-
+        
         //Données client à enregistrer
         $potentialClient->setUniqid($uniqId);
         $potentialClient->setUniqid($uniqId);
@@ -156,10 +143,26 @@ class RegistrationController extends AbstractController
         $potentialClient->setStripeToken(md5(uniqid()));
         $potentialClient->setPassword($encryptedPassword);
         $potentialClient->setUser($userRelatedToPotentialClient);
+        $potentialClient->setAbonnement($nouvelAbonnementPotentiel);
         
-        $facturePotentielle = $session->get('facturePotentielle');
 
         $em->persist($potentialClient);
+        $em->flush();
+        
+        //Création de la facture potentielle relative à l'abonneement
+        $nouvelleFacturePotentielle = new Facture;
+
+        $statutFacture = $stripe_session->payment_status === "paid" ? true : false;
+ 
+        $nouvelleFacturePotentielle->setDateEmissionFacture(new DateTime());
+        $nouvelleFacturePotentielle->setFactureAcquitee($statutFacture);
+        $nouvelleFacturePotentielle->setMontantTtcFacture($stripe_session->amount_total/100);
+        $nouvelleFacturePotentielle->setAbonnement($nouvelAbonnementPotentiel);
+        $nouvelleFacturePotentielle->setPourcentageTva(20);
+ 
+        $session->set('facturePotentielle', $nouvelleFacturePotentielle);
+        $facturePotentielle = $session->get('facturePotentielle');
+
         $em->persist($facturePotentielle);
         $em->flush();
 
