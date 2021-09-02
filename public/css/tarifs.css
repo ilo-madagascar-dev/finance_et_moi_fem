@@ -1,0 +1,33 @@
+.main-content *{
+    background: transparent;
+}
+
+.two-columns{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+    padding: 0 5em;
+}
+
+.title-block{
+    display: flex;
+    flex-direction: column;
+    gap: 1.2em;
+    padding: 3em 0;
+}
+
+h1.block{
+    color: var(--dark-01);
+    text-align: center;
+}
+p.deal{
+    text-align: center;
+    color: var(--dark-01);
+    font-size: 1.1em;
+}
+
+.ilany{
+    border: 1px solid var(--dark-01);
+    border-radius: 40px;
+    padding: 2em 1.5em;
+}
