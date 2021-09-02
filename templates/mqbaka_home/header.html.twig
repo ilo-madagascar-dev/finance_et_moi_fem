@@ -74,19 +74,22 @@
                             <div class="hover-main-title">
                                 Compte <div class="tri-down"></div>
                             </div>
-                            <div class="hoverable-content">    
+                            <div class="hoverable-content">
+                                {% if app.user %}
                                 <a href="#">
                                     Mon profil
                                 </a>
                                 <a href={{ path('app_logout') }}>
                                     Déconnexion
                                 </a>
+                                {% else %}
                                 <a href={{ path('app_login') }}>
                                     Connexion
                                 </a>
                                 <a href={{ path('registration') }}>
                                     Inscription
                                 </a>
+                                {% endif %}
                             </div>
                         </div>
                     </li>
