@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\FactureRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,6 +44,16 @@ class Facture
      * @ORM\JoinColumn(nullable=false)
      */
     private $abonnement;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Paiement::class, mappedBy="facture")
+     */
+    private $paiements;
+
+    public function __construct()
+    {
+        $this->paiements = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -104,6 +116,36 @@ class Facture
     public function setAbonnement(?Abonnement $abonnement): self
     {
         $this->abonnement = $abonnement;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Paiement[]
+     */
+    public function getPaiements(): Collection
+    {
+        return $this->paiements;
+    }
+
+    public function addPaiement(Paiement $paiement): self
+    {
+        if (!$this->paiements->contains($paiement)) {
+            $this->paiements[] = $paiement;
+            $paiement->setFacture($this);
+        }
+
+        return $this;
+    }
+
+    public function removePaiement(Paiement $paiement): self
+    {
+        if ($this->paiements->removeElement($paiement)) {
+            // set the owning side to null (unless already changed)
+            if ($paiement->getFacture() === $this) {
+                $paiement->setFacture(null);
+            }
+        }
 
         return $this;
     }

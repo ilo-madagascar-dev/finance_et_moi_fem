@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PaiementRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,10 +35,20 @@ class Paiement
     private $paid;
 
     /**
-     * @ORM\OneToOne(targetEntity=Client::class, inversedBy="paiement", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Facture::class, inversedBy="paiements", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $client;
+    private $facture;
+    
+    /**
+     * @ORM\OneToMany(targetEntity=MoyenPaiement::class, mappedBy="paiement")
+     */
+    private $moyenPaiement;
+
+    public function __construct()
+    {
+        $this->moyenPaiement = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -79,14 +91,44 @@ class Paiement
         return $this;
     }
 
-    public function getClient(): ?Client
+    public function getFacture(): ?Facture
     {
-        return $this->client;
+        return $this->facture;
     }
 
-    public function setClient(Client $client): self
+    public function setFacture(?Facture $facture): self
     {
-        $this->client = $client;
+        $this->facture = $facture;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|MoyenPaiement[]
+     */
+    public function getMoyenPaiement(): Collection
+    {
+        return $this->moyenPaiement;
+    }
+
+    public function addMoyenPaiement(MoyenPaiement $moyenPaiement): self
+    {
+        if (!$this->moyenPaiement->contains($moyenPaiement)) {
+            $this->moyenPaiement[] = $moyenPaiement;
+            $moyenPaiement->setPaiement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMoyenPaiement(MoyenPaiement $moyenPaiement): self
+    {
+        if ($this->moyenPaiement->removeElement($moyenPaiement)) {
+            // set the owning side to null (unless already changed)
+            if ($moyenPaiement->getPaiement() === $this) {
+                $moyenPaiement->setPaiement(null);
+            }
+        }
 
         return $this;
     }
