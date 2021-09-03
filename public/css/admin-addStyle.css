@@ -19,6 +19,9 @@
     grid-template-columns: max-content auto;
     gap: 2.5em;
     padding: .7em 1.5em;
+    position: sticky;
+    top: 0;
+    z-index: 3;
 }
 
 .hamburger-container{
@@ -30,12 +33,30 @@
     padding: 2px 0;
     cursor: pointer;
     margin-right: auto;
+    position: relative;
 }
 
 .ham-line{
     width: 100%;
     height: 5px;
     background: var(--white--ish-01);
+    transition: .4s;
+}
+
+.cross .ham-line:nth-child(1),
+.cross .ham-line:nth-child(2){
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%) rotate(45deg);
+}
+
+.cross .ham-line:nth-child(2){
+    transform: translate(0, -50%) rotate(-45deg);
+}
+
+.cross .ham-line:nth-child(3){
+    opacity: 0;
 }
 
 .icl img{
