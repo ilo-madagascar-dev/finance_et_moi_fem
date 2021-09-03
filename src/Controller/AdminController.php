@@ -21,4 +21,17 @@ class AdminController extends AbstractController
             'client'=>$conClient
         ]);
     }
+
+    /**
+     * @Route("/admin-h/{id}", name="admin-h")
+     */
+
+    public function indeheader(ClientRepository $clientrepository,$id): Response
+    {
+        $conClient=$clientrepository->find($id);
+        return $this->render('admin/admin-header.html.twig', [
+            'controller_name' => 'AdminHeaderController',
+            'client'=>$conClient
+        ]);
+    }
 }

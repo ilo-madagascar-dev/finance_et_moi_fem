@@ -1,0 +1,72 @@
+{# {% extends 'mqbaka_home/index.html.twig' %}
+
+{% block title %}Tableau de bord
+{% endblock %} #}
+
+{% block body %}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	{# <link href= {{ asset("/css/admin.css") }} rel="stylesheet"> #}
+	<link href={{ asset("/css/admin-addStyle.css") }} rel="stylesheet">
+	<div class="header">
+		<div class="logo-container">
+			<img src={{ asset('images/FINANCE_ET_MOI.png') }} alt="logo-admin">
+		</div>
+		<div class="icon-and-link">
+			<div class="hamburger-container cross" id="hamham" onclick="myfunction()">
+				<div class="ham-line"></div>
+				<div class="ham-line"></div>
+				<div class="ham-line"></div>
+			</div>
+			<div class="drop-d-icon">
+				<div class="clickable-thing">
+					<div class="icl">
+						<p> <span green></span><span>{{ client.nom }}</span></p>
+						<img src={{ asset('images/icon/power.svg') }} alt="">
+					</div>
+				</div>
+				<div class="drop-d-content">
+					<div class="icl">
+						<a href="#">
+							<img src={{ asset('images/icon/id-card.svg') }} alt="">
+							<p>Mon compte</p>
+						</a>
+					</div>
+					<div class="icl">
+						<a href="#">
+							<img src={{ asset('images/icon/gear.svg') }} alt="">
+							<p>Configuration</p>
+						</a>
+					</div>
+					<div class="icl">
+						<a href={{ path('app_logout') }}>
+							<img src={{ asset('images/icon/key.svg') }} alt="">
+							<p>Déconnexion</p>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script title="menu for the user">
+		let btn= document.querySelector('.clickable-thing');
+		let cont= document.querySelector('.drop-d-content');
+
+		btn.addEventListener('click', toggleThing);
+		function toggleThing(event){
+			event.stopPropagation();
+			cont.classList.toggle('act');
+		}
+		document.addEventListener('click', remThing);
+		function remThing(event){
+			cont.classList.remove('act');
+		}
+	</script>
+	<script title="hamham">
+		let ham= document.querySelector('#hamham');
+		ham.addEventListener('click', unham);
+		function unham(){
+			ham.classList.toggle('cross');
+		}
+	</script>
+{% endblock %}
