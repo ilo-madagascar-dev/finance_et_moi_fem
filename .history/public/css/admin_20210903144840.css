@@ -59,8 +59,8 @@ header{
     font-size: 19px;
     cursor: pointer;
 }
-.Smihidy{
-    width: 0px !important;
+.mihidy{
+    width: 0px;
 }
 #sidebarMenu ul{
     background-color: #242F44;
@@ -73,9 +73,6 @@ header{
     margin-left: 310px;
     margin-right: 5px;
     margin-top: 5px;
-}
-.Tmivelatra{
-    margin-left: -302px;
 }
 #content{
   transition: margin-left .5s;
@@ -128,6 +125,3 @@ body {font-family: "Lato", sans-serif;}
   border-left: none;
   height: 300px;
 }
-
-
-/* RESPONSIVE */

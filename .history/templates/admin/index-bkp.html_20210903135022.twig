@@ -1,0 +1,122 @@
+{% extends 'mqbaka_home/index.html.twig' %}
+
+{% block title %}Hello OneMoreController!
+{% endblock %}
+
+{% block body %}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="/css/admin.css" rel="stylesheet">
+	<header>
+		<div style="background: transparent">
+			<img src="/images/FINANCE_ET_MOI.png" class="logo">
+		</div>
+		<div style="background: transparent">
+			<img src="/images/Icon-feather-menu.png" class="btnMenu" qonclick="myfunction()">
+			<div class="Right">
+				<img src="/images/Icon-metro-profile.png" style="background-color: #13141D">Mon compte
+				<img src="/images/Icon-feather-settings.png" style="background-color: #13141D; margin-left: 25px;">Configuration
+				<img src="/images/Icon-simple-gravatar.png" id="power">
+			</div>
+		</div>
+	</header>
+	<aside id="sidebarMenu">
+		<ul>
+			<li><a class="Tablinks" onclick="openCity(event, 'Tableau-de-bord')" id="defaultOpen"><img src="/images/Icon-awesome-home.png" style="background: transparent; width: 30px; margin-right: 10px">Tableau de bord</a></li>
+			<li><a class="Tablinks" onclick="openCity(event, 'Demande-financement')">Demande financement</a></li>
+			<li><a class="Tablinks" onclick="openCity(event, 'Paiement-fractionne')">Paiement fractionne</a></li>
+			<li><a class="Tablinks" onclick="openCity(event, 'Suivit-des-dossiers')">Suivit des dossiers</a></li>
+		</ul>
+	</aside>
+<div id="content">
+	<div id="Tableau-de-bord" class="Tabcontent">
+		<h3>Tableau de bord</h3>
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut cursus mollis eros, vitae suscipit libero. Phasellus lobortis nisi libero, sit amet fermentum lorem auctor in. Nam fermentum neque sem, at efficitur felis aliquet sit amet. Ut tempor in justo id faucibus. Cras tristique hendrerit augue vitae efficitur. Suspendisse viverra ante felis. Curabitur faucibus purus orci, sit amet lacinia tellus elementum eu. Pellentesque ac nisl dui. Phasellus porttitor ac ligula sit amet tempor.
+															
+															        Suspendisse id eleifend enim. Sed eget sapien dolor. Proin ac ante vitae lorem imperdiet congue sit amet at nisl. Aliquam hendrerit pretium faucibus. Donec consequat blandit lorem, id aliquet leo ultrices in. Aenean eu elit vel ex bibendum condimentum et eget neque. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam hendrerit, eros eget consectetur pharetra, nulla tortor condimentum sapien, viverra ullamcorper massa velit id dolor. Nullam a leo eget nisl efficitur blandit. Cras auctor imperdiet ipsum, non dignissim lacus rhoncus sed. Aenean et quam nec neque viverra tempus eu sit amet erat. Fusce dolor odio, sodales sit amet lacinia sed, fringilla et leo. Aenean at arcu sed justo suscipit vehicula vitae accumsan nisl. Cras malesuada purus non placerat dictum. Nullam ultrices libero ut libero venenatis, ac vestibulum ipsum scelerisque. Phasellus posuere odio eros, non cursus lorem aliquet et.
+															
+															        Nullam lacinia, nunc quis rhoncus dignissim, erat justo volutpat tellus, id suscipit nisi lectus eget sapien. Mauris tristique molestie sem, laoreet feugiat dolor suscipit eu. Pellentesque sit amet turpis nibh. Ut aliquam nisl pretium rutrum hendrerit. Sed faucibus dui augue, ac ornare sem imperdiet vel. Proin commodo aliquam fermentum. Fusce porttitor a est eget rhoncus.
+															
+															        Morbi molestie dui ac vestibulum tempus. Sed vitae ligula quis arcu efficitur consectetur. Sed turpis urna, consectetur ac nisl sed, convallis volutpat lacus. Vestibulum gravida, ipsum non sodales malesuada, eros quam viverra diam, eget rutrum est lectus vel orci. Nam ex nunc, pretium eu vestibulum at, imperdiet sed lorem. Etiam dui ante, finibus id turpis vel, porttitor consequat ligula. Sed malesuada gravida nisl, non convallis massa ultricies non. Aenean ipsum nulla, ornare ut tristique non, commodo et metus. Pellentesque fringilla lacinia elit, viverra feugiat massa mattis quis. Duis felis turpis, vestibulum et elit et, porta rutrum est. Nunc quis laoreet nisi, sagittis volutpat ante. Nunc ac magna vel turpis vehicula viverra quis gravida enim. Proin ultrices nunc ut venenatis sodales.
+		</p>
+	</div>
+	<div id="Demande-financement" class="Tabcontent">
+		<iframe src="https://app.finnocar.com/iframe_nouveau_dossier?vd={{client.vd}}" width="300" height="600" frameborder="0" allowfullscreen="true" scrolling="no" style="width: 100%; height: 600px;"></iframe>
+	</div>
+	<div id="Paiement-fractionne" class="Tabcontent">
+		<iframe src="https://app.finnocar.com/iframe_form_cbnx?vd={{client.vd}}" width="300" height="600" frameborder="0" allowfullscreen="true" scrolling="no" style="width: 100%; height: 600px;"></iframe>
+	</div>
+	<div id="Suivit-des-dossiers" class="Tabcontent">
+		<iframe src="https://app.finnocar.com/version-test/iframe_dashboard?idgroupe={{" 1622543601638x611830994992322700"}}&idagence={{client.uniqid}}" width="300" height="600" frameborder="0" allowfullscreen="true" scrolling="no" style="width: 100%; height: 600px;"></iframe>
+	</div>
+</div>
+	{# w3s
+					</head>
+					
+					<div style="display: none;">
+					    <h2>Vertical Tabs</h2>
+					    <p>Click on the buttons inside the tabbed menu:</p>
+					
+					    <div class="tab">
+					    <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">London</button>
+					    <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+					    <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+					    </div>
+					
+					    <div id="London" class="tabcontent">
+					    <h3>London</h3>
+					    <p>London is the capital city of England.</p>
+					    </div>
+					
+					    <div id="Paris" class="tabcontent">
+					    <h3>Paris</h3>
+					    <p>Paris is the capital of France.</p> 
+					    </div>
+					
+					    <div id="Tokyo" class="tabcontent">
+					    <h3>Tokyo</h3>
+					    <p>Tokyo is the capital of Japan.</p>
+					    </div>
+					</div>
+					#}
+
+	<script>
+		function openCity(evt, cityName) {
+var i,
+tabcontent,
+tablinks;
+tabcontent = document.getElementsByClassName("Tabcontent");
+for (i = 0; i < tabcontent.length; i++) {
+tabcontent[i].style.display = "none";
+}
+tablinks = document.getElementsByClassName("Tablinks");
+for (i = 0; i < tablinks.length; i++) {
+tablinks[i].className = tablinks[i].className.replace(" active", "");
+}
+document.getElementById(cityName).style.display = "block";
+evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+	</script>
+	{# fin w3s #}
+<script>
+function myfunction() {
+    var x = document.getElementById("sidebarMenu");
+    var y = document.getElementById("content");
+    if (x.style.width === "0px"){
+        x.style.width = "305px";
+        
+    }else {
+        x.style.width = "0px";
+        
+    }
+    if (y.style.marginLeft === "-302px"){
+        y.style.marginLeft = "0px";
+    }else {
+        y.style.marginLeft = "-302px";
+    }
+}
+</script>
+{% endblock %}

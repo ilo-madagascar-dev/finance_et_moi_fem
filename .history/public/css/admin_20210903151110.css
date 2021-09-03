@@ -74,9 +74,6 @@ header{
     margin-right: 5px;
     margin-top: 5px;
 }
-.Tmivelatra{
-    margin-left: -302px;
-}
 #content{
   transition: margin-left .5s;
 }
@@ -128,6 +125,3 @@ body {font-family: "Lato", sans-serif;}
   border-left: none;
   height: 300px;
 }
-
-
-/* RESPONSIVE */

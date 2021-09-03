@@ -38,7 +38,7 @@ class Facture
     private $facture_acquitee;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Abonnement::class, inversedBy="factures", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity=Abonnement::class, inversedBy="factures")
      * @ORM\JoinColumn(nullable=false)
      */
     private $abonnement;
