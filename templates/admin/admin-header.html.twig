@@ -5,9 +5,63 @@
 
 {% block body %}
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href= {{ asset("/css/admin.css") }} rel="stylesheet">
+	{# <link href= {{ asset("/css/admin.css") }} rel="stylesheet"> #}
 	<link href={{ asset("/css/admin-addStyle.css") }} rel="stylesheet">
-	<header>
+	<div class="header">
+		<div class="logo-container">
+			<img src={{ asset('images/FINANCE_ET_MOI.png') }} alt="logo-admin">
+		</div>
+		<div class="icon-and-link">
+			<div class="hamburger-container">
+				<div class="ham-line"></div>
+				<div class="ham-line"></div>
+				<div class="ham-line"></div>
+			</div>
+			<div class="drop-d-icon">
+				<div class="clickable-thing">
+					<div class="icl">
+						<p> <span green></span><span>{{ client.nom }}</span></p>
+						<img src={{ asset('images/icon/power.svg') }} alt="">
+					</div>
+				</div>
+				<div class="drop-d-content">
+					<div class="icl">
+						<a href="#">
+							<img src={{ asset('images/icon/id-card.svg') }} alt="">
+							<p>Mon compte</p>
+						</a>
+					</div>
+					<div class="icl">
+						<a href="#">
+							<img src={{ asset('images/icon/gear.svg') }} alt="">
+							<p>Configuration</p>
+						</a>
+					</div>
+					<div class="icl">
+						<a href={{ path('app_logout') }}>
+							<img src={{ asset('images/icon/key.svg') }} alt="">
+							<p>Déconnexion</p>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script title="menu for the user">
+		let btn= document.querySelector('.clickable-thing');
+		let cont= document.querySelector('.drop-d-content');
+
+		btn.addEventListener('click', toggleThing);
+		function toggleThing(event){
+			event.stopPropagation();
+			cont.classList.toggle('act');
+		}
+		document.addEventListener('click', remThing);
+		function remThing(event){
+			cont.classList.remove('act');
+		}
+	</script>
+	{# <header>
 		<div style="background: transparent">
 			<img src="/images/FINANCE_ET_MOI.png" class="logo">
 		</div>
@@ -19,8 +73,8 @@
 				<img src={{ asset("/images/Icon-simple-gravatar.png") }} id="power"/>
 			</div>
 		</div>
-	</header>
-	<aside id="sidebarMenu">
+	</header> #}
+	{# <aside id="sidebarMenu">
 		<ul>
 			<li><a class="Tablinks" onclick="openCity(event, 'Tableau-de-bord')" id="defaultOpen"><img src="/images/Icon-awesome-home.png" style="background: transparent; width: 30px; margin-right: 10px"/>Tableau de bord</a></li>
 			<li><a class="Tablinks" onclick="openCity(event, 'Demande-financement')">Demande financement</a></li>
@@ -31,7 +85,7 @@
 	<div id="Tableau-de-bord" class="Tabcontent other">
 		<h3>
 		<img src={{ asset('images/Icon-awesome-home.png') }} class="im-inverted" />
-		Tableau de bord
+		Tableau de bord 2
 		</h3>
 	</div>
 
@@ -49,23 +103,23 @@
 
 	<script>
 		function openCity(evt, cityName) {
-var i,
-tabcontent,
-tablinks;
-tabcontent = document.getElementsByClassName("Tabcontent");
-for (i = 0; i < tabcontent.length; i++) {
-tabcontent[i].style.display = "none";
-}
-tablinks = document.getElementsByClassName("Tablinks");
-for (i = 0; i < tablinks.length; i++) {
-tablinks[i].className = tablinks[i].className.replace(" active", "");
-}
-document.getElementById(cityName).style.display = "block";
-evt.currentTarget.className += " active";
-}
+		var i,
+		tabcontent,
+		tablinks;
+		tabcontent = document.getElementsByClassName("Tabcontent");
+		for (i = 0; i < tabcontent.length; i++) {
+		tabcontent[i].style.display = "none";
+		}
+		tablinks = document.getElementsByClassName("Tablinks");
+		for (i = 0; i < tablinks.length; i++) {
+		tablinks[i].className = tablinks[i].className.replace(" active", "");
+		}
+		document.getElementById(cityName).style.display = "block";
+		evt.currentTarget.className += " active";
+		}
 
-// Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
-	</script>
+		// Get the element with id="defaultOpen" and click on it
+		document.getElementById("defaultOpen").click();
+	</script> #}
 	{# fin w3s #}
 {% endblock %}
