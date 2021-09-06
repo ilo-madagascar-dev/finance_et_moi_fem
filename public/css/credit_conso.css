@@ -65,7 +65,7 @@
     background-image: url(../images/icon/check.svg);
     display: inline-block;
     width: unset;
-    height: 100%;
+    height: 19.2px;
     aspect-ratio: 1;
     background-position: center;
     background-size: contain;
@@ -86,7 +86,7 @@ p.sub{
 }
 
 .advantages{
-    width: max-content;
+    /* width: max-content; */
     margin: auto;
 }
 
@@ -242,7 +242,7 @@ p.sub{
     border-radius: 30px;
     overflow: hidden;
     width: 100%;
-    aspect-ratio: 1.5;
+    /* aspect-ratio: 1.5; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -422,4 +422,195 @@ p.sub{
     position: relative;
     margin-top: 150px;
     left: 2em;
+}
+
+/*
+                L e t ' s   g e t   r e s p o n s i v e !!!
+*/
+
+@media only screen and (max-width: 1200px){
+    .steps{
+        grid-template-columns: 1fr 7fr;
+        column-gap: .6em;
+    }
+    .steps::after{
+        left: calc(((100% - 1em) / 8) / 2);
+        width: 1em;
+    }
+    .step-number{
+        font-size: 2.2em;
+    }
+    .boxes-inner{
+        column-gap: 5em;
+    }
+    .blue-shape-thing{
+        display: none;
+    }
+    .im-over-txt{
+        margin: 3em 1em;
+    }
+}
+
+@media only screen and (max-width: 1050px){
+    .steps::after{
+        width: .8em;
+    }
+    .step-number{
+        font-size: 1.8em;
+    }
+}
+
+@media only screen and (max-width: 1000px){
+    .how_done{
+        grid-template-columns: 1fr;
+        row-gap: 10em;
+    }
+    .slanted-box::before {
+        display: block;
+        content: '';
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(-98%, 0);
+        background: var(--dark-01);
+    }
+    .slanted-box{
+        margin-bottom: 5em;
+    }
+    .steps::after{
+        width: 2em;
+        left: calc(((100% - 1em) / 10) / 2);
+    }
+    .steps{
+        grid-template-columns: 1fr 9fr;
+    }
+    .step-number{
+        font-size: 2.5em;
+    }
+    .boxes-inner{
+        column-gap: 2em;
+    }
+    .boxes{
+        padding: 2em;
+        margin: 4em 1em;
+    }
+    .und-table tr > *{
+        padding: .2em;
+        line-height: 1.6em;
+        min-width: max-content;
+    }
+    .undestand-table{
+        overflow-x: auto;
+    }
+    .text-box{
+        width: unset;
+    }
+    .im-over-txt img{
+        left: 0;
+    }
+    .im-over-txt{
+        grid-template-columns: 50% 50%;
+    }
+}
+
+
+@media only screen and (max-width: 800px){
+    .steps::after{
+        width: 1.5em;
+    }
+    .boxes-inner{
+        column-gap: 1em;
+        row-gap: 1.5em;
+    }
+    .boxes{
+        margin: 4em 10px;
+        padding: 1em .5em;
+    }
+    .undest-title{
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 690px){
+    .how_done{
+        margin: 3em 1em;
+    }
+    .ilany{
+        padding: 2em;
+    }
+    .boxes-inner{
+        grid-template-columns: 100%;
+    }
+    .und-table tr>*{
+        font-size: .8em;
+    }
+    .im-over-txt{
+        grid-template-columns: 100%;
+        row-gap: 2em;;
+    }
+    .text-box{
+        left: 0;
+        margin-bottom: 0;
+    }
+    .im-over-txt img{
+        margin-top: 0;
+    }
+}
+
+@media only screen and (max-width: 450px){
+    .double-rounded{
+        flex-direction: column;
+        align-items: center;
+        gap: 1em;
+    }
+    .steps{
+        grid-template-columns: 100%;
+        
+    }
+    .step-number{
+        width: 1.5em;
+        margin: auto;
+    }
+    .steps::after{
+        display: block;
+        background: var(--dark-01);
+        width: 100%;
+        left: 0;
+        transform: none;
+        left: 50%;
+    }
+    .step-label{
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .slanted-title{
+        text-align: center;
+    }
+    .how_done{
+        row-gap: 2em;
+    }
+    .slanted-box{
+        height: 100%;
+        margin-bottom: 0;
+    }
+    .box{
+        padding: 1em;
+    }
+    .text-box{
+        overflow: hidden;
+        padding: 1em .5em;
+        overflow: hidden;
+    }
+    .bullet-arrow .item-arrow + .item-arrow{
+        left: 0;
+    }
+}
+
+@media only screen and (max-width: 380px){
+    h3.rounded{
+        font-size: 1em;
+    }
 }

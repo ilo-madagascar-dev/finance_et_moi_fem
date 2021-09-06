@@ -165,8 +165,27 @@ span[green]{
     border: 1px solid var(--dark-01);
     color: var(--dark-01);
     border-radius: 20px;
+    transition: .4s;
+    cursor: pointer;
+    opacity: .8;
+}
+
+.box-m:hover{
+    transform: scale(1.03);
+    transition: .4s;
+    opacity: 1;
 }
 
 .box-m img{
     height: 4em;
+}
+
+#sidebarMenu ul li a{
+    opacity: .5;
+    transition: .3s;
+}
+
+#sidebarMenu ul li:hover a{
+    opacity: 1;
+    transition: .3s;
 }
