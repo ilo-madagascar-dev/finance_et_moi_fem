@@ -135,3 +135,57 @@ span[green]{
 /* .drop-d-icon:hover .drop-d-content{
     display: flex;
 } */
+
+.Tabcontent.other{
+    height: max-content;
+    margin-top: 10px;
+    box-shadow: -2px 2px 2px 0px var(--dark-01-half);
+}
+
+.content-inner{
+    display: flex;
+    gap: 2em;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em 0;
+}
+
+.boxes-iconifiers{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2em;
+}
+
+.box-m{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+    padding: 2em;
+    border: 1px solid var(--dark-01);
+    color: var(--dark-01);
+    border-radius: 20px;
+    transition: .4s;
+    cursor: pointer;
+    opacity: .8;
+}
+
+.box-m:hover{
+    transform: scale(1.03);
+    transition: .4s;
+    opacity: 1;
+}
+
+.box-m img{
+    height: 4em;
+}
+
+#sidebarMenu ul li a{
+    opacity: .5;
+    transition: .3s;
+}
+
+#sidebarMenu ul li:hover a{
+    opacity: 1;
+    transition: .3s;
+}

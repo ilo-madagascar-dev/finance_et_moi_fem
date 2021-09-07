@@ -60,7 +60,7 @@ class Abonnement
     private $statut_paiement;
 
     /**
-     * @ORM\OneToOne(targetEntity=Client::class, inversedBy="abonnement", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Client::class, inversedBy="abonnement", cascade={"persist", "remove"}, fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $client;

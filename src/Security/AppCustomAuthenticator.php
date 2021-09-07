@@ -95,7 +95,7 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator implements P
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('home_mqbaka'));
+        return new RedirectResponse($this->urlGenerator->generate('client'));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

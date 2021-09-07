@@ -37,4 +37,14 @@ class HomePageController extends AbstractController
             'controller_name' => 'MqbakaHomeController',
         ]);
     }
+    
+    /**
+     * @Route("/assurance_emprunteur", name="assurance_emprunteur")
+     */
+    public function assurance_emprunteur(): Response
+    {
+        return $this->render('mqbaka_home/assurance_emprunteur.html.twig', [
+            'controller_name' => 'AssuranceEmprunteur',
+        ]);
+    }
 }
