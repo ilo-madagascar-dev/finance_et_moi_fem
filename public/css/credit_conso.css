@@ -591,6 +591,7 @@ p.sub{
     }
     .how_done{
         row-gap: 2em;
+        margin: 3em 0;
     }
     .slanted-box{
         height: 100%;
