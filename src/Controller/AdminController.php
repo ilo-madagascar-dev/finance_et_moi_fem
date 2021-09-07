@@ -64,4 +64,23 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
     }
+
+    /**
+     * @Route("/dashboard", name="dash")
+     */
+    public function adminDash(ClientRepository $clientrepository,UserRepository $userRepository): Response
+    {
+        if($this->getUser()){
+            $connUser=$this->getUser()->getEmail();
+            $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+            $cle_groupe="1622543601638x611830994992322700";
+            return $this->render('admin/components/admin-dashboard.html.twig', [
+                'controller_name' => 'AdminDash',
+                'client'=>$conClient,
+                'groupe'=>$cle_groupe
+            ]);
+        } else {
+            return $this->redirectToRoute('app_login');
+        }
+    }
 }

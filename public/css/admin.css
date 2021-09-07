@@ -38,30 +38,7 @@ header{
     margin-left: 70px;
     margin-right: 20px;
 }
-#sidebarMenu{
-    background-color: #242F44;
-    width: 305px;
-    height: 100%;
-    position: fixed;
-    z-index: 1;
-    overflow-x: hidden;
-    transition: 0.5s;
-}
-#sidebarMenu ul li{
-    padding: 20px;
-    color: white;
-    background-color: #242F44;
-    border-bottom: 3px solid white;
-    padding-bottom: 10px;
-}
-#sidebarMenu ul li a{
-    background-color: #242F44;
-    font-size: 19px;
-    cursor: pointer;
-}
-#sidebarMenu ul{
-    background-color: #242F44;
-}
+
 .Tabcontent {
     padding: 0px 12px;
     border: 1px solid #ccc;
