@@ -130,12 +130,7 @@ body {font-family: "Lato", sans-serif;}
 }
 
 
-/* RESPONSIVE 
+/* RESPONSIVE */
 @media (max-width: 767px){
-    #sidebarMenu{
-        width: 0px;
-    }
-    #content{
-        margin-left: -302px;
-    }
-}*/
+    
+}
