@@ -1,0 +1,59 @@
+.tarification{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.tarification .undest-title{
+    width: max-content;
+    margin: auto;
+}
+
+.m-tarif{
+    width: max-content;
+    margin: auto;
+}
+
+.m-tarif-t{
+    border-collapse: collapse;
+}
+
+.m-tarif-t *{
+    border: 1px solid var(--dark-01);
+}
+
+.m-tarif-t td, .m-tarif-t th{
+    padding: 1em 1em;
+    text-align: center;
+    color: var(--light-01);
+}
+
+.bol{
+    font-weight: 800;
+}
+
+td div, td{
+    color: var(--light-01);
+}
+.box[one]{
+    grid-column: 1 / 3;
+}
+
+@media only screen and (max-width: 550px){
+    .m-tarif-t td, .m-tarif-t th{
+        padding: .5em .5em;
+    }
+}
+
+@media only screen and (max-width: 510px){
+    .m-tarif-t td, .m-tarif-t th{
+        font-size: .8em;
+    }
+    .tarification h3.undest-title{
+        font-size: 1.3em;
+        width: 80%;
+    }
+    .ilany{
+        padding: 2em .5em;
+    }
+}

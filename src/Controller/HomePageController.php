@@ -47,4 +47,14 @@ class HomePageController extends AbstractController
             'controller_name' => 'AssuranceEmprunteur',
         ]);
     }
+    
+    /**
+     * @Route("/payement_fractionne", name="payement-fractionne")
+     */
+    public function payementFractionne(): Response
+    {
+        return $this->render('mqbaka_home/payement-fractionne.html.twig', [
+            'controller_name' => 'PayementFractionne',
+        ]);
+    }
 }

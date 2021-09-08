@@ -1,0 +1,215 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomePageController!{% endblock %}
+
+{% block stylesheets %}
+    {# <link href="stylesheets/fonts/stylesheet-01.css" rel="text/css"/> #}
+    <link href={{ asset('css/stylesheet.css') }} rel="stylesheet">
+    <link href={{ asset('css/colors.css') }} rel="stylesheet">
+    <link href={{ asset('css/credit_conso.css') }} rel="stylesheet">
+    <link href={{ asset('css/payement-frac-add.css') }} rel="stylesheet">
+    {% block addstyle %}
+    {% endblock %}
+{% endblock %}
+
+{% block body %}
+
+{% block header %}
+{% include "mqbaka_home/header.html.twig" %}
+{% endblock %}
+
+<div class="undestand-title">
+    <button class="full-blue dark">Notre produit</button>
+    <h3 class="undest-title line">
+        Proposer du financement n'a jamais été aussi simple !
+    </h3>
+</div>
+
+<div class="boxes">
+    <div class="boxes-inner">
+        <div class="box">
+            <img src={{ asset('images/icon/1.png') }} alt="">
+            <div class="box-title">Solutions adaptées</div>
+            <div class="box-p">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure laudantium, molestiae nesciunt obcaecati recusandae quae!
+            </div>
+        </div>
+        <div class="box">
+            <img src={{ asset('images/icon/2.png') }} alt="">
+            <div class="box-title">Banques partenaires</div>
+            <div class="box-p">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure laudantium, molestiae nesciunt obcaecati recusandae quae!
+            </div>
+        </div>
+        <div class="box">
+            <img src={{ asset('images/icon/4.png') }} alt="">
+            <div class="box-title">Signature eléctronique</div>
+            <div class="box-p">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure laudantium, molestiae nesciunt obcaecati recusandae quae!
+            </div>
+        </div>
+        <div class="box">
+            <img src={{ asset('images/icon/6.png') }} alt="">
+            <div class="box-title">100% en ligne</div>
+            <div class="box-p">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure laudantium, molestiae nesciunt obcaecati recusandae quae!
+            </div>
+        </div>
+        <div class="box" one>
+            <img src={{ asset('images/icon/6.png') }} alt="">
+            <div class="box-title">100% en ligne</div>
+            <div class="box-p">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure laudantium, molestiae nesciunt obcaecati recusandae quae!
+            </div>
+        </div>
+    </div>
+    <button class="full-blue">Je m'abonne</button>
+</div>
+
+<div class="undestand">
+    <div class="undestand-title">
+        <h3 class="undest-title" style="text-transform: uppercase">
+            les modalités
+        </h3>
+        <h3 class="undest-title">
+            Vous êtes prêts à ravir vos clients ?
+        </h3>
+    </div>
+    <div class="undestand-table">
+        <table class="und-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Payement en 4×</th>
+                    <th>Payement en 10×</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id='f-row'>
+                    <td>Condition d'accès</td>
+                    <td>Plus d'un an d'activité</td>
+                    <td>Plus d'un an d'activité</td>
+                </tr>
+                <tr>
+                    <td>Montants financés/td>
+                    <td>50 à 6000€</td>
+                    <td>50 à 6000€</td>
+                </tr>
+                <tr>
+                    <td>Frais</td>
+                    <td>
+                        <div class="bol">Vendeur</div>
+                        <div class="corres">
+                            2,2% du montant financé
+                        </div>
+                        <div class="bol">Client</div>
+                        <div class="corres">
+                            1,33% à 2,41% du montant financé
+                        </div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Acceptation</td>
+                    <td>Lorem ipsum dolor sit amet consectetur<br/> adipisicing elit. Beatae, laborum.</td>
+                    <td>Lorem ipsum dolor sit amet consectetur<br/> adipisicing elit. Beatae, laborum.</td>
+                </tr>
+                <tr>
+                    <td>Pièce justificative</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Règlement de la commande</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Multicanal</td>
+                    <td>Lorem ipsum dolor sit amet consectetur<br/> adipisicing elit. Delectus, ipsum!<br/> Quae quia perspiciatis voluptas. Nostrum!</td>
+                    <td>Lorem ipsum dolor sit amet consectetur<br/> adipisicing elit. Delectus, ipsum!<br/> Quae quia perspiciatis voluptas. Nostrum!</td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+<div class="how_done">
+    <div class="ilany">
+        <div class="tarification">
+            <h3 class="undest-title">
+                Tarification client paiement 4x
+            </h3>
+            <div class="m-tarif">
+                <table class="m-tarif-t">
+                    <thead>
+                        <tr>
+                            <th>Montant de la commande</th>
+                            <th>Frais négociables</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>50 à 1000€</td>
+                            <td>2.41%</td>
+                        </tr>
+                        <tr>
+                            <td>1000,01 à 1500€</td>
+                            <td>1000,01 à 1500€</td>
+                        </tr>
+                        <tr>
+                            <td>1000,01 à 1500€</td>
+                            <td>1000,01 à 1500€</td>
+                        </tr>
+                        <tr>
+                            <td>1000,01 à 1500€</td>
+                            <td>1000,01 à 1500€</td>
+                        </tr>
+                        <tr>
+                            <td>1000,01 à 1500€</td>
+                            <td>1000,01 à 1500€</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="advantages">
+            <h4 class="">AVANTAGES</h4>
+            <p class="sub">Les raisons de dire oui</p>
+            <div class="check-list">
+                <ul class="check-lister">
+                    <li class="list-item">Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                    <li class="list-item">Lorem ipsum dolor sit amet consectetur.</li>
+                    <li class="list-item">Lorem ipsum dolor sit.</li>
+                    <li class="list-item">Lorem ipsum dolor sit amet consectetur.</li>
+                    <li class="list-item">Ipsum dolor sit amet consectetur.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="ilany slanted-box">
+        <div class="slanted-inner">
+            <h3 class="slanted-title">
+                Comment ça marche&nbsp;?
+            </h3>
+            <div class="steps">
+                <div class="step-number">1</div>
+                <div class="step-label">Lorem ipsum dolor sit amet.</div>
+                <div class="step-number">2</div>
+                <div class="step-label">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus, nam.</div>
+                <div class="step-number">3</div>
+                <div class="step-label">Lorem ipsum dolor sit amet.</div>
+            </div>
+            <div class="blue-shape-thing"></div>
+        </div>
+    </div>
+</div>
+
+
+{% block footer %}
+{% include "mqbaka_home/footer.html.twig" %}
+{% endblock %}
+
+
+{% endblock %}
