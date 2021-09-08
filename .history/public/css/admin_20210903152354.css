@@ -128,14 +128,3 @@ body {font-family: "Lato", sans-serif;}
   border-left: none;
   height: 300px;
 }
-
-
-/* RESPONSIVE 
-@media (max-width: 767px){
-    #sidebarMenu{
-        width: 0px;
-    }
-    #content{
-        margin-left: -302px;
-    }
-}*/
