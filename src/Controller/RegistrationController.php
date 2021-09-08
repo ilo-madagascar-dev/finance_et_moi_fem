@@ -37,7 +37,7 @@ class RegistrationController extends AbstractController
             $priceId = $request->get('price_id');
             $session->set('price_id', $priceId);
         }
-
+        
         $newClient = new Client();
         
         $form = $this->createForm(ClientType::class, $newClient);
@@ -45,13 +45,15 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //dd($newClient);
             /**
              * Récupération du tarif choisi par l'utilisateur
              */
-            if ($request->get('price_id')) {
-                $priceId = $request->get('price_id');
+            if ($request->request->get('client')['type_abonnement']) {
+                $priceId = $request->request->get('client')['type_abonnement'];
                 $session->set('price_id', $priceId);
             }
+            
             //Les informations de la première étape seront enregistrées dans la premimère étape et seront flushées si l'utiliseur valide son abonnement et qu'il obtient un vd
             //Le User relatif à ce client ne sera créé que lorsque les deux dernières étapes (càd le paiement et la création d'un compte sur Lenbox seront validées) 
             $userExistence = $userRepository->findBy(['email' => $newClient->getEmail()]);
@@ -85,6 +87,25 @@ class RegistrationController extends AbstractController
      */
     public function registrationSeconStep(SessionInterface $session)
     {
+        if ($session->get('price_id')) {
+            $priceId = $session->get('price_id');
+         } else {
+            $this->addFlash('danger', 'Aucun type d\'abonnement n\'a été choisi');
+             return $this->redirectToRoute('registration');
+         }
+ 
+         $priceArray = [
+             'price_1JWc1BBW8SyIFHAgvuKoItbD',
+             'price_1JT0YJBW8SyIFHAgmEuizs6Z',
+             'price_1JWc1oBW8SyIFHAgGnAmvtyw',
+             'price_1JWc3mBW8SyIFHAg2E4YGU4c'
+         ];
+ 
+         if (!in_array($priceId, $priceArray)) {
+            $this->addFlash('danger', 'Le type d\'abonnement que vous avez choisi n\'existe pas');
+            return $this->redirectToRoute('registration');
+         }
+
         //dd($session->get('possibleNewUser'));
         return $this->render('registration/secondStepRegistration_trial.html.twig');
     }
@@ -99,22 +120,40 @@ class RegistrationController extends AbstractController
 
         if ($session->get('price_id')) {
            $priceId = $session->get('price_id');
+        } else {
+            $this->addFlash('danger', 'Aucun type d\'abonnement n\'a été choisi');
+            return $this->redirectToRoute('registration');
         }
+
+        $priceArray = [
+            'price_1JWc1BBW8SyIFHAgvuKoItbD',
+            'price_1JT0YJBW8SyIFHAgmEuizs6Z',
+            'price_1JWc1oBW8SyIFHAgGnAmvtyw',
+            'price_1JWc3mBW8SyIFHAg2E4YGU4c'
+        ];
+
+        if (!in_array($priceId, $priceArray)) 
+        {
+            $this->addFlash('danger', 'Le type d\'abonnement que vous avez choisi n\'existe pas');
+            return $this->redirectToRoute('registration');
+        }
+
         //Local success_url :
         //'success_url' => 'http://localhost:8000/registration/payment/success?session_id={CHECKOUT_SESSION_ID}',
         //Production success_url :
         //'success_url' => 'http://femcreditconso.fr/registration/payment/success?session_id={CHECKOUT_SESSION_ID}',
-        
+        $success_url = $_ENV['REGISTRATION_SUCCESS_URL'];
+
         $paymentSession = \Stripe\Checkout\Session::create([
-            'success_url' => 'http://localhost:8000/registration/payment/success?session_id={CHECKOUT_SESSION_ID}',
-          'cancel_url' => $this->generateUrl('registration_payment_failed', [], UrlGeneratorInterface::ABSOLUTE_URL),
-          'payment_method_types' => ['card'],
-          'mode' => 'subscription',
-          'line_items' => [[
-            'price' => $priceId,
-            // For metered billing, do not pass quantity
-            'quantity' => 1,
-          ]],
+            'success_url' => $success_url,
+            'cancel_url' => $this->generateUrl('registration_payment_failed', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'payment_method_types' => ['card'],
+            'mode' => 'subscription',
+            'line_items' => [[
+                'price' => $priceId,
+                // For metered billing, do not pass quantity
+                'quantity' => 1,
+            ]],
         ]);
 
         return $this->redirect($paymentSession->url, 303);
