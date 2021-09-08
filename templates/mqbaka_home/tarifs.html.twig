@@ -60,7 +60,7 @@
                         </p>
                     </div>
                 </div>
-                <form action="{{ path('registration') }}">
+                <form method="POST" action="{{ path('registration') }}">
                     <!-- Starter price -->
                     <input type="hidden" name="price_id" value="price_1JWc1BBW8SyIFHAgvuKoItbD" id="price_id_starter">
                     <button type="submit" class="full-blue">Créer un compte</button>
@@ -101,7 +101,7 @@
                         </p>
                     </div>
                 </div>
-                <form action="{{ path('registration') }}">
+                <form method="POST" action="{{ path('registration') }}">
                     <!-- Essentiel price -->
                     <input type="hidden" name="price_id" value="price_1JT0YJBW8SyIFHAgmEuizs6Z" id="price_id_essentiel">
                     <button type="submit" class="full-blue">Créer un compte</button>

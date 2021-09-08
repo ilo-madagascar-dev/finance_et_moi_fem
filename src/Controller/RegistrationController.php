@@ -29,8 +29,11 @@ class RegistrationController extends AbstractController
      */
     public function index(Request $request, SessionInterface $session, UserRepository $userRepository): Response
     {
+        
+        $priceId = '';
+
         /**
-         * Si se pointe à partir de la page tarifs
+         * Si le client se pointe à partir de la page tarifs
          */
         if ($request->get('price_id')) {
             //dd($request->get('price_id'));
@@ -78,7 +81,8 @@ class RegistrationController extends AbstractController
 
         return $this->render('registration/index.html.twig', [
             'controller_name' => 'RegistrationController',
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'priceId' => $priceId
         ]);
     }
 
