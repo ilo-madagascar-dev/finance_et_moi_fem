@@ -196,13 +196,15 @@ span[green]{
     }
 }
 
-@media only screen and (max-width: 570px){
+@media only screen and (max-width: 590px){
     .header{
         grid-template-columns: 100%;
         row-gap: 0;
+        padding: .7em .3em;
+        width: 100vw;
     }
     .logo-container{
-        width: max-content;
+        width: 100%;
         margin: auto;
         position: relative;
         max-width: 100%;
@@ -216,5 +218,8 @@ span[green]{
         background: var(--white--ish-01);
         left: 50%;
         transform: translate(-50%);
+    }
+    .logo-container img{
+        width: 100%;
     }
 }
