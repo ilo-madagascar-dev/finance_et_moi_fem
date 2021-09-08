@@ -29,13 +29,29 @@ class RegistrationController extends AbstractController
      */
     public function index(Request $request, SessionInterface $session, UserRepository $userRepository): Response
     {
+        /**
+         * Si se pointe à partir de la page tarifs
+         */
+        if ($request->get('price_id')) {
+            //dd($request->get('price_id'));
+            $priceId = $request->get('price_id');
+            $session->set('price_id', $priceId);
+        }
+
         $newClient = new Client();
         
         $form = $this->createForm(ClientType::class, $newClient);
-
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /**
+             * Récupération du tarif choisi par l'utilisateur
+             */
+            if ($request->get('price_id')) {
+                $priceId = $request->get('price_id');
+                $session->set('price_id', $priceId);
+            }
             //Les informations de la première étape seront enregistrées dans la premimère étape et seront flushées si l'utiliseur valide son abonnement et qu'il obtient un vd
             //Le User relatif à ce client ne sera créé que lorsque les deux dernières étapes (càd le paiement et la création d'un compte sur Lenbox seront validées) 
             $userExistence = $userRepository->findBy(['email' => $newClient->getEmail()]);
@@ -49,7 +65,13 @@ class RegistrationController extends AbstractController
 
             $session->set('possibleNewUser', $newClient);
 
-            return $this->redirectToRoute('registration_second_step');
+            if ($session->get('possibleNewUser')) 
+            {
+                return $this->redirectToRoute('registration_second_step');
+            } else {
+                $this->addFlash('danger', 'Il y a eu un problème, veuillez ressoummettre le formulaire !!!');
+            }
+
         }
 
         return $this->render('registration/index.html.twig', [
@@ -70,18 +92,21 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/registration/payment", name="registration_payment") 
      */
-    public function registrationPayment():Response
+    public function registrationPayment(SessionInterface $session):Response
     {
         Stripe::setApiKey($_ENV['STRIPE_SECRET']);
         $priceId = 'price_1JT0YJBW8SyIFHAgmEuizs6Z';
-        
+
+        if ($session->get('price_id')) {
+           $priceId = $session->get('price_id');
+        }
         //Local success_url :
         //'success_url' => 'http://localhost:8000/registration/payment/success?session_id={CHECKOUT_SESSION_ID}',
         //Production success_url :
         //'success_url' => 'http://femcreditconso.fr/registration/payment/success?session_id={CHECKOUT_SESSION_ID}',
         
         $paymentSession = \Stripe\Checkout\Session::create([
-            'success_url' => 'http://femcreditconso.fr/registration/payment/success?session_id={CHECKOUT_SESSION_ID}',
+            'success_url' => 'http://localhost:8000/registration/payment/success?session_id={CHECKOUT_SESSION_ID}',
           'cancel_url' => $this->generateUrl('registration_payment_failed', [], UrlGeneratorInterface::ABSOLUTE_URL),
           'payment_method_types' => ['card'],
           'mode' => 'subscription',
