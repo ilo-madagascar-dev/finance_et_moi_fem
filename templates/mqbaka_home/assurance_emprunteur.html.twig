@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomePageController!{% endblock %}
+
+{% block stylesheets %}
+    {# <link href="stylesheets/fonts/stylesheet-01.css" rel="text/css"/> #}
+    <link href={{ asset('css/stylesheet.css') }} rel="stylesheet">
+    <link href={{ asset('css/colors.css') }} rel="stylesheet">
+    <link href={{ asset('css/assu_emp.css') }} rel="stylesheet">
+    {% block addstyle %}
+    {% endblock %}
+{% endblock %}
+
+{% block body %}
+
+{% block header %}
+{% include "mqbaka_home/header.html.twig" %}
+{% endblock %}
+
+<div class="container-assu">
+  <h1 style="text-align: center;">L'ASSURANCE EMPRUNTEUR SOUSCRITE</h1>
+  <h3 style="text-align:center; text-transform: uppercase;">Garantir un emprunt permet d'être assuré en cas de décès,</h3>
+  <h3 style="text-align:center; text-transform: uppercase;">d'invalidité et/ou de perte d'emploi.</h3>
+  <p style="text-align:center;">Lorsque l'un de ces événements survient, l'assureur rembourse les échéances du prêt, en totalité ou en partie.</p>
+</div>
+
+<div class="container-assu">
+	<div class="grid-container" id="colonne1">
+	  <div class="item1" id="tableau1">
+	  	<img src={{ asset("images/icon/exclamation.svg") }} alt="" class="exc" />
+	    	<p style="color: var(--light-01); padding-top: 10px;">Conditions de résiliation : La 1ère année</p>
+	    	<p style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu quam lectus. Aliquam id tellus sed massa elementum laoreet. Nulla at hendrerit nisl, a vehicula purus. Integer dignissim viverra ipsum, ut fringilla elit commodo vel. Morbi vitae orci lorem. Maecenas cursus augue non odio pellentesque, id laoreet augue tempus. Nullam quis volutpat nisl.</p>
+	    	<p style="text-align: justify;">Aenean mattis elit volutpat nibh blandit, tempor pharetra magna hendrerit. Suspendisse lacinia, est at euismod accumsan, eros erat ullamcorper velit, ac hendrerit sapien quam id arcu. Fusce condimentum porta velit at scelerisque.</p>
+	  </div>
+
+	  <div class="item2" id="tableau2">
+	  	<img src={{ asset("images/icon/exclamation.svg") }} alt="" class="exc" />
+	    	<p style="color: var(--light-01); padding-top: 10px;">Conditions de résiliation : La 1ère année</p>
+	    	<p style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu quam lectus. Aliquam id tellus sed massa elementum laoreet. Nulla at hendrerit nisl, a vehicula purus. Integer dignissim viverra ipsum, ut fringilla elit commodo vel. Morbi vitae orci lorem. Maecenas cursus augue non odio pellentesque, id laoreet augue tempus. Nullam quis volutpat nisl.</p>
+	    	<p style="text-align: justify;">Aenean mattis elit volutpat nibh blandit, tempor pharetra magna hendrerit. Suspendisse lacinia, est at euismod accumsan, eros erat ullamcorper velit, ac hendrerit sapien quam id arcu. Fusce condimentum porta velit at scelerisque.</p>
+	  </div>
+	</div>
+</div>
+
+<div class="container-assu" id="tanana">
+	<h1 style="text-align: center;">.L'assurance emprunteur, une sécurité pour tous.</h1>
+	<p>Aenean mattis elit volutpat nibh blandit, tempor pharetra magna hendrerit. Suspendisse lacinia, est at euismod accumsan, eros erat ullamcorper velit, ac hendrerit sapien quam id arcu. Fusce condimentum porta velit at scelerisque.</p>
+	<img src={{ asset("images/20.png") }} style="height:250px;"><br><br>
+	<hr style="color: #839D2D; width: 50%; border: 1px solid #dcdcdc;">
+</div>
+
+<div class="container-assu" id="plan">
+	<div class="grid-container" id="colonne2">
+	  <div class="item1">
+	  	<h1>.Choisir l'assurance</h1><br>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu quam lectus. Aliquam id tellus sed massa elementum laoreet. Nulla at hendrerit nisl, a vehicula purus. Integer dignissim viverra ipsum, ut fringilla elit commodo vel. Morbi vitae orci lorem. Maecenas cursus augue non odio pellentesque, id laoreet augue tempus. Nullam quis volutpat nisl. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu quam lectus. Aliquam id tellus sed massa elementum laoreet. Nulla at hendrerit nisl, a vehicula purus. Integer dignissim viverra ipsum, ut fringilla elit commodo vel. Morbi vitae orci lorem. Maecenas cursus augue non odio pellentesque, id laoreet augue tempus. Nullam quis volutpat nisl. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu quam lectus. Aliquam id tellus sed massa elementum laoreet. Nulla at hendrerit nisl, a vehicula purus.</p>
+	  </div>
+	  <div class="item2" id="sary_machine">
+	  	<img src={{ asset("images/plan.png") }} style="height: 300px;">
+	  </div>
+	</div>
+</div>
+
+{% block footer %}
+{% include "mqbaka_home/footer.html.twig" %}
+{% endblock %}
+
+{% endblock %}

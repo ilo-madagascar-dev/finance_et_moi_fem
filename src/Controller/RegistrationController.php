@@ -5,11 +5,13 @@ namespace App\Controller;
 use App\Entity\Abonnement;
 use App\Entity\Client;
 use App\Entity\Facture;
+use App\Entity\Paiement;
 use App\Entity\User;
 use App\Form\ClientType;
 use App\Repository\UserRepository;
 use App\Service\ApiService;
 use DateTime;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -79,7 +81,7 @@ class RegistrationController extends AbstractController
         //'success_url' => 'http://femcreditconso.fr/registration/payment/success?session_id={CHECKOUT_SESSION_ID}',
         
         $paymentSession = \Stripe\Checkout\Session::create([
-            'success_url' => 'http://localhost:8000/registration/payment/success?session_id={CHECKOUT_SESSION_ID}',
+            'success_url' => 'http://femcreditconso.fr/registration/payment/success?session_id={CHECKOUT_SESSION_ID}',
           'cancel_url' => $this->generateUrl('registration_payment_failed', [], UrlGeneratorInterface::ABSOLUTE_URL),
           'payment_method_types' => ['card'],
           'mode' => 'subscription',
@@ -119,7 +121,6 @@ class RegistrationController extends AbstractController
         $nouvelAbonnementPotentiel->setClient($potentialClient);
         
         $session->set('abonnementPotentiel', $nouvelAbonnementPotentiel);
-        
        
         //Création de l'entité user relatif au client
         $userRelatedToPotentialClient = new User;
@@ -143,12 +144,11 @@ class RegistrationController extends AbstractController
         $potentialClient->setStripeToken(md5(uniqid()));
         $potentialClient->setPassword($encryptedPassword);
         $potentialClient->setUser($userRelatedToPotentialClient);
-        $potentialClient->setAbonnement($nouvelAbonnementPotentiel);
-        
+        $potentialClient->setAbonnement($nouvelAbonnementPotentiel);        
 
         $em->persist($potentialClient);
         $em->flush();
-        
+    
         //Création de la facture potentielle relative à l'abonneement
         $nouvelleFacturePotentielle = new Facture;
 
@@ -164,6 +164,18 @@ class RegistrationController extends AbstractController
         $facturePotentielle = $session->get('facturePotentielle');
 
         $em->persist($facturePotentielle);
+        $em->flush();
+
+        //Création du paiement relatif à l'abonnement (et donc à la facture)
+        $paiement = new Paiement();
+        $paiement->setMontantTtc($stripe_session->amount_total/100);
+        $paiement->setPaid(true);
+        $paiement->setPaidAt(new DateTimeImmutable());
+        $paiement->setFacture($nouvelleFacturePotentielle);
+
+        $nouvelleFacturePotentielle->addPaiement($paiement);
+
+        $em->persist($paiement);
         $em->flush();
 
         return $this->render('registration/successPayment.html.twig');

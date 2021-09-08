@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   height="18"
+   width="25"
+   sodipodi:docname="card.svg"
+   version="1.1"
+   viewBox="0 0 25 18"
+   data-name="Layer 1"
+   id="Layer_1">
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Credit Card</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     inkscape:current-layer="Layer_1"
+     inkscape:window-maximized="1"
+     inkscape:window-y="-6"
+     inkscape:window-x="-6"
+     inkscape:cy="9.736675"
+     inkscape:cx="16.285446"
+     inkscape:zoom="17.0837"
+     showgrid="false"
+     id="namedview6"
+     inkscape:window-height="812"
+     inkscape:window-width="1440"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     guidetolerance="10"
+     gridtolerance="10"
+     objecttolerance="10"
+     borderopacity="1"
+     bordercolor="#666666"
+     pagecolor="#ffffff" />
+  <title
+     id="title2">Credit Card</title>
+  <rect
+     y="0.76095933"
+     x="0.31482488"
+     height="16.624033"
+     width="24.254139"
+     id="rect839"
+     style="opacity:0.995;fill:#203c76;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2.60112;stroke-linecap:round" />
+  <path
+     style="fill:#ffffff"
+     sodipodi:nodetypes="ssssssssscssssccccsssscssssssssscccccccccc"
+     fill="#0e1d25"
+     d="M 23.75,18 H 1.25 C 0.55964406,18 0,17.440356 0,16.75 V 1.25 C 0,0.55964406 0.55964406,0 1.25,0 h 22.5 C 24.440356,0 25,0.55964406 25,1.25 v 15.5 C 25,17.440356 24.440356,18 23.75,18 Z M 1,5.8292934 V 16.75 C 1,16.888071 1.1119288,17 1.25,17 h 22.5 C 23.888071,17 24,16.888071 24,16.75 V 5.8292934 Z M 1,3.6438886 H 24 V 1.25 C 24,1.1119288 23.888071,1 23.75,1 H 1.25 C 1.1119288,1 1,1.1119288 1,1.25 Z m 20.5,8.1317684 h -5 c -0.276142,0 -0.5,-0.223857 -0.5,-0.5 V 8.2756575 c 0,-0.2761424 0.223858,-0.5 0.5,-0.5 h 5 c 0.276142,0 0.5,0.2238576 0.5,0.5 v 2.9999995 c 0,0.276143 -0.223858,0.5 -0.5,0.5 z M 12,14 H 3 v -1 h 9 z M 10,12 H 3 v -1 h 7 z"
+     data-name="Credit Card"
+     id="Credit_Card" />
+  <path
+     style="fill:#ffffff"
+     id="path837"
+     data-name="Credit Card"
+     d="m 21.5,14.234141 h -5 c -0.276142,0 -0.5,-0.223857 -0.5,-0.5 v -0.424445 c 0,-0.276143 0.223858,-0.5 0.5,-0.5 h 5 c 0.276142,0 0.5,0.223857 0.5,0.5 v 0.424445 c 0,0.276143 -0.223858,0.5 -0.5,0.5 z M 12,14 H 3 v -1 h 9 z M 10,12 H 3 v -1 h 7 z"
+     fill="#0e1d25"
+     sodipodi:nodetypes="ssssssssscccccccccc" />
+</svg>

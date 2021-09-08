@@ -1,0 +1,274 @@
+*{--light-01: #2292d0; --dark-01: #203c76;}
+
+.container-assu{
+    max-width: 960px;
+    margin: auto;
+}
+
+.container-assu p{
+    line-height: 1.5;
+}
+
+#tableau1, #tableau2{
+    padding: 1em 1em;
+    max-width: 100% !important;
+}
+
+.grid-container{
+    max-width: 100%!important;
+}
+
+.exc{
+    width: 2.5em;
+}
+
+#colonne1 {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-column-gap: 50px;
+  grid-row-gap: 10px;
+  padding: 10px;
+}
+
+#tableau1, #tableau2 {
+	text-align: center;
+	border: 1px solid;
+	padding-top: 30px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 40px;
+	border-radius: 40px;
+	box-shadow: 1px 1px 4px 3px #dcdcdc;
+}
+
+#tanana {
+	padding-top: 40px;
+	text-align: center;
+}
+
+#plan {
+	padding-top: 40px;
+}
+
+#colonne2 {
+	display: grid;
+	grid-template-columns: 70% auto;
+}
+
+
+h1 {
+	color: var(--dark-01);
+	font-size: 30px;
+	font-weight: 600;
+}
+
+h3 {
+	color: var(--dark-01);
+	font-size: 20px;
+}
+
+.fas {
+	color: var(--dark-01);
+}
+
+p {
+	color: var(--dark-01);
+}
+
+#tanana img{
+    margin-top: 4em;
+}
+
+
+/* Resposivite */
+
+
+@media screen and (max-width: 1326px) {
+    #colonne1 {
+            display: grid;
+            grid-template-columns: auto auto;
+            width: auto;
+            margin: auto;
+    }
+ 
+    #colonne2 {
+            display: grid;
+            grid-template-columns: auto auto;
+            width: auto;
+            margin: auto;
+    }
+ 
+    p {
+        font-size: 15px;
+    }
+ 
+    #tableau1, #tableau2 {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+ 
+    .item2 {
+            padding-top: 0px;
+    }
+}
+
+
+@media screen and (max-width: 1225px) {
+    #colonne1 {
+            display: grid;
+            grid-template-columns: auto auto;
+            width: auto;
+            margin: auto;
+    }
+ 
+    #colonne2 {
+            display: grid;
+            grid-template-columns: auto auto;
+            width: auto;
+            margin: auto;
+    }
+ 
+    p {
+        font-size: 15px;
+    }
+ 
+    #tableau1, #tableau2 {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+ 
+    .item2 {
+            padding-top: 50px;
+    }
+}
+
+@media screen and (max-width: 1025px) {
+    #colonne1 {
+            display: grid;
+            grid-template-columns: auto auto;
+            width: 700px;
+            margin: auto;
+    }
+ 
+    #colonne2 {
+            display: grid;
+            grid-template-columns: auto auto;
+            width: 700px;
+            margin: auto;
+    }
+ 
+    p {
+        font-size: 15px;
+    }
+ 
+    #tableau1, #tableau2 {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+ 
+    .item2 {
+            padding-top: 100px;
+    }
+ }
+ 
+
+@media screen and (max-width: 825px) {
+   #colonne1 {
+   		display: grid;
+   		grid-template-columns: auto;
+   		width: 500px;
+   		margin: auto;
+   }
+
+   #colonne2 {
+	   	display: grid;
+	   	grid-template-columns: auto;
+	   	width: 500px;
+	   	margin: auto;
+   }
+
+   p {
+   	font-size: 15px;
+   }
+
+   #tableau1, #tableau2 {
+   	padding-top: 20px;
+   	padding-bottom: 20px;
+   	padding-left: 10px;
+   	padding-right: 10px;
+   }
+
+   #tableau1 {
+   	margin-bottom: 20px;
+   }
+}
+
+
+@media screen and (max-width: 725px) {
+    #colonne1 {
+            display: grid;
+            grid-template-columns: auto;
+    }
+ 
+    #colonne2 {
+        display: grid;
+        grid-template-columns: auto;
+    }
+ 
+    p {
+        font-size: 14px;
+    }
+ 
+    #tableau1, #tableau2 {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+ 
+    #tableau1 {
+        margin-bottom: 20px;
+    }
+}
+
+
+@media screen and (max-width: 525px) {
+    #colonne1 {
+            display: grid;
+            grid-template-columns: auto;
+    }
+ 
+    #colonne2 {
+        display: grid;
+        grid-template-columns: auto;
+    }
+ 
+    p {
+        font-size: 14px;
+    }
+ 
+    #tableau1, #tableau2 {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+ 
+    #tableau1 {
+        margin-bottom: 20px;
+    }
+    .container-assu{
+        padding: 0 .5em;
+    }
+    #sary_machine{
+        width: max-content;
+        margin: auto;
+    }
+ }
+ 
