@@ -89,15 +89,16 @@
     margin-top: 100px;
     margin-left: auto;
     margin-right: auto;
-    padding: 80px !important;
-    height: 300px !important;
+    padding: 50px !important;
+    height: max-content !important;
+    width: 410px;
 }
 .palet2{
     padding: 20px;
     border: 0.5px solid var(--dark-01);
     border-radius: 20px 20px;
-    width: 350px;
-    height: 350px;
+    width: 380px;
+    /* height: 350px; */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .palet2 p{
@@ -174,7 +175,7 @@
         margin-top: 50px;
     }
     .palet2{
-        width: 60vw;
+        width: 100%;
         padding: 20px;
         border-radius: 60px 60px;
     }

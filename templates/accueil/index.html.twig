@@ -1,0 +1,247 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Finance_et_moi
+{% endblock %}
+
+{% block stylesheets %}
+    <link href={{ asset('css/stylesheet.css') }} rel="stylesheet">
+    <link href={{ asset('css/colors.css') }} rel="stylesheet">
+    <link rel="stylesheet" href={{ asset('css/accueil.css') }}>
+    <link rel="stylesheet" href={{ asset('css/apropos&accueil.css') }}>
+{% endblock %}
+{% block body %}
+    {% block header %}
+        {% include "mqbaka_home/header.html.twig" %}
+    {% endblock %}
+
+    <div class="main">
+		<div class="titre">
+		        <img src="images/dame.png" alt="dame">
+		    <div class="titre-content">
+		        <p>
+		            Vous êtes un professionnel artisan ? commerçant ? TPE,PME ?<br>
+			        Quel que soit votre secteur d'activité et la taille de votre
+			        entreprise, offrez à vos clients des solutions de financements
+			        et dynamisez vos ventes, nos offres sur mesures sont
+			        conçues pour vous !
+			        Financez les projets de vos clients.
+		        </p>
+		    </div>
+	    </div>
+	    <hr>
+        <div class="titre-2">
+            <div class="titre-2-contenu">
+                Démarquez-vous, offrez un nouveau service pour vous différencier !
+            </div>
+        </div>
+	    <div class="intro">
+		    <div class="prendmamain txt-gauche">
+				<div class="prendmamain-container">
+					<div class="avt-titre">
+						Des moyens adaptées
+					</div>
+					<div class="p-contenu">
+						<ul>
+							<li>
+								<span>
+								<img id="check" src="images/icon/check.png">
+							</span>
+								<span>
+									Equipez votre entreprise, vos points de ventes, agences, équipes commerciales de moyens de financements
+								</span>
+							</li>
+							<li>
+								<span>
+								<img id="check" src="images/icon/check.png">
+							</span>
+								<span>
+									Développez votre chiffre d'affaires, ne passez plus à coté une vente faute d'un manque de budget, liquidités, trésorerie de la part de vos prospects
+								</span>
+							</li>
+							<li>
+								<span>
+								<img id="check" src="images/icon/check.png">
+							</span>
+								<span>
+									Grâce à nos outils vous trouvez des moyens financiers pour concrétiser, finaliser vos ventes et réaliser les futurs projets de vos clients.
+								</span>
+							</li>
+							<li>
+								<span>
+								<img id="check" src="images/icon/check.png">
+							</span>
+								<span>
+									La solution F E M est faite pour vous.
+								</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+		    </div>
+		    <div class="image img-drt">
+		        <img id="moyen-adapte" src="images/moyen.png" alt="hero">
+		    </div>
+	    </div>
+
+		<hr>
+
+		<div class="intro">
+		    <div class="image">
+		        <img src="images/02.2.png" id="adapte" alt="hero">
+		    </div>
+		    <div class="prendmamain">
+				<div class="prendmamain-container" id="adapte-contenue">
+					<div class="avt-titre">
+						Des monsualités adaptées
+					</div>
+					<div class="p-contenu">
+						<ul>
+							<li>
+								<span>
+								<img id="check" src="images/icon/check.png">
+							</span>
+								<span>
+									Proposez des financements en respectant le budget de vos clients grâce à des mensualités adaptées à leur situation. 
+								</span>
+							</li>
+							<li>
+								<span>
+								<img id="check" src="images/icon/check.png">
+							</span>
+								<span>
+									Accédez à nos différents partenaires bancaires et de produits financiers au même endroit.
+								</span>
+							</li>
+							<li>
+								<span>
+								<img id="check" src="images/icon/check.png">
+							</span>
+								<span>
+									Des offres de 50 € à 100 000 €, de 3 à 84 mois.
+								</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+		    </div>
+	    </div>
+
+	    <hr>
+		
+		<div class="intro">
+		    <div class="prendmamain txt-gauche" id="simpa">
+				<div class="prendmamain-container">
+					<div class="avt-titre">
+						Processus simplifiés
+					</div>
+					<div class="p-contenu">
+						<ul>
+							<li>
+								<span>
+									<img id="check" src="images/icon/check.png">
+								</span>
+								<span>
+									Profitez d'une expérience 100% en ligne et sans tracas ! 
+								</span>
+							</li>
+							<li>
+								<span>
+									<img id="check" src="images/icon/check.png">
+								</span>
+								<span>
+									Nous nous occupons de toute la partie administrative pendant que vous vous focalisez sur le cœur de votre activité et générez des ventes.
+								</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+		    </div>
+		    <div class="image">
+		        <img src="images/processus.png" id="img-drt" alt="hero">
+		    </div>
+	    </div>
+
+        <hr>
+		
+		<div class="intro">
+		    <div class="image">
+		        <img src="images/charge.png" id="charge" alt="hero">
+		    </div>
+		    <div class="prendmamain">
+				<div class="prendmamain-container" id="charge-contenue">
+					<div class="avt-titre">
+						Prises en charge
+					</div>
+					<div class="p-contenu">
+						<ul>
+							<li>
+								<span>
+									<img id="check" src="images/icon/check.png">
+								</span>
+								<span>
+									Nous nous occupons de tout. FEM est le partenaire incontournable qui aide et favorise le developpement des entreprises
+								</span>
+							</li>
+							<li>
+								<span>
+									<img id="check" src="images/icon/check.png">
+								</span>
+								<span>
+									Recevez directement le virement sur votre compte dès la livraison du projet de votre client 
+								</span>
+							</li>
+							<li>
+								<span>
+									<img id="check" src="images/icon/check.png">
+								</span>
+								<span>
+									Depuis leur mobile, vos prospects, clients ont le loisir de choisir la meilleur offre du marché parmi nos différents partenaires bancaires
+								</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+		    </div>
+	    </div>
+
+        <hr>
+
+        <div class="fem-avt">
+            <div class="avt-row">
+                <div class="avt-1">
+                    <div class="avt-titre">
+                        La fin des contraintes juridiques
+                    </div>
+                    <div class="avt-contenue">
+                        Plus besoin d'ORIAS pour proposer du financement <br>
+                        FEM a les agréments pour vous et s'occupe de tous !
+                    </div>
+                </div>
+                <div class="avt-1">
+                    <div class="avt-titre">
+                        Des accords de principe en quelques secondes
+                    </div>
+                    <div class="avt-contenue">
+                        Convertissez vos ventes plus rapiddement grâce aux pré-accords de principe instantanés.
+                    </div>
+                </div>
+                <div class="avt-1">
+                    <div class="avt-titre">
+                        Une equipe dévouée 
+                    </div>
+                    <div class="avt-contenue">
+                        Pour toute question, des conseillers réactifs et sympathiques sont joignables par chat, SMS ou téléphone <br>
+                        Nous vous accompagnons à chaque étape devos financements
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+	</div>
+
+	{% include "apropos&accueil/apropos_accueil.html.twig" %}
+    {% block footer %}
+        {% include "mqbaka_home/footer.html.twig" %}
+    {% endblock %}
+{% endblock %}

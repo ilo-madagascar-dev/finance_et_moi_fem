@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomePageController extends AbstractController
 {
     /**
-     * @Route("/", name="home_page")
+     * @Route("/fem", name="home_page")
      */
     public function index(): Response
     {
@@ -35,6 +35,16 @@ class HomePageController extends AbstractController
     {
         return $this->render('mqbaka_home/credit_conso.html.twig', [
             'controller_name' => 'MqbakaHomeController',
+        ]);
+    }
+    
+    /**
+     * @Route("/assurance_emprunteur", name="assurance_emprunteur")
+     */
+    public function assurance_emprunteur(): Response
+    {
+        return $this->render('mqbaka_home/assurance_emprunteur.html.twig', [
+            'controller_name' => 'AssuranceEmprunteur',
         ]);
     }
 }

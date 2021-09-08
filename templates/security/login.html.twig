@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page de connexion{% endblock %}
+
+
+{% block stylesheets %}
+    {# <link href="stylesheets/fonts/stylesheet-01.css" rel="text/css"/> #}
+    <link href={{ asset('css/stylesheet.css') }} rel="stylesheet">
+    <link href={{ asset('css/colors.css') }} rel="stylesheet">
+    <link href={{ asset('css/full-height.css') }} rel="stylesheet">
+    {% block addstyle %}
+    {% endblock %}
+{% endblock %}
+
+{% block body %}
+<div class="login-wrapper">
+    {% include "mqbaka_home/header-compact.html.twig" %}
+
+    <form method="post" class="login-form">
+        {% if error %}
+            <div class="login-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        {% if app.user %}
+            <div class="already-logged">
+                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
+        {% endif %}
+        <div class="login-inner">
+            <div class="main-form">
+                <h1 class="login-title">
+                    Se connecter
+                </h1>
+                <div class="label-and-stuff">
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required placeholder="Adresse email">
+                    <!-- <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus placeholder="Adresse email"> -->
+
+                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required placeholder="Mot de passe">
+
+                    <input type="hidden" name="_csrf_token"
+                    value="{{ csrf_token('authenticate') }}">
+                </div>
+                <div class="log-button">
+                    <button class="sign-in-button" type="submit">
+                        Se connecter
+                    </button>
+                </div>
+            </div>
+            <div class="login-image">
+                <img src={{ asset('images/login.png') }} alt="">
+            </div>
+        </div>
+
+
+        {# <label for="inputEmail">Email</label>
+        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+        <label for="inputPassword">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+        <input type="hidden" name="_csrf_token"
+            value="{{ csrf_token('authenticate') }}"
+        > #}
+
+        {#
+            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+            See https://symfony.com/doc/current/security/remember_me.html
+
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" name="_remember_me"> Remember me
+                </label>
+            </div>
+        #}
+
+    </form>
+    
+</div>
+{% endblock %}

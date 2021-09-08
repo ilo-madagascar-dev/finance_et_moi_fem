@@ -1,0 +1,48 @@
+<link rel="stylesheet" href={{ asset("css/sidebar.css") }}>
+<div class="sidebarMenu">
+    <ul class="tablinks">
+        <li class="tablink">
+            <a href={{ path("dash") }}>
+                <img src={{ asset('images/Icon-awesome-home.png') }} alt="">
+                Tableau de bord
+            </a>
+        </li>
+        <li class="tablink">
+            <a href="">
+            {# <a href={{ path("dem_fin") }}> #}
+                Demande de financement
+            </a>
+        </li>
+        <li class="tablink">
+            <a href="">
+            {# <a href={{ path("pay_frac") }}> #}
+                Paiement fractionné
+            </a>
+        </li>
+        <li class="tablink">
+            <a href="">
+            {# <a href={{ path("suivi") }}> #}
+                Suivi de dossiers
+            </a>
+        </li>
+        <li class="tablink">
+            <div class="hoverable-li">
+                <div class="hoverable-li-title">
+                    Sous-comptes
+                </div>
+                <div class="hoverable-li-content">
+                    <a href="">
+                    {# <a href={{ path("add-sous") }}> #}
+                        <img src={{ asset('images/icon/list.svg') }} alt="">
+                        Gestion des sous-comptes
+                    </a>
+                    <a href="">
+                    {# <a href={{ path("liste-sous") }}> #}
+                        <img src={{ asset('images/icon/plus.svg') }} alt="">
+                        Ajouter un nouveau
+                    </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

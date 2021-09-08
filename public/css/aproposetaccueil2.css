@@ -1,0 +1,27 @@
+.gridcheck img{
+    padding: 0;
+    height: 1.5em;
+    margin-left: 3.5em;
+    width: unset;
+  }
+  .para2{
+    text-align: center;
+  }
+  
+  .para1{
+    margin-bottom: 1em;
+    text-align: center;
+  }
+  
+  .avt-1:hover {
+    background-color: #203c76;
+  }
+  
+  .avt-1:hover *{
+    background-color: #203c76;
+    color: #f5f5ff;
+  }
+
+  .btn-parti{
+    text-align: center;
+  }

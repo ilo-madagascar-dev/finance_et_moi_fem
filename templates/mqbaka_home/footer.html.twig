@@ -27,34 +27,46 @@
                 <div class="title-bullet slided" id="slided">
                     <h3 class="b-title">Crédit</h3>
                     <ul class="bullets">
-                        <li class="bullet">
-                            <img src={{ asset('images/icon/bullet.png') }} alt="">
-                            Crédit conso
+                        <li>
+                            <a href={{ path("credit_conso") }} class="bullet">
+                                <img src={{ asset('images/icon/bullet.png') }} alt="">
+                                Crédit conso
+                            </a>
                         </li>
-                        <li class="bullet">
-                            <img src={{ asset('images/icon/bullet.png') }} alt="">
-                            Paiement fractionner
+                        <li>
+                            <a href="#" class="bullet">
+                                <img src={{ asset('images/icon/bullet.png') }} alt="">
+                                Paiement fractionné
+                            </a>
                         </li>
                     </ul>
                 </div>
                 <div class="title-bullet">
                     <h3 class="b-title">Services</h3>
                     <ul class="bullets">
-                        <li class="bullet">
-                            <img src={{ asset('images/icon/bullet.png') }} alt="">
-                            Crédit conso
+                        <li>
+                            <a href={{ path("page_four") }} class="bullet">
+                                <img src={{ asset('images/icon/bullet.png') }} alt="">
+                                Rachat de crédit
+                            </a>
                         </li>
-                        <li class="bullet">
-                            <img src={{ asset('images/icon/bullet.png') }} alt="">
-                            Paiement fractionner
+                        <li>
+                            <a href={{ path("page_five") }} class="bullet">
+                                <img src={{ asset('images/icon/bullet.png') }} alt="">
+                                Prêt remeré
+                            </a>
                         </li>
-                        <li class="bullet">
-                            <img src={{ asset('images/icon/bullet.png') }} alt="">
-                            Crédit conso
+                        <li>
+                            <a href={{ path("page_six") }} class="bullet">
+                                <img src={{ asset('images/icon/bullet.png') }} alt="">
+                                Crédit in Fine
+                            </a>
                         </li>
-                        <li class="bullet">
-                            <img src={{ asset('images/icon/bullet.png') }} alt="">
-                            Paiement fractionner
+                        <li>
+                            <a href="#" class="bullet">
+                                <img src={{ asset('images/icon/bullet.png') }} alt="">
+                                Renégociation de crédit
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -68,20 +80,32 @@
                 </div>
                 <img src={{ asset('images/male-phone.png') }} alt="male-phone">
                 <div class="b-buttons">
-                    <button class="full-blue">Se connecter</button>
-                    <button class="not-so-full-blue">S'inscrire</button>
+                    <button class="full-blue" onclick="login__er()">Se connecter</button>
+                    <button class="not-so-full-blue" onclick="register__er()">S'inscrire</button>
                 </div>
+                <div class="invisible">
+                    <a href={{ path('app_login') }} id="login-er"></a>
+                    <a href={{ path('registration') }} id="register-er"></a>
+                </div>
+                <script title="for the buttons">
+                    function login__er(){
+                        document.querySelector('#login-er').click();
+                    }
+                    function register__er(){
+                        document.querySelector('#register-er').click();
+                    }
+                </script>
             </div>
         </div>
         
     </div>
     <div class="footer-menu">
         <ul class="menu-list-footer">
-            <li class="item-footer"><a href="#">Accueil</a></li>
-            <li class="item-footer"><a href="#">A-propos</a></li>
+            <li class="item-footer"><a href={{path('accueil')}}>Accueil</a></li>
+            <li class="item-footer"><a href={{path('page_two')}}>A-propos</a></li>
             <li class="item-footer"><a href="#">Assurance emprunteur</a></li>
-            <li class="item-footer"><a href="#">Tarifs</a></li>
-            <li class="item-footer"><a href="#">Votre concièrgerie</a></li>
+            <li class="item-footer"><a href={{ path('page_tarifs') }}>Tarifs</a></li>
+            <li class="item-footer"><a href="https://financeetmoi.simply-move.fr/">Votre concièrgerie</a></li>
         </ul>
     </div>
 </div>

@@ -1,10 +1,72 @@
-{% extends 'base.html.twig' %}
+{% extends 'mqbaka_home/index.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
-
-{% block body %}
-
-{% block header %}
+{% block title %}Tableau de bord
 {% endblock %}
 
+{% block body %}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href= {{ asset("/css/admin.css") }} rel="stylesheet">
+	{% include "admin/admin-header.html.twig" %}
+	<aside id="sidebarMenu">
+		<ul>
+			<li><a class="Tablinks" onclick="openCity(event, 'Tableau-de-bord')" id="defaultOpen"><img src="/images/Icon-awesome-home.png" style="background: transparent; width: 30px; margin-right: 10px"/>Tableau de bord</a></li>
+			<li><a class="Tablinks" onclick="openCity(event, 'Demande-financement')">Demande financement</a></li>
+			<li><a class="Tablinks" onclick="openCity(event, 'Paiement-fractionne')">Paiement fractionné</a></li>
+			<li><a class="Tablinks" onclick="openCity(event, 'Suivit-des-dossiers')">Suivi des dossiers</a></li>
+		</ul>
+	</aside>
+<div id="content">
+	{% include "admin/dashboard-frame.html.twig" %}
+
+	<div id="Demande-financement" class="Tabcontent">
+		<iframe src="https://app.finnocar.com/iframe_nouveau_dossier?vd={{client.vd}}" width="300" height="600" frameborder="0" allowfullscreen="true" scrolling="no" style="width: 100%; height: 600px;"></iframe>
+	</div>
+
+	<div id="Paiement-fractionne" class="Tabcontent">
+		<iframe src="https://app.finnocar.com/iframe_form_cbnx?vd={{client.vd}}" width="300" height="600" frameborder="0" allowfullscreen="true" scrolling="no" style="width: 100%; height: 600px;"></iframe>
+	</div>
+
+	<div id="Suivit-des-dossiers" class="Tabcontent">
+		<iframe src="https://app.finnocar.com/version-test/iframe_dashboard?idgroupe={{groupe}}&idagence={{client.uniqid}}" width="300" height="600" frameborder="0" allowfullscreen="true" scrolling="no" style="width: 100%; height: 600px;"></iframe>
+	</div>
+</div>
+<script>
+	function openCity(evt, cityName) {
+		var i,
+		tabcontent,
+		tablinks;
+		tabcontent = document.getElementsByClassName("Tabcontent");
+		for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		}
+		tablinks = document.getElementsByClassName("Tablinks");
+		for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(" active", "");
+		}
+		document.getElementById(cityName).style.display = "block";
+		evt.currentTarget.className += " active";
+	}
+
+	// Get the element with id="defaultOpen" and click on it
+	document.getElementById("defaultOpen").click();
+</script>
+	{# fin w3s #}
+<script>
+function myfunction() {
+    var x = document.getElementById("sidebarMenu");
+    var y = document.getElementById("content");
+    if (x.style.width === "0px"){
+        x.style.width = "305px";
+        
+    }else {
+        x.style.width = "0px";
+        
+    }
+    if (y.style.marginLeft === "-302px"){
+        y.style.marginLeft = "0px";
+    }else {
+        y.style.marginLeft = "-302px";
+    }
+}
+</script>
 {% endblock %}

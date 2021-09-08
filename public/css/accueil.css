@@ -1,0 +1,277 @@
+.main{
+  padding: 50px;
+  margin: 50px
+}
+
+.titre{
+  display: grid;
+  grid-template-columns: 25% 75%;
+  padding: 20px; 
+  margin: 15px;
+  margin-left: 50px;
+  margin-bottom: 1em;
+}
+
+.titre img{
+  height:20em;
+  padding-left: 8em;
+  width: unset
+}
+
+.titre-content{
+  color: #203c76;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 5em;
+  line-height: 1.7em;
+  padding: 2em;
+  padding-top: 0.50em
+}
+
+.titre-2{
+  width: max-content;
+  margin: auto;
+  margin-top: 2em;
+}
+
+.titre-2-contenu{
+  border-radius: 5em;
+  background-color: #203c76;
+  color: #fefefe;
+  font-weight: bold;
+  padding: 1.5em;
+}
+
+.intro{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding: 20px;
+  margin: 20px;
+}
+
+.image img{
+  width: 100%;
+  border: 0.5px aliceblue solid ;
+  border-radius: 20px 
+}
+
+.image #img-drt{
+  margin-left: -2em;
+}
+
+.img-drt{
+  margin-top: 10em;
+}
+
+.prendmamain{
+  align-items: center;
+  align-content: center;
+}
+
+.prendmamain-container{
+  border:  1px solid;
+  border-color: blue;
+  border-radius: 20px;
+  color: #265baa;
+  font-size: 20px;
+  padding: 1em
+}
+
+.txt-gauche{
+  z-index: 1;
+  background-color: transparent;
+}
+#simpa{
+  margin-top: 5em;
+}
+
+.p-contenue ul{
+  list-style: none;
+  padding:0;
+}
+.p-contenu ul li{
+  display: grid;
+  grid-template-columns: 2em auto;
+  margin-top :1em;
+  margin-bottom: 1em;
+}
+
+.p-contenu ul li span img{
+  padding: 0;
+  height: 1em;
+  width: unset;
+}
+
+.fem-avt{
+  margin: 1em;
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+}
+
+.avt-row{
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: auto auto auto;
+  
+}
+
+.avt-1{
+  border:  1px solid;
+  border-radius: 15px;
+  color: #265baa;
+  padding: 1em;
+  padding-bottom: 2em;
+  line-height: 1.5em
+}
+
+.avt-titre{
+  margin: 1em;
+  font-size: 20px;
+  font-weight: bold;
+  color: #1c9fd9;
+  text-align: center;
+}
+
+.gridcheck img{
+  padding: 0;
+  height: 1.5em;
+  margin-left: 3.5em;
+  width: unset;
+}
+.para2{
+  text-align: center;
+}
+
+.para1{
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+.avt-1:hover {
+  background-color: #203c76;
+}
+
+.avt-1:hover *{
+  background-color: #203c76;
+  color: #f5f5ff;
+}
+
+.btn-parti{
+  text-align: center;
+}
+
+#adapte{
+  margin-left: 8em;
+  width: 17em; 
+}
+
+#adapte-contenue{
+  margin-top: 2em
+}
+
+#charge{
+  width: 25em;
+  margin-left: 5em
+}
+
+#charge-contenue{
+  margin-top: 5em
+}
+
+@media only screen and ( max-width: 1300px){
+  .titre-content {
+      color: #203c76;
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 5em;
+      line-height: 1.7em;
+      padding: 2em;
+      padding-top: 2em;
+      padding-top: 0.50em;
+      background-color: transparent;
+  }
+  
+  .titre img {
+    height: 18em;
+    padding-left: 6em;
+    width: unset;
+  }
+  
+  .prendmamain-container{
+    border: 1px solid;
+    border-color: blue;
+    border-radius: 20px;
+    color: #265baa;
+    font-size: 18px;
+    padding: 1em;
+  }
+  #adapte {
+    margin-left: 4em;
+    width: 15em;
+  }
+  
+  #adapte-contenue {
+    margin-top: unset;
+  }
+  
+  #charge {
+    width: 18em;
+    margin-left: 4em;
+    margin-top: 5.7em;
+  }
+  
+  #charge-contenue {
+    margin-top: unset;
+  }
+}
+
+@media only screen and ( max-width: 1000px){
+  .main {
+    padding: 5px;
+    margin: 25px;
+  }
+  .titre-content {
+      color: #203c76;
+      font-weight: bold;
+      font-size: 12px;
+      margin-bottom: 1em;
+      margin-left: -4em;
+      line-height: 1.5em;
+      padding: 2em;
+      padding-top: 0.1em;
+      background-color: transparent;
+  }
+  
+  .titre img {
+    height: 10em;
+    padding-left: 3em;
+    width: unset;
+  }
+  
+  .titre-2-contenu {
+    border-radius: 5em;
+    background-color: #203c76;
+    color: #fefefe;
+    font-weight: bold;
+    padding: 1.5em;
+  }
+  
+  .intro {
+    display: grid;
+    grid-template-columns: 100%;
+    padding: 20px;
+    margin: 20px;
+  }
+  #moyen-adapte{
+    margin-left: 1em;
+    margin-top: -12em;
+    width: calc(100% - 5%);
+    height: 12em
+  }
+  .avt-row{
+    display: grid;
+    grid-gap: 1em;
+    grid-template-columns: 100%;
+  }
+
+}

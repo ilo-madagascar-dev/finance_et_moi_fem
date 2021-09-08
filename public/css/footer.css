@@ -98,6 +98,7 @@ img[alt='orias-logo']{
     align-items: center;
     color: var(--light-01);
     margin: .8em 0;
+    text-decoration: none;
 }
 
 .bullet img{
@@ -130,11 +131,17 @@ img[alt='orias-logo']{
     cursor: pointer;
     font-size: 1.1em;
     margin-top: 1.5em;
+    text-decoration: none;
+}
+
+.invisible{
+    display: none;
 }
 
 .not-so-full-blue{
     background: var(--white--ish-01);
     color: var(--light-01);
+    text-decoration: none;
 }
 
 .full-blue:hover{

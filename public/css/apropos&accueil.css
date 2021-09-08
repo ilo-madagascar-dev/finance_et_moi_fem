@@ -7,7 +7,6 @@ width: 100%;
 }
 .grid-container6 {
   display: grid;
-  
   grid-template-columns: auto auto;
  padding: 71px 100px;
 }
@@ -22,14 +21,14 @@ width: 100%;
 margin: 39px 79px 23px;
 color: var(--dark-01);
 }
-.button1{
-padding: 14px;
-border-radius: 49px;
-background-color: var(--light-01);
-color: white;
-border-width: 0px;
-width: 151px;
-margin-left: 386px;
+.button1 {
+    padding: 14px;
+    border-radius: 49px;
+    background-color: var(--light-01);
+    color: white;
+    border-width: 0px;
+    margin: auto;
+    float: right;
 }
 .grand_border{
     border-radius: 20px 20px;
@@ -42,7 +41,7 @@ padding: 10px;
 .grid1{
   display: grid;
   
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 35% 35% 35%;
   padding: 0px 100px;
 }
 .grid1 > div {
@@ -51,10 +50,16 @@ padding: 10px;
   padding: 20px 0;
 
 }
+.imggrid{
+  width: 50%;
+}
+#franfinance2{
+  display: none;
+}
 .grid2{
   display: grid;
   
-  grid-template-columns: auto auto ;
+  grid-template-columns: 35% 35% ;
   padding: 0px 200px;
 }
 .grid2 > div {
@@ -72,10 +77,11 @@ padding: 10px;
   text-align: center;
   color: var(--light-01);
 }
+
 .tt{
   text-align: center;
   color: var(--light-01);
-  margin: 56px 80px;
+  margin: 56px px;
 }
 .grid3{
   display: grid;
@@ -162,6 +168,95 @@ margin-left: 1000px;
   padding: 20px 0;
 
 }
-.img{
+.img {
+    width: 75%;
+    padding: 20px;
+}
+/* R E S P O N S I V E */
+
+@media (max-width: 750px){
+.grid-container6 {
+    padding: 0px 50px !important; 
+}
+.paraghaphe {
+    margin: 0px 30px 0px;
+}
+.imgfinacer{
+  width: 200px;
+}
+.button1 {
+    margin-left: 0px;
+}
+.button1 {
+   margin: 10px auto;
+    display: block;
+}
+.grid1 {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding: 0px 50px;
+}
+.grid2 {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding: 0px 50px;
+}
+.button1{
+  display: none;
+}
+.imggrid{
   width: 50%;
+}
+#franfinance1{
+display: none;
+}
+#franfinance2{
+  display: block;
+  margin: auto;
+}
+.grid3 {
+    display: grid;
+    grid-template-columns: auto;
+    padding: 0px 50px;
+}
+.image7{
+  width: 50%;
+}
+.bordercapture{
+margin: auto;
+display: block;
+}
+.bordercapture2{
+  margin: 0px 50px;
+}
+.tt{
+  margin: auto;
+  display: block;
+}
+.titre-secion{
+  margin: auto 32px;
+}
+.button2{
+  margin: auto;
+display: block;
+}
+.para1{
+  margin: auto;
+}
+.para2{
+  margin: auto;
+}
+.gridcheck{
+  padding: 0px 100px;
+}
+.gridimage {
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 0px 10px;
+}
+}
+@media (max-width: 500px){
+  .paraghaphe{
+    font-size: 14px;
+  }
 }
