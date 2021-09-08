@@ -23,7 +23,7 @@
 }
 
 .mobile-ham{
-    position: absolute;
+    position: fixed;
     left: 1em;
     top: calc(var(--header-height) + 1em);
     z-index: 8;
@@ -40,6 +40,12 @@
 .mobile-ham .ham-line{
     background: var(--blue-01);
     transition: var(--slide-duration);
+}
+
+@media only screen and (min-width: 961px){
+    .mobile-ham{
+        display: none!important;
+    }
 }
 
 @media only screen and (max-width: 960px){
@@ -90,5 +96,11 @@
     }
 }
 
-@media only screen and (max-width: 600px){
+.iF{
+    width: 100%;
+    height: 600px;
+}
+
+.Tabcontent{
+    padding: 2em;
 }

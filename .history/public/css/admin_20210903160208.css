@@ -38,7 +38,6 @@ header{
     margin-left: 70px;
     margin-right: 20px;
 }
-<<<<<<< HEAD
 #sidebarMenu{
     background-color: #242F44;
     width: 305px;
@@ -66,13 +65,6 @@ header{
 #sidebarMenu ul{
     background-color: #242F44;
 }
-=======
-
-<<<<<<< HEAD
->>>>>>> 73244a0147f9da6889df3be3c393cfadf303de28
-=======
->>>>>>> 620ca075c55b583c1aee02a289fd27a6519c28da
->>>>>>> 9fc47d5841b6db5db2d42408fd36636b17cd1d72
 .Tabcontent {
     padding: 0px 12px;
     border: 1px solid #ccc;
@@ -138,12 +130,7 @@ body {font-family: "Lato", sans-serif;}
 }
 
 
-/* RESPONSIVE 
+/* RESPONSIVE */
 @media (max-width: 767px){
-    #sidebarMenu{
-        width: 0px;
-    }
-    #content{
-        margin-left: -302px;
-    }
-}*/
+    
+}

@@ -1,0 +1,51 @@
+
+.ajout {
+	padding-top: 10px;
+	padding-left: 12vw;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    color: var(--dark-01);
+}
+
+div form {
+	text-align: center;
+	border: 1px solid grey;
+	border-radius: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 20px;
+	width: 460px;
+	box-shadow: 1px 2px 5px #888888;
+	margin-bottom: 70px;
+}
+
+div input {
+	width: 350px;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	border-bottom-color: grey;
+	margin-bottom: 20px;
+	font-size: 17px;
+	font-weight: 300px;
+	color: grey;
+}
+
+div input:focus {
+	border: none;
+	outline: none;
+	border-bottom: 2px solid var(--dark-01);
+}
+
+#valider {
+	width: 120px;
+	border: 1px solid;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius: 20px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	color: white;
+	background-color: var(--dark-01);
+}
