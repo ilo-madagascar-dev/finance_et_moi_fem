@@ -56,6 +56,12 @@ body{
     background: transparent;
     z-index: 0;
     --distance: 5%;
+    transform: scale(1.5, 1) translate(-5%, 40%) rotate(10deg);
+    --delay: 10s;
+}
+
+.floatters+.floatters{
+    transform: scale(1.5, 1) translate(5%, 40%) rotate(-10deg);
 }
 
 .floatter{
@@ -67,7 +73,7 @@ body{
     background: var(--white--ish-01);
     opacity: .2;
     mix-blend-mode: saturation;
-    animation: upAndDown infinite alternate ease-in-out 2s;
+    animation: upAndDown infinite alternate ease-in-out var(--delay);
 }
 
 .floatter:nth-child(1){
@@ -76,17 +82,33 @@ body{
 }
 
 .floatter:nth-child(2){
-    animation-delay: .5s;
+    animation-delay: calc(var(--delay) / 4);
 }
 
 .floatter:nth-child(3){
     top: calc(50% - 100px + 2 * var(--distance));
-    animation-delay: 1s;
+    animation-delay: calc(var(--delay) / 2);
 }
 
 .floatter:nth-child(4){
     top: calc(50% - 100px + 3 * var(--distance));
-    animation-delay: 1.5s;
+    animation-delay: calc(3 * var(--delay) / 4);
+}
+
+.floatters+.floatters .floatter:nth-child(1){
+    animation-delay: calc(var(--delay) / 2);
+}
+
+.floatters+.floatters .floatter:nth-child(2){
+    animation-delay: calc(3 * var(--delay) / 4);
+}
+
+.floatters+.floatters .floatter:nth-child(3){
+    animation-delay: 0s;
+}
+
+.floatters+.floatters .floatter:nth-child(4){
+    animation-delay: calc(var(--delay) / 4);
 }
 
 @keyframes upAndDown{
