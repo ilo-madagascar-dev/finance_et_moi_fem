@@ -140,4 +140,58 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
     }
+    /**
+     * @Route("/sajout", name="sajout")
+     */
+    public function pageAjout(ClientRepository $clientrepository,UserRepository $userRepository): Response
+    {
+        if($this->getUser()){
+            $connUser=$this->getUser()->getEmail();
+            $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+            $cle_groupe="1622543601638x611830994992322700";
+            return $this->render('admin/components/ajoutsous.html.twig', [
+                'controller_name' => 'ajout',
+                'client'=>$conClient,
+                'groupe'=>$cle_groupe
+            ]);
+        } else {
+            return $this->redirectToRoute('app_login');
+        }
+    }
+    /**
+     * @Route("/saccueil", name="saccueil")
+     */
+    public function pageAccueil(ClientRepository $clientrepository,UserRepository $userRepository): Response
+    {
+        if($this->getUser()){
+            $connUser=$this->getUser()->getEmail();
+            $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+            $cle_groupe="1622543601638x611830994992322700";
+            return $this->render('admin/components/accueilsous.html.twig', [
+                'controller_name' => 'Saccueil',
+                'client'=>$conClient,
+                'groupe'=>$cle_groupe
+            ]);
+        } else {
+            return $this->redirectToRoute('app_login');
+        }
+    }
+    /**
+     * @Route("/slistinfo", name="slistinfo")
+     */
+    public function pageListInfo(ClientRepository $clientrepository,UserRepository $userRepository): Response
+    {
+        if($this->getUser()){
+            $connUser=$this->getUser()->getEmail();
+            $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+            $cle_groupe="1622543601638x611830994992322700";
+            return $this->render('admin/components/listInfosous.html.twig', [
+                'controller_name' => 'SlistInfo',
+                'client'=>$conClient,
+                'groupe'=>$cle_groupe
+            ]);
+        } else {
+            return $this->redirectToRoute('app_login');
+        }
+    }
 }
