@@ -6,6 +6,7 @@
 <link href={{ asset('css/colors.css') }} rel="stylesheet">
 {% endblock %}
 
+
 {% block body %}
 <link rel="stylesheet" href={{ asset('css/registration.css') }}>
 
@@ -31,6 +32,8 @@
             </div>
         {% endfor %}
         
+        <!-- Data to test with Javascript -->
+        <div class="js-price-id" data-price-id="{{ priceId ? priceId : null }}"></div>
         <div class="form-container">
                 <div class="double-line">
                     <div class="line">
@@ -76,10 +79,38 @@
                         {{ form_widget(form.address) }}
                     </div>
                 </div>
+                <div class="line" style="text-align:center;">
+                    <!-- div class="line" -->
+                        {{ form_row(form.type_abonnement) }}
+                    <!-- /div -->
+                </div>
                 <button type="submit">Inscription</button>
         </div>
         {{ form_end(form) }}
     </div>
 </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const priceIdElement = document.querySelector('.js-price-id');
+            const priceId = priceIdElement.dataset.priceId;
+            const selectOptions = document.getElementsByTagName('option');
+            const optionsArray = Array.from(selectOptions);
+
+            for (let option of optionsArray) {
+                if(option.value == priceId){
+                    option.selected='selected';
+                }
+            }
+        });
+        
+
+        /* for (let index = 0; index < inputList.length; index++) {
+            console.log(inputList[index]);   
+        } */
+    </script>
 {% endblock %}
