@@ -40,62 +40,20 @@ body{
     border-radius: 40px;
     font-size: 1.1em;
     cursor: pointer;
-<<<<<<< HEAD
-    box-shadow: inset 0px 0px 0px 2px var(--light-01-half);
-=======
     box-shadow: inset 0px 0px 0px 0px var(--light-01),
                 inset 0px 0px 0px 2px var(--light-01-half);
->>>>>>> 73244a0147f9da6889df3be3c393cfadf303de28
     transition: .3s;
 }
 
 .finale-form button:hover{
-<<<<<<< HEAD
-    box-shadow: inset 0px 0px 0px 2px var(--light-01);
-=======
     box-shadow: inset 0px 0px 0px 7px var(--light-01),
                 inset 0px 0px 0px 10px var(--light-01-half);
     transition: .3s;
->>>>>>> 73244a0147f9da6889df3be3c393cfadf303de28
 }
 
 .floatters{
     position: absolute;
     top: 0;
-<<<<<<< HEAD
-    bottom: 0;
-    right: 0;
-    left: 0;
-    background: transparent;
-    z-index: 0;
-    --distance: 5%;
-    transform: scale(1.5, 1) translate(-5%, 40%) rotate(10deg);
-    --delay: 10s;
-}
-
-.floatters+.floatters{
-    transform: scale(1.5, 1) translate(5%, 40%) rotate(-10deg);
-}
-
-.floatter{
-    position: absolute;
-    width: 100%;
-    left: 0;
-    top: calc(50% - 100px);
-    height: 200px;
-    background: var(--white--ish-01);
-    opacity: .2;
-    mix-blend-mode: saturation;
-    animation: upAndDown infinite alternate ease-in-out var(--delay);
-}
-
-.floatter:nth-child(1){
-    top: calc(50% - 100px - var(--distance));
-    animation-delay: 0s;
-}
-
-.floatter:nth-child(2){
-=======
     left: 0;
     bottom: 0;
     right: 0;
@@ -126,26 +84,15 @@ body{
 
 .floatter:nth-child(2){
     top: calc(50% - 100px - 25px);
->>>>>>> 73244a0147f9da6889df3be3c393cfadf303de28
     animation-delay: calc(var(--delay) / 4);
 }
 
 .floatter:nth-child(3){
-<<<<<<< HEAD
-    top: calc(50% - 100px + 2 * var(--distance));
-=======
     top: calc(50% - 100px);
->>>>>>> 73244a0147f9da6889df3be3c393cfadf303de28
     animation-delay: calc(var(--delay) / 2);
 }
 
 .floatter:nth-child(4){
-<<<<<<< HEAD
-    top: calc(50% - 100px + 3 * var(--distance));
-    animation-delay: calc(3 * var(--delay) / 4);
-}
-
-=======
     top: calc(50% - 100px + 25px);
     animation-delay: calc(3 * var(--delay) / 4);
 }
@@ -158,7 +105,6 @@ body{
     animation-delay: calc(var(--delay) / 4);
 }
 
->>>>>>> 73244a0147f9da6889df3be3c393cfadf303de28
 .floatters+.floatters .floatter:nth-child(1){
     animation-delay: calc(var(--delay) / 2);
 }
@@ -167,22 +113,6 @@ body{
     animation-delay: calc(3 * var(--delay) / 4);
 }
 
-<<<<<<< HEAD
-.floatters+.floatters .floatter:nth-child(3){
-    animation-delay: 0s;
-}
-
-.floatters+.floatters .floatter:nth-child(4){
-    animation-delay: calc(var(--delay) / 4);
-}
-
-@keyframes upAndDown{
-    from{
-        transform: translate(0, -50px);
-    }
-    to{
-        transform: translate(0, 50px);
-=======
 @keyframes upAndDown{
     from{
         transform: translate(0, -20%);
@@ -312,6 +242,5 @@ body{
     }
     .login-title{
         padding: 0 1em;
->>>>>>> 73244a0147f9da6889df3be3c393cfadf303de28
     }
 }

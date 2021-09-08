@@ -3,19 +3,30 @@
         <h2 class="content-title">Tableau de bord</h2>
         <div class="boxes-iconifiers">
             <div class="box-m">
-                <img src={{ asset('images/icon/folder.svg') }} alt="" onclick="openCity(event, 'Demande-financement')">
+                <img src={{ asset('images/icon/folder.svg') }} alt="" onclick="demFi()">
                 Demande de finance
             </div>
             <div class="box-m">
-                <img src={{ asset('images/icon/card.svg') }} alt="" onclick="openCity(event, 'Paiement-fractionne')">
+                <img src={{ asset('images/icon/card.svg') }} alt="" onclick="payFrac()">
                 Paiement fractionné
             </div>
             <div class="box-m">
-                <img src={{ asset('images/icon/file.svg') }} alt="" onclick="openCity(event, 'Suivit-des-dossiers')">
+                <img src={{ asset('images/icon/file.svg') }} alt="" onclick="suiviDoss()">
                 Suivi des dossiers
             </div>
         </div>
     </div>
+    <script title="for the boxes">
+        function demFi(){
+            document.querySelector('#d').click();
+        }
+        function payFrac(){
+            document.querySelector('#p').click();
+        }
+        function suiviDoss(){
+            document.querySelector('#s').click();
+        }
+    </script>
     <p>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati sit reiciendis recusandae voluptatem, officia vel aliquam, id ad dicta totam harum numquam! Sint odit neque eligendi aperiam, possimus ex atque exercitationem debitis error nam ad quas iste nesciunt ipsum dolores aliquid delectus deserunt est blanditiis. Suscipit, ab quidem! Optio vel dolores adipisci, error cupiditate iure obcaecati, nulla voluptatem similique nam id impedit! Aspernatur exercitationem necessitatibus architecto nisi? Labore earum voluptatibus ullam harum dolore autem vel in, provident perferendis blanditiis fuga voluptatem? Ducimus id fuga aperiam ut ab consectetur sed odit dolores quia, temporibus aspernatur optio, magni ad ipsum doloremque similique.
     </p>
