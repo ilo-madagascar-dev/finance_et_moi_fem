@@ -1,0 +1,19 @@
+.tête{
+	margin: 20px;
+}
+.image{
+	width: 30px;
+}
+.bordur{
+ border-radius: 20px 20px;
+   border-style: solid;
+border-width: 1px;
+margin: 4%;
+padding: 23px 31px;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.grid{
+	display: grid;
+	grid-template-columns: 25% auto;
+	padding: 10px 15px;
+}
