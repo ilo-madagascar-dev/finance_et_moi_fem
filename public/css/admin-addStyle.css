@@ -140,6 +140,7 @@ span[green]{
     height: max-content;
     margin-top: 10px;
     box-shadow: -2px 2px 2px 0px var(--dark-01-half);
+    padding: 0 1em;
 }
 
 .content-inner{
@@ -168,6 +169,7 @@ span[green]{
     transition: .4s;
     cursor: pointer;
     opacity: .8;
+    text-align: center;
 }
 
 .box-m:hover{
@@ -180,12 +182,39 @@ span[green]{
     height: 4em;
 }
 
-#sidebarMenu ul li a{
-    opacity: .5;
-    transition: .3s;
+
+@media only screen and (max-width: 800px){
+    .boxes-iconifiers{
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: .5em;
+    }
+}
+@media only screen and (max-width: 600px){
+    .boxes-iconifiers{
+        grid-template-columns: 1fr;
+        gap: 1em;
+    }
 }
 
-#sidebarMenu ul li:hover a{
-    opacity: 1;
-    transition: .3s;
+@media only screen and (max-width: 570px){
+    .header{
+        grid-template-columns: 100%;
+        row-gap: 0;
+    }
+    .logo-container{
+        width: max-content;
+        margin: auto;
+        position: relative;
+        max-width: 100%;
+    }
+    .logo-container::after{
+        content: '';
+        position: absolute;
+        width: 80%;
+        height: 2px;
+        bottom: 0;
+        background: var(--white--ish-01);
+        left: 50%;
+        transform: translate(-50%);
+    }
 }
