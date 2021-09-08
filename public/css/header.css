@@ -7,7 +7,7 @@
 
 .header-top-bar{
     display: grid;
-    grid-template-columns: 18em auto;
+    grid-template-columns: 14em auto;
     gap: 2em;
     width: 100%;
     box-sizing: border-box;
@@ -166,18 +166,18 @@
 .tri-down{
     width: 0;
     height: 0;
-    border: 7px solid transparent;
-    border-top: 7px solid var(--light-01);
+    border: 5px solid transparent;
+    border-top: 5px solid var(--light-01);
     display: inline-block;
     border-bottom: 2px solid transparent;
-    margin-left: .5em;
+    margin-left: .2em;
 }
 
 .hoverable-drop:hover .tri-down{
-    border-top: 7px solid var(--dark-01);
+    border-top: 5px solid var(--dark-01);
 }
 
-@media only screen and (max-width: 1200px){
+@media only screen and (max-width: 1220px){
     .header-top-bar{
         position: relative;
     }
@@ -227,7 +227,7 @@
     }
 }
 
-@media only screen and (max-width: 800px){
+@media only screen and (max-width: 930px){
     .contact-stuff{
         flex-direction: column;
         gap: 1em;

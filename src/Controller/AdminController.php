@@ -83,4 +83,61 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
     }
+
+    /**
+     * @Route("/demande-financement", name="demfi")
+     */
+    public function demFi(ClientRepository $clientrepository,UserRepository $userRepository): Response
+    {
+        if($this->getUser()){
+            $connUser=$this->getUser()->getEmail();
+            $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+            $cle_groupe="1622543601638x611830994992322700";
+            return $this->render('admin/components/admin-demande-fin.html.twig', [
+                'controller_name' => 'demFi',
+                'client'=>$conClient,
+                'groupe'=>$cle_groupe
+            ]);
+        } else {
+            return $this->redirectToRoute('app_login');
+        }
+    }
+
+    /**
+     * @Route("/suivi-dossier", name="suivi")
+     */
+    public function suiDoss(ClientRepository $clientrepository,UserRepository $userRepository): Response
+    {
+        if($this->getUser()){
+            $connUser=$this->getUser()->getEmail();
+            $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+            $cle_groupe="1622543601638x611830994992322700";
+            return $this->render('admin/components/admin-suivi-doss.html.twig', [
+                'controller_name' => 'suiDoss',
+                'client'=>$conClient,
+                'groupe'=>$cle_groupe
+            ]);
+        } else {
+            return $this->redirectToRoute('app_login');
+        }
+    }
+
+    /**
+     * @Route("/payement-fractionne", name="payementF")
+     */
+    public function payFrac(ClientRepository $clientrepository,UserRepository $userRepository): Response
+    {
+        if($this->getUser()){
+            $connUser=$this->getUser()->getEmail();
+            $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+            $cle_groupe="1622543601638x611830994992322700";
+            return $this->render('admin/components/admin-payement-frac.html.twig', [
+                'controller_name' => 'payFrac',
+                'client'=>$conClient,
+                'groupe'=>$cle_groupe
+            ]);
+        } else {
+            return $this->redirectToRoute('app_login');
+        }
+    }
 }
