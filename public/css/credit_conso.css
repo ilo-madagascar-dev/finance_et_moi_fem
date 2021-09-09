@@ -225,6 +225,11 @@ p.sub{
 /*
                 B O X E S
 */
+
+*{
+    --boxes-gap: 15em;
+}
+
 .boxes{
     margin: 4em;
     border: 5px solid var(--dark-01-half);
@@ -264,7 +269,7 @@ p.sub{
 .boxes-inner{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 15em;
+    gap: var(--boxes-gap);
     grid-row-gap: 4em;
 }
 
@@ -429,6 +434,10 @@ p.sub{
 */
 
 @media only screen and (max-width: 1200px){
+    
+    *{
+        --boxes-gap: 5em;
+    }
     .steps{
         grid-template-columns: 1fr 7fr;
         column-gap: .6em;
@@ -441,7 +450,7 @@ p.sub{
         font-size: 2.2em;
     }
     .boxes-inner{
-        column-gap: 5em;
+        column-gap: var(--boxes-gap);
     }
     .blue-shape-thing{
         display: none;
@@ -461,6 +470,9 @@ p.sub{
 }
 
 @media only screen and (max-width: 1000px){
+    *{
+        --boxes-gap: 2em;
+    }
     .how_done{
         grid-template-columns: 1fr;
         row-gap: 10em;
@@ -489,9 +501,6 @@ p.sub{
     .step-number{
         font-size: 2.5em;
     }
-    .boxes-inner{
-        column-gap: 2em;
-    }
     .boxes{
         padding: 2em;
         margin: 4em 1em;
@@ -517,11 +526,13 @@ p.sub{
 
 
 @media only screen and (max-width: 800px){
+    *{
+        --boxes-gap: 1em;
+    }
     .steps::after{
         width: 1.5em;
     }
     .boxes-inner{
-        column-gap: 1em;
         row-gap: 1.5em;
     }
     .boxes{
@@ -548,7 +559,7 @@ p.sub{
     }
     .im-over-txt{
         grid-template-columns: 100%;
-        row-gap: 2em;;
+        row-gap: 2em;
     }
     .text-box{
         left: 0;

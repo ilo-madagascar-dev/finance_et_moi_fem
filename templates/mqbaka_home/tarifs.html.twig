@@ -27,7 +27,7 @@
         <div class="two-columns">
             <div class="ilany">
                 <h3 class="ilany-title">Starter</h3>
-                <p class="ilany-p">59€ HT/Mois Agence tête de reseau</p>
+                <p class="ilany-p"><span id="priceThingStarter">59€</span> HT/<span class="thingType">Mois</span> Agence tête de reseau</p>
                 <div class="li-checks">
                     <div class="el">
                         <img src={{ asset('images/icon/check-dark.svg') }} alt="">
@@ -60,11 +60,15 @@
                         </p>
                     </div>
                 </div>
-                <button class="full-blue">Créer un compte</button>
+                <form method="POST" action="{{ path('registration') }}">
+                    <!-- Starter price -->
+                    <input type="hidden" name="price_id" value="price_1JWc1BBW8SyIFHAgvuKoItbD" id="price_id_starter">
+                    <button type="submit" class="full-blue">Créer un compte</button>
+                </form>
             </div>
             <div class="ilany">
                 <h3 class="ilany-title">Essentiel</h3>
-                <p class="ilany-p"><span id="priceThing">89</span>€ HT/Mois Agence tête de reseau</p>
+                <p class="ilany-p"><span id="priceThing">89</span>€ HT/<span class="thingType">Mois</span>  Agence tête de reseau</p>
                 <div class="li-checks">
                     <div class="el">
                         <img src={{ asset('images/icon/check-dark.svg') }} alt="">
@@ -97,7 +101,11 @@
                         </p>
                     </div>
                 </div>
-                <button class="full-blue">Créer un compte</button>
+                <form method="POST" action="{{ path('registration') }}">
+                    <!-- Essentiel price -->
+                    <input type="hidden" name="price_id" value="price_1JT0YJBW8SyIFHAgmEuizs6Z" id="price_id_essentiel">
+                    <button type="submit" class="full-blue">Créer un compte</button>
+                </form>
             </div>
         </div>
         <div class="switcher">
@@ -129,11 +137,19 @@
                     if(event.target.getAttribute('data-indic')== 'mensuel'){
                         p1.classList.add('on');
                         p2.classList.remove('on');
+                        document.querySelector('#priceThingStarter').innerHTML= "59";
                         document.querySelector('#priceThing').innerHTML= "89";
+                        document.querySelector('#price_id_starter').value = "price_1JWc1BBW8SyIFHAgvuKoItbD";
+                        document.querySelector('#price_id_essentiel').value = "price_1JT0YJBW8SyIFHAgmEuizs6Z";
+                        Array.from(document.querySelectorAll('.thingType')).forEach((item) => {item.innerHTML = "Mois"});
                     } else {
                         p2.classList.add('on');
                         p1.classList.remove('on');
-                        document.querySelector('#priceThing').innerHTML= "109";
+                        document.querySelector('#priceThingStarter').innerHTML= "590";
+                        document.querySelector('#priceThing').innerHTML= "890";
+                        document.querySelector('#price_id_starter').value = "price_1JWc1oBW8SyIFHAgGnAmvtyw";
+                        document.querySelector('#price_id_essentiel').value = "price_1JWc3mBW8SyIFHAg2E4YGU4c";
+                        Array.from(document.querySelectorAll('.thingType')).forEach((item) => {item.innerHTML = "An"});
                     }
                 }
             </script>

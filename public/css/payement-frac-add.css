@@ -1,0 +1,82 @@
+.tarification{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.tarification .undest-title{
+    width: max-content;
+    margin: auto;
+}
+
+.m-tarif{
+    width: max-content;
+    margin: auto;
+}
+
+.m-tarif-t{
+    border-collapse: collapse;
+}
+
+.m-tarif-t *{
+    border: 1px solid var(--dark-01);
+}
+
+.m-tarif-t td, .m-tarif-t th{
+    padding: 1em 1em;
+    text-align: center;
+    color: var(--light-01);
+}
+
+.bol{
+    font-weight: 800;
+}
+
+td div, td{
+    color: var(--light-01);
+}
+.box[one]{
+    position: relative;
+    left: calc(100% + var(--boxes-gap)/2);
+    transform: translate(-50%);
+}
+
+.und-table tr > *, .bol, .corres{
+    line-height: 2;
+}
+
+.advantages{
+    color: var(--dark-01);
+}
+
+.box img{
+    height: 80px;
+    width: unset;
+    max-width: unset;
+}
+
+@media only screen and (max-width: 690px){
+    .box[one]{
+        position: static;
+        transform: none;
+    }
+}
+
+@media only screen and (max-width: 550px){
+    .m-tarif-t td, .m-tarif-t th{
+        padding: .5em .5em;
+    }
+}
+
+@media only screen and (max-width: 510px){
+    .m-tarif-t td, .m-tarif-t th{
+        font-size: .8em;
+    }
+    .tarification h3.undest-title{
+        font-size: 1.3em;
+        width: 80%;
+    }
+    .ilany{
+        padding: 2em .5em;
+    }
+}

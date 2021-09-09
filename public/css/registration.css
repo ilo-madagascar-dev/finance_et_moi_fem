@@ -11,6 +11,24 @@
     background: transparent;
 }
 
+/**
+ * Sélection des abonnements 
+ */
+ label {
+    display:block;
+    margin-bottom: 0.25rem;
+    color: var(--dark-01);
+}
+
+select {
+    width:100%;
+    margin:auto;
+    height:40px;
+    color: var(--dark-01);
+    border: 1px solid var(--dark-01);
+    border-radius: 5px;
+}
+
 .background{
     position: absolute;
     width: 100%;

@@ -104,3 +104,12 @@
 .Tabcontent{
     padding: 2em;
 }
+
+@media only screen and (max-width: 350px){
+    *{
+        --side-width: 300px;
+    }
+    .sidebarMenu.expanded{
+        width: 300px;
+    }
+}

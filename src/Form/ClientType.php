@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Client;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -69,6 +70,19 @@ class ClientType extends AbstractType
                 'label' => 'siren',
                 'attr' => array(
                     'placeholder' => 'SIREN'
+                )
+            ])
+            ->add('type_abonnement', ChoiceType::class, [
+            'label' => 'Abonnement',
+                'mapped' => false,
+                'choices' => [
+                    'Starter mensuel' => 'price_1JWc1BBW8SyIFHAgvuKoItbD',
+                    'Essentiel mensuel' => 'price_1JT0YJBW8SyIFHAgmEuizs6Z',
+                    'Starter annuel' => 'price_1JWc1oBW8SyIFHAgGnAmvtyw',
+                    'Essentiel annuel' => 'price_1JWc3mBW8SyIFHAg2E4YGU4c',
+                ],
+                'attr' => array(
+                    'placeholder' => "Type d'abonnement"
                 )
             ])
         ;
