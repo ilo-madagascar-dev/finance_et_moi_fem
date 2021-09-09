@@ -36,7 +36,30 @@ td div, td{
     color: var(--light-01);
 }
 .box[one]{
-    grid-column: 1 / 3;
+    position: relative;
+    left: calc(100% + var(--boxes-gap)/2);
+    transform: translate(-50%);
+}
+
+.und-table tr > *, .bol, .corres{
+    line-height: 2;
+}
+
+.advantages{
+    color: var(--dark-01);
+}
+
+.box img{
+    height: 80px;
+    width: unset;
+    max-width: unset;
+}
+
+@media only screen and (max-width: 690px){
+    .box[one]{
+        position: static;
+        transform: none;
+    }
 }
 
 @media only screen and (max-width: 550px){
