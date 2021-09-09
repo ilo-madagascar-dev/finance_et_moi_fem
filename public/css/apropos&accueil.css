@@ -53,9 +53,6 @@ padding: 10px;
 .imggrid{
   width: 50%;
 }
-#franfinance2{
-  display: none;
-}
 .grid2{
   display: grid;
   
@@ -259,4 +256,4 @@ display: block;
   .paraghaphe{
     font-size: 14px;
   }
-}
+}          

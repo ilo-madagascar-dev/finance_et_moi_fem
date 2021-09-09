@@ -5,7 +5,7 @@
     display: flex;
     gap: 12px;
     align-items: center;
-    color: var(--dark-01);
+    color: #13141d;
 }
 
 div form {
@@ -17,6 +17,7 @@ div form {
 	padding-top: 20px;
 	width: 460px;
 	box-shadow: 1px 2px 5px #888888;
+	margin-bottom: 70px;
 }
 
 div input {
@@ -34,7 +35,7 @@ div input {
 div input:focus {
 	border: none;
 	outline: none;
-	border-bottom: 2px solid var(--dark-01);
+	border-bottom: 2px solid #13141d;
 }
 
 #valider {
@@ -46,5 +47,5 @@ div input:focus {
 	padding-top: 5px;
 	padding-bottom: 5px;
 	color: white;
-	background-color: var(--dark-01);
+	background-color: #13141d;
 }
