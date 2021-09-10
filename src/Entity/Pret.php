@@ -29,7 +29,7 @@ class Pret
 
     /**
      * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="prets")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $client;
 
@@ -38,6 +38,11 @@ class Pret
      * @ORM\JoinColumn(nullable=false)
      */
     private $status;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=SousCompte::class, inversedBy="prets")
+     */
+    private $sousCompte;
 
     public function getId(): ?int
     {
@@ -88,6 +93,18 @@ class Pret
     public function setStatus(?StatusPret $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getSousCompte(): ?SousCompte
+    {
+        return $this->sousCompte;
+    }
+
+    public function setSousCompte(?SousCompte $sousCompte): self
+    {
+        $this->sousCompte = $sousCompte;
 
         return $this;
     }

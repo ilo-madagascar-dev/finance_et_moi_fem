@@ -49,6 +49,11 @@ class User implements UserInterface
      */
     private $client;
 
+    /**
+     * @ORM\OneToOne(targetEntity=SousCompte::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $sousCompte;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -167,6 +172,23 @@ class User implements UserInterface
         }
 
         $this->client = $client;
+
+        return $this;
+    }
+
+    public function getSousCompte(): ?SousCompte
+    {
+        return $this->sousCompte;
+    }
+
+    public function setSousCompte(SousCompte $sousCompte): self
+    {
+        // set the owning side of the relation if necessary
+        if ($sousCompte->getUser() !== $this) {
+            $sousCompte->setUser($this);
+        }
+
+        $this->sousCompte = $sousCompte;
 
         return $this;
     }
