@@ -96,6 +96,16 @@ class SousCompte
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $codePostal;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $addresseEntreprise;
+
     public function __construct()
     {
         $this->prets = new ArrayCollection();
@@ -310,6 +320,30 @@ class SousCompte
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getCodePostal(): ?string
+    {
+        return $this->codePostal;
+    }
+
+    public function setCodePostal(string $codePostal): self
+    {
+        $this->codePostal = $codePostal;
+
+        return $this;
+    }
+
+    public function getAddresseEntreprise(): ?string
+    {
+        return $this->addresseEntreprise;
+    }
+
+    public function setAddresseEntreprise(string $addresseEntreprise): self
+    {
+        $this->addresseEntreprise = $addresseEntreprise;
 
         return $this;
     }

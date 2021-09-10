@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Make your payment!{% endblock %}
+
+
+{% block stylesheets %}
+    {# <link href="stylesheets/fonts/stylesheet-01.css" rel="text/css"/> #}
+    <link href={{ asset('css/stylesheet.css') }} rel="stylesheet">
+    <link href={{ asset('css/colors.css') }} rel="stylesheet">
+    <link href={{ asset('css/full-height.css') }} rel="stylesheet">
+    {% block addstyle %}
+    {% endblock %}
+{% endblock %}
+
+{% block body %}
+
+    <section class="all-the">
+        <h1 class="sec-step-title">Finalisez l'inscription de la filiale</h1>
+        <p>
+            Afin de finaliser l'inscription de votre filiale, vous devez d'abord vous abonner !!!
+        </p>
+        <form action="{{ path('sous_compte_registration_payment') }}" method="POST" class="finale-form">
+            <button type="submit" class="">Créer l'abonnement de la filiale</button>
+        </form>
+    </section>
+    <div class="floatters">
+        <div class="floatter"></div>
+        <div class="floatter"></div>
+        <div class="floatter"></div>
+        <div class="floatter"></div>
+    </div>
+    <div class="floatters">
+        <div class="floatter"></div>
+        <div class="floatter"></div>
+        <div class="floatter"></div>
+        <div class="floatter"></div>
+    </div>
+
+{% endblock %}

@@ -2,15 +2,31 @@
 
 namespace App\Controller;
 
-use App\Repository\ClientRepository;
+use DateTime;
+use Stripe\Stripe;
+use App\Entity\User;
+use DateTimeImmutable;
+use App\Entity\Facture;
+use App\Entity\Paiement;
+use App\Entity\Abonnement;
+use App\Entity\SousCompte;
+use App\Service\ApiService;
+use App\Form\SousCompteType;
+use Stripe\Checkout\Session;
 use App\Repository\UserRepository;
+use App\Repository\ClientRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AdminController extends AbstractController
 {
-    /**
+     /**
      * @Route("/admin/{id}", name="admin")
      */
     public function index(ClientRepository $clientrepository,$id): Response
@@ -140,25 +156,8 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
     }
-    /**
-     * @Route("/ajouter-sous-compte", name="sajout")
-     */
-    public function pageAjout(ClientRepository $clientrepository,UserRepository $userRepository): Response
-    {
-        if($this->getUser()){
-            $connUser=$this->getUser()->getEmail();
-            $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
-            $cle_groupe="1622543601638x611830994992322700";
-            return $this->render('admin/components/ajoutsous.html.twig', [
-                'controller_name' => 'ajout',
-                'client'=>$conClient,
-                'groupe'=>$cle_groupe
-            ]);
-        } else {
-            return $this->redirectToRoute('app_login');
-        }
-    }
-    /**
+
+     /**
      * @Route("/sous-comptes", name="saccueil")
      */
     public function pageAccueil(ClientRepository $clientrepository,UserRepository $userRepository): Response
@@ -176,6 +175,7 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
     }
+
     /**
      * @Route("/sous-compte-info", name="slistinfo")
      */
@@ -194,6 +194,7 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
     }
+
      /**
      * @Route("/sous-comptes-liste", name="slist")
      */
@@ -211,5 +212,260 @@ class AdminController extends AbstractController
         } else {
             return $this->redirectToRoute('app_login');
         }
+    }
+
+    /**
+     * @Route("/ajouter-sous-compte", name="sajout")
+     */
+    public function pageAjout(ClientRepository $clientrepository,UserRepository $userRepository, Request $request, SessionInterface $session): Response
+    {
+        if($this->getUser()){
+            $connUser=$this->getUser()->getEmail();
+            
+            $userVd = $this->getUser()->getClient()->getVd();
+
+            $eventuallyNewSousCompte = new SousCompte;
+
+            $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+            $cle_groupe="1622543601638x611830994992322700";
+            
+            $form = $this->createForm(SousCompteType::class, $eventuallyNewSousCompte);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                //dd($newClient);
+                /**
+                 * Récupération du vd de l'utilisateur connecté
+                 */
+                if ($request->request->get('uservd')) {
+                    $uservd = $request->request->get('uservd');
+                    $session->set('userConnectedVd', $uservd);
+                    $session->set('eventuallyNewSousCompte', $eventuallyNewSousCompte);
+                }
+                
+                //Les informations de la première étape seront enregistrées dans la premimère étape et seront flushées si l'utiliseur valide son abonnement et qu'il obtient un vd
+                //Le User relatif à ce client ne sera créé que lorsque les deux dernières étapes (càd le paiement et la création d'un compte sur Lenbox seront validées) 
+                $userExistence = $userRepository->findBy(['email' => $eventuallyNewSousCompte->getEmail()]);
+                
+                if ($userExistence) {
+    
+                    $this->addFlash('danger', 'Cet e-mail est déjà relié à un utilisateur');
+    
+                    return $this->redirectToRoute('registration');
+                }
+    
+                $session->set('possibleNewSousCompte', $eventuallyNewSousCompte);
+    
+                if ($session->get('possibleNewSousCompte')) 
+                {
+                    return $this->redirectToRoute('sous-compte_ajout_second_step');
+                } else {
+                    $this->addFlash('danger', 'Il y a eu un problème, veuillez ressoummettre le formulaire !!!');
+                }
+    
+            }
+
+            return $this->render('admin/components/ajoutsous.html.twig', [
+                'controller_name' => 'ajout',
+                'client'=>$conClient,
+                'groupe'=>$cle_groupe,
+                'userVd'=>$userVd,
+                'form'=>$form->createView()
+            ]);
+        } else {
+            return $this->redirectToRoute('app_login');
+        }
+    }
+
+    
+    /**
+     * @Route("/souscompte/ajout/second/step", name="sous-compte_ajout_second_step")
+     */
+    public function souscompteRegistrationSeconStep(SessionInterface $session)
+    {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        if (!$session->get('userConnectedVd') || !$session->get('eventuallyNewSousCompte')) {
+            return $this->redirectToRoute('sajout');
+        }
+        
+
+        /*
+        
+        $priceArray = [
+             'price_1JWc1BBW8SyIFHAgvuKoItbD',
+             'price_1JT0YJBW8SyIFHAgmEuizs6Z',
+             'price_1JWc1oBW8SyIFHAgGnAmvtyw',
+             'price_1JWc3mBW8SyIFHAg2E4YGU4c'
+        ];
+ 
+         if (!in_array($priceId, $priceArray)) {
+            $this->addFlash('danger', 'Le type d\'abonnement que vous avez choisi n\'existe pas');
+            return $this->redirectToRoute('registration');
+         }
+         
+        */
+
+        //dd($session->get('possibleNewUser'));
+        return $this->render('sous-comptes/sous-compte-second-step-creation.html.twig');
+    }
+
+    /**
+     * @Route("/sous-compte/registration/payment", name="sous_compte_registration_payment") 
+     */
+    public function sousCompteRegistrationPayment(SessionInterface $session):Response
+    {
+        Stripe::setApiKey($_ENV['STRIPE_SECRET']);
+        $priceId = 'price_1JY72lBW8SyIFHAgJEyG0fLk';
+
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+        
+        if ($session->get('price_id')) {
+           $priceId = $session->get('price_id');
+        }
+
+        /* $priceArray = [
+            'price_1JWc1BBW8SyIFHAgvuKoItbD',
+            'price_1JT0YJBW8SyIFHAgmEuizs6Z',
+            'price_1JWc1oBW8SyIFHAgGnAmvtyw',
+            'price_1JWc3mBW8SyIFHAg2E4YGU4c'
+        ];
+
+        if (!in_array($priceId, $priceArray)) 
+        {
+            $this->addFlash('danger', 'Le type d\'abonnement que vous avez choisi n\'existe pas');
+            return $this->redirectToRoute('registration');
+        } */
+
+        //Local success_url :
+        //'success_url' => 'http://localhost:8000/registration/payment/success?session_id={CHECKOUT_SESSION_ID}',
+        //Production success_url :
+        //'success_url' => 'http://femcreditconso.fr/registration/payment/success?session_id={CHECKOUT_SESSION_ID}',
+        $success_url = $_ENV['SOUS_COMPTE_REGISTRATION_SUCCESS_URL'];
+
+        $paymentSession = \Stripe\Checkout\Session::create([
+            'success_url' => $success_url,
+            'cancel_url' => $this->generateUrl('sous-compte_registration_payment_failed', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'payment_method_types' => ['card'],
+            'mode' => 'subscription',
+            'line_items' => [[
+                'price' => $priceId,
+                // For metered billing, do not pass quantity
+                'quantity' => 1,
+            ]],
+        ]);
+
+        return $this->redirect($paymentSession->url, 303);
+    }
+
+    /**
+     * @Route("/sous-compte/registration/payment/success", name="sous-compte_registration_payment_success")
+     */
+    public function sousCompteRegistrationPaymentSuccess(Request $request, SessionInterface $session, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, ApiService $apiService):Response
+    {
+        if (!$this->getUser()) {
+            if (!$this->getUser()->getClient()) {
+                return $this->redirectToRoute('app_login');
+            }
+        }
+
+        if (!$session->get('userConnectedVd') || !$session->get('eventuallyNewSousCompte')) {
+            return $this->redirectToRoute('sajout');
+        }
+
+        $session_id = $request->get('session_id');
+
+        Stripe::setApiKey($_ENV['STRIPE_SECRET']);
+
+        $stripe_session = \Stripe\Checkout\Session::retrieve(
+          $session_id,
+          []
+        );
+
+        $potentialClient = $session->get('eventuallyNewSousCompte');
+        $userConnectedVd = $session->get('userConnectedVd');
+        //dd($potentialClient, $userConnectedVd);
+        //Création d'un nouvel abonnement
+        $nouvelAbonnementPotentiel = new Abonnement();
+        
+        $nouvelAbonnementPotentiel->setStripeSubscriptionId($stripe_session->subscription);
+        $nouvelAbonnementPotentiel->setStripeCusId($stripe_session->customer);
+        $nouvelAbonnementPotentiel->setMode($stripe_session->mode);
+        $nouvelAbonnementPotentiel->setStatutPaiement($stripe_session->payment_status);
+        $nouvelAbonnementPotentiel->setDateDebutAbonnement(new DateTime());
+        $nouvelAbonnementPotentiel->setSousCompte($potentialClient);
+        
+        $session->set('abonnementPotentiel', $nouvelAbonnementPotentiel);
+       
+        //Création de l'entité user relatif au client
+        $userRelatedToPotentialClient = new User;
+        
+        //Password encrypting
+        $encryptedPassword = $passwordEncoder->encodePassword($userRelatedToPotentialClient, $potentialClient->getPassword());
+
+        $userRelatedToPotentialClient->setEmail($potentialClient->getEmail());
+        $userRelatedToPotentialClient->setPassword($encryptedPassword);
+        $userRelatedToPotentialClient->setDateCreationUtilisateur(new DateTime());
+        $userRelatedToPotentialClient->setActive(true);
+        $userRelatedToPotentialClient->setRoles(["ROLE_SOUSCOMPTE"]);
+        $clientsInfosFromLenbox = $apiService->postsousCompte($userConnectedVd, $potentialClient->getEmail(), $potentialClient->getTelMobile(), $potentialClient->getNom(), $potentialClient->getPrenom());
+        $sousCompteUid = $clientsInfosFromLenbox['response']['uid'];
+        
+        //$uniqId = md5(uniqid());
+
+        //Données client à enregistrer
+        $potentialClient->setUid($sousCompteUid);
+        $potentialClient->setPassword($encryptedPassword);
+        $potentialClient->setUser($userRelatedToPotentialClient);
+        $potentialClient->setAbonnement($nouvelAbonnementPotentiel);        
+        $potentialClient->setClient($this->getUser()->getClient());        
+        $potentialClient->setCreateAt(new DateTimeImmutable());        
+
+        $em->persist($potentialClient);
+        $em->flush();
+    
+        //Création de la facture potentielle relative à l'abonneement
+        $nouvelleFacturePotentielle = new Facture;
+
+        $statutFacture = $stripe_session->payment_status === "paid" ? true : false;
+ 
+        $nouvelleFacturePotentielle->setDateEmissionFacture(new DateTime());
+        $nouvelleFacturePotentielle->setFactureAcquitee($statutFacture);
+        $nouvelleFacturePotentielle->setMontantTtcFacture($stripe_session->amount_total/100);
+        $nouvelleFacturePotentielle->setAbonnement($nouvelAbonnementPotentiel);
+        $nouvelleFacturePotentielle->setPourcentageTva(20);
+ 
+        $session->set('facturePotentielle', $nouvelleFacturePotentielle);
+        $facturePotentielle = $session->get('facturePotentielle');
+
+        $em->persist($facturePotentielle);
+        $em->flush();
+
+        //Création du paiement relatif à l'abonnement (et donc à la facture)
+        $paiement = new Paiement();
+        $paiement->setMontantTtc($stripe_session->amount_total/100);
+        $paiement->setPaid(true);
+        $paiement->setPaidAt(new DateTimeImmutable());
+        $paiement->setFacture($nouvelleFacturePotentielle);
+
+        $nouvelleFacturePotentielle->addPaiement($paiement);
+
+        $em->persist($paiement);
+        $em->flush();
+
+        return $this->render('registration/successPayment.html.twig');
+    }
+
+    /**
+     * @Route("/sous-compte/registration/payment/failed", name="sous-compte_registration_payment_failed")
+     */
+    public function sousCompteRegistrationPaymentFailed():Response
+    {
+        //paymentFailure.html.twig
+        return $this->render('registration/paymentFailure.html.twig');
     }
 }

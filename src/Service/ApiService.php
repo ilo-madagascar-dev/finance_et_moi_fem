@@ -32,5 +32,29 @@ class ApiService
              ],
         ]);
      return $response->toArray();
+    }
+    
+    public function postsousCompte($vd,$email,$telMobile,$nom,$prenom): array
+    {
+        
+        $response = $this->clientapi->request(
+            'POST',
+            'https://app.finnocar.com/version-test/api/1.1/wf/getuser',[
+            'headers' => [
+                    'content-type' => 'application/json'    
+            ],
+            'json' => [
+                'authkey' => '1622543601638x611830994992322700',
+                'vd'=>$vd,
+                'email'=> $email,
+                'telMobile'=> $telMobile,
+                'nom'=> $nom,
+                'prenom'=>$prenom,
+                'admin'=> false,
+                'update'=>false
+             ],
+        ]);
+        
+        return $response->toArray();
     }  
 }
