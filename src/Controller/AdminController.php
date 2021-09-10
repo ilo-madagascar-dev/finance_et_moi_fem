@@ -141,7 +141,7 @@ class AdminController extends AbstractController
         }
     }
     /**
-     * @Route("/sajout", name="sajout")
+     * @Route("/ajouter-sous-compte", name="sajout")
      */
     public function pageAjout(ClientRepository $clientrepository,UserRepository $userRepository): Response
     {
@@ -159,7 +159,7 @@ class AdminController extends AbstractController
         }
     }
     /**
-     * @Route("/saccueil", name="saccueil")
+     * @Route("/sous-comptes", name="saccueil")
      */
     public function pageAccueil(ClientRepository $clientrepository,UserRepository $userRepository): Response
     {
@@ -177,7 +177,7 @@ class AdminController extends AbstractController
         }
     }
     /**
-     * @Route("/slistinfo", name="slistinfo")
+     * @Route("/sous-compte-info", name="slistinfo")
      */
     public function pageListInfo(ClientRepository $clientrepository,UserRepository $userRepository): Response
     {
@@ -195,7 +195,7 @@ class AdminController extends AbstractController
         }
     }
      /**
-     * @Route("/slist", name="slist")
+     * @Route("/sous-comptes-liste", name="slist")
      */
     public function pageList(ClientRepository $clientrepository,UserRepository $userRepository): Response
     {
