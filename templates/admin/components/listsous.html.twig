@@ -1,6 +1,6 @@
 {% extends 'mqbaka_home/index.html.twig' %}
 
-{% block title %}Tableau de bord - Admin
+{% block title %}Tableau de bord - Sous-comptes
 {% endblock %}
 
 {% block body %}
@@ -11,7 +11,61 @@
         {% include "admin/admin-header.html.twig" %}
         <div class="dash-container sidebared">
             {% include "admin/components/sidebar.html.twig" %}
-            {% include "admin/list.html.twig" %}
+
+            {# Needs some conditions here #}
+            {# if no elements on the list #}
+            <div class="none-is-here">
+                Vous n'avez pas encore de sous-comptes actifs.
+                <a href={{ path("sajout") }} class="create-sous">
+                    <img src={{ asset('images/icon/plus.svg') }} alt="">
+                    Créer un sous-compte
+                </a>
+            </div>
+            <style>
+                .none-is-here{
+                    margin: auto;
+                }
+                .create-sous{
+                    display: flex;
+                    gap: 1em;
+                    text-decoration: none;
+                    background: var(--blue-01);
+                    color: var(--white--ish-01);
+                    align-items: center;
+                    width: max-content;
+                    padding: 1em 2em;
+                    margin: auto;
+                    margin-top: auto;
+                    margin-top: 1.5em;
+                    border-radius: 4px;
+                    position: relative;
+                    z-index: 3;
+                    overflow: hidden;
+                }
+                .create-sous img{
+                    width: 2em;
+                }
+                .create-sous::after{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 0%;
+                    background: var(--dark-01);
+                    content: "";
+                    height: 100%;
+                    z-index: -1;
+                    transition: .4s;
+                }
+                .create-sous:hover::after{
+                    width: 100%;
+                    transition: .4s;
+                }
+            </style>
+
+            {# display the list if not empty #}
+            {# {% include "admin/list.html.twig" %} #}
+
+
         </div>
     </div>
     <div class="mobile-ham" onclick="toggleSideMobile()">

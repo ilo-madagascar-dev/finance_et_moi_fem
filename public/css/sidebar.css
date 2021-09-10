@@ -9,7 +9,7 @@
 .sidebarMenu{
     position: sticky;
     top: var(--header-height);
-    max-height: calc(100vh - var(--header-height));
+    height: calc(100vh - var(--header-height));
     overflow: hidden;
 }
 
@@ -59,6 +59,19 @@
 .hoverable-li-title{
     position: relative;
     z-index: 1;
+}
+
+.chev-down{
+    display: inline-block;
+    width: .55em;
+    height: .55em;
+    border: 3px solid var(--white--ish-01);
+    border-left: none;
+    border-top: none;
+    transform: scale(1.2, 1) rotate(45deg);
+    margin-left: .8em;
+    position: relative;
+    top: -4px;
 }
 
 @media (hover: hover){
