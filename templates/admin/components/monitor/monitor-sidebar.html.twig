@@ -1,0 +1,50 @@
+<link rel="stylesheet" href={{ asset("css/sidebar.css") }}>
+<div class="sidebarMenu">
+    <ul class="tablinks">
+        <li class="tablink">
+            <a href={{ path("moni-dash", id: id) }}>
+                <img src={{ asset('images/Icon-awesome-home.png') }} alt="">
+                Tableau de bord
+            </a>
+        </li>
+        <li class="tablink">
+            {# <a href=""> #}
+            <a href={{ path("moni-demfi", id: id) }} id='d'>
+                Demande de financement
+            </a>
+        </li>
+        <li class="tablink">
+            {# <a href=""> #}
+            <a href={{ path("moni-payementF", id: id) }} id='p'>
+                Paiement fractionné
+            </a>
+        </li>
+        <li class="tablink">
+            {# <a href=""> #}
+            <a href={{ path("moni-suivi", id: id) }} id='s'>
+                Suivi de dossiers
+            </a>
+        </li>
+        {# {% if role == "ROLE_CLIENT" %}
+        <li class="tablink">
+            <div class="hoverable-li">
+                <div class="hoverable-li-title">
+                    Sous-comptes <span class="chev-down"></span>
+                </div>
+                <div class="hoverable-li-content">
+                    {# <a href=""> #}
+                    {# <a href={{ path("slist") }}>
+                        <img src={{ asset('images/icon/list.svg') }} alt="">
+                        Gestion des sous-comptes
+                    </a> #}
+                    {# <a href=""> #}
+                    {# <a href={{ path("sajout") }}>
+                        <img src={{ asset('images/icon/plus.svg') }} alt="">
+                        Ajouter un nouveau
+                    </a>
+                </div>
+            </div>
+        </li> #}
+        {% endif %} #}
+    </ul>
+</div>

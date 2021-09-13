@@ -13,25 +13,8 @@
         <div class="dash-container sidebared">
             {% include "admin/components/sidebar.html.twig" %}
 
-            {# Needs some conditions here #}
-            {# if no elements on the list #}
-
-            {# <div class="none-is-here">
-                Vous n'avez pas encore de sous-comptes actifs.
-                <a href={{ path("sajout") }} class="create-sous">
-                    <img src={{ asset('images/icon/plus.svg') }} alt="">
-                    Créer un sous-compte
-                </a>
-            </div> #}
-            
-
-            {# display the list if not empty #}
-            {#% set name= "Rakoto" %#}
-            {#% set firstname= "firstRakoto" %#}
-            {#% set adress= "12 rere of rere 102" %#}
-            {#% include "admin/list.html.twig" with {name:name, firstname:firstname, adress:adress} only %#}
             {% if usersAccounts %}
-            <div>
+            <div class="sub-accounts">
                 <h2 class="tête" f><img class="image" src={{ asset('images/icon/list-d.svg') }}>Sous-comptes</h2>
                 
                 {% for userAccount in usersAccounts %}
@@ -61,15 +44,26 @@
                             {{ userAccount.addresseEntreprise }}
                             </div>
                         </div>
-                        <style>
-                            [f]{
-                                display: flex;
-                                gap: .7em;
-                            }
-                        </style>
                     </div>
                     
                 {% endfor %}
+                <style>
+                    [f]{
+                        display: flex;
+                        gap: .7em;
+                        position: sticky;
+                        top: var(--header-height);
+                        background: var(--white--ish-01);
+                        padding: 1em 3em;
+                        margin-left: 0;
+                        margin-right: 0;
+                    }
+                </style>
+
+                <a href={{ path("sajout") }} class="create-sous">
+                    <img src={{ asset('images/icon/plus.svg') }} alt="">
+                    Créer un sous-compte
+                </a>
 
             </div>
             {% else %}

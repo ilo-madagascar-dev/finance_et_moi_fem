@@ -22,6 +22,10 @@
     column-gap: 1em;
 }
 
+.sub-accounts{
+    padding-bottom: 2em;
+}
+
 .mobile-ham{
     position: fixed;
     left: 1em;

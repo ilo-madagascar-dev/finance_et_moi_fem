@@ -1,0 +1,70 @@
+{% extends 'mqbaka_home/index.html.twig' %}
+
+{% block title %}Tableau de bord - Admin
+{% endblock %}
+
+{% block body %}
+	{# <link href= {{ asset("/css/admin.css") }} rel="stylesheet"> #}
+	<link href= {{ asset("/css/admin-dash.css") }} rel="stylesheet">
+
+    <div class="dash-outliner">
+        {% include "admin/admin-header.html.twig" %}
+        <div class="dash-container sidebared">
+            {% include "admin/components/sidebar.html.twig" %}
+            <div id="Demande-financement" class="Tabcontent">
+                {# <iframe src="https://app.finnocar.com/iframe_form_cbnx?vd={{client.vd}}" frameborder="0" allowfullscreen="true" scrolling="yes" class="iF"></iframe> #}
+                {% if role == "ROLE_CLIENT" %}
+                    <iframe src="https://app.finnocar.com/iframe_form_cbnx?vd={{client.vd}}" width="300" height="600" frameborder="0" allowfullscreen="true" scrolling="no" style="width: 100%; height: 600px;"></iframe>
+                {% else %}
+                    <iframe src="https://app.finnocar.com/iframe_form_cbnx?vd={{Scompte}}" width="300" height="600" frameborder="0" allowfullscreen="true" scrolling="no" style="width: 100%; height: 600px;"></iframe>
+                {% endif %}
+                    
+                <style>
+                    .previous{
+                        position: absolute;
+                        font-size: 50px;
+                        color: #13141d;
+                        margin-left: 3vw;
+                        bottom: 50px;
+                        cursor: pointer;
+                    }
+                    .chev-left{
+                        width: 50px;
+                        height: 50px;
+                        border: 16px solid var(--blue-01);
+                        border-top: none;
+                        border-right: none;
+                        transform: rotate(45deg);
+                    }
+                </style>
+                <div style="position: relative">
+                    <div class="previous">
+                        <div class="chev-left"></div>
+                    <div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mobile-ham" onclick="toggleSideMobile()">
+        <div class="ham-line"></div>
+        <div class="ham-line"></div>
+        <div class="ham-line"></div>
+    </div>
+
+    <script title="for the sidebar to show and collapse">
+
+        function toggleSide(){
+            let side= document.querySelector(".dash-container");
+            side.classList.toggle('sidebared');
+        }
+
+        function toggleSideMobile(){
+            let side= document.querySelector('.sidebarMenu');
+            let ham= document.querySelector('.mobile-ham');
+
+            ham.classList.toggle('expanded');
+            side.classList.toggle('expanded');
+        }
+    </script>
+
+{% endblock %}

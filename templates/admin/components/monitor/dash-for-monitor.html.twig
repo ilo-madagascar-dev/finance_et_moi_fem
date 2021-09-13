@@ -1,0 +1,37 @@
+{% extends 'mqbaka_home/index.html.twig' %}
+
+{% block title %}Tableau de bord - Admin
+{% endblock %}
+
+{% block body %}
+	<link href= {{ asset("/css/admin-dash.css") }} rel="stylesheet">
+
+    <div class="dash-outliner">
+        {% include "admin/admin-header.html.twig" %}
+        <div class="dash-container sidebared">
+            {% include "admin/components/monitor/sidebar.html.twig" with { id: id } only %}
+            {% include "admin/components/monitor/monitor-frame.html.twig" with { id: id } only %}
+        </div>
+    </div>
+    <div class="mobile-ham" onclick="toggleSideMobile()">
+        <div class="ham-line"></div>
+        <div class="ham-line"></div>
+        <div class="ham-line"></div>
+    </div>
+    <script title="for the sidebar to show and collapse">
+
+        function toggleSide(){
+            let side= document.querySelector(".dash-container");
+            side.classList.toggle('sidebared');
+        }
+
+        function toggleSideMobile(){
+            let side= document.querySelector('.sidebarMenu');
+            let ham= document.querySelector('.mobile-ham');
+
+            ham.classList.toggle('expanded');
+            side.classList.toggle('expanded');
+        }
+    </script>
+
+{% endblock %}

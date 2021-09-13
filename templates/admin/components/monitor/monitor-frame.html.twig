@@ -1,0 +1,55 @@
+<div id="Tableau-de-bord" class="Tabcontent other">
+    <div class="content-inner">
+        <h2 class="content-title">Tableau de bord</h2>
+        <div class="boxes-iconifiers">
+            <div class="box-m">
+                <img src={{ asset('images/icon/folder.svg') }} alt="" onclick="demFi()">
+                Demande de finance
+            </div>
+            <div class="box-m">
+                <img src={{ asset('images/icon/card.svg') }} alt="" onclick="payFrac()">
+                Paiement fractionné
+            </div>
+            <div class="box-m">
+                <img src={{ asset('images/icon/file.svg') }} alt="" onclick="suiviDoss()">
+                Suivi des dossiers
+            </div>
+        </div>
+    </div>
+    
+    <style>
+        .previous{
+            position: absolute;
+            font-size: 50px;
+            color: #13141d;
+            margin-left: 3vw;
+            bottom: 50px;
+            cursor: pointer;
+        }
+        .chev-left{
+            width: 50px;
+            height: 50px;
+            border: 16px solid var(--blue-01);
+            border-top: none;
+            border-right: none;
+            transform: rotate(45deg);
+        }
+    </style>
+    <div style="position: relative">
+        <div class="previous">
+            <div class="chev-left"></div>
+        <div>
+    </div>
+    
+    <script title="for the boxes">
+        function demFi(){
+            document.querySelector('#d').click();
+        }
+        function payFrac(){
+            document.querySelector('#p').click();
+        }
+        function suiviDoss(){
+            document.querySelector('#s').click();
+        }
+    </script>
+</div>
