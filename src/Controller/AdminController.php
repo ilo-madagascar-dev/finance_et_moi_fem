@@ -100,20 +100,21 @@ class AdminController extends AbstractController
         if($this->getUser()){
             $connUser=$this->getUser()->getEmail();
             $role=$this->getUser()->getRoles()[0];
-            //dd($role);
-
+            $vdScompte='';
             if ($this->getUser()->getClient()) {
                 $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
             }
 
             if ($this->getUser()->getSousCompte()) {
                 $conClient=$sousCompteRepository->findOneBy(['email'=>$connUser]);
+                $vdScompte=$conClient->getClient()->getVd();
             }
-
+           
             $cle_groupe="1622543601638x611830994992322700";
             return $this->render('admin/components/admin-dashboard.html.twig', [
                 'controller_name' => 'AdminDash',
                 'client'=>$conClient,
+                'Scompte'=>$vdScompte,
                 'groupe'=>$cle_groupe,
                 'role'=>$role
             ]);
@@ -125,17 +126,25 @@ class AdminController extends AbstractController
     /**
      * @Route("/demande-financement", name="demfi")
      */
-    public function demFi(ClientRepository $clientrepository,UserRepository $userRepository): Response
+    public function demFi(ClientRepository $clientrepository,UserRepository $userRepository,SousCompteRepository $sousCompteRepository): Response
     {
         if($this->getUser()){
             $connUser=$this->getUser()->getEmail();
-            $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
-            $cle_groupe="1622543601638x611830994992322700";
             $role=$this->getUser()->getRoles()[0];
+            $vdScompte='';
+            if ($this->getUser()->getClient()) {
+                $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+            }
 
+            if ($this->getUser()->getSousCompte()) {
+                $conClient=$sousCompteRepository->findOneBy(['email'=>$connUser]);
+                $vdScompte=$conClient->getClient()->getVd();
+            }
+             $cle_groupe="1622543601638x611830994992322700";
             return $this->render('admin/components/admin-demande-fin.html.twig', [
                 'controller_name' => 'demFi',
                 'client'=>$conClient,
+                'Scompte'=>$vdScompte,
                 'groupe'=>$cle_groupe,
                 'role'=>$role
             ]);
@@ -147,17 +156,25 @@ class AdminController extends AbstractController
     /**
      * @Route("/suivi-dossier", name="suivi")
      */
-    public function suiDoss(ClientRepository $clientrepository,UserRepository $userRepository): Response
+    public function suiDoss(ClientRepository $clientrepository,UserRepository $userRepository,SousCompteRepository $sousCompteRepository): Response
     {
         if($this->getUser()){
             $connUser=$this->getUser()->getEmail();
-            $role = $this->getUser()->getRoles()[0];
-            $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
-            $cle_groupe="1622543601638x611830994992322700";
+            $role=$this->getUser()->getRoles()[0];
+            $vdScompte='';
+            if ($this->getUser()->getClient()) {
+                $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+            }
 
+            if ($this->getUser()->getSousCompte()) {
+                $conClient=$sousCompteRepository->findOneBy(['email'=>$connUser]);
+                $vdScompte=$conClient->getClient()->getVd();
+            }
+            $cle_groupe="1622543601638x611830994992322700";
             return $this->render('admin/components/admin-suivi-doss.html.twig', [
                 'controller_name' => 'suiDoss',
                 'client'=>$conClient,
+                'Scompte'=>$vdScompte,
                 'groupe'=>$cle_groupe,
                 'role'=>$role
             ]);
@@ -169,17 +186,26 @@ class AdminController extends AbstractController
     /**
      * @Route("/payement-fractionne", name="payementF")
      */
-    public function payFrac(ClientRepository $clientrepository,UserRepository $userRepository): Response
+    public function payFrac(ClientRepository $clientrepository,UserRepository $userRepository,SousCompteRepository $sousCompteRepository): Response
     {
         if($this->getUser()){
             $connUser=$this->getUser()->getEmail();
-            $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
-            $cle_groupe="1622543601638x611830994992322700";
             $role=$this->getUser()->getRoles()[0];
+            $vdScompte='';
+            if ($this->getUser()->getClient()) {
+                $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+            }
+
+            if ($this->getUser()->getSousCompte()) {
+                $conClient=$sousCompteRepository->findOneBy(['email'=>$connUser]);
+                $vdScompte=$conClient->getClient()->getVd();
+            }
+            $cle_groupe="1622543601638x611830994992322700";
 
             return $this->render('admin/components/admin-payement-frac.html.twig', [
                 'controller_name' => 'payFrac',
                 'client'=>$conClient,
+                'Scompte'=>$vdScompte,
                 'groupe'=>$cle_groupe,
                 'role'=>$role
             ]);
