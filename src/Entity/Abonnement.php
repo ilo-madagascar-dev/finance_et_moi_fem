@@ -61,9 +61,14 @@ class Abonnement
 
     /**
      * @ORM\OneToOne(targetEntity=Client::class, inversedBy="abonnement", cascade={"persist", "remove"}, fetch="EAGER")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $client;
+
+    /**
+     * @ORM\OneToOne(targetEntity=SousCompte::class, inversedBy="abonnement", cascade={"persist", "remove"})
+     */
+    private $sousCompte;
 
     public function __construct()
     {
@@ -197,6 +202,18 @@ class Abonnement
     public function setClient(Client $client): self
     {
         $this->client = $client;
+
+        return $this;
+    }
+
+    public function getSousCompte(): ?SousCompte
+    {
+        return $this->sousCompte;
+    }
+
+    public function setSousCompte(?SousCompte $sousCompte): self
+    {
+        $this->sousCompte = $sousCompte;
 
         return $this;
     }

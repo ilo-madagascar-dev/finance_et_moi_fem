@@ -99,9 +99,15 @@ class Client
      */
     private $abonnement;
 
+    /**
+     * @ORM\OneToMany(targetEntity=SousCompte::class, mappedBy="client", orphanRemoval=true)
+     */
+    private $sousComptes;
+
     public function __construct()
     {
         $this->prets = new ArrayCollection();
+        $this->sousComptes = new ArrayCollection();
     }
     
 
@@ -311,6 +317,36 @@ class Client
         }
 
         $this->abonnement = $abonnement;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SousCompte[]
+     */
+    public function getSousComptes(): Collection
+    {
+        return $this->sousComptes;
+    }
+
+    public function addSousCompte(SousCompte $sousCompte): self
+    {
+        if (!$this->sousComptes->contains($sousCompte)) {
+            $this->sousComptes[] = $sousCompte;
+            $sousCompte->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSousCompte(SousCompte $sousCompte): self
+    {
+        if ($this->sousComptes->removeElement($sousCompte)) {
+            // set the owning side to null (unless already changed)
+            if ($sousCompte->getClient() === $this) {
+                $sousCompte->setClient(null);
+            }
+        }
 
         return $this;
     }
