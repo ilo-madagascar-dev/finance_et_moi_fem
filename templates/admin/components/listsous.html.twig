@@ -14,16 +14,19 @@
 
             {# Needs some conditions here #}
             {# if no elements on the list #}
-            <div class="none-is-here">
+            {# <div class="none-is-here">
                 Vous n'avez pas encore de sous-comptes actifs.
                 <a href={{ path("sajout") }} class="create-sous">
                     <img src={{ asset('images/icon/plus.svg') }} alt="">
                     Créer un sous-compte
                 </a>
-            </div>
+            </div> #}
 
             {# display the list if not empty #}
-            {# {% include "admin/list.html.twig" %} #}
+            {% set name= "Rakoto" %}
+            {% set firstname= "firstRakoto" %}
+            {% set adress= "12 rere of rere 102" %}
+            {% include "admin/list.html.twig" with {name:name, firstname:firstname, adress:adress} only %}
 
 
         </div>

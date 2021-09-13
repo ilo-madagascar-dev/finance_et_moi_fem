@@ -145,6 +145,10 @@
     padding: 2em;
 }
 
+.content-title{
+    color: var(--dark-01);
+}
+
 @media only screen and (max-width: 450px){
     .none-is-here{
         font-size: .8em;

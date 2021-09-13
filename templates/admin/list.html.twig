@@ -6,27 +6,29 @@
 <div>
  	<h2 class="tête" f><img class="image" src={{ asset('images/icon/list-d.svg') }}>Sous-comptes</h2>
 
-
 	<div class="bordur">
 		<div class="grid">
 			<div>
-				<p class="paragraphe">Nom :</p>
+				<p class="paragraphe">Nom : </p>
 			</div>
 			<div>
-			</div>
-		</div>
-		<div class="grid">
-			<div>
-				<p class="paragraphe">Prénom :</p>
-			</div>
-			<div>
+			{{ name }} 
 			</div>
 		</div>
 		<div class="grid">
 			<div>
-				<p class="paragraphe">Adresse :</p>
+				<p class="paragraphe">Prénom : </p>
 			</div>
 			<div>
+			{{ firstname }}
+			</div>
+		</div>
+		<div class="grid">
+			<div>
+				<p class="paragraphe">Adresse : </p>
+			</div>
+			<div>
+			{{ adress }}
 			</div>
 		</div>
 		<style>
