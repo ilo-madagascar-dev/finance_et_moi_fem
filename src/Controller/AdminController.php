@@ -266,6 +266,11 @@ class AdminController extends AbstractController
         if($this->getUser()){
             $connUser=$this->getUser()->getEmail();
             $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+
+            $userAccounts = $this->getUser()->getClient()->getSouscomptes()->getValues();
+
+            //dd($usersAccounts);
+
             $cle_groupe="1622543601638x611830994992322700";
             $role = $this->getUser()->getRoles()[0];
 
@@ -273,7 +278,8 @@ class AdminController extends AbstractController
                 'controller_name' => 'Slist',
                 'client'=>$conClient,
                 'groupe'=>$cle_groupe,
-                'role'=>$role
+                'role'=>$role,
+                'usersAccounts'=>$userAccounts
             ]);
         } else {
             return $this->redirectToRoute('app_login');

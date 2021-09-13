@@ -11,14 +11,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class TrialController {
+class TrialController extends AbstractController {
     /**
      * @Route("/client-trial/get", name="client_getter_trial")
      */
     public function clientGetter(PaiementRepository $paiementRepository, ClientRepository $clientRepository, UserRepository $userRepository, AbonnementRepository $abonnementRepository, FactureRepository $factureRepository):Response
     {
-        /* $user = $userRepository->find(1);
-        dd($user); */
+        //$user = $userRepository->find(1);
+        //dd($user); */
+
+        $userClients = $this->getUser()->getClient()->getSouscomptes()->getValues();
+        //dd($userClients);
 
         //$clients = $clientRepository->find(2);
         //dd($clients);
