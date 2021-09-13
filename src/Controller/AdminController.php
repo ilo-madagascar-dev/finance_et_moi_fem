@@ -15,6 +15,7 @@ use App\Form\SousCompteType;
 use Stripe\Checkout\Session;
 use App\Repository\UserRepository;
 use App\Repository\ClientRepository;
+use App\Repository\SousCompteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -84,16 +85,27 @@ class AdminController extends AbstractController
     /**
      * @Route("/dashboard", name="dash")
      */
-    public function adminDash(ClientRepository $clientrepository,UserRepository $userRepository): Response
+    public function adminDash(ClientRepository $clientrepository, SousCompteRepository $sousCompteRepository, UserRepository $userRepository): Response
     {
         if($this->getUser()){
             $connUser=$this->getUser()->getEmail();
-            $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+            $role=$this->getUser()->getRoles()[0];
+            //dd($role);
+
+            if ($this->getUser()->getClient()) {
+                $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+            }
+
+            if ($this->getUser()->getSousCompte()) {
+                $conClient=$sousCompteRepository->findOneBy(['email'=>$connUser]);
+            }
+
             $cle_groupe="1622543601638x611830994992322700";
             return $this->render('admin/components/admin-dashboard.html.twig', [
                 'controller_name' => 'AdminDash',
                 'client'=>$conClient,
-                'groupe'=>$cle_groupe
+                'groupe'=>$cle_groupe,
+                'role'=>$role
             ]);
         } else {
             return $this->redirectToRoute('app_login');
