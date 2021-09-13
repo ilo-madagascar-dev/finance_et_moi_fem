@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Payment effectué{% endblock %}
+
+{% block stylesheets %}
+    {# <link href="stylesheets/fonts/stylesheet-01.css" rel="text/css"/> #}
+    <link href={{ asset('css/stylesheet.css') }} rel="stylesheet">
+    <link href={{ asset('css/colors.css') }} rel="stylesheet">
+    <link href={{ asset('css/full-height.css') }} rel="stylesheet">
+    {% block addstyle %}
+    {% endblock %}
+{% endblock %}
+
+{% block body %}
+    <section class="all-the">
+        <h1 class="sec-step-title">Votre payment a été effectué avec succès !</h1>
+        <p>
+            Vous pouvez maintenant revenir au tableau de bord.
+        </p>
+        <form action="{{ path('app_login') }}" method="POST" class="finale-form">
+            <button type="submit" class="">Se connecter</button>
+        </form>
+    </section>
+    <div class="floatters">
+        <div class="floatter"></div>
+        <div class="floatter"></div>
+        <div class="floatter"></div>
+        <div class="floatter"></div>
+    </div>
+    <div class="floatters">
+        <div class="floatter"></div>
+        <div class="floatter"></div>
+        <div class="floatter"></div>
+        <div class="floatter"></div>
+    </div>
+{% endblock %}
