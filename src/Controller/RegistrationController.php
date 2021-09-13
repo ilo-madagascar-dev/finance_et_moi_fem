@@ -177,7 +177,15 @@ class RegistrationController extends AbstractController
           []
         );
 
+        if (!$stripe_session) {
+            return $this->redirectToRoute('registration');
+        }
+
+        //dd($stripe_session);
+
+        //Le client potentiel
         $potentialClient = $session->get('possibleNewUser');
+       
         //Création d'un nouvel abonnement
         $nouvelAbonnementPotentiel = new Abonnement();
         

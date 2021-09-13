@@ -6,6 +6,7 @@
 {% block body %}
 	{# <link href= {{ asset("/css/admin.css") }} rel="stylesheet"> #}
 	<link href= {{ asset("/css/admin-dash.css") }} rel="stylesheet">
+    <link href={{ asset('css/list.css') }} rel="stylesheet">
 
     <div class="dash-outliner">
         {% include "admin/admin-header.html.twig" %}
@@ -25,11 +26,61 @@
             
 
             {# display the list if not empty #}
-            {% set name= "Rakoto" %}
-            {% set firstname= "firstRakoto" %}
-            {% set adress= "12 rere of rere 102" %}
-            {% include "admin/list.html.twig" with {name:name, firstname:firstname, adress:adress} only %}
+            {#% set name= "Rakoto" %#}
+            {#% set firstname= "firstRakoto" %#}
+            {#% set adress= "12 rere of rere 102" %#}
+            {#% include "admin/list.html.twig" with {name:name, firstname:firstname, adress:adress} only %#}
+            {% if usersAccounts %}
+            <div>
+                <h2 class="tête" f><img class="image" src={{ asset('images/icon/list-d.svg') }}>Sous-comptes</h2>
+                
+                {% for userAccount in usersAccounts %}
+                    
+                    <div class="bordur">
+                        <div class="grid">
+                            <div>
+                                <p class="paragraphe">Nom : </p>
+                            </div>
+                            <div>
+                            {{ userAccount.nom }} 
+                            </div>
+                        </div>
+                        <div class="grid">
+                            <div>
+                                <p class="paragraphe">Prénom : </p>
+                            </div>
+                            <div>
+                            {{ userAccount.prenom }}
+                            </div>
+                        </div>
+                        <div class="grid">
+                            <div>
+                                <p class="paragraphe">Adresse : </p>
+                            </div>
+                            <div>
+                            {{ userAccount.addresseEntreprise }}
+                            </div>
+                        </div>
+                        <style>
+                            [f]{
+                                display: flex;
+                                gap: .7em;
+                            }
+                        </style>
+                    </div>
+                    
+                {% endfor %}
 
+            </div>
+            {% else %}
+            <div class="none-is-here">
+                Vous n'avez pas encore de sous-comptes actifs.
+                <a href={{ path("sajout") }} class="create-sous">
+                    <img src={{ asset('images/icon/plus.svg') }} alt="">
+                    Créer un sous-compte
+                </a>
+            </div>
+            {% endif %}
 
         </div>
     </div>

@@ -33,9 +33,12 @@ class AdminController extends AbstractController
     public function index(ClientRepository $clientrepository,$id): Response
     {
         $conClient=$clientrepository->find($id);
+        $role=$this->getUser()->getRoles()[0];
+
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'AdminController',
-            'client'=>$conClient
+            'client'=>$conClient,
+            'role'=>$role
         ]);
     }
 
@@ -45,9 +48,11 @@ class AdminController extends AbstractController
     public function indeheader(ClientRepository $clientrepository,$id): Response
     {
         $conClient=$clientrepository->find($id);
+        $role=$this->getUser()->getRoles()[0];
         return $this->render('admin/admin-header.html.twig', [
             'controller_name' => 'AdminHeaderController',
-            'client'=>$conClient
+            'client'=>$conClient,
+            'role'=>$role
         ]);
     }
 
@@ -57,9 +62,11 @@ class AdminController extends AbstractController
     public function frame(ClientRepository $clientrepository,$id): Response
     {
         $conClient=$clientrepository->find($id);
+        $role=$this->getUser()->getRoles()[0];
         return $this->render('admin/dashboard-frame.html.twig', [
             'controller_name' => 'FrameController',
-            'client'=>$conClient
+            'client'=>$conClient,
+            'role'=>$role,
         ]);
     }
 
@@ -72,10 +79,13 @@ class AdminController extends AbstractController
             $connUser=$this->getUser()->getEmail();
             $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
             $cle_groupe="1622543601638x611830994992322700";
+            $role=$this->getUser()->getRoles()[0];
+
             return $this->render('admin/index.html.twig', [
                 'controller_name' => 'AdminHeaderController',
                 'client'=>$conClient,
-                'groupe'=>$cle_groupe
+                'groupe'=>$cle_groupe,
+                'role'=>$role
             ]);
         } else {
             return $this->redirectToRoute('app_login');
@@ -90,20 +100,21 @@ class AdminController extends AbstractController
         if($this->getUser()){
             $connUser=$this->getUser()->getEmail();
             $role=$this->getUser()->getRoles()[0];
-            //dd($role);
-
+            $vdScompte='';
             if ($this->getUser()->getClient()) {
                 $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
             }
 
             if ($this->getUser()->getSousCompte()) {
                 $conClient=$sousCompteRepository->findOneBy(['email'=>$connUser]);
+                $vdScompte=$conClient->getClient()->getVd();
             }
-
+           
             $cle_groupe="1622543601638x611830994992322700";
             return $this->render('admin/components/admin-dashboard.html.twig', [
                 'controller_name' => 'AdminDash',
                 'client'=>$conClient,
+                'Scompte'=>$vdScompte,
                 'groupe'=>$cle_groupe,
                 'role'=>$role
             ]);
@@ -115,16 +126,27 @@ class AdminController extends AbstractController
     /**
      * @Route("/demande-financement", name="demfi")
      */
-    public function demFi(ClientRepository $clientrepository,UserRepository $userRepository): Response
+    public function demFi(ClientRepository $clientrepository,UserRepository $userRepository,SousCompteRepository $sousCompteRepository): Response
     {
         if($this->getUser()){
             $connUser=$this->getUser()->getEmail();
-            $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
-            $cle_groupe="1622543601638x611830994992322700";
+            $role=$this->getUser()->getRoles()[0];
+            $vdScompte='';
+            if ($this->getUser()->getClient()) {
+                $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+            }
+
+            if ($this->getUser()->getSousCompte()) {
+                $conClient=$sousCompteRepository->findOneBy(['email'=>$connUser]);
+                $vdScompte=$conClient->getClient()->getVd();
+            }
+             $cle_groupe="1622543601638x611830994992322700";
             return $this->render('admin/components/admin-demande-fin.html.twig', [
                 'controller_name' => 'demFi',
                 'client'=>$conClient,
-                'groupe'=>$cle_groupe
+                'Scompte'=>$vdScompte,
+                'groupe'=>$cle_groupe,
+                'role'=>$role
             ]);
         } else {
             return $this->redirectToRoute('app_login');
@@ -134,16 +156,27 @@ class AdminController extends AbstractController
     /**
      * @Route("/suivi-dossier", name="suivi")
      */
-    public function suiDoss(ClientRepository $clientrepository,UserRepository $userRepository): Response
+    public function suiDoss(ClientRepository $clientrepository,UserRepository $userRepository,SousCompteRepository $sousCompteRepository): Response
     {
         if($this->getUser()){
             $connUser=$this->getUser()->getEmail();
-            $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+            $role=$this->getUser()->getRoles()[0];
+            $vdScompte='';
+            if ($this->getUser()->getClient()) {
+                $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+            }
+
+            if ($this->getUser()->getSousCompte()) {
+                $conClient=$sousCompteRepository->findOneBy(['email'=>$connUser]);
+                $vdScompte=$conClient->getClient()->getVd();
+            }
             $cle_groupe="1622543601638x611830994992322700";
             return $this->render('admin/components/admin-suivi-doss.html.twig', [
                 'controller_name' => 'suiDoss',
                 'client'=>$conClient,
-                'groupe'=>$cle_groupe
+                'Scompte'=>$vdScompte,
+                'groupe'=>$cle_groupe,
+                'role'=>$role
             ]);
         } else {
             return $this->redirectToRoute('app_login');
@@ -153,16 +186,28 @@ class AdminController extends AbstractController
     /**
      * @Route("/payement-fractionne", name="payementF")
      */
-    public function payFrac(ClientRepository $clientrepository,UserRepository $userRepository): Response
+    public function payFrac(ClientRepository $clientrepository,UserRepository $userRepository,SousCompteRepository $sousCompteRepository): Response
     {
         if($this->getUser()){
             $connUser=$this->getUser()->getEmail();
-            $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+            $role=$this->getUser()->getRoles()[0];
+            $vdScompte='';
+            if ($this->getUser()->getClient()) {
+                $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+            }
+
+            if ($this->getUser()->getSousCompte()) {
+                $conClient=$sousCompteRepository->findOneBy(['email'=>$connUser]);
+                $vdScompte=$conClient->getClient()->getVd();
+            }
             $cle_groupe="1622543601638x611830994992322700";
+
             return $this->render('admin/components/admin-payement-frac.html.twig', [
                 'controller_name' => 'payFrac',
                 'client'=>$conClient,
-                'groupe'=>$cle_groupe
+                'Scompte'=>$vdScompte,
+                'groupe'=>$cle_groupe,
+                'role'=>$role
             ]);
         } else {
             return $this->redirectToRoute('app_login');
@@ -178,10 +223,13 @@ class AdminController extends AbstractController
             $connUser=$this->getUser()->getEmail();
             $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
             $cle_groupe="1622543601638x611830994992322700";
+            $role=$this->getUser()->getRoles()[0];
+
             return $this->render('admin/components/accueilsous.html.twig', [
                 'controller_name' => 'Saccueil',
                 'client'=>$conClient,
-                'groupe'=>$cle_groupe
+                'groupe'=>$cle_groupe,
+                'role'=>$role
             ]);
         } else {
             return $this->redirectToRoute('app_login');
@@ -197,10 +245,13 @@ class AdminController extends AbstractController
             $connUser=$this->getUser()->getEmail();
             $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
             $cle_groupe="1622543601638x611830994992322700";
+            $role=$this->getUser()->getRoles()[0];
+            
             return $this->render('admin/components/listInfosous.html.twig', [
                 'controller_name' => 'SlistInfo',
                 'client'=>$conClient,
-                'groupe'=>$cle_groupe
+                'groupe'=>$cle_groupe,
+                'role'=>$role
             ]);
         } else {
             return $this->redirectToRoute('app_login');
@@ -215,11 +266,20 @@ class AdminController extends AbstractController
         if($this->getUser()){
             $connUser=$this->getUser()->getEmail();
             $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+
+            $userAccounts = $this->getUser()->getClient()->getSouscomptes()->getValues();
+
+            //dd($usersAccounts);
+
             $cle_groupe="1622543601638x611830994992322700";
+            $role = $this->getUser()->getRoles()[0];
+
             return $this->render('admin/components/listsous.html.twig', [
                 'controller_name' => 'Slist',
                 'client'=>$conClient,
-                'groupe'=>$cle_groupe
+                'groupe'=>$cle_groupe,
+                'role'=>$role,
+                'usersAccounts'=>$userAccounts
             ]);
         } else {
             return $this->redirectToRoute('app_login');
@@ -235,6 +295,8 @@ class AdminController extends AbstractController
             $connUser=$this->getUser()->getEmail();
             
             $userVd = $this->getUser()->getClient()->getVd();
+
+            $role = $this->getUser()->getRoles()[0];
 
             $eventuallyNewSousCompte = new SousCompte;
 
@@ -282,7 +344,8 @@ class AdminController extends AbstractController
                 'client'=>$conClient,
                 'groupe'=>$cle_groupe,
                 'userVd'=>$userVd,
-                'form'=>$form->createView()
+                'form'=>$form->createView(),
+                'role'=>$role
             ]);
         } else {
             return $this->redirectToRoute('app_login');
@@ -336,9 +399,9 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
         
-        if ($session->get('price_id')) {
+        /* if ($session->get('price_id')) {
            $priceId = $session->get('price_id');
-        }
+        } */
 
         /* $priceArray = [
             'price_1JWc1BBW8SyIFHAgvuKoItbD',
@@ -469,7 +532,7 @@ class AdminController extends AbstractController
         $em->persist($paiement);
         $em->flush();
 
-        return $this->render('registration/successPayment.html.twig');
+        return $this->render('sous-comptes/souscompte_success_payment.html.twig');
     }
 
     /**
