@@ -25,6 +25,7 @@
                 Suivi de dossiers
             </a>
         </li>
+        {% if role == "ROLE_CLIENT" %}
         <li class="tablink">
             <div class="hoverable-li">
                 <div class="hoverable-li-title">
@@ -44,5 +45,6 @@
                 </div>
             </div>
         </li>
+        {% endif %}
     </ul>
 </div>
