@@ -285,6 +285,98 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
     }
+    /**
+     * @Route("/sous-compte-affiche/{id}", name="saffiche")
+     */
+    public function affiche(ClientRepository $clientrepository,UserRepository $userRepository,$id,SousCompteRepository $sousCompteRepository): Response
+    {
+        if($this->getUser()){
+            $connUser=$this->getUser()->getEmail();
+            $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+            $souCompte=$sousCompteRepository->findOneBy(['id'=>$id,'client'=>$conClient]);
+            $cle_groupe="1622543601638x611830994992322700";
+            $role = $this->getUser()->getRoles()[0];
+           // dd($souCompte);
+            return $this->render('admin/components/monitor/dash-for-monitor.html.twig', [
+                'controller_name' => 'Slist',
+                'client'=>$conClient,
+                'Scompte'=>$souCompte,
+                'groupe'=>$cle_groupe,
+                'role'=>$role
+            ]);
+        } else {
+            return $this->redirectToRoute('app_login');
+        }
+    }
+    /**
+     * @Route("/sous-compte-affiche/{id}", name="safficheDf")
+     */
+    public function afficheDf(ClientRepository $clientrepository,UserRepository $userRepository,$id,SousCompteRepository $sousCompteRepository): Response
+    {
+        if($this->getUser()){
+            $connUser=$this->getUser()->getEmail();
+            $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+            $souCompte=$sousCompteRepository->find($id);
+            $cle_groupe="1622543601638x611830994992322700";
+            $role = $this->getUser()->getRoles()[0];
+           // dd($souCompte);
+            return $this->render('admin/components/monitor/dash-for-monitor.html.twig', [
+                'controller_name' => 'Slist',
+                'client'=>$conClient,
+                'Scompte'=>$souCompte,
+                'groupe'=>$cle_groupe,
+                'role'=>$role
+            ]);
+        } else {
+            return $this->redirectToRoute('app_login');
+        }
+    }
+    /**
+     * @Route("/sous-compte-affiche/{id}", name="saffichePf")
+     */
+    public function affichePf(ClientRepository $clientrepository,UserRepository $userRepository,$id,SousCompteRepository $sousCompteRepository): Response
+    {
+        if($this->getUser()){
+            $connUser=$this->getUser()->getEmail();
+            $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+            $souCompte=$sousCompteRepository->find($id);
+            $cle_groupe="1622543601638x611830994992322700";
+            $role = $this->getUser()->getRoles()[0];
+           // dd($souCompte);
+            return $this->render('admin/components/monitor/dash-for-monitor.html.twig', [
+                'controller_name' => 'Slist',
+                'client'=>$conClient,
+                'Scompte'=>$souCompte,
+                'groupe'=>$cle_groupe,
+                'role'=>$role
+            ]);
+        } else {
+            return $this->redirectToRoute('app_login');
+        }
+    }
+    /**
+     * @Route("/sous-compte-affiche/{id}", name="safficheSd")
+     */
+    public function afficheSd(ClientRepository $clientrepository,UserRepository $userRepository,$id,SousCompteRepository $sousCompteRepository): Response
+    {
+        if($this->getUser()){
+            $connUser=$this->getUser()->getEmail();
+            $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+            $souCompte=$sousCompteRepository->find($id);
+            $cle_groupe="1622543601638x611830994992322700";
+            $role = $this->getUser()->getRoles()[0];
+           // dd($souCompte);
+            return $this->render('admin/components/monitor/dash-for-monitor.html.twig', [
+                'controller_name' => 'Slist',
+                'client'=>$conClient,
+                'Scompte'=>$souCompte,
+                'groupe'=>$cle_groupe,
+                'role'=>$role
+            ]);
+        } else {
+            return $this->redirectToRoute('app_login');
+        }
+    }
 
     /**
      * @Route("/ajouter-sous-compte", name="sajout")

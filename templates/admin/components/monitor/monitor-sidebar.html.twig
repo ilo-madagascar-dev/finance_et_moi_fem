@@ -2,26 +2,26 @@
 <div class="sidebarMenu">
     <ul class="tablinks">
         <li class="tablink">
-            <a href={{ path("moni-dash", id: id) }}>
+            <a href={{ path("saffiche", {id: id}) }}>
                 <img src={{ asset('images/Icon-awesome-home.png') }} alt="">
                 Tableau de bord
             </a>
         </li>
         <li class="tablink">
             {# <a href=""> #}
-            <a href={{ path("moni-demfi", id: id) }} id='d'>
+            <a href={{ path("safficheDf", {id: id}) }} id='d'> 
                 Demande de financement
             </a>
         </li>
         <li class="tablink">
             {# <a href=""> #}
-            <a href={{ path("moni-payementF", id: id) }} id='p'>
+            <a href={{ path("saffichePf", {id: id}) }} id='p'>
                 Paiement fractionné
             </a>
         </li>
         <li class="tablink">
             {# <a href=""> #}
-            <a href={{ path("moni-suivi", id: id) }} id='s'>
+            <a href={{ path("safficheSd", {id: id}) }} id='s'>
                 Suivi de dossiers
             </a>
         </li>
@@ -44,7 +44,7 @@
                     </a>
                 </div>
             </div>
-        </li> #}
+        </li> 
         {% endif %} #}
     </ul>
 </div>

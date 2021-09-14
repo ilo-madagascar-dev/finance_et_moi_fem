@@ -6,10 +6,13 @@
 {% block body %}
 	<link href= {{ asset("/css/admin-dash.css") }} rel="stylesheet">
 
+   
+ {% set id= Scompte.id %}
     <div class="dash-outliner">
         {% include "admin/admin-header.html.twig" %}
         <div class="dash-container sidebared">
-            {% include "admin/components/monitor/sidebar.html.twig" with { id: id } only %}
+        
+            {% include "admin/components/monitor/monitor-sidebar.html.twig" with { id: id } only %}
             {% include "admin/components/monitor/monitor-frame.html.twig" with { id: id } only %}
         </div>
     </div>
