@@ -6,10 +6,13 @@ use App\Repository\ClientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ClientRepository::class)
+ * @Vich\Uploadable
  */
 class Client
 {
@@ -103,6 +106,28 @@ class Client
      * @ORM\OneToMany(targetEntity=SousCompte::class, mappedBy="client", orphanRemoval=true)
      */
     private $sousComptes;
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     * 
+     * @Vich\UploadableField(mapping="identiy_proof", fileNameProperty="identityProof")
+     * 
+     */
+    private $identityProofFile;
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @var string|null
+     */
+    private $identityProof;
+
+    /**
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
+     *
+     * @var \DateTimeInterface|null
+     */
+    private $updatedAt;
 
     public function __construct()
     {
@@ -350,4 +375,53 @@ class Client
 
         return $this;
     }
+
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $identityProofFile
+     */
+    public function setIdentityProofFile($identityProofFile = null): Client
+    {
+        $this->identityProofFile = $identityProofFile;
+
+        if (null !== $identityProofFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+        return $this;
+    }
+
+    public function getIdentityProofFile()
+    {
+        return $this->identityProofFile;
+    }
+
+    public function setIdentityProof(?string $identityProof): Client
+    {
+        $this->identityProof = $identityProof;
+        return $this;
+    }
+
+    public function getIdentityProof(): ?string
+    {
+        return $this->identityProof;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
+    
 }

@@ -54,6 +54,7 @@ class RegistrationController extends AbstractController
              */
             if ($request->request->get('client')['type_abonnement']) {
                 $priceId = $request->request->get('client')['type_abonnement'];
+                
                 $session->set('price_id', $priceId);
             }
             
@@ -67,6 +68,18 @@ class RegistrationController extends AbstractController
 
                 return $this->redirectToRoute('registration');
             }
+
+            //dd(__DIR__);
+            $extension = explode('.', $newClient->getIdentityProofFile()->getClientOriginalName())[1];
+            $filename = md5(uniqid()).'_'.md5(uniqid()).'_'.md5(uniqid()).'.'.$extension;
+            $newClient->getIdentityProofFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/identityProof', $filename);
+            $newClient->setIdentityProofFile(null);
+            $newClient->setIdentityProof($filename);
+            //dd($newClient);
+            //$newClient->setIdentityProof(null);
+            
+            //dd($newClient->getIdentityProofFile());
+            //dd(base64_decode($encodedFile));
 
             $session->set('possibleNewUser', $newClient);
 

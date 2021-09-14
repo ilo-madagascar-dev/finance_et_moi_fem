@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Client;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -44,6 +45,13 @@ class ClientType extends AbstractType
             ])
             ->add('nomEntreprise', TextType::class, [
                 'label' => 'nom de votre entreprise',
+                'attr' => array(
+                    'placeholder' => 'Nom de votre entreprise'
+                )
+            ])
+            ->add('identityProofFile', FileType::class, [
+                'label' => 'Votre pièce d\'identité',
+                'required' => false,
                 'attr' => array(
                     'placeholder' => 'Nom de votre entreprise'
                 )
