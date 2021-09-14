@@ -16,16 +16,18 @@
             {% if usersAccounts %}
             <div class="sub-accounts">
                 <h2 class="tête" f><img class="image" src={{ asset('images/icon/list-d.svg') }}>Sous-comptes</h2>
+
+                {% set i=0 %}
                 
                 {% for userAccount in usersAccounts %}
                     
-                    <div class="bordur">
+                    <div class="bordur" onclick="move(event);" id={{ "b-" ~ i }}>
                         <div class="grid">
                             <div>
                                 <p class="paragraphe">Nom : </p>
                             </div>
                             <div>
-                            {{ userAccount.nom }} 
+                            {{ userAccount.nom }}
                             </div>
                         </div>
                         <div class="grid">
@@ -44,7 +46,9 @@
                             {{ userAccount.addresseEntreprise }}
                             </div>
                         </div>
+                        <a href={{ path("saffichePf", {id: userAccount.id}) }} class="invisible linktoIt" id={{ "l-" ~ i}}></a>
                     </div>
+                    {% set i= i+1 %}
                     
                 {% endfor %}
                 <style>
@@ -96,6 +100,13 @@
 
             ham.classList.toggle('expanded');
             side.classList.toggle('expanded');
+        }
+    </script>
+    <script title="for the clickable bunches">
+        function move(event) {
+            let the_id= event.target.getAttribute("id").slice(2);
+            let the_link= document.querySelector(".linktoIt#l-" + the_id);
+            the_link.click();
         }
     </script>
 
