@@ -27,7 +27,7 @@
         
         {#% Flash message %#}
         {% for message in app.flashes('danger') %}
-            <div class="flash-notice">
+            <div class="alert alert-danger">
                 {{ message }}
             </div>
         {% endfor %}
@@ -86,12 +86,19 @@
                 </div>
                 <div class="line" style="text-align:center;">
                     <!-- div class="line" -->
-                        {{ form_row(form.identityProofFile) }}
                     <!-- /div -->
+                    <div class="fileDiv">
+                        <!-- label for="custom-identityProofFilename" id="custom-identityProofFilename-label"></label -->
+                        <button type="button" id="custom-identityProofFile">Pièce d'identité</button>
+                        <span id="custom-identityProofFilename">Aucun fichier choisi</span>
+                        {{ form_widget(form.identityProofFile) }}
+                        <div id="identityProofInfos"></div>
+                    </div>
                 </div>
-                <button type="submit">Inscription</button>
+                <button type="submit" id="registrationSubmit">Inscription</button>
         </div>
         {{ form_end(form) }}
+
     </div>
 </div>
 
@@ -112,10 +119,54 @@
                 }
             }
         });
-        
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded',() => {
+            const priceIdElement = document.querySelector('.js-price-id');
+            const priceId = priceIdElement.dataset.priceId;
+            const realFileBtn = document.querySelector('#client_identityProofFile');
+            const customBtn = document.querySelector('#custom-identityProofFile');
+            const identityProofFilename = document.querySelector('#custom-identityProofFilename');
+            const client_type_abonnement = document.querySelector('#client_type_abonnement');
+            
+            console.log(priceId);
 
-        /* for (let index = 0; index < inputList.length; index++) {
-            console.log(inputList[index]);   
-        } */
+            //Affichage des champs pièces jointes en fonction de l'abonnement choisi auparavant    
+            if (priceId == 'price_1JT0YJBW8SyIFHAgmEuizs6Z' || priceId == 'price_1JWc3mBW8SyIFHAg2E4YGU4c') {
+                document.querySelector('.fileDiv').style.display = 'inline';
+                //client_identityProofFile.required = true;
+            } else if(priceId == 'price_1JWc1BBW8SyIFHAgvuKoItbD' || priceId == 'price_1JWc1oBW8SyIFHAgGnAmvtyw') {
+                document.querySelector('.fileDiv').style.display = 'none';
+                //client_identityProofFile.required = false;
+            } else {
+                document.querySelector('.fileDiv').style.display = 'none';
+                //client_identityProofFile.required = false;
+            }
+
+            //"Mise en forme du champ input file. "   
+            customBtn.addEventListener('click', () => {
+                realFileBtn.click();
+            });
+
+            realFileBtn.addEventListener('change', () => {
+                if (realFileBtn.value) {
+                    identityProofFilename.innerHTML = realFileBtn.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+                } else {
+                    identityProofFilename.innerHTML = 'Aucun fichier choisi';
+                }
+            })
+            
+            //Affichage des champs pièces jointes en fonction de la valeur du select choisie sur la page    
+            client_type_abonnement.addEventListener('change', () => {
+                if(client_type_abonnement.value == 'price_1JT0YJBW8SyIFHAgmEuizs6Z' || client_type_abonnement.value == 'price_1JWc3mBW8SyIFHAg2E4YGU4c'){
+                    document.querySelector('.fileDiv').style.display = 'inline';
+                    //client_identityProofFile.required = true;
+                } else if(client_type_abonnement.value == 'price_1JWc1BBW8SyIFHAgvuKoItbD' || client_type_abonnement.value == 'price_1JWc1oBW8SyIFHAgGnAmvtyw') {
+                    document.querySelector('.fileDiv').style.display = 'none';
+                    //client_identityProofFile.required = false;
+                    const identityProofInfos = document.querySelector('#identityProofInfos');
+                };
+            });
+        });
     </script>
 {% endblock %}

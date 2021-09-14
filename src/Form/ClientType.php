@@ -53,7 +53,8 @@ class ClientType extends AbstractType
                 'label' => 'Votre pièce d\'identité',
                 'required' => false,
                 'attr' => array(
-                    'placeholder' => 'Nom de votre entreprise'
+                    'placeholder' => 'Nom de votre entreprise',
+                    'hidden' => 'hidden'
                 )
             ])
             ->add('telMobile', TextType::class, [
