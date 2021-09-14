@@ -94,6 +94,21 @@ class ClientType extends AbstractType
                     'placeholder' => "Type d'abonnement"
                 )
             ])
+            ->add('rib', TextType::class, [
+                    'required' => false,
+                    'label' => 'RIB',
+                    'attr' => array(
+                        'placeholder' => "RIB"
+                    )
+            ])
+            ->add('extraitRCSFile', FileType::class, [
+                'label' => 'Votre extrait RCS',
+                'required' => false,
+                'attr' => array(
+                    'placeholder' => 'Nom de votre entreprise',
+                    'hidden' => 'hidden'
+                )
+            ])
         ;
     }
 

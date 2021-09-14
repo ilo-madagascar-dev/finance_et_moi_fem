@@ -84,15 +84,30 @@
                         {{ form_row(form.type_abonnement) }}
                     <!-- /div -->
                 </div>
-                <div class="line" style="text-align:center;">
-                    <!-- div class="line" -->
-                    <!-- /div -->
-                    <div class="fileDiv">
-                        <!-- label for="custom-identityProofFilename" id="custom-identityProofFilename-label"></label -->
-                        <button type="button" id="custom-identityProofFile">Pièce d'identité</button>
-                        <span id="custom-identityProofFilename">Aucun fichier choisi</span>
-                        {{ form_widget(form.identityProofFile) }}
-                        <div id="identityProofInfos"></div>
+                <div class="line line-essentiel">
+                    {{ form_widget(form.rib) }}
+                </div>
+                <div class="double-line">
+                    <div class="line line-essentiel" style="text-align:center;">
+                        <!-- div class="line" -->
+                        <!-- /div -->
+                        <div class="fileDiv">
+                            <!-- label for="custom-identityProofFilename" id="custom-identityProofFilename-label"></label -->
+                            <button type="button" id="custom-identityProofFile">Pièce d'identité</button>
+                            <span id="custom-identityProofFilename">Aucun fichier choisi</span>
+                            {{ form_widget(form.identityProofFile) }}
+                            <div id="identityProofInfos"></div>
+                        </div>
+                    </div>
+                    <div class="line line-essentiel" style="text-align:center;">
+                        <!-- div class="line" -->
+                        <!-- /div -->
+                        <div class="fileDiv">
+                            <!-- label for="custom-identityProofFilename" id="custom-identityProofFilename-label"></label -->
+                            <button type="button" id="extraitRCSFile">Extrait RCS</button>
+                            <span id="extraitRCSfilename">Aucun fichier choisi</span>
+                            {{ form_widget(form.extraitRCSFile) }}
+                        </div>
                     </div>
                 </div>
                 <button type="submit" id="registrationSubmit">Inscription</button>
@@ -124,26 +139,41 @@
         document.addEventListener('DOMContentLoaded',() => {
             const priceIdElement = document.querySelector('.js-price-id');
             const priceId = priceIdElement.dataset.priceId;
+            const client_type_abonnement = document.querySelector('#client_type_abonnement');
+            
             const realFileBtn = document.querySelector('#client_identityProofFile');
             const customBtn = document.querySelector('#custom-identityProofFile');
             const identityProofFilename = document.querySelector('#custom-identityProofFilename');
-            const client_type_abonnement = document.querySelector('#client_type_abonnement');
-            
+
+            const client_extraitRCSFile = document.querySelector('#client_extraitRCSFile');
+            const extraitRCSFileBtn = document.querySelector('#extraitRCSFile');
+            const extraitRCSfilename = document.querySelector('#extraitRCSfilename');
+
             console.log(priceId);
 
+            const everyLineEssentiel = Array.from(document.querySelectorAll('.line-essentiel'));
             //Affichage des champs pièces jointes en fonction de l'abonnement choisi auparavant    
             if (priceId == 'price_1JT0YJBW8SyIFHAgmEuizs6Z' || priceId == 'price_1JWc3mBW8SyIFHAg2E4YGU4c') {
-                document.querySelector('.fileDiv').style.display = 'inline';
+                everyLineEssentiel.forEach(element => {
+                    element.style.display = 'inline';
+                });
+                //document.querySelector('.line-essentiel').style.display = 'inline';
                 //client_identityProofFile.required = true;
             } else if(priceId == 'price_1JWc1BBW8SyIFHAgvuKoItbD' || priceId == 'price_1JWc1oBW8SyIFHAgGnAmvtyw') {
-                document.querySelector('.fileDiv').style.display = 'none';
+                everyLineEssentiel.forEach(element => {
+                    element.style.display = 'none';
+                });
+                //document.querySelector('.line-essentiel').style.display = 'none';
                 //client_identityProofFile.required = false;
             } else {
-                document.querySelector('.fileDiv').style.display = 'none';
+                everyLineEssentiel.forEach(element => {
+                    element.style.display = 'none';
+                });
+                //document.querySelector('.line-essentiel').style.display = 'none';
                 //client_identityProofFile.required = false;
             }
 
-            //"Mise en forme du champ input file. "   
+            //"Mise en forme du champ pièce d'identité. "   
             customBtn.addEventListener('click', () => {
                 realFileBtn.click();
             });
@@ -156,15 +186,33 @@
                 }
             })
             
+            //"Mise en forme du champ pièce d'identité. "   
+            extraitRCSFileBtn.addEventListener('click', () => {
+                client_extraitRCSFile.click();
+            });
+
+            client_extraitRCSFile.addEventListener('change', () => {
+                if (client_extraitRCSFile.value) {
+                    extraitRCSfilename.innerHTML = client_extraitRCSFile.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+                } else {
+                    extraitRCSfilename.innerHTML = 'Aucun fichier choisi';
+                }
+            })
+            
             //Affichage des champs pièces jointes en fonction de la valeur du select choisie sur la page    
             client_type_abonnement.addEventListener('change', () => {
                 if(client_type_abonnement.value == 'price_1JT0YJBW8SyIFHAgmEuizs6Z' || client_type_abonnement.value == 'price_1JWc3mBW8SyIFHAg2E4YGU4c'){
-                    document.querySelector('.fileDiv').style.display = 'inline';
+                    everyLineEssentiel.forEach(element => {
+                        element.style.display = 'inline';
+                    });
+                    //document.querySelector('.line-essentiel').style.display = 'inline';
                     //client_identityProofFile.required = true;
                 } else if(client_type_abonnement.value == 'price_1JWc1BBW8SyIFHAgvuKoItbD' || client_type_abonnement.value == 'price_1JWc1oBW8SyIFHAgGnAmvtyw') {
-                    document.querySelector('.fileDiv').style.display = 'none';
+                    everyLineEssentiel.forEach(element => {
+                        element.style.display = 'none';
+                    });
+                    //document.querySelector('.line-essentiel').style.display = 'none';
                     //client_identityProofFile.required = false;
-                    const identityProofInfos = document.querySelector('#identityProofInfos');
                 };
             });
         });

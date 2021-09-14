@@ -61,6 +61,16 @@ class RegistrationController extends AbstractController
                     $this->addFlash('danger', "Vous devez uploader une copie de votre pièce d'identité pour l'abonnement Essentiel !!!");
                     return $this->redirectToRoute('registration', ['price_id' => $priceId]);
                 }
+
+                if(!$newClient->getRib()){
+                    $this->addFlash('danger', "Vous devez absolument rentrer votre RIB !!!");
+                    return $this->redirectToRoute('registration', ['price_id' => $priceId]);
+                }
+
+                if(!$newClient->getExtraitRCSFile()){
+                    $this->addFlash('danger', "Vous devez absolument rentrer votre extrait RCS !!!");
+                    return $this->redirectToRoute('registration', ['price_id' => $priceId]);
+                }
             }
             
             //Les informations de la première étape seront enregistrées dans la premimère étape et seront flushées si l'utiliseur valide son abonnement et qu'il obtient un vd
@@ -73,7 +83,7 @@ class RegistrationController extends AbstractController
 
                 return $this->redirectToRoute('registration');
             }
-
+            
             //dd(__DIR__);
             if ($newClient->getIdentityProofFile()) {
                 $extension = explode('.', $newClient->getIdentityProofFile()->getClientOriginalName())[1];
@@ -87,6 +97,14 @@ class RegistrationController extends AbstractController
                 //dd($newClient->getIdentityProofFile());
                 //dd(base64_decode($encodedFile));
                 
+            }
+
+            if ($newClient->getExtraitRCSFile()) {
+                $extension = explode('.', $newClient->getExtraitRCSFile()->getClientOriginalName())[1];
+                $filename = md5(uniqid()).'_'.md5(uniqid()).'_'.md5(uniqid()).'.'.$extension;
+                $newClient->getExtraitRCSFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/extrait_rcs', $filename);
+                $newClient->setExtraitRCSFile(null);
+                $newClient->setExtraitRCSname($filename);
             }
                 $session->set('possibleNewUser', $newClient);
                 

@@ -58,7 +58,7 @@ select {
  }
 
  .fileDiv {
-     /* text-align: left !important; */
+     text-align: left !important;
      margin-left: 0;
  }
 
