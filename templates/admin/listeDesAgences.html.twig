@@ -1,0 +1,35 @@
+
+<meta name="viewport" content="widht=device-widht , initial-scale=1.0">
+<link href={{ asset('css/list.css') }} rel="stylesheet">
+
+
+<div>
+ 	<h2 class="tête" f><img class="image" src={{ asset('images/icon/list-d.svg') }}>Liste des agences</h2>
+
+	<div class="bordur">
+		<div class="grid">
+			<div>
+				<p class="paragraphe">Nom de l'agence : </p>
+			</div>
+			<div>
+			{# {{ name }}  #}
+			</div>
+		</div>
+		<div class="grid">
+			<div>
+				<p class="paragraphe">Abonnement : </p>
+			</div>
+			<div>
+			{# {{ firstname }} #}
+			</div>
+		</div>
+		<style>
+			[f]{
+				display: flex;
+				gap: .7em;
+			}
+		</style>
+	</div>
+</div>
+
+		

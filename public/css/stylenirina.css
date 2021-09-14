@@ -48,4 +48,5 @@ div input:focus {
 	padding-bottom: 5px;
 	color: white;
 	background-color: #13141d;
+	cursor: pointer;
 }
