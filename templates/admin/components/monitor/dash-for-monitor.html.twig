@@ -1,19 +1,19 @@
 {% extends 'mqbaka_home/index.html.twig' %}
 
-{% block title %}Tableau de bord - Admin
+{% block title %}Sous-compte - Tableau de bord
 {% endblock %}
 
 {% block body %}
 	<link href= {{ asset("/css/admin-dash.css") }} rel="stylesheet">
 
    
- {% set id= Scompte.id %}
+ {% set id= Soucompte.id %}
     <div class="dash-outliner">
         {% include "admin/admin-header.html.twig" %}
         <div class="dash-container sidebared">
         
             {% include "admin/components/monitor/monitor-sidebar.html.twig" with { id: id } only %}
-            {% include "admin/components/monitor/monitor-frame.html.twig" with { id: id } only %}
+            {% include "admin/components/monitor/monitor-frame.html.twig" with { id: id, sous: Soucompte } only %}
         </div>
     </div>
     <div class="mobile-ham" onclick="toggleSideMobile()">

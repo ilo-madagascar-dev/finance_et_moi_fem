@@ -1,6 +1,6 @@
 <div id="Tableau-de-bord" class="Tabcontent other">
     <div class="content-inner">
-        <h2 class="content-title">Tableau de bord</h2>
+        <h2 class="content-title">{{ sous.nom ~ " " ~ sous.prenom }}</h2>
         <div class="boxes-iconifiers">
             <div class="box-m">
                 <img src={{ asset('images/icon/folder.svg') }} alt="" onclick="demFi()">
@@ -16,30 +16,7 @@
             </div>
         </div>
     </div>
-    
-    <style>
-        .previous{
-            position: absolute;
-            font-size: 50px;
-            color: #13141d;
-            margin-left: 3vw;
-            bottom: 50px;
-            cursor: pointer;
-        }
-        .chev-left{
-            width: 50px;
-            height: 50px;
-            border: 16px solid var(--blue-01);
-            border-top: none;
-            border-right: none;
-            transform: rotate(45deg);
-        }
-    </style>
-    <div style="position: relative">
-        <div class="previous">
-            <div class="chev-left"></div>
-        <div>
-    </div>
+    {% include "admin/components/monitor/chevron.html.twig" %}
     
     <script title="for the boxes">
         function demFi(){
