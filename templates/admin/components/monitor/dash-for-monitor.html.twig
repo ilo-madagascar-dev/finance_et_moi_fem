@@ -13,7 +13,7 @@
         <div class="dash-container sidebared">
         
             {% include "admin/components/monitor/monitor-sidebar.html.twig" with { id: id } only %}
-            {% include "admin/components/monitor/monitor-frame.html.twig" with { id: id } only %}
+            {% include "admin/components/monitor/monitor-frame.html.twig" with { id: id, sous: Soucompte } only %}
         </div>
     </div>
     <div class="mobile-ham" onclick="toggleSideMobile()">
