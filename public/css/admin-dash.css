@@ -99,6 +99,22 @@
     color: var(--dark-01);
 }
 
+.invisible{
+    display: none;
+}
+
+.bordur{
+    transition: .4s;
+}
+
+.bordur:hover{
+    transform: scale(1.01);
+    transition: .4s;
+}
+
+.bordur *{
+    pointer-events: none;
+}
 
 @media only screen and (min-width: 961px){
     .mobile-ham{
@@ -121,6 +137,7 @@
         width: max-content;
         z-index: 7;
         animation: slide var(--slide-duration) ease-in-out;
+        min-width: 339.25px;
     }
     .mobile-ham.expanded .ham-line{
         background: var(--white--ish-01);

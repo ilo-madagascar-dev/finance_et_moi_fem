@@ -1,6 +1,6 @@
 {% extends 'mqbaka_home/index.html.twig' %}
 
-{% block title %}Tableau de bord - Admin
+{% block title %}Sous-comptes - Payement fractionné
 {% endblock %}
 
 {% block body %}
@@ -10,7 +10,7 @@
     <div class="dash-outliner">
         {% include "admin/admin-header.html.twig" %}
         <div class="dash-container sidebared">
-            {% include "admin/components/sidebar.html.twig" %}
+            {% include "admin/components/monitor/monitor-sidebar.html.twig" with { id: Scompte.id} only %}
             <div id="Demande-financement" class="Tabcontent">
                 {# <iframe src="https://app.finnocar.com/iframe_form_cbnx?vd={{client.vd}}" frameborder="0" allowfullscreen="true" scrolling="yes" class="iF"></iframe> #}
                 {% if role == "ROLE_CLIENT" %}
@@ -37,11 +37,9 @@
                         transform: rotate(45deg);
                     }
                 </style>
-                <div style="position: relative">
-                    <div class="previous">
-                        <div class="chev-left"></div>
-                    <div>
-                </div>
+                <div class="previous">
+                    <div class="chev-left"></div>
+                <div>
             </div>
         </div>
     </div>
