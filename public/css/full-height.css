@@ -1,8 +1,10 @@
 body{
     height: 100vh;
+    max-height: 100vh;
     display: flex;
     background: var(--light-01-half);
     flex-direction: column;
+    overflow: hidden;
 }
 
 .all-the{
