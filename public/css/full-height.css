@@ -9,7 +9,8 @@ body{
 
 .all-the{
     width: max-content;
-    margin: auto;
+    max-width: 100%;
+    margin: 2em auto;
     color: var(--light-01);
     background: transparent;
     position: relative;
@@ -23,6 +24,8 @@ body{
 .sec-step-title{
     font-size: 3em;
     margin-bottom: .4em;
+    width: max-content;
+    margin: auto;
 }
 
 .all-the p{
@@ -31,7 +34,7 @@ body{
 
 .finale-form{
     width: max-content;
-    margin: 3em auto;
+    margin: 3em auto 1em;
 }
 
 .finale-form button{
@@ -210,6 +213,76 @@ body{
     align-items: center;
 }
 
+/*
+            S e c o n d   S t e p
+*/
+
+.details-thing{
+    width: max-content;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    margin-top: 1em;
+}
+
+.details-title{
+    width: max-content;
+    margin: auto;
+}
+
+.details-details{
+    font-family: monospace;
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 1em;
+    row-gap: .5em;
+    background: white;
+    border: 1px solid #0004;
+    padding: 1em;
+}
+
+.details-details *{
+    font-family: monospace;
+    font-size: 1.15em;
+    padding: 0 .5em;
+    color: black;
+}
+
+.details-value{
+    font-weight: 800;
+    text-align: right;
+}
+
+.details-label{
+    position: relative;
+}
+
+.details-label::after{
+    content: ':';
+    position: absolute;
+    right: 0;
+    transform: translate(100%);
+}
+
+.notice{
+    width: 20em;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    max-width: 90%;
+}
+
+.notice-content {
+    font-family: monospace;
+    height: 10em;
+    overflow-y: auto;
+}
+
+.notice-p {
+    font-family: monospace;
+}
+
 @media only screen and (max-width: 800px){
     .login-inner{
         display: flex;
@@ -225,6 +298,9 @@ body{
     }
     .main-form{
         padding: 3em;
+    }
+    .sec-step-title{
+        font-size: 2em;
     }
 }
 
@@ -244,5 +320,15 @@ body{
     }
     .login-title{
         padding: 0 1em;
+    }
+    .sec-step-title{
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 375px){
+    .details-details *{
+        padding: 0;font-size: 1em;
     }
 }

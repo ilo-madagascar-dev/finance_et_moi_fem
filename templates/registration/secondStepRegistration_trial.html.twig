@@ -19,15 +19,46 @@
         <p>
             Afin de finaliser votre inscription, vous devez d'abord vous abonner !!!
         </p>
-        <h3 style="margin-top:30px; text-align:center;">Détails de l'abonnement</h3>
-        <p style="margin-top:10px;"> Montant TTC : <strong>{{ facture.montantTtcFacture }} € </strong></p>
-        <p> Tva : {{ facture.pourcentageTva }} % </p>
-        <p>Paiement de la facture : {{ facture.factureAcquitee == false ? 'Non achevée' : '' }}</p>
-        <!-- /div -->
+
+        <!-- <div class="details-thing">
+            <h3 class="details-title">Détails de l'abonnement</h3>
+            <p class="margin-top:10px;"> Montant TTC : <strong>{{ facture.montantTtcFacture }} € </strong></p>
+            <p> Tva : {{ facture.pourcentageTva }} % </p>
+            <p>Paiement de la facture : {{ facture.factureAcquitee == false ? 'Non achevée' : '' }}</p>
+        </div> -->
+
+        <div class="details-thing">
+            <h3 class="details-title">Détails de l'abonnement</h3>
+            <div class="details-details">
+                <div class="details-label">Montant TTC</div>
+                <div class="details-value">{{ facture.montantTtcFacture }} €</div>
+                
+                <div class="details-label">Tva</div>
+                <div class="details-value">{{ facture.pourcentageTva }} %</div>
+
+                <div class="details-label">Paiement de la facture</div>
+                <div class="details-value">{{ facture.factureAcquitee == false ? 'Non achevée' : '' }}</div>
+            </div>
+        </div>
         <form action="{{ path('registration_payment') }}" method="POST" class="finale-form">
             <button type="submit" class="">S'abonner</button>
         </form>
+
+        
+        <!-- /div -->
     </section>
+    <div class="notice">
+        <h3 class="details-title">Rappel :</h3>
+        <div class="notice-content">
+            <p class="notice-p">
+                Avant de vous accorder votre abonnement, nous devons vérifier que votre entreprise a au moins un an d'activité.
+            </p>
+            <p class="notice-p">Après étude et validation de vos dossiers par nos partenaires bancaires, qui peut prendre 3 à 4 semaines, vous pourrez avoir accès au payement fractionné sur votre espace.</p>
+            <p class="notice-p">
+                Les crédits conso et crédits affecté vous seront d'ores accessible immédiatement après votre inscritpion.
+            </p>
+        </div>
+    </div>
     <div class="floatters">
         <div class="floatter"></div>
         <div class="floatter"></div>
