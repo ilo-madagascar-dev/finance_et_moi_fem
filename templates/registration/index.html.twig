@@ -94,7 +94,7 @@
                         <div class="fileDiv">
                             <!-- label for="custom-identityProofFilename" id="custom-identityProofFilename-label"></label -->
                             <button type="button" id="custom-identityProofFile">Pièce d'identité</button>
-                            <span id="custom-identityProofFilename">Aucun fichier choisi</span>
+                            <span id="custom-identityProofFilename">Aucun fichier</span>
                             {{ form_widget(form.identityProofFile) }}
                             <div id="identityProofInfos"></div>
                         </div>
@@ -105,7 +105,7 @@
                         <div class="fileDiv">
                             <!-- label for="custom-identityProofFilename" id="custom-identityProofFilename-label"></label -->
                             <button type="button" id="extraitRCSFile">Extrait RCS</button>
-                            <span id="extraitRCSfilename">Aucun fichier choisi</span>
+                            <span id="extraitRCSfilename">Aucun fichier</span>
                             {{ form_widget(form.extraitRCSFile) }}
                         </div>
                     </div>
@@ -153,13 +153,13 @@
 
             const everyLineEssentiel = Array.from(document.querySelectorAll('.line-essentiel'));
             //Affichage des champs pièces jointes en fonction de l'abonnement choisi auparavant    
-            if (priceId == 'price_1JT0YJBW8SyIFHAgmEuizs6Z' || priceId == 'price_1JWc3mBW8SyIFHAg2E4YGU4c') {
+            if(priceId == 'price_1JZs5tBW8SyIFHAgHT2LqoM7' || priceId == 'price_1JZs9wBW8SyIFHAgwZgSId5i'){
                 everyLineEssentiel.forEach(element => {
                     element.style.display = 'inline';
                 });
                 //document.querySelector('.line-essentiel').style.display = 'inline';
                 //client_identityProofFile.required = true;
-            } else if(priceId == 'price_1JWc1BBW8SyIFHAgvuKoItbD' || priceId == 'price_1JWc1oBW8SyIFHAgGnAmvtyw') {
+            } else if(priceId == 'price_1JZs3OBW8SyIFHAgl3MjuPtc' || priceId == 'price_1JZs71BW8SyIFHAgnS6niVw1') {
                 everyLineEssentiel.forEach(element => {
                     element.style.display = 'none';
                 });
@@ -182,7 +182,7 @@
                 if (realFileBtn.value) {
                     identityProofFilename.innerHTML = realFileBtn.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
                 } else {
-                    identityProofFilename.innerHTML = 'Aucun fichier choisi';
+                    identityProofFilename.innerHTML = 'Aucun fichier';
                 }
             })
             
@@ -195,19 +195,19 @@
                 if (client_extraitRCSFile.value) {
                     extraitRCSfilename.innerHTML = client_extraitRCSFile.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
                 } else {
-                    extraitRCSfilename.innerHTML = 'Aucun fichier choisi';
+                    extraitRCSfilename.innerHTML = 'Aucun fichier';
                 }
             })
             
             //Affichage des champs pièces jointes en fonction de la valeur du select choisie sur la page    
             client_type_abonnement.addEventListener('change', () => {
-                if(client_type_abonnement.value == 'price_1JT0YJBW8SyIFHAgmEuizs6Z' || client_type_abonnement.value == 'price_1JWc3mBW8SyIFHAg2E4YGU4c'){
+                if(client_type_abonnement.value == 'price_1JZs5tBW8SyIFHAgHT2LqoM7' || client_type_abonnement.value == 'price_1JZs9wBW8SyIFHAgwZgSId5i'){
                     everyLineEssentiel.forEach(element => {
                         element.style.display = 'inline';
                     });
                     //document.querySelector('.line-essentiel').style.display = 'inline';
                     //client_identityProofFile.required = true;
-                } else if(client_type_abonnement.value == 'price_1JWc1BBW8SyIFHAgvuKoItbD' || client_type_abonnement.value == 'price_1JWc1oBW8SyIFHAgGnAmvtyw') {
+                } else if(client_type_abonnement.value == 'price_1JZs3OBW8SyIFHAgl3MjuPtc' || client_type_abonnement.value == 'price_1JZs71BW8SyIFHAgnS6niVw1') {
                     everyLineEssentiel.forEach(element => {
                         element.style.display = 'none';
                     });

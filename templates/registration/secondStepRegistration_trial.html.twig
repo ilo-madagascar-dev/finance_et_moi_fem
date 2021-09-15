@@ -19,6 +19,11 @@
         <p>
             Afin de finaliser votre inscription, vous devez d'abord vous abonner !!!
         </p>
+        <h3 style="margin-top:30px; text-align:center;">Détails de l'abonnement</h3>
+        <p style="margin-top:10px;"> Montant TTC : <strong>{{ facture.montantTtcFacture }} € </strong></p>
+        <p> Tva : {{ facture.pourcentageTva }} % </p>
+        <p>Paiement de la facture : {{ facture.factureAcquitee == false ? 'Non achevée' : '' }}</p>
+        <!-- /div -->
         <form action="{{ path('registration_payment') }}" method="POST" class="finale-form">
             <button type="submit" class="">S'abonner</button>
         </form>

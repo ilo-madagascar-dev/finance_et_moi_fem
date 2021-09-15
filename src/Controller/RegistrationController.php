@@ -56,7 +56,7 @@ class RegistrationController extends AbstractController
                 $session->set('price_id', $priceId);
             }
 
-            if($priceId == 'price_1JT0YJBW8SyIFHAgmEuizs6Z' || $priceId == 'price_1JWc3mBW8SyIFHAg2E4YGU4c'){
+            if($priceId == 'price_1JZs5tBW8SyIFHAgHT2LqoM7' || $priceId == 'price_1JZs9wBW8SyIFHAgwZgSId5i'){
                 if(!$newClient->getIdentityProofFile()){
                     $this->addFlash('danger', "Vous devez uploader une copie de votre pièce d'identité pour l'abonnement Essentiel !!!");
                     return $this->redirectToRoute('registration', ['price_id' => $priceId]);
@@ -129,6 +129,8 @@ class RegistrationController extends AbstractController
      */
     public function registrationSeconStep(SessionInterface $session)
     {
+        $price = 70.8;
+
         if ($session->get('price_id')) {
             $priceId = $session->get('price_id');
          } else {
@@ -137,10 +139,10 @@ class RegistrationController extends AbstractController
          }
  
          $priceArray = [
-             'price_1JWc1BBW8SyIFHAgvuKoItbD',
-             'price_1JT0YJBW8SyIFHAgmEuizs6Z',
-             'price_1JWc1oBW8SyIFHAgGnAmvtyw',
-             'price_1JWc3mBW8SyIFHAg2E4YGU4c'
+             'price_1JZs3OBW8SyIFHAgl3MjuPtc',
+             'price_1JZs5tBW8SyIFHAgHT2LqoM7',
+             'price_1JZs71BW8SyIFHAgnS6niVw1',
+             'price_1JZs9wBW8SyIFHAgwZgSId5i'
          ];
  
          if (!in_array($priceId, $priceArray)) {
@@ -148,8 +150,46 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('registration');
          }
 
-        //dd($session->get('possibleNewUser'));
-        return $this->render('registration/secondStepRegistration_trial.html.twig');
+         /**
+          * Tests sur la valeur du price_id
+          */
+
+          $priceValues = [
+            'starter_mensuel'=> 70.8,
+            'essentiel_mensuel'=> 106.8,
+            'starter_annuel'=> 708,
+            'essentiel_annuel'=> 1068
+        ];
+
+        switch ($priceId) {
+            case 'price_1JZs3OBW8SyIFHAgl3MjuPtc':
+                $price = $priceValues['starter_mensuel'];
+                break;
+            case 'price_1JZs5tBW8SyIFHAgHT2LqoM7':
+                $price = $priceValues['essentiel_mensuel'];
+                break;
+            case 'price_1JZs71BW8SyIFHAgnS6niVw1':
+                $price = $priceValues['starter_annuel'];
+                break;
+            case 'price_1JZs9wBW8SyIFHAgwZgSId5i':
+                $price = $priceValues['essentiel_annuel'];
+                break;
+        }
+
+        //Billing to show to the view !!!!
+        //$facture = $session->get('facturePotentielle');
+        $facture = new Facture;
+
+        $facture->setDateEmissionFacture(new DateTime());
+        $facture->setMontantTtcFacture($price);
+        $facture->setPourcentageTva(20);
+        $facture->setFactureAcquitee(false);
+        $session->set('facturePotentielle', $facture);
+
+            //dd($session->get('possibleNewUser'));
+        return $this->render('registration/secondStepRegistration_trial.html.twig', [
+            'facture' => $facture
+        ]);
     }
 
     /**
@@ -158,7 +198,7 @@ class RegistrationController extends AbstractController
     public function registrationPayment(SessionInterface $session):Response
     {
         Stripe::setApiKey($_ENV['STRIPE_SECRET']);
-        $priceId = 'price_1JT0YJBW8SyIFHAgmEuizs6Z';
+        $priceId = 'price_1JZs3OBW8SyIFHAgl3MjuPtc';
 
         if ($session->get('price_id')) {
            $priceId = $session->get('price_id');
@@ -168,10 +208,10 @@ class RegistrationController extends AbstractController
         }
 
         $priceArray = [
-            'price_1JWc1BBW8SyIFHAgvuKoItbD',
-            'price_1JT0YJBW8SyIFHAgmEuizs6Z',
-            'price_1JWc1oBW8SyIFHAgGnAmvtyw',
-            'price_1JWc3mBW8SyIFHAg2E4YGU4c'
+            'price_1JZs3OBW8SyIFHAgl3MjuPtc',
+            'price_1JZs5tBW8SyIFHAgHT2LqoM7',
+            'price_1JZs71BW8SyIFHAgnS6niVw1',
+            'price_1JZs9wBW8SyIFHAgwZgSId5i'
         ];
 
         if (!in_array($priceId, $priceArray)) 
@@ -264,9 +304,9 @@ class RegistrationController extends AbstractController
         if (!$potentialClient->getIdentityProof()) {
             $potentialClient->setUpdatedAt(new DateTime);
         }
-
-        $em->persist($potentialClient);
-        $em->flush();
+        
+        //$em->persist($potentialClient);
+        //$em->flush();
     
         //Création de la facture potentielle relative à l'abonneement
         $nouvelleFacturePotentielle = new Facture;
@@ -282,8 +322,8 @@ class RegistrationController extends AbstractController
         $session->set('facturePotentielle', $nouvelleFacturePotentielle);
         $facturePotentielle = $session->get('facturePotentielle');
 
-        $em->persist($facturePotentielle);
-        $em->flush();
+        //$em->persist($facturePotentielle);
+        //$em->flush();
 
         //Création du paiement relatif à l'abonnement (et donc à la facture)
         $paiement = new Paiement();
@@ -294,7 +334,10 @@ class RegistrationController extends AbstractController
 
         $nouvelleFacturePotentielle->addPaiement($paiement);
 
+        $em->persist($facturePotentielle);
+        $em->persist($potentialClient);
         $em->persist($paiement);
+
         $em->flush();
 
         return $this->render('registration/successPayment.html.twig');
