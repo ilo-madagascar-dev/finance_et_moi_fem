@@ -21,6 +21,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Stripe\Stripe;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Validator\Constraints\Date;
 
 class RegistrationController extends AbstractController
 {
@@ -28,15 +29,13 @@ class RegistrationController extends AbstractController
      * @Route("/registration", name="registration")
      */
     public function index(Request $request, SessionInterface $session, UserRepository $userRepository): Response
-    {
-        
+    {                
         $priceId = '';
 
         /**
-         * Si le client se pointe à partir de la page tarifs
+         * Si le client arrive à partir de la page tarifs
          */
         if ($request->get('price_id')) {
-            //dd($request->get('price_id'));
             $priceId = $request->get('price_id');
             $session->set('price_id', $priceId);
         }
@@ -48,7 +47,6 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //dd($newClient);
             /**
              * Récupération du tarif choisi par l'utilisateur
              */
@@ -56,6 +54,23 @@ class RegistrationController extends AbstractController
                 $priceId = $request->request->get('client')['type_abonnement'];
                 
                 $session->set('price_id', $priceId);
+            }
+
+            if($priceId == 'price_1JT0YJBW8SyIFHAgmEuizs6Z' || $priceId == 'price_1JWc3mBW8SyIFHAg2E4YGU4c'){
+                if(!$newClient->getIdentityProofFile()){
+                    $this->addFlash('danger', "Vous devez uploader une copie de votre pièce d'identité pour l'abonnement Essentiel !!!");
+                    return $this->redirectToRoute('registration', ['price_id' => $priceId]);
+                }
+
+                if(!$newClient->getRib()){
+                    $this->addFlash('danger', "Vous devez absolument rentrer votre RIB !!!");
+                    return $this->redirectToRoute('registration', ['price_id' => $priceId]);
+                }
+
+                if(!$newClient->getExtraitRCSFile()){
+                    $this->addFlash('danger', "Vous devez absolument rentrer votre extrait RCS !!!");
+                    return $this->redirectToRoute('registration', ['price_id' => $priceId]);
+                }
             }
             
             //Les informations de la première étape seront enregistrées dans la premimère étape et seront flushées si l'utiliseur valide son abonnement et qu'il obtient un vd
@@ -68,21 +83,31 @@ class RegistrationController extends AbstractController
 
                 return $this->redirectToRoute('registration');
             }
-
-            //dd(__DIR__);
-            $extension = explode('.', $newClient->getIdentityProofFile()->getClientOriginalName())[1];
-            $filename = md5(uniqid()).'_'.md5(uniqid()).'_'.md5(uniqid()).'.'.$extension;
-            $newClient->getIdentityProofFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/identityProof', $filename);
-            $newClient->setIdentityProofFile(null);
-            $newClient->setIdentityProof($filename);
-            //dd($newClient);
-            //$newClient->setIdentityProof(null);
             
-            //dd($newClient->getIdentityProofFile());
-            //dd(base64_decode($encodedFile));
+            //dd(__DIR__);
+            if ($newClient->getIdentityProofFile()) {
+                $extension = explode('.', $newClient->getIdentityProofFile()->getClientOriginalName())[1];
+                $filename = md5(uniqid()).'_'.md5(uniqid()).'_'.md5(uniqid()).'.'.$extension;
+                $newClient->getIdentityProofFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/identityProof', $filename);
+                $newClient->setIdentityProofFile(null);
+                $newClient->setIdentityProof($filename);
+                //dd($newClient);
+                //$newClient->setIdentityProof(null);
+                
+                //dd($newClient->getIdentityProofFile());
+                //dd(base64_decode($encodedFile));
+                
+            }
 
-            $session->set('possibleNewUser', $newClient);
-
+            if ($newClient->getExtraitRCSFile()) {
+                $extension = explode('.', $newClient->getExtraitRCSFile()->getClientOriginalName())[1];
+                $filename = md5(uniqid()).'_'.md5(uniqid()).'_'.md5(uniqid()).'.'.$extension;
+                $newClient->getExtraitRCSFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/extrait_rcs', $filename);
+                $newClient->setExtraitRCSFile(null);
+                $newClient->setExtraitRCSname($filename);
+            }
+                $session->set('possibleNewUser', $newClient);
+                
             if ($session->get('possibleNewUser')) 
             {
                 return $this->redirectToRoute('registration_second_step');
@@ -234,6 +259,11 @@ class RegistrationController extends AbstractController
         $potentialClient->setPassword($encryptedPassword);
         $potentialClient->setUser($userRelatedToPotentialClient);
         $potentialClient->setAbonnement($nouvelAbonnementPotentiel);        
+        $potentialClient->setAbonnement($nouvelAbonnementPotentiel);        
+        
+        if (!$potentialClient->getIdentityProof()) {
+            $potentialClient->setUpdatedAt(new DateTime);
+        }
 
         $em->persist($potentialClient);
         $em->flush();

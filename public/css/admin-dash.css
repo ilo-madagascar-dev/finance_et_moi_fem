@@ -116,6 +116,43 @@
     pointer-events: none;
 }
 
+.previous{
+    position: absolute;
+    color: #13141d;
+    margin-left: 3vw;
+    bottom: 50px;
+    cursor: pointer;
+    height: 70.7107px;
+    width: max-content;
+    display: flex;
+    align-items: center;
+}
+/* .chev-left{
+    width: 50px;
+    height: 50px;
+    border: 16px solid var(--blue-01);
+    border-top: none;
+    border-right: none;
+    transform: rotate(45deg);
+} */
+
+.chevron-left{
+    position: absolute;
+    transform: rotate(45deg);
+}
+.chevron-border{
+    height: 50px;
+    width: 50px;
+    box-sizing: border-box;
+    border-left: 16px solid black;
+    border-bottom: 16px solid black;
+}
+
+.content-title{
+    width: max-content;
+    margin: auto;
+}
+
 @media only screen and (min-width: 961px){
     .mobile-ham{
         display: none!important;

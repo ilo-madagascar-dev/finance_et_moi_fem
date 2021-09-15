@@ -53,7 +53,8 @@ class ClientType extends AbstractType
                 'label' => 'Votre pièce d\'identité',
                 'required' => false,
                 'attr' => array(
-                    'placeholder' => 'Nom de votre entreprise'
+                    'placeholder' => 'Nom de votre entreprise',
+                    'hidden' => 'hidden'
                 )
             ])
             ->add('telMobile', TextType::class, [
@@ -91,6 +92,21 @@ class ClientType extends AbstractType
                 ],
                 'attr' => array(
                     'placeholder' => "Type d'abonnement"
+                )
+            ])
+            ->add('rib', TextType::class, [
+                    'required' => false,
+                    'label' => 'RIB',
+                    'attr' => array(
+                        'placeholder' => "RIB"
+                    )
+            ])
+            ->add('extraitRCSFile', FileType::class, [
+                'label' => 'Votre extrait RCS',
+                'required' => false,
+                'attr' => array(
+                    'placeholder' => 'Nom de votre entreprise',
+                    'hidden' => 'hidden'
                 )
             ])
         ;

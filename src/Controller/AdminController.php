@@ -296,11 +296,12 @@ class AdminController extends AbstractController
             $souCompte=$sousCompteRepository->findOneBy(['id'=>$id,'client'=>$conClient]);
             $cle_groupe="1622543601638x611830994992322700";
             $role = $this->getUser()->getRoles()[0];
-           // dd($souCompte);
+            $vdScompte=$conClient->getVd();
             return $this->render('admin/components/monitor/dash-for-monitor.html.twig', [
                 'controller_name' => 'Slist',
                 'client'=>$conClient,
-                'Scompte'=>$souCompte,
+                'Soucompte'=>$souCompte,
+                'Scompte'=>$vdScompte,
                 'groupe'=>$cle_groupe,
                 'role'=>$role
             ]);
@@ -314,16 +315,18 @@ class AdminController extends AbstractController
     public function afficheDf(ClientRepository $clientrepository,UserRepository $userRepository,$id,SousCompteRepository $sousCompteRepository): Response
     {
         if($this->getUser()){
+            $vdScompte='';
             $connUser=$this->getUser()->getEmail();
             $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
-            $souCompte=$sousCompteRepository->find($id);
+            $souCompte=$sousCompteRepository->findOneBy(['id'=>$id,'client'=>$conClient]);
             $cle_groupe="1622543601638x611830994992322700";
             $role = $this->getUser()->getRoles()[0];
-           // dd($souCompte);
+            $vdScompte=$conClient->getVd();
             return $this->render('admin/components/monitor/monitor-demande-fin.html.twig', [
                 'controller_name' => 'Slist',
                 'client'=>$conClient,
-                'Scompte'=>$souCompte,
+                'Soucompte'=>$souCompte,
+                'Scompte'=>$vdScompte,
                 'groupe'=>$cle_groupe,
                 'role'=>$role
             ]);
@@ -339,14 +342,15 @@ class AdminController extends AbstractController
         if($this->getUser()){
             $connUser=$this->getUser()->getEmail();
             $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
-            $souCompte=$sousCompteRepository->find($id);
+            $souCompte=$sousCompteRepository->findOneBy(['id'=>$id,'client'=>$conClient]);
             $cle_groupe="1622543601638x611830994992322700";
             $role = $this->getUser()->getRoles()[0];
-           // dd($souCompte);
+            $vdScompte=$conClient->getVd();
             return $this->render('admin/components/monitor/monitor-payment-frac.html.twig', [
                 'controller_name' => 'Slist',
                 'client'=>$conClient,
-                'Scompte'=>$souCompte,
+                'Soucompte'=>$souCompte,
+                'Scompte'=>$vdScompte,
                 'groupe'=>$cle_groupe,
                 'role'=>$role
             ]);
@@ -362,14 +366,15 @@ class AdminController extends AbstractController
         if($this->getUser()){
             $connUser=$this->getUser()->getEmail();
             $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
-            $souCompte=$sousCompteRepository->find($id);
+            $souCompte=$sousCompteRepository->findOneBy(['id'=>$id,'client'=>$conClient]);
             $cle_groupe="1622543601638x611830994992322700";
             $role = $this->getUser()->getRoles()[0];
-           // dd($souCompte);
+            $vdScompte=$conClient->getVd();
             return $this->render('admin/components/monitor/monitor-suivi.html.twig', [
                 'controller_name' => 'Slist',
                 'client'=>$conClient,
-                'Scompte'=>$souCompte,
+                'Soucompte'=>$souCompte,
+                'Scompte'=>$vdScompte,
                 'groupe'=>$cle_groupe,
                 'role'=>$role
             ]);

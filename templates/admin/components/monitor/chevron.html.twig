@@ -1,0 +1,11 @@
+<div class="previous" onclick="moveBack(event);" title="Retour à votre tableau de bord">
+    <div class="chevron-left">
+        <div class="chevron-border"></div>
+    </div>
+    <a href={{ path("dash") }} class="invisible" id="b-d"></a>
+    <script title="back to dashboard">
+        function moveBack(event) {
+            document.querySelector("#b-d").click();
+        }
+    </script>
+</div>
