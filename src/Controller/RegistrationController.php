@@ -129,6 +129,8 @@ class RegistrationController extends AbstractController
      */
     public function registrationSeconStep(SessionInterface $session)
     {
+        $possibleNewClient = $session->get('possibleNewUser');
+        $fileUploadRappel = false;
         $price = 70.8;
 
         if ($session->get('price_id')) {
@@ -137,7 +139,12 @@ class RegistrationController extends AbstractController
             $this->addFlash('danger', 'Aucun type d\'abonnement n\'a été choisi');
              return $this->redirectToRoute('registration');
          }
- 
+        
+         //Afficher le message de rappel de la deuxième étape grâce à la variable $fileUploadRappel
+        if ($priceId == 'price_1JZs5tBW8SyIFHAgHT2LqoM7' || $priceId == 'price_1JZs9wBW8SyIFHAgwZgSId5i') {
+            $fileUploadRappel = true;
+        }
+
          $priceArray = [
              'price_1JZs3OBW8SyIFHAgl3MjuPtc',
              'price_1JZs5tBW8SyIFHAgHT2LqoM7',
@@ -185,10 +192,10 @@ class RegistrationController extends AbstractController
         $facture->setPourcentageTva(20);
         $facture->setFactureAcquitee(false);
         $session->set('facturePotentielle', $facture);
-
-            //dd($session->get('possibleNewUser'));
+        
         return $this->render('registration/secondStepRegistration_trial.html.twig', [
-            'facture' => $facture
+            'facture' => $facture,
+            'rappel'=> $fileUploadRappel
         ]);
     }
 

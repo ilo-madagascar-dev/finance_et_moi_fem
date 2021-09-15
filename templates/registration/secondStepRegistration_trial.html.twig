@@ -47,18 +47,22 @@
         
         <!-- /div -->
     </section>
-    <div class="notice">
-        <h3 class="details-title">Rappel :</h3>
-        <div class="notice-content">
-            <p class="notice-p">
-                Avant de vous accorder votre abonnement, nous devons vérifier que votre entreprise a au moins un an d'activité.
-            </p>
-            <p class="notice-p">Après étude et validation de vos dossiers par nos partenaires bancaires, qui peut prendre 3 à 4 semaines, vous pourrez avoir accès au payement fractionné sur votre espace.</p>
-            <p class="notice-p">
-                Les crédits conso et crédits affecté vous seront d'ores accessible immédiatement après votre inscritpion.
-            </p>
+
+    {% if rappel == true %}
+        <div class="notice">
+            <h3 class="details-title">Rappel :</h3>
+            <div class="notice-content">
+                <p class="notice-p">
+                    Avant de vous accorder votre abonnement, nous devons vérifier que votre entreprise a au moins un an d'activité.
+                </p>
+                <p class="notice-p">Après étude et validation de vos dossiers par nos partenaires bancaires, qui peut prendre 3 à 4 semaines, vous pourrez avoir accès au payement fractionné sur votre espace.</p>
+                <p class="notice-p">
+                    Les crédits conso et crédits affecté vous seront d'ores accessible immédiatement après votre inscritpion.
+                </p>
+            </div>
         </div>
-    </div>
+    {% endif %}
+    
     <div class="floatters">
         <div class="floatter"></div>
         <div class="floatter"></div>
