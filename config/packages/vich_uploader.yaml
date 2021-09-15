@@ -1,6 +1,14 @@
 vich_uploader:
     db_driver: orm
 
+    mappings:
+        identity_proof:
+            uri_prefix: /images/identityProof
+            upload_destination: '%kernel.project_dir%/public/images/identityProof'
+        RCS:
+            uri_prefix: /images/extrait_rcs
+            upload_destination: '%kernel.project_dir%/public/images/extrait_rcs'
+            
     #mappings:
     #    products:
     #        uri_prefix: /images/products

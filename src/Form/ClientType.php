@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Client;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -48,6 +49,14 @@ class ClientType extends AbstractType
                     'placeholder' => 'Nom de votre entreprise'
                 )
             ])
+            ->add('identityProofFile', FileType::class, [
+                'label' => 'Votre pièce d\'identité',
+                'required' => false,
+                'attr' => array(
+                    'placeholder' => 'Nom de votre entreprise',
+                    'hidden' => 'hidden'
+                )
+            ])
             ->add('telMobile', TextType::class, [
                 'label' => 'Téléphone mobile',
                 'attr' => array(
@@ -76,13 +85,28 @@ class ClientType extends AbstractType
             'label' => 'Abonnement',
                 'mapped' => false,
                 'choices' => [
-                    'Starter mensuel' => 'price_1JWc1BBW8SyIFHAgvuKoItbD',
-                    'Essentiel mensuel' => 'price_1JT0YJBW8SyIFHAgmEuizs6Z',
-                    'Starter annuel' => 'price_1JWc1oBW8SyIFHAgGnAmvtyw',
-                    'Essentiel annuel' => 'price_1JWc3mBW8SyIFHAg2E4YGU4c',
+                    'Starter mensuel' => 'price_1JZs3OBW8SyIFHAgl3MjuPtc',
+                    'Essentiel mensuel' => 'price_1JZs5tBW8SyIFHAgHT2LqoM7',
+                    'Starter annuel' => 'price_1JZs71BW8SyIFHAgnS6niVw1',
+                    'Essentiel annuel' => 'price_1JZs9wBW8SyIFHAgwZgSId5i'
                 ],
                 'attr' => array(
                     'placeholder' => "Type d'abonnement"
+                )
+            ])
+            ->add('rib', TextType::class, [
+                    'required' => false,
+                    'label' => 'RIB',
+                    'attr' => array(
+                        'placeholder' => "RIB"
+                    )
+            ])
+            ->add('extraitRCSFile', FileType::class, [
+                'label' => 'Votre extrait RCS',
+                'required' => false,
+                'attr' => array(
+                    'placeholder' => 'Nom de votre entreprise',
+                    'hidden' => 'hidden'
                 )
             ])
         ;

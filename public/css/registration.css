@@ -10,13 +10,26 @@
 .form-register *{
     background: transparent;
 }
+/**
+ * .alert .alert-danger css
+ */
+.alert-danger {
+    background: var(--dark-01);
+    color: var(--white--ish-01);
+    border-radius: 0.5rem;
+    padding-left: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-right: 2rem;
+    margin-bottom: 2rem;
+}
 
 /**
- * Sélection des abonnements 
+ * Select des abonnements 
  */
  label {
     display:block;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.5rem;
     color: var(--dark-01);
 }
 
@@ -27,6 +40,37 @@ select {
     color: var(--dark-01);
     border: 1px solid var(--dark-01);
     border-radius: 5px;
+}
+
+/**
+ * Customization du input FILE 
+ */
+ /* #custom-identityProofFile {
+    padding: 10px;
+ }*/
+#custom-identityProofFilename-label{
+    text-align:center;
+    display: inline;
+}
+
+ #custom-identityProofFilename {
+     margin-left: 0.25rem;
+ }
+
+ .fileDiv {
+     text-align: left !important;
+     margin-left: 0;
+ }
+
+ label {
+    /* display:block; */
+    margin-right: 0.50rem;
+    margin-bottom: 0.25rem;
+    color: var(--dark-01);
+}
+
+#registrationSubmit {
+    margin-top: 24px;
 }
 
 .background{
@@ -85,7 +129,7 @@ select {
     border: var(--dark-01) solid 1px;
     border-radius: 5px;
     color: var(--dark-01);
-    padding: .3em 2em;
+    padding: .75em 2em;
     cursor: pointer;
     transition: .2s;
 }

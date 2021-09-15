@@ -27,7 +27,7 @@
         
         {#% Flash message %#}
         {% for message in app.flashes('danger') %}
-            <div class="flash-notice">
+            <div class="alert alert-danger">
                 {{ message }}
             </div>
         {% endfor %}
@@ -84,9 +84,36 @@
                         {{ form_row(form.type_abonnement) }}
                     <!-- /div -->
                 </div>
-                <button type="submit">Inscription</button>
+                <div class="line line-essentiel">
+                    {{ form_widget(form.rib) }}
+                </div>
+                <div class="double-line">
+                    <div class="line line-essentiel" style="text-align:center;">
+                        <!-- div class="line" -->
+                        <!-- /div -->
+                        <div class="fileDiv">
+                            <!-- label for="custom-identityProofFilename" id="custom-identityProofFilename-label"></label -->
+                            <button type="button" id="custom-identityProofFile">Pièce d'identité</button>
+                            <span id="custom-identityProofFilename">Aucun fichier</span>
+                            {{ form_widget(form.identityProofFile) }}
+                            <div id="identityProofInfos"></div>
+                        </div>
+                    </div>
+                    <div class="line line-essentiel" style="text-align:center;">
+                        <!-- div class="line" -->
+                        <!-- /div -->
+                        <div class="fileDiv">
+                            <!-- label for="custom-identityProofFilename" id="custom-identityProofFilename-label"></label -->
+                            <button type="button" id="extraitRCSFile">Extrait RCS</button>
+                            <span id="extraitRCSfilename">Aucun fichier</span>
+                            {{ form_widget(form.extraitRCSFile) }}
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" id="registrationSubmit">Inscription</button>
         </div>
         {{ form_end(form) }}
+
     </div>
 </div>
 
@@ -107,10 +134,87 @@
                 }
             }
         });
-        
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded',() => {
+            const priceIdElement = document.querySelector('.js-price-id');
+            const priceId = priceIdElement.dataset.priceId;
+            const client_type_abonnement = document.querySelector('#client_type_abonnement');
+            
+            const realFileBtn = document.querySelector('#client_identityProofFile');
+            const customBtn = document.querySelector('#custom-identityProofFile');
+            const identityProofFilename = document.querySelector('#custom-identityProofFilename');
 
-        /* for (let index = 0; index < inputList.length; index++) {
-            console.log(inputList[index]);   
-        } */
+            const client_extraitRCSFile = document.querySelector('#client_extraitRCSFile');
+            const extraitRCSFileBtn = document.querySelector('#extraitRCSFile');
+            const extraitRCSfilename = document.querySelector('#extraitRCSfilename');
+
+            console.log(priceId);
+
+            const everyLineEssentiel = Array.from(document.querySelectorAll('.line-essentiel'));
+            //Affichage des champs pièces jointes en fonction de l'abonnement choisi auparavant    
+            if(priceId == 'price_1JZs5tBW8SyIFHAgHT2LqoM7' || priceId == 'price_1JZs9wBW8SyIFHAgwZgSId5i'){
+                everyLineEssentiel.forEach(element => {
+                    element.style.display = 'inline';
+                });
+                //document.querySelector('.line-essentiel').style.display = 'inline';
+                //client_identityProofFile.required = true;
+            } else if(priceId == 'price_1JZs3OBW8SyIFHAgl3MjuPtc' || priceId == 'price_1JZs71BW8SyIFHAgnS6niVw1') {
+                everyLineEssentiel.forEach(element => {
+                    element.style.display = 'none';
+                });
+                //document.querySelector('.line-essentiel').style.display = 'none';
+                //client_identityProofFile.required = false;
+            } else {
+                everyLineEssentiel.forEach(element => {
+                    element.style.display = 'none';
+                });
+                //document.querySelector('.line-essentiel').style.display = 'none';
+                //client_identityProofFile.required = false;
+            }
+
+            //"Mise en forme du champ pièce d'identité. "   
+            customBtn.addEventListener('click', () => {
+                realFileBtn.click();
+            });
+
+            realFileBtn.addEventListener('change', () => {
+                if (realFileBtn.value) {
+                    identityProofFilename.innerHTML = realFileBtn.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+                } else {
+                    identityProofFilename.innerHTML = 'Aucun fichier';
+                }
+            })
+            
+            //"Mise en forme du champ pièce d'identité. "   
+            extraitRCSFileBtn.addEventListener('click', () => {
+                client_extraitRCSFile.click();
+            });
+
+            client_extraitRCSFile.addEventListener('change', () => {
+                if (client_extraitRCSFile.value) {
+                    extraitRCSfilename.innerHTML = client_extraitRCSFile.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+                } else {
+                    extraitRCSfilename.innerHTML = 'Aucun fichier';
+                }
+            })
+            
+            //Affichage des champs pièces jointes en fonction de la valeur du select choisie sur la page    
+            client_type_abonnement.addEventListener('change', () => {
+                if(client_type_abonnement.value == 'price_1JZs5tBW8SyIFHAgHT2LqoM7' || client_type_abonnement.value == 'price_1JZs9wBW8SyIFHAgwZgSId5i'){
+                    everyLineEssentiel.forEach(element => {
+                        element.style.display = 'inline';
+                    });
+                    //document.querySelector('.line-essentiel').style.display = 'inline';
+                    //client_identityProofFile.required = true;
+                } else if(client_type_abonnement.value == 'price_1JZs3OBW8SyIFHAgl3MjuPtc' || client_type_abonnement.value == 'price_1JZs71BW8SyIFHAgnS6niVw1') {
+                    everyLineEssentiel.forEach(element => {
+                        element.style.display = 'none';
+                    });
+                    //document.querySelector('.line-essentiel').style.display = 'none';
+                    //client_identityProofFile.required = false;
+                };
+            });
+        });
     </script>
 {% endblock %}
