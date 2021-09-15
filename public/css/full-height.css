@@ -10,7 +10,7 @@ body{
 .all-the{
     width: max-content;
     max-width: 100%;
-    margin: 2em auto;
+    margin: auto;
     color: var(--light-01);
     background: transparent;
     position: relative;
@@ -267,7 +267,7 @@ body{
 
 .notice{
     width: 20em;
-    margin: 0 auto;
+    margin: auto;
     position: relative;
     z-index: 1;
     max-width: 90%;
