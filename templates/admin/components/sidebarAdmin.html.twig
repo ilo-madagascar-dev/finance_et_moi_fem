@@ -9,42 +9,17 @@
         </li>
         <li class="tablink">
             {# <a href=""> #}
-            <a href={{ path("demfi") }} id='d'>
-                Demande de financement
+            <a href={{ path("demo_ny_aina") }}>
+                <img src={{ asset('images/Icon-awesome-list-ul.png') }} alt="">
+                Liste des agences
             </a>
         </li>
         <li class="tablink">
             {# <a href=""> #}
-            <a href={{ path("payementF") }} id='p'>
-                Paiement fractionné
+            <a href={{ path("valid") }}>
+                <img src={{ asset('images/Icon-awesome-clipboard-check.png') }} alt="">
+                Validation
             </a>
         </li>
-        <li class="tablink">
-            {# <a href=""> #}
-            <a href={{ path("suivi") }} id='s'>
-                Suivi de dossiers
-            </a>
-        </li>
-        {% if role == "ROLE_CLIENT" %}
-        <li class="tablink">
-            <div class="hoverable-li">
-                <div class="hoverable-li-title">
-                    Sous-comptes <span class="chev-down"></span>
-                </div>
-                <div class="hoverable-li-content">
-                    {# <a href=""> #}
-                    <a href={{ path("slist") }}>
-                        <img src={{ asset('images/icon/list.svg') }} alt="">
-                        Gestion des sous-comptes
-                    </a>
-                    {# <a href=""> #}
-                    <a href={{ path("sajout") }}>
-                        <img src={{ asset('images/icon/plus.svg') }} alt="">
-                        Ajouter un nouveau
-                    </a>
-                </div>
-            </div>
-        </li>
-        {% endif %}
     </ul>
 </div>
