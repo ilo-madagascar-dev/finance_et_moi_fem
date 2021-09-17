@@ -34,7 +34,7 @@ class ApiService
      return $response->toArray();
     }
     
-    public function postsousCompte($vd,$email,$telMobile,$nom,$prenom): array
+    public function postsousCompte($vd,$email,$telMobile,$nom,$prenom,$mjour=false): array
     {
         
         $response = $this->clientapi->request(
@@ -51,7 +51,7 @@ class ApiService
                 'nom'=> $nom,
                 'prenom'=>$prenom,
                 'admin'=> false,
-                'update'=>false
+                'update'=>$mjour
              ],
         ]);
         
