@@ -136,6 +136,21 @@ class Client
      * @var string|null
      */
     private $extraitRCSname;
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     * 
+     * @Vich\UploadableField(mapping="RCS", fileNameProperty="extraitRCSname")
+     * 
+     */
+    private $ribFile;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     *
+     * @var string|null
+     */
+    private $rib;
     
     /**
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
@@ -145,14 +160,19 @@ class Client
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $rib;
+    private $rcsValidated;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $fileValidation;
+    private $identityValidated;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $ribValidated;
 
     public function __construct()
     {
@@ -437,6 +457,46 @@ class Client
     {
         return $this->extraitRCSname;
     }
+
+    /**
+     * 
+     * Rib File
+     * 
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null ribFile
+     */
+    public function setRibFile($ribFile = null): Client
+    {
+        $this->ribFile = $ribFile;
+
+        if (null !== $ribFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+        return $this;
+    }
+
+    public function getRibFile()
+    {
+        return $this->ribFile;
+    }
+
+    public function setRib(?string $rib): Client
+    {
+        $this->rib = $rib;
+        return $this;
+    }
+
+    public function getRib(): ?string
+    {
+        return $this->rib;
+    }
     
     public function getUpdatedAt(): ?\DateTimeInterface
     {
@@ -446,18 +506,6 @@ class Client
     public function setUpdatedAt(\DateTimeInterface $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-        return $this;
-    }
-
-    public function getRib(): ?string
-    {
-        return $this->rib;
-    }
-
-    public function setRib(?string $rib): self
-    {
-        $this->rib = $rib;
-
         return $this;
     }
 
@@ -498,14 +546,38 @@ class Client
         return $this->identityProof;
     }
 
-    public function getFileValidation(): ?bool
+    public function getRcsValidated(): ?bool
     {
-        return $this->fileValidation;
+        return $this->rcsValidated;
     }
 
-    public function setFileValidation(?bool $fileValidation): self
+    public function setRcsValidated(?bool $rcsValidated): self
     {
-        $this->fileValidation = $fileValidation;
+        $this->rcsValidated = $rcsValidated;
+
+        return $this;
+    }
+
+    public function getIdentityValidated(): ?bool
+    {
+        return $this->identityValidated;
+    }
+
+    public function setIdentityValidated(?bool $identityValidated): self
+    {
+        $this->identityValidated = $identityValidated;
+
+        return $this;
+    }
+
+    public function getRibValidated(): ?bool
+    {
+        return $this->ribValidated;
+    }
+
+    public function setRibValidated(?bool $ribValidated): self
+    {
+        $this->ribValidated = $ribValidated;
 
         return $this;
     }

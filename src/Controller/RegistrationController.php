@@ -62,7 +62,7 @@ class RegistrationController extends AbstractController
                     return $this->redirectToRoute('registration', ['price_id' => $priceId]);
                 }
 
-                if(!$newClient->getRib()){
+                if(!$newClient->getRibFile()){
                     $this->addFlash('danger', "Vous devez absolument rentrer votre RIB !!!");
                     return $this->redirectToRoute('registration', ['price_id' => $priceId]);
                 }
@@ -84,7 +84,7 @@ class RegistrationController extends AbstractController
                 return $this->redirectToRoute('registration');
             }
             
-            //dd(__DIR__);
+            //Gestion des pièces-jointes
             if ($newClient->getIdentityProofFile()) {
                 $extension = explode('.', $newClient->getIdentityProofFile()->getClientOriginalName())[1];
                 $filename = md5(uniqid()).'_'.md5(uniqid()).'_'.md5(uniqid()).'.'.$extension;
@@ -106,8 +106,18 @@ class RegistrationController extends AbstractController
                 $newClient->setExtraitRCSFile(null);
                 $newClient->setExtraitRCSname($filename);
             }
-                $session->set('possibleNewUser', $newClient);
-                
+
+            if ($newClient->getRibFile()) {
+                $extension = explode('.', $newClient->getRibFile()->getClientOriginalName())[1];
+                $filename = md5(uniqid()).'_'.md5(uniqid()).'_'.md5(uniqid()).'.'.$extension;
+                $newClient->getRibFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/rib', $filename);
+                $newClient->setRibFile(null);
+                $newClient->setRib($filename);
+            }
+            
+            //Mise en place de l'utilisateur potentiel dans la session
+            $session->set('possibleNewUser', $newClient);
+
             if ($session->get('possibleNewUser')) 
             {
                 return $this->redirectToRoute('registration_second_step');

@@ -84,9 +84,7 @@
                         {{ form_row(form.type_abonnement) }}
                     <!-- /div -->
                 </div>
-                <div class="line line-essentiel">
-                    {{ form_widget(form.rib) }}
-                </div>
+
                 <div class="double-line">
                     <div class="line line-essentiel" style="text-align:center;">
                         <!-- div class="line" -->
@@ -109,6 +107,14 @@
                             {{ form_widget(form.extraitRCSFile) }}
                         </div>
                     </div>
+                </div>
+                <div class="line line-essentiel">
+                    <div class="fileDiv">
+                         <!-- label for="custom-identityProofFilename" id="custom-identityProofFilename-label"></label -->
+                         <button type="button" id="ribFileButton">RIB</button>
+                          <span id="ribFileName">Aucun fichier</span>
+                         {{ form_widget(form.ribFile) }}
+                     </div>
                 </div>
                 <button type="submit" id="registrationSubmit">Inscription</button>
         </div>
@@ -149,6 +155,10 @@
             const extraitRCSFileBtn = document.querySelector('#extraitRCSFile');
             const extraitRCSfilename = document.querySelector('#extraitRCSfilename');
 
+            const client_ribFile = document.querySelector('#client_ribFile');
+            const ribFileButton = document.querySelector('#ribFileButton');
+            const ribFileName = document.querySelector('#ribFileName');
+
             console.log(priceId);
 
             const everyLineEssentiel = Array.from(document.querySelectorAll('.line-essentiel'));
@@ -186,7 +196,7 @@
                 }
             })
             
-            //"Mise en forme du champ pièce d'identité. "   
+            //"Mise en forme du champ extrait RCS. "   
             extraitRCSFileBtn.addEventListener('click', () => {
                 client_extraitRCSFile.click();
             });
@@ -196,6 +206,19 @@
                     extraitRCSfilename.innerHTML = client_extraitRCSFile.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
                 } else {
                     extraitRCSfilename.innerHTML = 'Aucun fichier';
+                }
+            })
+
+            //"Mise en forme du champ ribFile. "   
+            ribFileButton.addEventListener('click', () => {
+                client_ribFile.click();
+            });
+
+            client_ribFile.addEventListener('change', () => {
+                if (client_ribFile.value) {
+                    ribFileName.innerHTML = client_ribFile.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+                } else {
+                    ribFileName.innerHTML = 'Aucun fichier';
                 }
             })
             
