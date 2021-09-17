@@ -1,0 +1,25 @@
+<link rel="stylesheet" href={{ asset("css/sidebar.css") }}>
+<div class="sidebarMenu">
+    <ul class="tablinks">
+        <li class="tablink">
+            <a href={{ path("dash") }}>
+                <img src={{ asset('images/Icon-awesome-home.png') }} alt="">
+                Tableau de bord
+            </a>
+        </li>
+        <li class="tablink">
+            {# <a href=""> #}
+            <a href={{ path("demo_ny_aina") }}>
+                <img src={{ asset('images/Icon-awesome-list-ul.png') }} alt="">
+                Liste des agences
+            </a>
+        </li>
+        <li class="tablink">
+            {# <a href=""> #}
+            <a href={{ path("valid") }}>
+                <img src={{ asset('images/Icon-awesome-clipboard-check.png') }} alt="">
+                Validation
+            </a>
+        </li>
+    </ul>
+</div>

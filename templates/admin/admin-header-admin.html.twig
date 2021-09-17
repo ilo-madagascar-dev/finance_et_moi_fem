@@ -1,0 +1,43 @@
+{% block body %}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	{# <link href= {{ asset("/css/admin.css") }} rel="stylesheet"> #}
+	<link href={{ asset("/css/admin-addStyle.css") }} rel="stylesheet">
+	<div class="header">
+		<div class="logo-container">
+			<img src={{ asset('images/FINANCE_ET_MOI.png') }} alt="logo-admin">
+		</div>
+		<div class="icon-and-link">
+			<div class="hamburger-container cross" id="hamham" onclick="toggleSide()">
+				<div class="ham-line"></div>
+				<div class="ham-line"></div>
+				<div class="ham-line"></div>
+			</div>
+			<div>
+				<p>Admin</p>
+				
+			</div>
+		</div>
+	</div>
+	
+	<script title="menu for the user">
+		let btn= document.querySelector('.clickable-thing');
+		let cont= document.querySelector('.drop-d-content');
+
+		btn.addEventListener('click', toggleThing);
+		function toggleThing(event){
+			event.stopPropagation();
+			cont.classList.toggle('act');
+		}
+		document.addEventListener('click', remThing);
+		function remThing(event){
+			cont.classList.remove('act');
+		}
+	</script>
+	<script title="hamham">
+		let ham= document.querySelector('#hamham');
+		ham.addEventListener('click', unham);
+		function unham(){
+			ham.classList.toggle('cross');
+		}
+	</script>
+{% endblock %}
