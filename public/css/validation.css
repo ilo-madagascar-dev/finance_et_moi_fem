@@ -1,0 +1,16 @@
+.flex{
+    display: flex;
+    gap: .7em;
+    padding: 20px;
+}
+.flex p{
+    font-size: 25px;
+}
+table{
+    border-collapse: collapse;
+    width: 98%;
+}
+td, th{
+    border: 1px solid;
+    padding: 10px;
+}
