@@ -149,6 +149,11 @@ class Client
      */
     private $rib;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $fileValidation;
+
     public function __construct()
     {
         $this->prets = new ArrayCollection();
@@ -491,6 +496,18 @@ class Client
     public function getIdentityProof(): ?string
     {
         return $this->identityProof;
+    }
+
+    public function getFileValidation(): ?bool
+    {
+        return $this->fileValidation;
+    }
+
+    public function setFileValidation(?bool $fileValidation): self
+    {
+        $this->fileValidation = $fileValidation;
+
+        return $this;
     }
     
 }

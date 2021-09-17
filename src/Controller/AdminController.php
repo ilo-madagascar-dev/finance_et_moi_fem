@@ -462,26 +462,20 @@ class AdminController extends AbstractController
         if (!$session->get('userConnectedVd') || !$session->get('eventuallyNewSousCompte')) {
             return $this->redirectToRoute('sajout');
         }
-        
 
-        /*
+        //Bil to show to the admin of the SousCompte
+        $price = 58.80;
+        $facture = new Facture;
         
-        $priceArray = [
-             'price_1JWc1BBW8SyIFHAgvuKoItbD',
-             'price_1JT0YJBW8SyIFHAgmEuizs6Z',
-             'price_1JWc1oBW8SyIFHAgGnAmvtyw',
-             'price_1JWc3mBW8SyIFHAg2E4YGU4c'
-        ];
- 
-         if (!in_array($priceId, $priceArray)) {
-            $this->addFlash('danger', 'Le type d\'abonnement que vous avez choisi n\'existe pas');
-            return $this->redirectToRoute('registration');
-         }
-         
-        */
+        $facture->setDateEmissionFacture(new DateTime());
+        $facture->setMontantTtcFacture($price);
+        $facture->setPourcentageTva(20);
+        $facture->setFactureAcquitee(false);
+        $session->set('facturePotentielle', $facture);
 
-        //dd($session->get('possibleNewUser'));
-        return $this->render('sous-comptes/sous-compte-second-step-creation.html.twig');
+        return $this->render('sous-comptes/sous-compte-second-step-creation.html.twig', [
+            'facture'=> $facture
+        ]);
     }
 
     /**
@@ -495,28 +489,7 @@ class AdminController extends AbstractController
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         }
-        
-        /* if ($session->get('price_id')) {
-           $priceId = $session->get('price_id');
-        } */
 
-        /* $priceArray = [
-            'price_1JWc1BBW8SyIFHAgvuKoItbD',
-            'price_1JT0YJBW8SyIFHAgmEuizs6Z',
-            'price_1JWc1oBW8SyIFHAgGnAmvtyw',
-            'price_1JWc3mBW8SyIFHAg2E4YGU4c'
-        ];
-
-        if (!in_array($priceId, $priceArray)) 
-        {
-            $this->addFlash('danger', 'Le type d\'abonnement que vous avez choisi n\'existe pas');
-            return $this->redirectToRoute('registration');
-        } */
-
-        //Local success_url :
-        //'success_url' => 'http://localhost:8000/registration/payment/success?session_id={CHECKOUT_SESSION_ID}',
-        //Production success_url :
-        //'success_url' => 'http://femcreditconso.fr/registration/payment/success?session_id={CHECKOUT_SESSION_ID}',
         $success_url = $_ENV['SOUS_COMPTE_REGISTRATION_SUCCESS_URL'];
 
         $paymentSession = \Stripe\Checkout\Session::create([
