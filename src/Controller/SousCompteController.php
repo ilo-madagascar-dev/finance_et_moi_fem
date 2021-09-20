@@ -29,7 +29,7 @@ class SousCompteController extends AbstractController
         $userVd = $this->getUser()->getClient()->getVd();
 
         $role = $this->getUser()->getRoles()[0];
-
+        
         $conClient=$souscompterepository->findOneBy(['email'=>$connUser]);
 
         $cle_groupe="1622543601638x611830994992322700";
@@ -59,36 +59,16 @@ class SousCompteController extends AbstractController
             //envoyer les modif a lenbox
             $clientsInfosFromLenbox = $apiService->postsousCompte($userConnectedVd, $souscompte->getEmail(), $souscompte->getTelMobile(), $souscompte->getNom(), $souscompte->getPrenom(), true);
 
-            //$encryptedPassword = $passwordEncoder->encodePassword($userRelatedToPotentialClient, $potentialClient->getPassword());
-
             $userRelatedToPotentialClient->setEmail($souscompte->getEmail());
-            //$userRelatedToPotentialClient->setDateCreationUtilisateur(new DateTime());
-            //$userRelatedToPotentialClient->setActive(true);
-            //$userRelatedToPotentialClient->setRoles(["ROLE_SOUSCOMPTE"]);
-/* 
-            $sous_compte->setUid($sousCompteUid);
-            $sous_compte->setUser($userRelatedToPotentialClient);
-            $sous_compte->setAbonnement($nouvelAbonnementPotentiel);
-            $sous_compte->setClient($this->getUser()->getClient());        
-            $sous_compte->setCreateAt(new DateTimeImmutable()); */
 
             $em->persist($souscompte);
             $em->flush();
-
-            /* $session->set('possibleNewSousCompte', $eventuallyNewSousCompte);
-
-            if ($session->get('possibleNewSousCompte')) 
-            {
-                return $this->redirectToRoute('sous-compte_ajout_second_step');
-            } else {
-                $this->addFlash('danger', 'Il y a eu un problème, veuillez ressoummettre le formulaire !!!');
-            } */
 
         }
         
         return $this->render('sous_compte/index.html.twig', [
             'controller_name' => 'SousCompteController',
-            'client'=>$souscompte,
+            'client'=>$this->getUser()->getClient(),
             'groupe'=>$cle_groupe,
             'userVd'=>$userVd,
             'form'=>$form->createView(),
