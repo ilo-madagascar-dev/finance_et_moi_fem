@@ -4,14 +4,13 @@
 {% endblock %}
 
 {% block body %}
-	{# <link href= {{ asset("/css/admin.css") }} rel="stylesheet"> #}
 	<link href= {{ asset("/css/admin-dash.css") }} rel="stylesheet">
 
     <div class="dash-outliner">
         {% include "admin/admin-header-admin.html.twig" %}
         <div class="dash-container sidebared">
             {% include "admin/components/sidebarAdmin.html.twig" %}
-            {% include "admin/listeDesAgences.html.twig" %}
+            {% include "admin/listeDesAgences.html.twig" with { clients: clients } only %}
         </div>
     </div>
     <div class="mobile-ham" onclick="toggleSideMobile()">

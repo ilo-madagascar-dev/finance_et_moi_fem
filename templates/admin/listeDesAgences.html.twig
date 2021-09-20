@@ -1,35 +1,81 @@
 
 <meta name="viewport" content="widht=device-widht , initial-scale=1.0">
 <link href={{ asset('css/list.css') }} rel="stylesheet">
+<link href={{ asset('css/admin-addStyle.css') }} rel="stylesheet">
 
 
 <div>
  	<h2 class="tête" f><img class="image" src={{ asset('images/icon/list-d.svg') }}>Liste des agences</h2>
 
-	<div class="bordur">
+	{# <div class="bordur">
 		<div class="grid">
 			<div>
 				<p class="paragraphe">Nom de l'agence : </p>
 			</div>
-			<div>
+			<div> #}
 			{# {{ name }}  #}
-			</div>
+			{# </div>
 		</div>
 		<div class="grid">
 			<div>
 				<p class="paragraphe">Abonnement : </p>
 			</div>
-			<div>
+			<div> #}
 			{# {{ firstname }} #}
-			</div>
+			{# </div>
 		</div>
+	</div> #}
+
+	{% for client in clients %}
+		<div class="bordur">
+			<div class="grid">
+				<div>
+					<p class="paragraphe">Nom de l'agence : </p>
+				</div>
+				<div>
+					{{ client.nom }}
+				</div>
+			</div>
+			<div class="grid">
+				<div>
+					<p class="paragraphe">Abonnement : </p>
+				</div>
+				<div>
+				{% if client.abonnement.statutPaiement == 1 %}
+					Payé
+					{% else %}
+						Non payé
+				{% endif %}
+				</div>
+			</div>
+			<div class="grid">
+				<div>
+					<p class="paragraphe">Accès au paiement fractionné :</p>
+				</div>
+				{% include "admin/components/switch.html.twig" with { attr : client.id , act: client.abonnement.statutPaiement } only %}
+			</div>
 		<style>
 			[f]{
 				display: flex;
 				gap: .7em;
 			}
 		</style>
-	</div>
+		</div>
+	{% endfor %}
+
+	{# {% for client in clients %}
+		{{client.nom}}
+		<br/>
+		<br/>
+		{% for sous in client.sousComptes %}
+			{{sous.nom}}
+		<br/>
+		{% endfor %}
+
+		------------
+	{% endfor %} #}
+
 </div>
+{% include "admin/components/switch-script.html.twig" %}
 
 		

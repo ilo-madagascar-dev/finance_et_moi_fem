@@ -1,0 +1,8 @@
+<div>
+{% if not attr %}
+    {% set attr = "0" %}
+{% endif %}
+    <div class={{ act ? "switch-cool on" : "switch-cool" }} data-id={{ attr }}>
+        <div class="switch-but"></div>
+    </div>
+</div>

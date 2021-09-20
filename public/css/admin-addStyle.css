@@ -182,6 +182,35 @@ span[green]{
     height: 4em;
 }
 
+.switch-cool{
+  width: 3em;
+  height: 1.5em;
+  background: grey;
+  border-radius: 50px;
+  transition: .3s;
+  position: relative;
+  cursor: pointer;
+  pointer-events: auto!important;
+}
+
+.switch-but{
+    height: 1.5em;
+    width: 1.5em;
+    background: var(--white--ish-01);
+    border-radius: 50px;
+    transform: scale(.95);
+    transition: .2s;
+    position: absolute;
+    left: 0;top: 0;
+}
+
+.switch-cool.on{
+    background: lime;
+}
+
+.switch-cool.on .switch-but{
+    left: 50%;
+}
 
 @media only screen and (max-width: 800px){
     .boxes-iconifiers{
