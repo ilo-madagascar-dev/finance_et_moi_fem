@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TypeAbonnement{% endblock %}
+
+{% block body %}
+    <h1>TypeAbonnement</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ type_abonnement.id }}</td>
+            </tr>
+            <tr>
+                <th>Label</th>
+                <td>{{ type_abonnement.label }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ type_abonnement.createdAt ? type_abonnement.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ type_abonnement.updatedAt ? type_abonnement.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('type_abonnement_index') }}">back to list</a>
+
+    <a href="{{ path('type_abonnement_edit', {'id': type_abonnement.id}) }}">edit</a>
+
+    {{ include('type_abonnement/_delete_form.html.twig') }}
+{% endblock %}

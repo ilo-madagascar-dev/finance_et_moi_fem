@@ -8,6 +8,7 @@ use App\Entity\Facture;
 use App\Entity\Paiement;
 use App\Entity\User;
 use App\Form\ClientType;
+use App\Repository\TypeAbonnementRepository;
 use App\Repository\UserRepository;
 use App\Service\ApiService;
 use DateTime;
@@ -139,9 +140,15 @@ class RegistrationController extends AbstractController
      */
     public function registrationSeconStep(SessionInterface $session)
     {
+        /* 
+        * Code permettant éventuellement de mieux sauvegarder le nouvel utilisateur probable dans la session
         $possibleNewClient = $session->get('possibleNewUser');
+        $session->set('possibleNewUser', $possibleNewClient);
+        */
         $fileUploadRappel = false;
         $price = 70.8;
+
+        $typeAbonnement = 1;
 
         if ($session->get('price_id')) {
             $priceId = $session->get('price_id');
@@ -261,9 +268,30 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/registration/payment/success", name="registration_payment_success")
      */
-    public function registrationPaymentSuccess(Request $request, SessionInterface $session, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, ApiService $apiService):Response
+    public function registrationPaymentSuccess(Request $request, SessionInterface $session, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, ApiService $apiService, TypeAbonnementRepository $typeAbonnementRepository):Response
     {
         $session_id = $request->get('session_id');
+        
+        /**
+         * Le priceId permettra de choisir l'abonnement équivalent dans la base de données
+         */
+        $priceId = 'price_1JZs3OBW8SyIFHAgl3MjuPtc';
+
+        if ($session->get('price_id')) {
+           $priceId = $session->get('price_id');
+        } else {
+            $this->addFlash('danger', "Aucun produit n'a été choisi");
+            return $this->redirectToRoute('registration');
+        }
+
+        $typeAbonnement = $typeAbonnementRepository->findOneBy(['price_ID' => $priceId]);
+
+        if (!$typeAbonnement) 
+        {
+            $this->addFlash('danger', "Aucun type d'abonnement n'a été choisi (ou n'existe encore dans la base de données)");
+
+            return $this->redirectToRoute('registration');
+        }
 
         Stripe::setApiKey($_ENV['STRIPE_SECRET']);
 
@@ -290,8 +318,9 @@ class RegistrationController extends AbstractController
         $nouvelAbonnementPotentiel->setStatutPaiement($stripe_session->payment_status);
         $nouvelAbonnementPotentiel->setDateDebutAbonnement(new DateTime());
         $nouvelAbonnementPotentiel->setClient($potentialClient);
+        $nouvelAbonnementPotentiel->setTypeAbonnement($typeAbonnement);
         
-        $session->set('abonnementPotentiel', $nouvelAbonnementPotentiel);
+        //$session->set('abonnementPotentiel', $nouvelAbonnementPotentiel);
        
         //Création de l'entité user relatif au client
         $userRelatedToPotentialClient = new User;
@@ -336,8 +365,8 @@ class RegistrationController extends AbstractController
         $nouvelleFacturePotentielle->setAbonnement($nouvelAbonnementPotentiel);
         $nouvelleFacturePotentielle->setPourcentageTva(20);
  
-        $session->set('facturePotentielle', $nouvelleFacturePotentielle);
-        $facturePotentielle = $session->get('facturePotentielle');
+        //$session->set('facturePotentielle', $nouvelleFacturePotentielle);
+        //$facturePotentielle = $session->get('facturePotentielle');
 
         //$em->persist($facturePotentielle);
         //$em->flush();
@@ -351,7 +380,7 @@ class RegistrationController extends AbstractController
 
         $nouvelleFacturePotentielle->addPaiement($paiement);
 
-        $em->persist($facturePotentielle);
+        $em->persist($nouvelleFacturePotentielle);
         $em->persist($potentialClient);
         $em->persist($paiement);
 
