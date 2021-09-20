@@ -1,0 +1,43 @@
+{% extends 'mqbaka_home/index.html.twig' %}
+
+{% block title %}Tableau de bord - Admin
+{% endblock %}
+
+{% block body %}
+	{# <link href= {{ asset("/css/admin.css") }} rel="stylesheet"> #}
+	<link href= {{ asset("/css/admin-dash.css") }} rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@100&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/css/stylenirina.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <div class="dash-outliner">
+        {% include "admin/admin-header.html.twig" %}
+        <div class="dash-container sidebared">
+            {% include "admin/components/sidebar.html.twig" %}
+            {% include "admin/cilentModif.html.twig" %}
+        </div>
+    </div>
+    <div class="mobile-ham" onclick="toggleSideMobile()">
+        <div class="ham-line"></div>
+        <div class="ham-line"></div>
+        <div class="ham-line"></div>
+    </div>
+    <script title="for the sidebar to show and collapse">
+
+        function toggleSide(){
+            let side= document.querySelector(".dash-container");
+            side.classList.toggle('sidebared');
+        }
+
+        function toggleSideMobile(){
+            let side= document.querySelector('.sidebarMenu');
+            let ham= document.querySelector('.mobile-ham');
+
+            ham.classList.toggle('expanded');
+            side.classList.toggle('expanded');
+        }
+    </script>
+
+{% endblock %}
