@@ -178,6 +178,18 @@
     padding: 20px 15px 0px 15px;
 }
 
+[f]{
+    display: flex;
+    gap: .7em;
+    position: sticky;
+    top: var(--header-height);
+    background: var(--white--ish-01);
+    padding: 1em 3em;
+    margin-left: 0;
+    margin-right: 0;
+    z-index: 2;
+}
+
 @media only screen and (min-width: 961px){
     .mobile-ham{
         display: none!important;

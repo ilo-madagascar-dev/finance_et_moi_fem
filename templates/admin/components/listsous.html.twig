@@ -62,18 +62,6 @@
                     {% set i= i+1 %}
                     
                 {% endfor %}
-                <style>
-                    [f]{
-                        display: flex;
-                        gap: .7em;
-                        position: sticky;
-                        top: var(--header-height);
-                        background: var(--white--ish-01);
-                        padding: 1em 3em;
-                        margin-left: 0;
-                        margin-right: 0;
-                    }
-                </style>
 
                 <a href={{ path("sajout") }} class="create-sous">
                     <img src={{ asset('images/icon/plus.svg') }} alt="">
