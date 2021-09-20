@@ -7,21 +7,6 @@
 	{# <link href= {{ asset("/css/admin.css") }} rel="stylesheet"> #}
 	<link href= {{ asset("/css/admin-dash.css") }} rel="stylesheet">
     <link href={{ asset('css/list.css') }} rel="stylesheet">
-    <style>
-        .sub-accounts a {
-            /* font-weight:bold; */
-            text-decoration: none;
-            color:  --dark-01;
-        }
-        .sub-accounts a:hover {
-            text-decoration: underline;
-            margin-top: 10px;          
-        }
-
-        .sousCompteLink {
-            padding: 20px 15px 0px 15px;
-        }
-    </style>
 
     <div class="dash-outliner">
         {% include "admin/admin-header.html.twig" %}
@@ -70,7 +55,7 @@
                             </div>
                         </div>
                         <div class="sousCompteLink">
-                            <a href={{ path("modif_sous_compte", {id: userAccount.id}) }} class="" id={{ "l-" ~ i}}>Editer le sous-compte</a>
+                            <a href={{ path("modif_sous_compte", {id: userAccount.id}) }} class="" id={{ "l-" ~ i}}>Editer le sous-compte <img class="link-pen" src={{ asset('images/icon/edit-pen-d.svg') }}></a>
                         </div>
                         <!-- a href={#{ path("saffiche", {id: userAccount.id}) }#} class="invisible linktoIt" id={#{ "l-" ~ i}#}>Voir le sous-compte</a -->
                     </div>

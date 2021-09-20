@@ -50,3 +50,16 @@ div input:focus {
 	background-color: #13141d;
 	cursor: pointer;
 }
+
+@media only screen and (max-width: 480px){
+	div form{
+		max-width: 100%;
+		border: none;
+		box-shadow: none;
+		width: unset;
+	}
+
+	div input{
+		width: 90%;
+	}
+}
