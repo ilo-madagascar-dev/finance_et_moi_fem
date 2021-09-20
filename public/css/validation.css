@@ -9,6 +9,7 @@
 table{
     border-collapse: collapse;
     width: 98%;
+    margin-left: 15px;
 }
 td, th{
     border: 1px solid;
