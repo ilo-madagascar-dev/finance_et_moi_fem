@@ -94,7 +94,8 @@ class SousCompteController extends AbstractController
     public function modifSousComptePassword(SousCompte $sousCompte, Request $request, SousCompteRepository $souscompterepository, UserRepository $userRepository, UserPasswordEncoderInterface $passwordEncoder)
     {
         $userRelatedToSousCompte = $sousCompte->getClient()->getUser();
-        
+        $userRole = $this->getUser()->getRoles()[0];
+
         if ($userRelatedToSousCompte->getId() !== $this->getUser()->getId()) {
             $this->addFlash('danger', "Ce sous-compte n'est pas le vôtre.");
             return $this->redirectToRoute('dash');
@@ -115,7 +116,8 @@ class SousCompteController extends AbstractController
 
         return $this->render('sous_compte/modif_password.html.twig',[
             'client' => $this->getUser()->getClient(),
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'role'=> $userRole
         ]);
     }
 }
