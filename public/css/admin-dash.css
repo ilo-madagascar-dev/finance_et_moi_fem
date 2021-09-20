@@ -112,9 +112,12 @@
     transition: .4s;
 }
 
-.bordur *{
+/**
+ * Temporarily commented
+ */
+/* .bordur *{
     pointer-events: none;
-}
+} */
 
 .previous{
     position: absolute;

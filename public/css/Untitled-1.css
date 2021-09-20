@@ -1,0 +1,50 @@
+@media only screen and ( max-width: 1000px){
+    .main {
+      padding: 5px;
+      margin: 25px;
+    }
+    .titre-content {
+        color: #203c76;
+        font-weight: bold;
+        font-size: 12px;
+        margin-bottom: 1em;
+        margin-left: -4em;
+        line-height: 1.5em;
+        padding: 2em;
+        padding-top: 0.1em;
+        background-color: transparent;
+    }
+    
+    .titre img {
+      height: 10em;
+      padding-left: 3em;
+      width: unset;
+    }
+    
+    .titre-2-contenu {
+      border-radius: 5em;
+      background-color: #203c76;
+      color: #fefefe;
+      font-weight: bold;
+      padding: 1.5em;
+    }
+    
+    .intro {
+      display: grid;
+      grid-template-columns: 100%;
+      padding: 20px;
+      margin: 20px;
+    }
+    #moyen-adapte{
+      margin-left: 1em;
+      margin-top: -12em;
+      width: calc(100% - 5%);
+      height: 12em
+    }
+    .avt-row{
+      display: grid;
+      grid-gap: 1em;
+      grid-template-columns: 100%;
+    }
+  
+  }

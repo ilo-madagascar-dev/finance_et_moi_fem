@@ -60,7 +60,7 @@ class SousCompte
     private $uid;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="sousCompte", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="sousCompte", cascade={"persist", "remove"}, fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;

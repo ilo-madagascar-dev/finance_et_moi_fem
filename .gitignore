@@ -28,3 +28,6 @@
 
 /public/images/extrait_rcs/**
 !/public/images/extrait_rcs/**/
+
+/public/images/rib/**
+!/public/images/rib/**/
