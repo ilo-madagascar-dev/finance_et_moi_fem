@@ -1,0 +1,14 @@
+<script title="for all the switches">
+	let sw= document.querySelectorAll(".switch-cool");
+
+	function turn__on(event) {
+		event.target.classList.toggle('on');
+        // let xmlhttp = new XMLHttpRequest;
+        // let __id= event.target.getAttribute('data-id');
+        // xmlhttp.open("get",`/SuperAdmin/valid/${__id}`);
+        // xmlhttp.send();
+	}
+	sw.forEach(element => {
+		element.addEventListener('click', turn__on);
+	});
+</script>

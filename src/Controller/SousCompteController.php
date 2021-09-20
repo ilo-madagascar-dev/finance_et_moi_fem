@@ -93,7 +93,7 @@ class SousCompteController extends AbstractController
      */
     public function modifSousComptePassword(SousCompte $sousCompte, Request $request, SousCompteRepository $souscompterepository, UserRepository $userRepository, UserPasswordEncoderInterface $passwordEncoder)
     {
-        $userRelatedToSousCompte = $sousCompte->getUser();
+        $userRelatedToSousCompte = $sousCompte->getClient()->getUser();
         
         if ($userRelatedToSousCompte->getId() !== $this->getUser()->getId()) {
             $this->addFlash('danger', "Ce sous-compte n'est pas le vôtre.");
