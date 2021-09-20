@@ -54,10 +54,10 @@
                             {{ userAccount.codePostal }}
                             </div>
                         </div>
-                        <div class="sousCompteLink">
-                            <a href={{ path("modif_sous_compte", {id: userAccount.id}) }} class="" id={{ "l-" ~ i}}>Editer le sous-compte <img class="link-pen" src={{ asset('images/icon/edit-pen-d.svg') }}></a>
+                        <div class="sousCompteLink pointer">
+                            <a href={{ path("modif_sous_compte", {id: userAccount.id}) }} class="pointer" id={{ "l-" ~ i}}>Editer le sous-compte <img class="link-pen" src={{ asset('images/icon/edit-pen-d.svg') }}></a>
                         </div>
-                        <!-- a href={#{ path("saffiche", {id: userAccount.id}) }#} class="invisible linktoIt" id={#{ "l-" ~ i}#}>Voir le sous-compte</a -->
+                        <a href={{ path("saffiche", {id: userAccount.id}) }} class="invisible linktoIt" id={{ "l-" ~ i}}>Voir le sous-compte</a>
                     </div>
                     {% set i= i+1 %}
                     
