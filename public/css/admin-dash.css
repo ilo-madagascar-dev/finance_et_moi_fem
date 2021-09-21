@@ -190,6 +190,24 @@
     z-index: 2;
 }
 
+.create-sous.thing{
+    align-self: start;
+}
+
+div.thing{
+    align-self: end;
+}
+
+.thing h2{
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+.dommage{
+    display: grid;
+    height: 100%;
+}
+
 @media only screen and (min-width: 961px){
     .mobile-ham{
         display: none!important;

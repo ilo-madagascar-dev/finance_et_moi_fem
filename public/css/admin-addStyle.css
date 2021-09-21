@@ -233,6 +233,10 @@ table.agence thead{
     top: 0; */
 }
 
+table.agence td a{
+    border: none;
+}
+
 [something]{
     border: none !important;
 }
