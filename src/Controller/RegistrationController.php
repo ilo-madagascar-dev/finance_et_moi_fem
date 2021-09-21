@@ -29,7 +29,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/registration", name="registration")
      */
-    public function index(Request $request, SessionInterface $session, UserRepository $userRepository): Response
+    public function index(Request $request, SessionInterface $session, UserRepository $userRepository, TypeAbonnementRepository $typeAbonnementRepository): Response
     {                
         $priceId = '';
 
@@ -55,6 +55,18 @@ class RegistrationController extends AbstractController
                 $priceId = $request->request->get('client')['type_abonnement'];
                 
                 $session->set('price_id', $priceId);
+            }
+
+            /**
+             * Vérification de l'existence du type d'abonnement dans la base
+             */
+            $typeAbonnement = $typeAbonnementRepository->findOneBy(['price_ID' => $priceId]);
+
+            if (!$typeAbonnement) 
+            {
+                $this->addFlash('danger', "Aucun type d'abonnement n'a été choisi (ou n'existe encore dans la base de données)");
+
+                return $this->redirectToRoute('registration');
             }
 
             if($priceId == 'price_1JZs5tBW8SyIFHAgHT2LqoM7' || $priceId == 'price_1JZs9wBW8SyIFHAgwZgSId5i'){
