@@ -205,7 +205,7 @@ span[green]{
 }
 
 .switch-cool.on{
-    background: lime;
+    background: var(--light-01);
 }
 
 .switch-cool.on .switch-but{
