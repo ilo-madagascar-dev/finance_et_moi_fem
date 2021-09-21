@@ -174,6 +174,11 @@ class Client
      */
     private $ribValidated;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $actif;
+
     public function __construct()
     {
         $this->prets = new ArrayCollection();
@@ -578,6 +583,18 @@ class Client
     public function setRibValidated(?bool $ribValidated): self
     {
         $this->ribValidated = $ribValidated;
+
+        return $this;
+    }
+
+    public function getActif(): ?int
+    {
+        return $this->actif;
+    }
+
+    public function setActif(?int $actif): self
+    {
+        $this->actif = $actif;
 
         return $this;
     }
