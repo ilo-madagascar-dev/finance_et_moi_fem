@@ -108,8 +108,10 @@ class Client
     private $sousComptes;
 
     /**
-     * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     * 
+     * @var File|null
+     * @Assert\Image(
+     *      mimeTypes={"image/jpeg", "image/png", "application/pdf"}
+     * )
      * @Vich\UploadableField(mapping="identity_proof", fileNameProperty="identityProof")
      * 
      */
@@ -123,8 +125,10 @@ class Client
     private $identityProof;
 
     /**
-     * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     * 
+     * @var File|null
+     * @Assert\Image(
+     *      mimeTypes={"image/jpeg", "image/png", "application/pdf"}
+     * )
      * @Vich\UploadableField(mapping="RCS", fileNameProperty="extraitRCSname")
      * 
      */
@@ -138,8 +142,10 @@ class Client
     private $extraitRCSname;
 
     /**
-     * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     * 
+     * @var File|null
+     * @Assert\Image(
+     *      mimeTypes={"image/jpeg", "image/png", "application/pdf"}
+     * )
      * @Vich\UploadableField(mapping="RCS", fileNameProperty="extraitRCSname")
      * 
      */
