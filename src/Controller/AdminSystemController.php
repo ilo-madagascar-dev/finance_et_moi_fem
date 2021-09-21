@@ -12,7 +12,6 @@ use App\Entity\Abonnement;
 use App\Entity\SousCompte;
 use Stripe\Checkout\Session;
 use App\Repository\UserRepository;
-use App\Repository\AdminRepository;
 use App\Repository\ClientRepository;
 use App\Repository\SousCompteRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -37,7 +36,7 @@ class AdminSystemController extends AbstractController
     /**
     * @Route("/SuperAdmin", name="Sup-admin")
     */
-    public function index(Request $request,AdminRepository $adminrepository,UserRepository $userRepository): Response
+    public function index(Request $request,UserRepository $userRepository): Response
     { 
        $nom["nom"] = "supeur Admin";
        $role[]="ROLE_SupAdmin";
@@ -50,7 +49,7 @@ class AdminSystemController extends AbstractController
     /**
     * @Route("/SuperAdmin/valid", name="Sup-admin_val")
     */
-    public function valid(AdminRepository $adminrepository,UserRepository $userRepository,ClientRepository $clientrepository): Response
+    public function valid(UserRepository $userRepository,ClientRepository $clientrepository): Response
     {
        $client=$clientrepository->findAll();
        $role[]="ROLE_SupAdmin";
@@ -63,7 +62,7 @@ class AdminSystemController extends AbstractController
 /**
     * @Route("/SuperAdmin/valid/{id}", name="Sup-admin_actif",methods={"POST|GET"})
     */
-    public function actif(Request $request,AdminRepository $adminrepository,UserRepository $userRepository,ClientRepository $clientrepository,$id): Response
+    public function actif(Request $request,UserRepository $userRepository,ClientRepository $clientrepository,$id): Response
     {
        $client=$clientrepository->find($id);
        $client->setActif(($client->getActif())?false:true);

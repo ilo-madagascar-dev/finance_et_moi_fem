@@ -20,55 +20,73 @@ class Admin
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $firstname;
+    private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $lastname;
+    private $email;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="string", length=255)
      */
-    private $createdAt;
+    private $password;
+
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="admin", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getFirstname(): ?string
+    public function getNom(): ?string
     {
-        return $this->firstname;
+        return $this->nom;
     }
 
-    public function setFirstname(string $firstname): self
+    public function setNom(string $nom): self
     {
-        $this->firstname = $firstname;
+        $this->nom = $nom;
 
         return $this;
     }
 
-    public function getLastname(): ?string
+    public function getEmail(): ?string
     {
-        return $this->lastname;
+        return $this->email;
     }
 
-    public function setLastname(string $lastname): self
+    public function setEmail(string $email): self
     {
-        $this->lastname = $lastname;
+        $this->email = $email;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getPassword(): ?string
     {
-        return $this->createdAt;
+        return $this->password;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    public function setPassword(string $password): self
     {
-        $this->createdAt = $createdAt;
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
