@@ -119,12 +119,15 @@ class SousCompteController extends AbstractController
             $userRelatedToSousCompte->setPassword($encryptedPassword);
 
             $this->em->flush();
+
+            $this->addFlash("success", "Le mot du passe du sous-compte a bien été modifié !!!!");
         }
 
         return $this->render('sous_compte/modif_password.html.twig',[
             'client' => $this->getUser()->getClient(),
             'form' => $form->createView(),
-            'role'=> $userRole
+            'role'=> $userRole,
+            'sousCompte' => $sousCompte
         ]);
     }
 }
