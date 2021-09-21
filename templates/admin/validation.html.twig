@@ -1,28 +1,54 @@
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href= {{ asset("/css/validation.css") }} rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href={{ asset("/css/validation.css") }} rel="stylesheet">
 </head>
 <div>
-    <div class="flex">
-        <img src={{asset('images/icon-awesome-clipboard-check.png')}}>
-        <p>Validation</P>
-    </div>
-    <table>
-        <tr>
-            <th>Nom de l'Agence</th>
-            <th>Nom Gerant</th>
-            <th>Prénom</th>
-            <th>Adress</th>
-            <th>Ville</th>
-            <th>Actif</th>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
+	<div class="flex">
+		<img src={{asset('images/icon-awesome-clipboard-check.png')}}>
+		<p>Validation</P>
+	</div>
+	<table>
+		<thead class="thead-dark">
+			<tr>
+				<th>Nom de l'Agence</th>
+				<th>Nom Gerant</th>
+				<th>Prénom</th>
+				<th>Adress</th>
+				<th>Actif</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for client in clients %}
+				<tr>
+					<td>{{client.nomEntreprise}}</td>
+					<td>{{client.nom}}</td>
+					<td>{{client.prenom}}</td>
+					<td>{{client.address}}</td>
+					<td>
+						<div class="container_toggle">
+							<div class="{{(client.actif)?'toggle-button active':'toggle-button'}}" data-id="{{client.id}}">
+									<div class="inner-circle"></div>
+								</div>
+							</div>
+						</td>
+					</td>
+				</tr>
+			{% endfor %}
+
+		</tbody>
+	</table>
+	<script>
+	let active = document.querySelectorAll('.toggle-button');
+	console.log(active);
+	for(let toggle of active){
+		toggle.addEventListener('click', () => {
+		    console.log("ok");
+			let xmlhttp = new XMLHttpRequest;
+			let __id= toggle.getAttribute('data-id');
+			xmlhttp.open("get",`/SuperAdmin/valid/${__id}`);
+			xmlhttp.send();
+			toggle.classList.toggle('active');
+		})
+	}
+	</script>
 </div>
