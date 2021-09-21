@@ -14,7 +14,7 @@ class ApiService
        $this->clientapi = $clientapi; 
     }
    
-    public function postLenbox($nomEntreprise,$email,$telMobile,$uniqid): array
+    public function postLenbox($nomEntreprise,$email,$telMobile,$uniqid,$mjour=false): array
     {
         
         $response = $this->clientapi->request(
@@ -28,7 +28,8 @@ class ApiService
                 'nomEntreprise'=> $nomEntreprise,
                 'email'=> $email,
                 'telMobile'=> $telMobile,
-                'uniqueId'=> $uniqid
+                'uniqueId'=> $uniqid,
+                'update'=>$mjour
              ],
         ]);
      return $response->toArray();

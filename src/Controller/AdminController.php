@@ -194,11 +194,13 @@ class AdminController extends AbstractController
             $vdScompte='';
             if ($this->getUser()->getClient()) {
                 $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+                $actifpay=$conClient->getActif();
             }
 
             if ($this->getUser()->getSousCompte()) {
                 $conClient=$sousCompteRepository->findOneBy(['email'=>$connUser]);
                 $vdScompte=$conClient->getClient()->getVd();
+                 $actifpay=$conClient->getClient()->getActif();
             }
             $cle_groupe="1622543601638x611830994992322700";
 
@@ -207,7 +209,8 @@ class AdminController extends AbstractController
                 'client'=>$conClient,
                 'Scompte'=>$vdScompte,
                 'groupe'=>$cle_groupe,
-                'role'=>$role
+                'role'=>$role,
+                'agenceActif'=>$actifpay
             ]);
         } else {
             return $this->redirectToRoute('app_login');
@@ -346,13 +349,15 @@ class AdminController extends AbstractController
             $cle_groupe="1622543601638x611830994992322700";
             $role = $this->getUser()->getRoles()[0];
             $vdScompte=$conClient->getVd();
+            $actifpay=$conClient->getActif();
             return $this->render('admin/components/monitor/monitor-payment-frac.html.twig', [
                 'controller_name' => 'Slist',
                 'client'=>$conClient,
                 'Soucompte'=>$souCompte,
                 'Scompte'=>$vdScompte,
                 'groupe'=>$cle_groupe,
-                'role'=>$role
+                'role'=>$role,
+                'agenceActif'=>$actifpay
             ]);
         } else {
             return $this->redirectToRoute('app_login');

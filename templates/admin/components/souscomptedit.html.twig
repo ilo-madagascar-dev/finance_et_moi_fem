@@ -4,7 +4,8 @@
 	<link rel="stylesheet" type="text/css" href="/css/stylenirina.css">
 </head>
 <div style="margin-top: 40px;">
-    <span class="ajout"><img src={{ asset('images/icon/edit-pen-d.svg') }} alt="">Editer un sous-compte</span><br><br>
+
+<span class="ajout"><img src={{ asset('images/icon/edit-pen-d.svg') }} alt="">Editer un sous-compte</span><br><br>
     {{ form_start(form)}}
         {{ form_widget(form.nom)}} 
         {{ form_widget(form.prenom)}} 
@@ -18,5 +19,8 @@
         
         <input type="hidden" name="uservd" value="{{ userVd }}">
         <input type="submit" value="VALIDER" id="valider"> 
-    {{ form_end(form)}} 
+    {{ form_end(form)}}
+    <div style="text-align:center; margin-bottom:40px;">
+        <a href="{{ path('sous_compte_modif_password', {id: souscompte.id}) }}">Modifier le mot de passe du sous-compte</a>
+    </div>
 </div>

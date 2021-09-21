@@ -70,6 +70,11 @@ class Abonnement
      */
     private $sousCompte;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=TypeAbonnement::class, inversedBy="abonnements", fetch="EAGER")
+     */
+    private $typeAbonnement;
+
     public function __construct()
     {
         $this->factures = new ArrayCollection();
@@ -214,6 +219,18 @@ class Abonnement
     public function setSousCompte(?SousCompte $sousCompte): self
     {
         $this->sousCompte = $sousCompte;
+
+        return $this;
+    }
+
+    public function getTypeAbonnement(): ?TypeAbonnement
+    {
+        return $this->typeAbonnement;
+    }
+
+    public function setTypeAbonnement(?TypeAbonnement $typeAbonnement): self
+    {
+        $this->typeAbonnement = $typeAbonnement;
 
         return $this;
     }
