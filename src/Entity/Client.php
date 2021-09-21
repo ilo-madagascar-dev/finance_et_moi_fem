@@ -108,10 +108,7 @@ class Client
     private $sousComptes;
 
     /**
-     * @var File|null
-     * @Assert\Image(
-     *      mimeTypes={"image/jpeg", "image/png", "application/pdf"}
-     * )
+     * 
      * @Vich\UploadableField(mapping="identity_proof", fileNameProperty="identityProof")
      * 
      */
@@ -125,10 +122,7 @@ class Client
     private $identityProof;
 
     /**
-     * @var File|null
-     * @Assert\Image(
-     *      mimeTypes={"image/jpeg", "image/png", "application/pdf"}
-     * )
+     * 
      * @Vich\UploadableField(mapping="RCS", fileNameProperty="extraitRCSname")
      * 
      */
@@ -142,10 +136,7 @@ class Client
     private $extraitRCSname;
 
     /**
-     * @var File|null
-     * @Assert\Image(
-     *      mimeTypes={"image/jpeg", "image/png", "application/pdf"}
-     * )
+     * 
      * @Vich\UploadableField(mapping="RCS", fileNameProperty="extraitRCSname")
      * 
      */
