@@ -64,11 +64,25 @@ class RegistrationController extends AbstractController
 
             if (!$typeAbonnement) 
             {
-                $this->addFlash('danger', "Aucun type d'abonnement n'a été choisi (ou n'existe encore dans la base de données)");
+                $this->addFlash('danger', "Ce type d'abonnement n'existe pas encore dans la base de données");
+
+                return $this->redirectToRoute('registration');
+            }
+            
+            //Les informations de la première étape seront enregistrées dans la premimère étape et seront flushées si l'utiliseur valide son abonnement et qu'il obtient un vd
+            //Le User relatif à ce client ne sera créé que lorsque les deux dernières étapes (càd le paiement et la création d'un compte sur Lenbox seront validées) 
+            $userExistence = $userRepository->findBy(['email' => $newClient->getEmail()]);
+            
+            if ($userExistence) {
+
+                $this->addFlash('danger', 'Cet e-mail est déjà relié à un utilisateur');
 
                 return $this->redirectToRoute('registration');
             }
 
+            /**
+             * Vérification de l'upload de pièces-jointes pour l'abonnement Essentiel
+             */
             if($priceId == 'price_1JZs5tBW8SyIFHAgHT2LqoM7' || $priceId == 'price_1JZs9wBW8SyIFHAgwZgSId5i'){
                 if(!$newClient->getIdentityProofFile()){
                     $this->addFlash('danger', "Vous devez uploader une copie de votre pièce d'identité pour l'abonnement Essentiel !!!");
@@ -86,16 +100,6 @@ class RegistrationController extends AbstractController
                 }
             }
             
-            //Les informations de la première étape seront enregistrées dans la premimère étape et seront flushées si l'utiliseur valide son abonnement et qu'il obtient un vd
-            //Le User relatif à ce client ne sera créé que lorsque les deux dernières étapes (càd le paiement et la création d'un compte sur Lenbox seront validées) 
-            $userExistence = $userRepository->findBy(['email' => $newClient->getEmail()]);
-            
-            if ($userExistence) {
-
-                $this->addFlash('danger', 'Cet e-mail est déjà relié à un utilisateur');
-
-                return $this->redirectToRoute('registration');
-            }
             
             //Gestion des pièces-jointes
             if ($newClient->getIdentityProofFile()) {
