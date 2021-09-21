@@ -49,8 +49,6 @@ class ModifClientController extends AbstractController
 
             }
             
-            //dd($clients->getNomEntreprise()." et ". $clients->getEmail(). "et" . $clients->getTelMobile()." et ".$uniqid);
-            
             try{
                 $clientsInfosFromLenbox = $apiService->postLenbox($clients->getNomEntreprise(), $clients->getEmail(), $clients->getTelMobile(), $uniqid, true);
             }
