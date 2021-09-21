@@ -212,6 +212,50 @@ span[green]{
     left: 50%;
 }
 
+.table-agences{
+    overflow: auto;
+    max-height: 100%;
+    margin: 0 1em;
+    flex-basis: 60vh;
+}
+
+.table-agences *{
+    font-family: monospace!important;
+}
+
+table.agence{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table.agence thead{
+    /* position: sticky;
+    top: 0; */
+}
+
+[something]{
+    border: none !important;
+}
+
+table.agence *{
+    border: 1px solid var(--blue-01);
+}
+
+table.agence td, table.agence th{
+    padding: .5em .8em;
+    text-align: left;
+}
+
+table.agence tr:nth-child(2n){
+    background: #8882;
+}
+
+.middle-content{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2em;
+}
+
 @media only screen and (max-width: 800px){
     .boxes-iconifiers{
         grid-template-columns: 1fr 1fr 1fr;

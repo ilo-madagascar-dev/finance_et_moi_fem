@@ -4,7 +4,7 @@
 <link href={{ asset('css/admin-addStyle.css') }} rel="stylesheet">
 
 
-<div>
+<div class="middle-content">
  	<h2 class="tête" f><img class="image" src={{ asset('images/icon/list-d.svg') }}>Liste des agences</h2>
 
 	{# <div class="bordur">
@@ -26,7 +26,46 @@
 		</div>
 	</div> #}
 
-	{% for client in clients %}
+	<div class="table-agences">
+		<table class="agence">
+			<thead>
+				<tr>
+					<th>Agence</th>
+					<th>Adresse</th>
+					<th>Etat de l'abonnement</th>
+					<th>Accès au paiement fractionné</th>
+					<th>Sous-comptes actifs</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for client in clients %}
+					<tr>
+						<td>{{ client.nom }}</td>
+						<td>{{ client.address }}</td>
+						<td>
+							{% if client.abonnement.statutPaiement == 1 %}
+								Paiement effectué
+								{% else %}
+									Paiement non effectué
+							{% endif %}
+						</td>
+						<td>
+							{% include "admin/components/switch.html.twig" with { attr : client.id , act: client.abonnement.statutPaiement } only %}
+						</td>
+						<td>
+							{% set i = 0 %}
+							{% for sous in client.sousComptes %}
+								{% set i = i + 1 %}
+							{% endfor %}
+							{{ i }}
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+	{# {% for client in clients %}
 		<div class="bordur">
 			<div class="grid">
 				<div>
@@ -61,7 +100,7 @@
 			}
 		</style>
 		</div>
-	{% endfor %}
+	{% endfor %} #}
 
 	{# {% for client in clients %}
 		{{client.nom}}
