@@ -62,7 +62,7 @@ class DemoNyAinaController extends AbstractController
     // }
 
     /**
-     * @Route("/demo/ny/valid", name="valid")
+     * @Route("/demo/ny/valid", name="valide")
      */
     public function pageValidation(ClientRepository $clientrepository,UserRepository $userRepository): Response
     {
