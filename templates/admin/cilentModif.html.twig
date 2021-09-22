@@ -10,18 +10,58 @@
 <div style="margin-top: 40px;">
     <span class="ajout" style="font-size: 17px;"><i class="fa fa-plus-circle" style="font-size: 30px;"></i><p style="font-size: 20px;">Ajouter</p> 
     </span><br><br>
-
+    {{ type.label }} <br> {{ type.priceId }}
     {{ form_start(form)}}
-        {% if type == "sub_1JZwrwBW8SyIFHAgPJO5Ba7i" %}
+    {{ form_widget(form.nom)}} 
+            {{ form_widget(form.prenom)}} 
+            {{ form_widget(form.email)}} 
+            {{ form_widget(form.nomEntreprise)}} 
+            {{ form_widget(form.address)}} 
+            {{ form_widget(form.telMobile)}}
+            {{ form_widget(form.telFixe)}} 
+            {{ form_widget(form.siren)}}
+            {# $abonnement->getPriceID() === 'price_1JZs5tBW8SyIFHAgHT2LqoM7' || $abonnement->getPriceID() === 'price_1JZs9wBW8SyIFHAgwZgSId5i' #}
+            {% if  type.priceId == "price_1JZs3OBW8SyIFHAgl3MjuPtc" or type.priceId == "price_1JZs71BW8SyIFHAgnS6niVw1"  %}
+                {% do form.identityProofFile.setRendered() %}
+                {% do form.type_abonnement.setRendered() %}
+                {% do form.extraitRCSFile.setRendered() %}
+                {% do form.ribFile.setRendered() %}
+                {% else %}
+                    {{ form_widget(form.identityProofFile)}}
+                    {% do form.type_abonnement.setRendered() %}
+                    {{ form_widget(form.extraitRCSFile)}}
+                    {{ form_widget(form.ribFile)}}
+            {% endif %}
+
+
+        {# {% if type.label == "essentiel_mensuel" or type.label == "essentiel_annuel" %}
             {{ form_widget(form.nom)}} 
             {{ form_widget(form.prenom)}} 
             {{ form_widget(form.email)}} 
-            {{ form_widget(form.telMobile)}} 
             {{ form_widget(form.nomEntreprise)}} 
             {{ form_widget(form.address)}} 
+            {{ form_widget(form.telMobile)}}
             {{ form_widget(form.telFixe)}} 
             {{ form_widget(form.siren)}}
-        {% endif %}
+            {{ form_widget(form.identityProofFile)}}
+            {{ form_widget(form.type_abonnement)}}
+            {{ form_widget(form.extraitRCSFile)}}
+            {{ form_widget(form.ribFile)}}
+        {% elseif type.label == "starter_mensuel" or type.label == "starter_annuel"  %}
+            {{ form_widget(form.nom)}} 
+            {{ form_widget(form.prenom)}} 
+            {{ form_widget(form.email)}} 
+            {{ form_widget(form.nomEntreprise)}} 
+            {{ form_widget(form.address)}} 
+            {{ form_widget(form.telMobile)}}
+            {{ form_widget(form.telFixe)}} 
+            {{ form_widget(form.siren)}}
+            {% do form.identityProofFile.setRendered() %}
+            {% do form.type_abonnement.setRendered() %}
+            {% do form.extraitRCSFile.setRendered() %}
+            {% do form.ribFile.setRendered() %}
+        
+        {% endif %} #}
         {# <input type="hidden" name="uservd" value="{{ userVd }}"> #}
         <input type="submit" value="VALIDER" id="valider"> 
     {{ form_end(form)}} 

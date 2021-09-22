@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Client;
 use App\Service\ApiService;
+use App\Form\ClientModifType;
 use App\Repository\UserRepository;
 use App\Repository\ClientRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,10 +19,16 @@ class ModifClientController extends AbstractController
      * @Route("/agence/modif/{id}", name="modif_agence")
      */
     public function modifieAgence(Client $clients, Request $request, EntityManagerInterface $em, ApiService $apiService, UserRepository $userRepository, ClientRepository $clientRep)
-    {
-        // dd($this->getUser()->getClient());
-
-        $abonnement = $this->getUser()->getClient()->getAbonnement()->getStripeSubscriptionId(); 
+    {   
+        
+        if (!$this->getUser()) {
+            # code...
+            //dd('vous devez connecté');
+            return $this->redirectToRoute('app_login');
+        }
+        
+        $abonnement = $this->getUser()->getClient()->getAbonnement()->getTypeAbonnement();
+        //dd($abonnement->getPriceID());
         $present_mail = $clients->getEmail();
 
         $form = $this->createForm(ClientModifType::class, $clients);
@@ -34,32 +41,137 @@ class ModifClientController extends AbstractController
             $userConnectedVd = $clients->getVd();
             $uniqid = $clients->getUniqid();
 
-            if( $clients->getEmail() !== $present_mail )
+            if( $abonnement->getPriceID() === 'price_1JZs3OBW8SyIFHAgl3MjuPtc' || $abonnement->getPriceID() === 'price_1JZs71BW8SyIFHAgnS6niVw1' ){
+                dd("starter io");
+                if( $clients->getEmail() !== $present_mail )
+                {
+                    $userExistence = $userRepository->findBy(['email' => $clients->getEmail()]);
+                
+                    if ($userExistence) {
+    
+                        //dd("loza !!!");
+    
+                        $this->addFlash('danger', 'Cet e-mail est déjà relié à un utilisateur');
+    
+                        return $this->redirectToRoute('modif_agence');
+                    }
+    
+                }
+                
+                try{
+                    $clientsInfosFromLenbox = $apiService->postLenbox($clients->getNomEntreprise(), $clients->getEmail(), $clients->getTelMobile(), $uniqid, true);
+                }
+                catch (Exception $e){
+                    dd('Exception reçue : ', $e->getMessage() );
+                }
+    
+                $userRelatedToPotentialClient->setEmail($clients->getEmail());
+    
+                $em->persist($clients);
+                $em->flush();
+            }
+            elseif($abonnement->getPriceID() === 'price_1JZs5tBW8SyIFHAgHT2LqoM7' || $abonnement->getPriceID() === 'price_1JZs9wBW8SyIFHAgwZgSId5i')
             {
-                $userExistence = $userRepository->findBy(['email' => $clients->getEmail()]);
-            
-                if ($userExistence) {
+                //veriffication piece jointe
 
-                    //dd("loza !!!");
-
-                    $this->addFlash('danger', 'Cet e-mail est déjà relié à un utilisateur');
-
-                    return $this->redirectToRoute('modif_agence');
+                if($clients->getIdentityProofFile()){
+                    //dd($clients->getIdentityProofFile());
+                    $this->addFlash('danger', "Vous devez uploader une copie de votre pièce d'identité pour l'abonnement Essentiel !!!");
+                    //return $this->redirectToRoute('modif_agence', ['price_id' => $priceId]);
                 }
 
-            }
-            
-            try{
-                $clientsInfosFromLenbox = $apiService->postLenbox($clients->getNomEntreprise(), $clients->getEmail(), $clients->getTelMobile(), $uniqid, true);
-            }
-            catch (Exception $e){
-                dd('Exception reçue : ', $e->getMessage() );
+                if($clients->getRibFile()){
+                    //dd($clients->getRibFile());
+                    $this->addFlash('danger', "Vous devez absolument rentrer votre RIB !!!");
+                    //return $this->redirectToRoute('modif_agence', ['price_id' => $priceId]);
+                }
+
+                if($clients->getExtraitRCSFile()){
+                    //dd($clients->getExtraitRCSFile());
+                    $this->addFlash('danger', "Vous devez absolument rentrer votre extrait RCS !!!");
+                    //return $this->redirectToRoute('modif_agence', ['price_id' => $priceId]);
+                }
+
+                //gestion des pieces jointes
+                $mimeTypeAllowed = ['application/pdf', 'image/jpeg', 'image/png'];
+                    
+                if ($clients->getIdentityProofFile()) {
+                    
+                    if(!in_array($clients->getIdentityProofFile()->getMimeType(), $mimeTypeAllowed)){
+                        $this->addFlash('danger', "Seul les fichiers de type jpeg, png et pdf sont autorisés pour la pièce d'identité !!!!");
+
+                        return $this->redirectToRoute('registration', ['price_id' => $priceId]);
+                    }
+
+                    $extension = explode('.', $clients->getIdentityProofFile()->getClientOriginalName())[1];
+                    $filename = md5(uniqid()).'_'.md5(uniqid()).'_'.md5(uniqid()).'.'.$extension;
+                    $clients->getIdentityProofFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/identityProof', $filename);
+                    $clients->setIdentityProofFile(null);
+                    $clients->setIdentityProof($filename);
+                    //dd($newClient);
+                    //$newClient->setIdentityProof(null);
+                    
+                    //dd($newClient->getIdentityProofFile());
+                    //dd(base64_decode($encodedFile));
+                    
+                }
+
+                if ($clients->getExtraitRCSFile()) {
+                    
+                    if(!in_array($clients->getExtraitRCSFile()->getMimeType(), $mimeTypeAllowed)){
+                        $this->addFlash('danger', "Seul les fichiers de type jpeg, png et pdf sont autorisés pour l'extrait RCS !!!!");
+                        return $this->redirectToRoute('registration', ['price_id' => $priceId]);
+                    }
+                    
+                    $extension = explode('.', $clients->getExtraitRCSFile()->getClientOriginalName())[1];
+                    $filename = md5(uniqid()).'_'.md5(uniqid()).'_'.md5(uniqid()).'.'.$extension;
+                    $clients->getExtraitRCSFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/extrait_rcs', $filename);
+                    $clients->setExtraitRCSFile(null);
+                    $clients->setExtraitRCSname($filename);
+                }
+
+                if ($clients->getRibFile()) {
+                    if(!in_array($clients->getRibFile()->getMimeType(), $mimeTypeAllowed)){
+                        $this->addFlash('danger', "Seul les fichiers de type jpeg, png et pdf sont autorisés pour la pièce-jointe du RIB !!!!");
+                        return $this->redirectToRoute('registration', ['price_id' => $priceId]);
+                    }
+                    
+                    $extension = explode('.', $clients->getRibFile()->getClientOriginalName())[1];
+                    $filename = md5(uniqid()).'_'.md5(uniqid()).'_'.md5(uniqid()).'.'.$extension;
+                    $clients->getRibFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/rib', $filename);
+                    $clients->setRibFile(null);
+                    $clients->setRib($filename);
+                }
+
+                dd($clients);
+                if( $clients->getEmail() !== $present_mail )
+                    {
+                        $userExistence = $userRepository->findBy(['email' => $clients->getEmail()]);
+                    
+                        if ($userExistence) {
+        
+                            $this->addFlash('danger', 'Cet e-mail est déjà relié à un utilisateur');
+        
+                            return $this->redirectToRoute('modif_agence');
+                        }
+        
+                    }
+                    
+                    try{
+                        $clientsInfosFromLenbox = $apiService->postLenbox($clients->getNomEntreprise(), $clients->getEmail(), $clients->getTelMobile(), $uniqid, true);
+                    }
+                    catch (Exception $e){
+                        dd('Exception reçue : ', $e->getMessage() );
+                    }
+                    
+        
+                    $userRelatedToPotentialClient->setEmail($clients->getEmail());
+        
+                    $em->persist($clients);
+                    $em->flush();
+                //
             }
 
-            $userRelatedToPotentialClient->setEmail($clients->getEmail());
-
-            $em->persist($clients);
-            $em->flush();
         }
 
         return $this->render('client/index.html.twig', [
