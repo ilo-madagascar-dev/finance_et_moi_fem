@@ -326,6 +326,24 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('registration');
         }
 
+        /**
+         * Montant Hors-taxe relatif à l'abonnement
+         */
+        switch ($priceId) {
+            case 'price_1JZs3OBW8SyIFHAgl3MjuPtc':
+                $montantHT = 59;
+                break;
+            case 'price_1JZs5tBW8SyIFHAgHT2LqoM7':
+                $montantHT = 89;
+                break;
+            case 'price_1JZs71BW8SyIFHAgnS6niVw1':
+                $montantHT = 590;
+                break;
+            case 'price_1JZs9wBW8SyIFHAgwZgSId5i':
+                $montantHT = 890;
+                break;
+        }
+
         $typeAbonnement = $typeAbonnementRepository->findOneBy(['price_ID' => $priceId]);
 
         if (!$typeAbonnement) 
@@ -401,6 +419,7 @@ class RegistrationController extends AbstractController
 
         $statutFacture = $stripe_session->payment_status === "paid" ? true : false;
  
+        $nouvelleFacturePotentielle->setMontantHT($montantHT);
         $nouvelleFacturePotentielle->setDateEmissionFacture(new DateTime());
         $nouvelleFacturePotentielle->setFactureAcquitee($statutFacture);
         $nouvelleFacturePotentielle->setMontantTtcFacture($stripe_session->amount_total/100);
