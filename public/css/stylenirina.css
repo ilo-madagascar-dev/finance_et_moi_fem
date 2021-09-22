@@ -1,11 +1,13 @@
 
 .ajout {
 	padding-top: 10px;
-	padding-left: 12vw;
     display: flex;
     gap: 12px;
     align-items: center;
     color: #13141d;
+	margin: auto;
+	max-width: 80%;
+	text-align: center;
 }
 
 div form {
