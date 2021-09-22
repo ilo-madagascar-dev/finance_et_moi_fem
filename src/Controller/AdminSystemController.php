@@ -57,7 +57,7 @@ class AdminSystemController extends AbstractController
     /**
     * @Route("/SuperAdmin/valid", name="Sup-admin_val")
     */
-    public function valid(UserRepository $userRepository,ClientRepository $clientrepository,): Response
+    public function valid(UserRepository $userRepository,ClientRepository $clientrepository): Response
     { 
      if($this->getUser()){
        $connUser=$this->getUser()->getEmail();
