@@ -45,7 +45,7 @@ body{
     margin-bottom: .4em;
 }
 
-form[name="change_password_form"] label{
+.inputs-re label{
     display: none;
 }
 
