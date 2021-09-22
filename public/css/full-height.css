@@ -37,7 +37,7 @@ body{
     margin: 3em auto 1em;
 }
 
-.finale-form button{
+.finale-form button, .button-togo{
     border: none;
     background: var(--white--ish-01);
     padding: 1em 3em;
@@ -50,7 +50,7 @@ body{
     transition: .3s;
 }
 
-.finale-form button:hover{
+.finale-form button:hover, .button-togo:hover{
     box-shadow: inset 0px 0px 0px 7px var(--light-01),
                 inset 0px 0px 0px 10px var(--light-01-half);
     transition: .3s;

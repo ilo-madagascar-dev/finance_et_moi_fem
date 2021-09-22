@@ -1,0 +1,144 @@
+body{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.content{
+    flex-basis: 100%;
+    position: relative;
+}
+
+.content img[alt="logo"]{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: .1;
+    z-index: 0;
+}
+
+.reset-modal{
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    max-width: 90%;
+    color: var(--dark-01);
+    padding: 3em 2.5em;
+    border-radius: 15px;
+    box-shadow: -4px 4px 5px 0px var(--dark-01-half);
+}
+
+.reset-title{
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: .4em;
+}
+
+.explain{
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: .4em;
+}
+
+form[name="change_password_form"] label{
+    display: none;
+}
+
+.inputs-re, form[name="change_password_form"]{
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    gap: 1em;
+    align-items: center;
+}
+
+.inputs-re div{
+    width: max-content;
+}
+
+.inputs-re input{
+    width: 25em;
+    padding: .7em 1em;
+    border-radius: 15px;
+    border: var(--dark-01) solid 1px;
+}
+
+.further-ex{
+    width: 25em;
+    font-size: .8em;
+}
+
+.buttons__{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.link__to__register{
+    font-size: .7em;
+    text-decoration: none;
+    color: var(--dark-01);
+    font-weight: 800;
+    transition: .4s;
+}
+
+.link__to__register:hover{
+    color: var(--light-01);
+    transition: .4s;
+}
+
+.valid-btn{
+    border: none;
+    background: var(--light-01);
+    color: var(--white--ish-01);
+    padding: .2em 1.6em;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.valid-btn:hover{
+    background: var(--dark-01);
+    transition: .4s;
+}
+
+@media only screen and (max-width: 600px){
+    body{
+        height: auto;
+        overflow: unset;
+    }
+    .reset-modal{
+        top: 0;
+        transform: translate(-50%, 5%);
+    }
+}
+
+@media only screen and (max-width: 474px){
+    .reset-modal{
+        box-shadow: none;
+        border-radius: none;
+        position: static;
+        transform: none;
+        margin: auto;
+    }
+    .content img[alt="logo"]{
+        display: none;
+    }
+    .inputs-re div{
+        max-width: 100%;
+    }
+    .inputs-re input{
+        max-width: 90vw;
+    }
+    .further-ex{
+        max-width: 90vw;
+    }
+    .buttons__{
+        width: 90vw;
+    }
+}
