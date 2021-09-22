@@ -1,8 +1,22 @@
-<div>
+<div something>
 {% if not attr %}
     {% set attr = "0" %}
 {% endif %}
-    <div class={{ act ? "switch-cool on" : "switch-cool" }} data-id={{ attr }}>
-        <div class="switch-but"></div>
+
+{% if act == 1 %}
+
+    {# <div class={{ act == 22 ? "switch-cool on" : "switch-cool" }} data-id={{ attr }}>
+        <div class="switch-but" style="pointer-events: none"></div>
+    </div> #}
+    <div class="switch-cool on" data-id={{ attr }}>
+        <div class="switch-but" style="pointer-events: none"></div>
     </div>
+    {% else %}
+    <div class="switch-cool" data-id={{ attr }}>
+        <div class="switch-but" style="pointer-events: none"></div>
+    </div>
+
+{% endif %}
+
+
 </div>

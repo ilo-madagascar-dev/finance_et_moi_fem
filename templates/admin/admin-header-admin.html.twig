@@ -12,9 +12,33 @@
 				<div class="ham-line"></div>
 				<div class="ham-line"></div>
 			</div>
-			<div>
-				<p>Admin</p>
-				
+			<div class="drop-d-icon">
+				<div class="clickable-thing">
+					<div class="icl">
+						<p> <span green></span><span>Admin</span></p>
+						<img src={{ asset('images/icon/power.svg') }} alt="">
+					</div>
+				</div>
+				<div class="drop-d-content">
+					<div class="icl">
+						<a href="#">
+							<img src={{ asset('images/icon/id-card.svg') }} alt="">
+							<p>Mon compte</p>
+						</a>
+					</div>
+					<div class="icl">
+						<a href="#">
+							<img src={{ asset('images/icon/gear.svg') }} alt="">
+							<p>Configuration</p>
+						</a>
+					</div>
+					<div class="icl">
+						<a href={{ path('app_logout') }}>
+							<img src={{ asset('images/icon/key.svg') }} alt="">
+							<p>Déconnexion</p>
+						</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

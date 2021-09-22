@@ -1,15 +1,22 @@
-{% extends 'reset_password/skeleton.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block title %}Reset your password{% endblock %}
+{% block title %}Finance et moi -- stuff{% endblock %}
+{% block stylesheets %}
+<link href={{ asset('css/stylesheet.css') }} rel="stylesheet">
+<link href={{ asset('css/colors.css') }} rel="stylesheet">
+<link href={{ asset('css/reset.css') }} rel="stylesheet">
+{% endblock %}
 
-{% block modal %}
-    <h1>Reset your password</h1>
 
-    {# {{ form_start(resetForm) }}
-        {{ form_row(resetForm.plainPassword) }}
-        <button class="btn btn-primary">Reset password</button>
-    {{ form_end(resetForm) }} #}
-    <div class="reset-modal">
+{% block body %}
+
+    {% block header %}
+        {% include "mqbaka_home/header-compact.html.twig" %}
+    {% endblock %}
+    <div class="content">
+        <img src={{ asset("images/favicon.png") }} alt="logo">
+        {% block modal %}
+            <div class="reset-modal">
                 <h3 class="reset-title">Récuperation de compte</h3>
                 <h5 class="explain">Entrez votre nouveau mot de passe</h5>
                 {{ form_start(resetForm) }}
@@ -26,4 +33,8 @@
                     </div>
                 {{ form_end(resetForm) }}
             </div>
+        {% endblock %}
+    </div>
+
+
 {% endblock %}
