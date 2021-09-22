@@ -42,7 +42,7 @@ class ModifClientController extends AbstractController
             $uniqid = $clients->getUniqid();
 
             if( $abonnement->getPriceID() === 'price_1JZs3OBW8SyIFHAgl3MjuPtc' || $abonnement->getPriceID() === 'price_1JZs71BW8SyIFHAgnS6niVw1' ){
-                dd("starter io");
+                //dd("starter io");
                 if( $clients->getEmail() !== $present_mail )
                 {
                     $userExistence = $userRepository->findBy(['email' => $clients->getEmail()]);
@@ -143,7 +143,7 @@ class ModifClientController extends AbstractController
                     $clients->setRib($filename);
                 }
 
-                dd($clients);
+                //dd($clients);
                 if( $clients->getEmail() !== $present_mail )
                     {
                         $userExistence = $userRepository->findBy(['email' => $clients->getEmail()]);
