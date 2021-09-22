@@ -57,7 +57,7 @@ class AdminSystemController extends AbstractController
     /**
     * @Route("/SuperAdmin/valid", name="Sup-admin_val")
     */
-    public function valid(UserRepository $userRepository,ClientRepository $clientrepository): Response
+    public function valid(UserRepository $userRepository,ClientRepository $clientrepository,): Response
     { 
      if($this->getUser()){
        $connUser=$this->getUser()->getEmail();
@@ -69,7 +69,7 @@ class AdminSystemController extends AbstractController
             $urlidentityProof=$_ENV['DOWNLOAD_FILE'].'identityProof/';
             $urlrib=$_ENV['DOWNLOAD_FILE'].'rib/';
             $urlextrait_rcs=$_ENV['DOWNLOAD_FILE'].'extrait_rcs/';
-            
+
             return $this->render('admin\components\listeDesAgencessous.html.twig', [
                 'controller_name' => 'AdminSystemController',
                 'clients'=>$client,
