@@ -1,7 +1,56 @@
-<h1>Facture FEM :</h1>
-<p>Nom: {{ client.nom }}</p>
-<p>Prénom: {{ client.prenom }}</p>
-<p>Montant HT : {{ facture.montantHT }} €</p>
-<p>Tva : 20%</p>
-<p>Montant TTC : {{ facture.montantTtcFacture }} €</p>
-<p>{{ facture.factureAcquitee ? 'facture acquitée':'facture non acquitée '}}</p>
+<div a>
+    <h1>Facture FEM</h1>
+    <div c>
+        <span>Nom</span><span>{{ client.nom }}</span>
+        <span>Prénom</span><span>{{ client.prenom }}</span>
+        <span>Montant HT</span><span>{{ facture.montantHT }} €</span>
+        <span>TVA</span><span>20%</span>
+        <span>Montant TTC</span><span>{{ facture.montantTtcFacture }} €</span>
+        <span>Etat de la facture</span><span>{{ facture.factureAcquitee ? 'facture acquitée':'facture non acquitée '}}</span>
+    </div>
+</div>
+<style>
+    div[a]{
+    width: 500px;
+    margin: auto;
+    max-width: 95vw;
+    padding: 1em 2em;
+    background: #1c9fd922;
+    }
+
+    [a]h1{
+    text-align: center;
+    color: #203c76;
+    }
+
+    [c]{
+    background: white;
+    border: 1px dashed black;
+    padding: 1em;
+    font-family: monospace;
+    display: grid;
+    grid-template-columns: max-content auto;
+    column-gap: .5em;
+    row-gap: .8em;
+    }
+
+    [a] [c] span{
+    position: relative;
+    }
+
+    [a] [c] span:nth-child(2n){
+    font-weight: 800;
+    text-align: right;
+    }
+
+    [a] [c] span:nth-child(2n+1)::after{
+    content:":";
+    position: absolute;
+    right: 0; top: 50%;
+    transform: translate(100%, -50%);
+    }
+
+    [a] [c] span:nth-child(2n+1){
+    padding-right: 1em;
+    }
+</style>
