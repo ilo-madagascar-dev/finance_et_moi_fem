@@ -49,6 +49,10 @@ body{
                 inset 0px 0px 0px 2px var(--light-01-half);
     transition: .3s;
 }
+.button-togo{
+    display: block;
+    margin: auto;
+}
 
 .finale-form button:hover, .button-togo:hover{
     box-shadow: inset 0px 0px 0px 7px var(--light-01),
