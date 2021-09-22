@@ -13,7 +13,7 @@
             {% include "admin/components/monitor/monitor-sidebar.html.twig" with { id: Soucompte.id} only  %}
             <div id="Demande-financement" class="Tabcontent">
                 <h2 class="content-title">{{ Soucompte.nom ~ " " ~ Soucompte.prenom }}</h2>
-                <iframe src="https://app.finnocar.com/version-test/iframe_dashboard?idgroupe={{groupe}}&idagence={{Scompte}}&idcompte={{Soucompte.uid}}" frameborder="0" allowfullscreen="true" scrolling="yes" class="iF"></iframe>
+                <iframe src="https://app.finnocar.com/iframe_dashboard?idgroupe={{groupe}}&idagence={{Scompte}}&idcompte={{Soucompte.uid}}" frameborder="0" allowfullscreen="true" scrolling="yes" class="iF"></iframe>
                 {# <iframe src="https://app.finnocar.com/iframe_form_cbnx?vd={{Scompte}}" width="300" height="600" frameborder="0" allowfullscreen="true" scrolling="no" style="width: 100%; height: 600px;"></iframe> #}
                 
                 {% include "admin/components/monitor/chevron.html.twig" %}
