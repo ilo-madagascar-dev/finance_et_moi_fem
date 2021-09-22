@@ -63,9 +63,17 @@
 							{{ i }}
 						</td>
 						<td>
-							<a href="#">file001</a>
-							<a href="#">file002</a>
-							<a href="#">file003</a>
+						{# {{ "http.." ~ client.om }} #}
+						{# {{ client.abonnement.typeAbonnement.label }} #}
+						{% if client.abonnement.typeAbonnement %}
+							{% if client.abonnement.typeAbonnement.priceID == "price_1JZs5tBW8SyIFHAgHT2LqoM7" %}
+								<a href={{urlIdentity ~ client.identityProof}} target="_blank">Cin</a>
+								<a href={{urlRib ~ client.rib}} target="_blank">Rib</a>
+								<a href={{urlExtrait_rcs ~ client.extraitRCSname}} target="_blank">Extrait Kbis</a>
+							{% else %}
+								pas de pièce jointe
+							{% endif %}
+						{% endif %}
 						</td>
 					</tr>
 				{% endfor %}

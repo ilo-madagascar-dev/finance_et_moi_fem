@@ -10,7 +10,7 @@
         {% include "admin/admin-header-admin.html.twig" %}
         <div class="dash-container sidebared">
             {% include "admin/components/sidebarAdmin.html.twig" %}
-            {% include "admin/listeDesAgences.html.twig" with { clients: clients } only %}
+            {% include "admin/listeDesAgences.html.twig" with { clients: clients, urlIdentity: urlIdentity, urlRib: urlRib, urlExtrait_rcs: urlExtrait_rcs } only %}
         </div>
     </div>
     <div class="mobile-ham" onclick="toggleSideMobile()">

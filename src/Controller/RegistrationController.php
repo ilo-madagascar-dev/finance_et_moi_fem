@@ -21,6 +21,9 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Stripe\Stripe;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Constraints\Date;
 
@@ -182,8 +185,7 @@ class RegistrationController extends AbstractController
         */
         $fileUploadRappel = false;
         $price = 70.8;
-
-        $typeAbonnement = 1;
+        $montantHT = 59;
 
         if ($session->get('price_id')) {
             $priceId = $session->get('price_id');
@@ -223,15 +225,19 @@ class RegistrationController extends AbstractController
         switch ($priceId) {
             case 'price_1JZs3OBW8SyIFHAgl3MjuPtc':
                 $price = $priceValues['starter_mensuel'];
+                $montantHT = 59;
                 break;
             case 'price_1JZs5tBW8SyIFHAgHT2LqoM7':
                 $price = $priceValues['essentiel_mensuel'];
+                $montantHT = 89;
                 break;
             case 'price_1JZs71BW8SyIFHAgnS6niVw1':
                 $price = $priceValues['starter_annuel'];
+                $montantHT = 590;
                 break;
             case 'price_1JZs9wBW8SyIFHAgwZgSId5i':
                 $price = $priceValues['essentiel_annuel'];
+                $montantHT = 890;
                 break;
         }
 
@@ -239,6 +245,7 @@ class RegistrationController extends AbstractController
         //$facture = $session->get('facturePotentielle');
         $facture = new Facture;
 
+        $facture->setMontantHT($montantHT);
         $facture->setDateEmissionFacture(new DateTime());
         $facture->setMontantTtcFacture($price);
         $facture->setPourcentageTva(20);
@@ -303,7 +310,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/registration/payment/success", name="registration_payment_success")
      */
-    public function registrationPaymentSuccess(Request $request, SessionInterface $session, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, ApiService $apiService, TypeAbonnementRepository $typeAbonnementRepository):Response
+    public function registrationPaymentSuccess(Request $request, SessionInterface $session, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, ApiService $apiService, TypeAbonnementRepository $typeAbonnementRepository, MailerInterface $mailer):Response
     {
         $session_id = $request->get('session_id');
         
@@ -317,6 +324,24 @@ class RegistrationController extends AbstractController
         } else {
             $this->addFlash('danger', "Aucun produit n'a été choisi");
             return $this->redirectToRoute('registration');
+        }
+
+        /**
+         * Montant Hors-taxe relatif à l'abonnement
+         */
+        switch ($priceId) {
+            case 'price_1JZs3OBW8SyIFHAgl3MjuPtc':
+                $montantHT = 59;
+                break;
+            case 'price_1JZs5tBW8SyIFHAgHT2LqoM7':
+                $montantHT = 89;
+                break;
+            case 'price_1JZs71BW8SyIFHAgnS6niVw1':
+                $montantHT = 590;
+                break;
+            case 'price_1JZs9wBW8SyIFHAgwZgSId5i':
+                $montantHT = 890;
+                break;
         }
 
         $typeAbonnement = $typeAbonnementRepository->findOneBy(['price_ID' => $priceId]);
@@ -394,6 +419,7 @@ class RegistrationController extends AbstractController
 
         $statutFacture = $stripe_session->payment_status === "paid" ? true : false;
  
+        $nouvelleFacturePotentielle->setMontantHT($montantHT);
         $nouvelleFacturePotentielle->setDateEmissionFacture(new DateTime());
         $nouvelleFacturePotentielle->setFactureAcquitee($statutFacture);
         $nouvelleFacturePotentielle->setMontantTtcFacture($stripe_session->amount_total/100);
@@ -420,6 +446,23 @@ class RegistrationController extends AbstractController
         $em->persist($paiement);
 
         $em->flush();
+
+        /**
+         * Envoi du e-mail au client et à l'administrateur après la création du nouvel utilisateur
+         */
+        /* $email = (new TemplatedEmail())
+            ->from(new Address('fndmfindme@gmail.com', 'Financer et moi'))
+            ->to($userRelatedToPotentialClient->getEmail())
+            ->cc('hentsraf@gmail.com')
+            ->subject("Facture d'abonnement Financer Et Moi")
+            ->htmlTemplate('billing/billing.html.twig')
+            ->context([
+                'facture' => $nouvelleFacturePotentielle,
+                'client' => $potentialClient
+            ])
+        ;
+
+        $mailer->send($email); */
 
         return $this->render('registration/successPayment.html.twig');
     }
