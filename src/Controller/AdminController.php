@@ -247,7 +247,7 @@ class AdminController extends AbstractController
         if($this->getUser()){
             $connUser=$this->getUser()->getEmail();
             $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
-            $cle_groupe="1622543601638x611830994992322700";
+            $cle_groupe="1627331075466x718359703300287400";
             $role=$this->getUser()->getRoles()[0];
             
             return $this->render('admin/components/listInfosous.html.twig', [
