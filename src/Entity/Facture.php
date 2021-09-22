@@ -50,6 +50,11 @@ class Facture
      */
     private $paiements;
 
+    /**
+     * @ORM\Column(type="decimal", precision=6, scale=2, nullable=true)
+     */
+    private $montantHT;
+
     public function __construct()
     {
         $this->paiements = new ArrayCollection();
@@ -146,6 +151,18 @@ class Facture
                 $paiement->setFacture(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMontantHT(): ?string
+    {
+        return $this->montantHT;
+    }
+
+    public function setMontantHT(?string $montantHT): self
+    {
+        $this->montantHT = $montantHT;
 
         return $this;
     }
