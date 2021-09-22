@@ -19,12 +19,12 @@ class ApiService
         
         $response = $this->clientapi->request(
             'POST',
-            'https://app.finnocar.com/version-test/api/1.1/wf/getagency',[
+            'https://app.finnocar.com/api/1.1/wf/getagency',[
             'headers' => [
                     'content-type' => 'application/json'    
             ],
             'json' => [
-                'authkey' => '1622543601638x611830994992322700',
+                'authkey' => '1627331075466x718359703300287400',
                 'nomEntreprise'=> $nomEntreprise,
                 'email'=> $email,
                 'telMobile'=> $telMobile,
@@ -40,12 +40,12 @@ class ApiService
         
         $response = $this->clientapi->request(
             'POST',
-            'https://app.finnocar.com/version-test/api/1.1/wf/getuser',[
+            'https://app.finnocar.com/api/1.1/wf/getuser',[
             'headers' => [
                     'content-type' => 'application/json'    
             ],
             'json' => [
-                'authkey' => '1622543601638x611830994992322700',
+                'authkey' => '1627331075466x718359703300287400',
                 'vd'=>$vd,
                 'email'=> $email,
                 'telMobile'=> $telMobile,
