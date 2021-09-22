@@ -5,41 +5,59 @@
 
 {% block body %}
 	{# <link href= {{ asset("/css/admin.css") }} rel="stylesheet"> #}
-	<link href= {{ asset("/css/admin-dash.css") }} rel="stylesheet">
+	<link href={{ asset("/css/admin-dash.css") }} rel="stylesheet">
 
-    <div class="dash-outliner">
-        {% include "admin/admin-header.html.twig" %}
-        <div class="dash-container sidebared">
-            {% include "admin/components/sidebar.html.twig" %}
-            <div id="Demande-financement" class="Tabcontent">
-                {# <iframe src="https://app.finnocar.com/iframe_form_cbnx?vd={{client.vd}}" frameborder="0" allowfullscreen="true" scrolling="yes" class="iF"></iframe> #}
-                {% if role == "ROLE_CLIENT" %}
-                    <iframe src="https://app.finnocar.com/iframe_form_cbnx?vd={{client.vd}}" width="300" height="600" frameborder="0" allowfullscreen="true" scrolling="no" style="width: 100%; height: 600px;"></iframe>
-                {% else %}
-                    <iframe src="https://app.finnocar.com/iframe_form_cbnx?vd={{Scompte}}" width="300" height="600" frameborder="0" allowfullscreen="true" scrolling="no" style="width: 100%; height: 600px;"></iframe>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-    <div class="mobile-ham" onclick="toggleSideMobile()">
-        <div class="ham-line"></div>
-        <div class="ham-line"></div>
-        <div class="ham-line"></div>
-    </div>
-    <script title="for the sidebar to show and collapse">
+	<div class="dash-outliner">
+		{% include "admin/admin-header.html.twig" %}
+		<div class="dash-container sidebared">
+			{% include "admin/components/sidebar.html.twig" %}
+			<div id="Demande-financement" class="Tabcontent">
+				{# <iframe src="https://app.finnocar.com/iframe_form_cbnx?vd={{client.vd}}" frameborder="0" allowfullscreen="true" scrolling="yes" class="iF"></iframe> #}
 
-        function toggleSide(){
-            let side= document.querySelector(".dash-container");
-            side.classList.toggle('sidebared');
-        }
+				{% if agenceActif !="null" and agenceActif != 0 %}
+					{% if role == "ROLE_CLIENT" %}
+						<iframe src="https://app.finnocar.com/iframe_form_cbnx?vd={{client.vd}}" width="300" height="600" frameborder="0" allowfullscreen="true" scrolling="yes" style="width: 100%; height: 600px;"></iframe>
+					{% else %}
+						<iframe src="https://app.finnocar.com/iframe_form_cbnx?vd={{Scompte}}" width="300" height="600" frameborder="0" allowfullscreen="true" scrolling="yes" style="width: 100%; height: 600px;"></iframe>
+					{% endif %}
+				{% else %}
+					<div class="dommage">
+						<div class='thing'>
+							<h2>
+								Cette page est reservée aux abonnées ayant choisi le tarif Essentiel.
+							</h2>
+							<p>
+								Votre type d'abonnement actuel ne vous permet pas d'accéder au paiement fractionné.
+							</p>
+							<p>
+								Toutefois, si vous avez choisi le type d'abonnement  <strong>Essentiel</strong> (annuel ou mensuel) et que vous voyez encore ce message, nous vous prions d'attendre que notre équipe valide votre dossier avant de vous accorder l'accès à cette page.
+							</p>
+						</div>
+						<a href={{ path("dash") }} class="create-sous thing">Retourner au tableau de bord</a>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+	<div class="mobile-ham" onclick="toggleSideMobile()">
+		<div class="ham-line"></div>
+		<div class="ham-line"></div>
+		<div class="ham-line"></div>
+	</div>
+	<script title="for the sidebar to show and collapse">
 
-        function toggleSideMobile(){
-            let side= document.querySelector('.sidebarMenu');
-            let ham= document.querySelector('.mobile-ham');
+		function toggleSide() {
+let side = document.querySelector(".dash-container");
+side.classList.toggle('sidebared');
+}
 
-            ham.classList.toggle('expanded');
-            side.classList.toggle('expanded');
-        }
-    </script>
+function toggleSideMobile() {
+let side = document.querySelector('.sidebarMenu');
+let ham = document.querySelector('.mobile-ham');
+
+ham.classList.toggle('expanded');
+side.classList.toggle('expanded');
+}
+	</script>
 
 {% endblock %}

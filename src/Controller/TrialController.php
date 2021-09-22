@@ -17,10 +17,14 @@ class TrialController extends AbstractController {
      */
     public function clientGetter(PaiementRepository $paiementRepository, ClientRepository $clientRepository, UserRepository $userRepository, AbonnementRepository $abonnementRepository, FactureRepository $factureRepository):Response
     {
-        //$user = $userRepository->find(1);
+        $user = $userRepository->find(34);
+        $usersAbonnement = $user->getClient()->getAbonnement();
+
+        dd($usersAbonnement);
+        
         //dd($user); */
 
-        $userClients = $this->getUser()->getClient()->getSouscomptes()->getValues();
+        //$userClients = $this->getUser()->getClient()->getSouscomptes()->getValues();
         //dd($userClients);
 
         //$clients = $clientRepository->find(2);
@@ -29,8 +33,8 @@ class TrialController extends AbstractController {
         //$abonnement = $abonnementRepository->findAll();
         //dd($abonnement);
         
-        $facture = $factureRepository->find(3);
-        dd($facture->getPaiements()->getValues());
+        //$facture = $factureRepository->find(3);
+        //dd($facture->getPaiements()->getValues());
         //dd($facture->getPaiements()->getKeys());
         /* $paiement = $paiementRepository->find(1);
         dd($paiement); */

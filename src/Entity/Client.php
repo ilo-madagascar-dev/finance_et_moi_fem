@@ -108,7 +108,6 @@ class Client
     private $sousComptes;
 
     /**
-     * NOTE: This is not a mapped field of entity metadata, just a simple property.
      * 
      * @Vich\UploadableField(mapping="identity_proof", fileNameProperty="identityProof")
      * 
@@ -123,7 +122,6 @@ class Client
     private $identityProof;
 
     /**
-     * NOTE: This is not a mapped field of entity metadata, just a simple property.
      * 
      * @Vich\UploadableField(mapping="RCS", fileNameProperty="extraitRCSname")
      * 
@@ -138,7 +136,6 @@ class Client
     private $extraitRCSname;
 
     /**
-     * NOTE: This is not a mapped field of entity metadata, just a simple property.
      * 
      * @Vich\UploadableField(mapping="RCS", fileNameProperty="extraitRCSname")
      * 
@@ -173,6 +170,11 @@ class Client
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $ribValidated;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $actif;
 
     public function __construct()
     {
@@ -578,6 +580,18 @@ class Client
     public function setRibValidated(?bool $ribValidated): self
     {
         $this->ribValidated = $ribValidated;
+
+        return $this;
+    }
+
+    public function getActif(): ?int
+    {
+        return $this->actif;
+    }
+
+    public function setActif(?int $actif): self
+    {
+        $this->actif = $actif;
 
         return $this;
     }

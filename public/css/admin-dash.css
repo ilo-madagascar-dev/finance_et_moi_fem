@@ -67,7 +67,7 @@
     z-index: 3;
     overflow: hidden;
 }
-.create-sous img{
+.create-sous img, .ajout img{
     width: 2em;
 }
 .create-sous::after{
@@ -112,12 +112,9 @@
     transition: .4s;
 }
 
-/**
- * Temporarily commented
- */
-/* .bordur *{
+.bordur *:not(.pointer){
     pointer-events: none;
-} */
+}
 
 .previous{
     position: absolute;
@@ -130,14 +127,6 @@
     display: flex;
     align-items: center;
 }
-/* .chev-left{
-    width: 50px;
-    height: 50px;
-    border: 16px solid var(--blue-01);
-    border-top: none;
-    border-right: none;
-    transform: rotate(45deg);
-} */
 
 .chevron-left{
     position: absolute;
@@ -154,6 +143,69 @@
 .content-title{
     width: max-content;
     margin: auto;
+}
+
+.link-pen{
+    height: 1.2em;
+    margin-left: .8em;
+}
+
+.sub-accounts a:not(.create-sous) {
+    text-decoration: none;
+    color:  var(--blue-01);
+    padding: .5em .3em;
+    position: relative;
+}
+
+.sub-accounts a:not(.create-sous)::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translate(0, 100%);
+    width: 0;
+    height: 3px;
+    transition: .4s;
+    background: var(--blue-01);
+}
+
+.sub-accounts a:hover::after{    
+    width: 100%;
+    transition: .4s;
+}
+
+.sousCompteLink {
+    padding: 20px 15px 0px 15px;
+}
+
+[f]{
+    display: flex;
+    gap: .7em;
+    position: sticky;
+    top: var(--header-height);
+    background: var(--white--ish-01);
+    padding: 1em 3em;
+    margin-left: 0;
+    margin-right: 0;
+    z-index: 2;
+}
+
+.create-sous.thing{
+    align-self: start;
+}
+
+div.thing{
+    align-self: end;
+}
+
+.thing h2{
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+.dommage{
+    display: grid;
+    height: 100%;
 }
 
 @media only screen and (min-width: 961px){

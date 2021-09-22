@@ -1,4 +1,9 @@
 <div id="Tableau-de-bord" class="Tabcontent other">
+    {% for message in app.flashes('danger') %}
+        <div style="text-align:center">
+            {{ message }}
+        </div>
+    {% endfor %}
     <div class="content-inner">
         <h2 class="content-title">Tableau de bord</h2>
         <div class="boxes-iconifiers">

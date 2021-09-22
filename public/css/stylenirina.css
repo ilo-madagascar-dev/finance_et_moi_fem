@@ -1,11 +1,13 @@
 
 .ajout {
 	padding-top: 10px;
-	padding-left: 12vw;
     display: flex;
     gap: 12px;
     align-items: center;
     color: #13141d;
+	margin: auto;
+	max-width: 80%;
+	text-align: center;
 }
 
 div form {
@@ -49,4 +51,17 @@ div input:focus {
 	color: white;
 	background-color: #13141d;
 	cursor: pointer;
+}
+
+@media only screen and (max-width: 480px){
+	div form{
+		max-width: 100%;
+		border: none;
+		box-shadow: none;
+		width: unset;
+	}
+
+	div input{
+		width: 90%;
+	}
 }

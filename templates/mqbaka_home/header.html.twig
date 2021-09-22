@@ -92,8 +92,8 @@
                             </div>
                             <div class="hoverable-content">
                                 {% if app.user %}
-                                <a href="#">
-                                    Mon profil
+                                <a href={{ path("dash") }}>
+                                    Tableau de bord
                                 </a>
                                 <a href={{ path('app_logout') }}>
                                     Déconnexion

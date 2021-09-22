@@ -182,6 +182,83 @@ span[green]{
     height: 4em;
 }
 
+.switch-cool{
+  width: 3em;
+  height: 1.5em;
+  background: grey;
+  border-radius: 50px;
+  transition: .3s;
+  position: relative;
+  cursor: pointer;
+  pointer-events: auto!important;
+}
+
+.switch-but{
+    height: 1.5em;
+    width: 1.5em;
+    background: var(--white--ish-01);
+    border-radius: 50px;
+    transform: scale(.95);
+    transition: .2s;
+    position: absolute;
+    left: 0;top: 0;
+}
+
+.switch-cool.on{
+    background: var(--light-01);
+}
+
+.switch-cool.on .switch-but{
+    left: 50%;
+}
+
+.table-agences{
+    overflow: auto;
+    max-height: 100%;
+    margin: 0 1em;
+    flex-basis: 60vh;
+}
+
+.table-agences *{
+    font-family: monospace!important;
+}
+
+table.agence{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table.agence thead{
+    /* position: sticky;
+    top: 0; */
+}
+
+table.agence td a{
+    border: none;
+}
+
+[something]{
+    border: none !important;
+}
+
+table.agence *{
+    border: 1px solid var(--blue-01);
+}
+
+table.agence td, table.agence th{
+    padding: .5em .8em;
+    text-align: left;
+}
+
+table.agence tr:nth-child(2n){
+    background: #8882;
+}
+
+.middle-content{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2em;
+}
 
 @media only screen and (max-width: 800px){
     .boxes-iconifiers{
