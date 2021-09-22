@@ -17,9 +17,8 @@
         <p>
             Vous pouvez maintenant aller vers la page de connexion.
         </p>
-        <form action="{{ path('app_login') }}" method="POST" class="finale-form">
-            <button type="submit" class="">Se connecter</button>
-        </form>
+            <button class="button-togo">Se connecter</button>
+            <a href={{ path("app_login") }} class="invisible" id="goto"></a>
     </section>
     <div class="floatters">
         <div class="floatter"></div>
@@ -33,4 +32,11 @@
         <div class="floatter"></div>
         <div class="floatter"></div>
     </div>
+    <script title="for the button">
+        let btn= document.querySelector("button-togo");
+        btn.addEventListener("click", goto);
+        function goto() {
+            document.querySelector("#goto").click();
+        }
+    </script>
 {% endblock %}
