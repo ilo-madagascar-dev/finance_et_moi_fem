@@ -64,11 +64,25 @@ class RegistrationController extends AbstractController
 
             if (!$typeAbonnement) 
             {
-                $this->addFlash('danger', "Aucun type d'abonnement n'a été choisi (ou n'existe encore dans la base de données)");
+                $this->addFlash('danger', "Ce type d'abonnement n'existe pas encore dans la base de données");
+
+                return $this->redirectToRoute('registration');
+            }
+            
+            //Les informations de la première étape seront enregistrées dans la premimère étape et seront flushées si l'utiliseur valide son abonnement et qu'il obtient un vd
+            //Le User relatif à ce client ne sera créé que lorsque les deux dernières étapes (càd le paiement et la création d'un compte sur Lenbox seront validées) 
+            $userExistence = $userRepository->findBy(['email' => $newClient->getEmail()]);
+            
+            if ($userExistence) {
+
+                $this->addFlash('danger', 'Cet e-mail est déjà relié à un utilisateur');
 
                 return $this->redirectToRoute('registration');
             }
 
+            /**
+             * Vérification de l'upload de pièces-jointes pour l'abonnement Essentiel
+             */
             if($priceId == 'price_1JZs5tBW8SyIFHAgHT2LqoM7' || $priceId == 'price_1JZs9wBW8SyIFHAgwZgSId5i'){
                 if(!$newClient->getIdentityProofFile()){
                     $this->addFlash('danger', "Vous devez uploader une copie de votre pièce d'identité pour l'abonnement Essentiel !!!");
@@ -86,19 +100,17 @@ class RegistrationController extends AbstractController
                 }
             }
             
-            //Les informations de la première étape seront enregistrées dans la premimère étape et seront flushées si l'utiliseur valide son abonnement et qu'il obtient un vd
-            //Le User relatif à ce client ne sera créé que lorsque les deux dernières étapes (càd le paiement et la création d'un compte sur Lenbox seront validées) 
-            $userExistence = $userRepository->findBy(['email' => $newClient->getEmail()]);
-            
-            if ($userExistence) {
-
-                $this->addFlash('danger', 'Cet e-mail est déjà relié à un utilisateur');
-
-                return $this->redirectToRoute('registration');
-            }
             
             //Gestion des pièces-jointes
+            $mimeTypeAllowed = ['application/pdf', 'image/jpeg', 'image/png'];
             if ($newClient->getIdentityProofFile()) {
+                
+                if(!in_array($newClient->getIdentityProofFile()->getMimeType(), $mimeTypeAllowed)){
+                    $this->addFlash('danger', "Seul les fichiers de type jpeg, png et pdf sont autorisés pour la pièce d'identité !!!!");
+
+                    return $this->redirectToRoute('registration', ['price_id' => $priceId]);
+                }
+
                 $extension = explode('.', $newClient->getIdentityProofFile()->getClientOriginalName())[1];
                 $filename = md5(uniqid()).'_'.md5(uniqid()).'_'.md5(uniqid()).'.'.$extension;
                 $newClient->getIdentityProofFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/identityProof', $filename);
@@ -113,6 +125,12 @@ class RegistrationController extends AbstractController
             }
 
             if ($newClient->getExtraitRCSFile()) {
+                
+                if(!in_array($newClient->getExtraitRCSFile()->getMimeType(), $mimeTypeAllowed)){
+                    $this->addFlash('danger', "Seul les fichiers de type jpeg, png et pdf sont autorisés pour l'extrait RCS !!!!");
+                    return $this->redirectToRoute('registration', ['price_id' => $priceId]);
+                }
+                
                 $extension = explode('.', $newClient->getExtraitRCSFile()->getClientOriginalName())[1];
                 $filename = md5(uniqid()).'_'.md5(uniqid()).'_'.md5(uniqid()).'.'.$extension;
                 $newClient->getExtraitRCSFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/extrait_rcs', $filename);
@@ -121,6 +139,11 @@ class RegistrationController extends AbstractController
             }
 
             if ($newClient->getRibFile()) {
+                if(!in_array($newClient->getRibFile()->getMimeType(), $mimeTypeAllowed)){
+                    $this->addFlash('danger', "Seul les fichiers de type jpeg, png et pdf sont autorisés pour la pièce-jointe du RIB !!!!");
+                    return $this->redirectToRoute('registration', ['price_id' => $priceId]);
+                }
+                
                 $extension = explode('.', $newClient->getRibFile()->getClientOriginalName())[1];
                 $filename = md5(uniqid()).'_'.md5(uniqid()).'_'.md5(uniqid()).'.'.$extension;
                 $newClient->getRibFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/rib', $filename);

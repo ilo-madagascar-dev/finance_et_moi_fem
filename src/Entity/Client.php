@@ -108,7 +108,6 @@ class Client
     private $sousComptes;
 
     /**
-     * NOTE: This is not a mapped field of entity metadata, just a simple property.
      * 
      * @Vich\UploadableField(mapping="identity_proof", fileNameProperty="identityProof")
      * 
@@ -123,7 +122,6 @@ class Client
     private $identityProof;
 
     /**
-     * NOTE: This is not a mapped field of entity metadata, just a simple property.
      * 
      * @Vich\UploadableField(mapping="RCS", fileNameProperty="extraitRCSname")
      * 
@@ -138,7 +136,6 @@ class Client
     private $extraitRCSname;
 
     /**
-     * NOTE: This is not a mapped field of entity metadata, just a simple property.
      * 
      * @Vich\UploadableField(mapping="RCS", fileNameProperty="extraitRCSname")
      * 
