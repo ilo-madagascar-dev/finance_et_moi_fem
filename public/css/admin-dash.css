@@ -66,6 +66,9 @@
     position: relative;
     z-index: 3;
     overflow: hidden;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
 }
 .create-sous img, .ajout img{
     width: 2em;
@@ -194,6 +197,11 @@
     align-self: start;
 }
 
+.create-sous.left{
+    margin: unset;
+    margin-right: auto;
+}
+
 div.thing{
     align-self: end;
 }
@@ -206,6 +214,78 @@ div.thing{
 .dommage{
     display: grid;
     height: 100%;
+}
+
+table.table{
+    border-collapse: collapse;
+    margin: auto;
+}
+
+table.table *{
+    font-family: monospace;
+    text-decoration: none;
+}
+
+table.table td, table.table th{
+    padding: .5em 1em;
+    border: 1px solid var(--blue-01);
+}
+
+table.table td img{
+    width: 1.4em;
+    margin: .5em;
+    opacity: .8;
+    transition: .4s;
+}
+
+table.table td img:hover{
+    opacity: 1;
+    transition: .4s;
+}
+
+.contents h1{
+    text-align: center;
+    margin: 1.5em 0;
+}
+
+.flex-line{
+    display: flex;
+    gap: 1em;
+    width: max-content;
+    margin: 1em auto;
+}
+
+.flex-line .create-sous{
+    margin: 0;
+    height: 100%;
+}
+
+.chevleft{
+    display: inline-block;
+    width: 1em; height: 1em;
+    border: 4px solid var(--white--ish-01);
+    border-right: transparent;
+    border-top: transparent;
+    transform: rotate(45deg) scale(.8);
+}
+
+form[name="type_abonnement"]{
+    width: max-content;
+    margin: auto;
+}
+
+form[name="type_abonnement"] #type_abonnement div{
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    align-items: center;
+    margin: 1em 0;
+}
+
+form[name="type_abonnement"] #type_abonnement div input{
+    border: 1px solid var(--blue-01);
+    padding: .5em 1em;
+    border-radius: 15px;
 }
 
 @media only screen and (min-width: 961px){
@@ -260,6 +340,13 @@ div.thing{
     }
     to{
         transform: translate(0);
+    }
+}
+
+@media only screen and (max-width: 550px){
+    .flex-line{
+        flex-direction: column;
+        align-items: center;
     }
 }
 

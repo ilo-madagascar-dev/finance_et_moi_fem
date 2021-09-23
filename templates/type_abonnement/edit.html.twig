@@ -1,13 +1,44 @@
-{% extends 'base.html.twig' %}
+{% extends 'mqbaka_home/index.html.twig' %}
 
-{% block title %}Edit TypeAbonnement{% endblock %}
+{% block title %}Modifier un type d'abonnement{% endblock %}
+
 
 {% block body %}
-    <h1>Edit TypeAbonnement</h1>
+	<link href= {{ asset("/css/admin-dash.css") }} rel="stylesheet">
 
-    {{ include('type_abonnement/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="dash-outliner">
+        {% include "admin/admin-header-admin.html.twig" %}
+        <div class="dash-container sidebared">
+            {% include "admin/components/sidebarAdmin.html.twig" %}
+            <div class="contents">
+                <h1>Modifier type d'abonnement</h1>
 
-    <a href="{{ path('type_abonnement_index') }}">back to list</a>
+                {{ include('type_abonnement/_form.html.twig', {'button_label': 'Update'}) }}
 
-    {{ include('type_abonnement/_delete_form.html.twig') }}
+                {{ include('type_abonnement/_delete_form.html.twig') }}
+
+            </div>
+        </div>
+    </div>
+    <div class="mobile-ham" onclick="toggleSideMobile()">
+        <div class="ham-line"></div>
+        <div class="ham-line"></div>
+        <div class="ham-line"></div>
+    </div>
+    <script title="for the sidebar to show and collapse">
+
+        function toggleSide(){
+            let side= document.querySelector(".dash-container");
+            side.classList.toggle('sidebared');
+        }
+
+        function toggleSideMobile(){
+            let side= document.querySelector('.sidebarMenu');
+            let ham= document.querySelector('.mobile-ham');
+
+            ham.classList.toggle('expanded');
+            side.classList.toggle('expanded');
+        }
+    </script>
+
 {% endblock %}

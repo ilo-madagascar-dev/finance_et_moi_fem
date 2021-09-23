@@ -15,6 +15,9 @@ body{
     background: transparent;
     position: relative;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
 }
 
 .all-the *{
@@ -26,6 +29,8 @@ body{
     margin-bottom: .4em;
     width: max-content;
     margin: auto;
+    max-width: 90vw;
+    text-align: center;
 }
 
 .all-the p{
@@ -52,6 +57,13 @@ body{
 .button-togo{
     display: block;
     margin: auto;
+}
+
+a.button-togo{
+    display: block;
+    width: max-content;
+    margin: auto;
+    text-decoration: none;
 }
 
 .finale-form button:hover, .button-togo:hover{

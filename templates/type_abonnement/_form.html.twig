@@ -1,4 +1,7 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div class="flex-line">
+        <a href="{{ path('type_abonnement_index') }}" class="create-sous"><div class="chevleft"></div> Retour à la liste</a>
+        <button class="create-sous">{{ button_label|default('Save') }}</button>
+    </div>
 {{ form_end(form) }}
