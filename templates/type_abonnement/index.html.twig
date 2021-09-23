@@ -1,39 +1,73 @@
-{% extends 'base.html.twig' %}
+{% extends 'mqbaka_home/index.html.twig' %}
 
-{% block title %}TypeAbonnement index{% endblock %}
+{% block title %}Types d'abonnement
+{% endblock %}
 
 {% block body %}
-    <h1>TypeAbonnement index</h1>
+	<link href= {{ asset("/css/admin-dash.css") }} rel="stylesheet">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Label</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for type_abonnement in type_abonnements %}
-            <tr>
-                <td>{{ type_abonnement.id }}</td>
-                <td>{{ type_abonnement.label }}</td>
-                <td>{{ type_abonnement.createdAt ? type_abonnement.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ type_abonnement.updatedAt ? type_abonnement.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('type_abonnement_show', {'id': type_abonnement.id}) }}">show</a>
-                    <a href="{{ path('type_abonnement_edit', {'id': type_abonnement.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="dash-outliner">
+        {% include "admin/admin-header-admin.html.twig" %}
+        <div class="dash-container sidebared">
+            {% include "admin/components/sidebarAdmin.html.twig" %}
+            <div class="contents">
+                <h1>Types d'abonnements</h1>
 
-    <a href="{{ path('type_abonnement_new') }}">Create new</a>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Label</th>
+                            <th>CreatedAt</th>
+                            <th>UpdatedAt</th>
+                            <th>actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for type_abonnement in type_abonnements %}
+                        <tr>
+                            <td>{{ type_abonnement.id }}</td>
+                            <td>{{ type_abonnement.label }}</td>
+                            <td>{{ type_abonnement.createdAt ? type_abonnement.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ type_abonnement.updatedAt ? type_abonnement.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                            <td icons>
+                                <a href="{{ path('type_abonnement_show', {'id': type_abonnement.id}) }}" title="Détails">
+                                    <img src={{ asset('images/icon/view-d.svg') }} alt="">
+                                </a>
+                                <a href="{{ path('type_abonnement_edit', {'id': type_abonnement.id}) }}" title="Editer"><img src={{ asset('images/icon/edit-pen-d.svg') }} alt=""></a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">Il n'y a encore aucun type d'abonnement dans la base de données</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <a href="{{ path('type_abonnement_new') }}" class="create-sous"><img src={{ asset('images/icon/plus.svg') }} alt="">Ajouter</a>
+            </div>
+        </div>
+    </div>
+    <div class="mobile-ham" onclick="toggleSideMobile()">
+        <div class="ham-line"></div>
+        <div class="ham-line"></div>
+        <div class="ham-line"></div>
+    </div>
+    <script title="for the sidebar to show and collapse">
+
+        function toggleSide(){
+            let side= document.querySelector(".dash-container");
+            side.classList.toggle('sidebared');
+        }
+
+        function toggleSideMobile(){
+            let side= document.querySelector('.sidebarMenu');
+            let ham= document.querySelector('.mobile-ham');
+
+            ham.classList.toggle('expanded');
+            side.classList.toggle('expanded');
+        }
+    </script>
+
 {% endblock %}

@@ -1,34 +1,68 @@
-{% extends 'base.html.twig' %}
+{% extends 'mqbaka_home/index.html.twig' %}
 
-{% block title %}TypeAbonnement{% endblock %}
+{% block title %}Types d'abonnement
+{% endblock %}
 
 {% block body %}
-    <h1>TypeAbonnement</h1>
+	<link href= {{ asset("/css/admin-dash.css") }} rel="stylesheet">
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ type_abonnement.id }}</td>
-            </tr>
-            <tr>
-                <th>Label</th>
-                <td>{{ type_abonnement.label }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ type_abonnement.createdAt ? type_abonnement.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ type_abonnement.updatedAt ? type_abonnement.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="dash-outliner">
+        {% include "admin/admin-header-admin.html.twig" %}
+        <div class="dash-container sidebared">
+            {% include "admin/components/sidebarAdmin.html.twig" %}
+            <div class="contents">
+                <h1>TypeAbonnement</h1>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ type_abonnement.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Label</th>
+                            <td>{{ type_abonnement.label }}</td>
+                        </tr>
+                        <tr>
+                            <th>CreatedAt</th>
+                            <td>{{ type_abonnement.createdAt ? type_abonnement.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>UpdatedAt</th>
+                            <td>{{ type_abonnement.updatedAt ? type_abonnement.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-    <a href="{{ path('type_abonnement_index') }}">back to list</a>
+                <div class="flex-line">
+                    <a href="{{ path('type_abonnement_index') }}" class="create-sous"> <div class="chevleft"></div> Retour à la liste</a>
 
-    <a href="{{ path('type_abonnement_edit', {'id': type_abonnement.id}) }}">edit</a>
+                    <a href="{{ path('type_abonnement_edit', {'id': type_abonnement.id}) }}" class="create-sous">Editer</a>
 
-    {{ include('type_abonnement/_delete_form.html.twig') }}
+                    {{ include('type_abonnement/_delete_form.html.twig') }}
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="mobile-ham" onclick="toggleSideMobile()">
+        <div class="ham-line"></div>
+        <div class="ham-line"></div>
+        <div class="ham-line"></div>
+    </div>
+    <script title="for the sidebar to show and collapse">
+
+        function toggleSide(){
+            let side= document.querySelector(".dash-container");
+            side.classList.toggle('sidebared');
+        }
+
+        function toggleSideMobile(){
+            let side= document.querySelector('.sidebarMenu');
+            let ham= document.querySelector('.mobile-ham');
+
+            ham.classList.toggle('expanded');
+            side.classList.toggle('expanded');
+        }
+    </script>
+
 {% endblock %}

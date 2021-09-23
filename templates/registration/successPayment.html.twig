@@ -17,8 +17,7 @@
         <p>
             Vous pouvez maintenant aller vers la page de connexion.
         </p>
-            <button class="button-togo">Se connecter</button>
-            <a href={{ path("app_login") }} class="invisible" id="goto"></a>
+            <a href={{ path("app_login") }} class="button-togo" id="goto">Se connecter</a>
     </section>
     <div class="floatters">
         <div class="floatter"></div>
@@ -32,11 +31,4 @@
         <div class="floatter"></div>
         <div class="floatter"></div>
     </div>
-    <script title="for the button">
-        let btn= document.querySelector("button-togo");
-        btn.addEventListener("click", goto);
-        function goto() {
-            document.querySelector("#goto").click();
-        }
-    </script>
 {% endblock %}
