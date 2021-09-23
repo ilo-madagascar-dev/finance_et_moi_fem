@@ -243,6 +243,10 @@ table.table td img:hover{
     transition: .4s;
 }
 
+table.table tr:nth-child(2n){
+    background: #7771;
+}
+
 .contents h1{
     text-align: center;
     margin: 1.5em 0;
