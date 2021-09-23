@@ -450,7 +450,7 @@ class RegistrationController extends AbstractController
         /**
          * Envoi du e-mail au client et à l'administrateur après la création du nouvel utilisateur
          */
-        /* $email = (new TemplatedEmail())
+        $email = (new TemplatedEmail())
             ->from(new Address('fndmfindme@gmail.com', 'Financer et moi'))
             ->to($userRelatedToPotentialClient->getEmail())
             ->cc('hentsraf@gmail.com')
@@ -462,7 +462,7 @@ class RegistrationController extends AbstractController
             ])
         ;
 
-        $mailer->send($email); */
+        $mailer->send($email);
 
         return $this->render('registration/successPayment.html.twig');
     }
