@@ -17,16 +17,16 @@
     {% include "mqbaka_home/header-compact.html.twig" %}
 
     <form method="post" class="login-form">
-        {% if error %}
-            <div class="login-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
-
-        {% if app.user %}
-            <div class="already-logged">
-                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-            </div>
-        {% endif %}
         <div class="login-inner">
+            {% if error %}
+                <div class="login-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            {% if app.user %}
+                <div class="already-logged">
+                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            {% endif %}
             <div class="main-form">
                 <h1 class="login-title">
                     Se connecter

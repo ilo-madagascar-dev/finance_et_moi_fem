@@ -159,6 +159,17 @@ a.button-togo{
     grid-template-columns: 4fr 3fr;
     padding: 0em 4em;
     box-sizing: border-box;
+    position: relative;
+}
+
+.login-error, .already-logged{
+    position: absolute;
+    top: 0;
+    left: 4em;
+    padding: 1.5em 2em;
+    background: var(--dark-01);
+    border-radius: 15px;
+    color: var(--white--ish-01);
 }
 
 .main-form{
