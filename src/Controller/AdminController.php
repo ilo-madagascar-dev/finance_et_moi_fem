@@ -472,6 +472,7 @@ class AdminController extends AbstractController
         $price = 58.80;
         $facture = new Facture;
         
+        $facture->setMontantHT(49);
         $facture->setDateEmissionFacture(new DateTime());
         $facture->setMontantTtcFacture($price);
         $facture->setPourcentageTva(20);

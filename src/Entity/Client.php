@@ -176,6 +176,11 @@ class Client
      */
     private $actif;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $statutJuridique;
+
     public function __construct()
     {
         $this->prets = new ArrayCollection();
@@ -592,6 +597,18 @@ class Client
     public function setActif(?int $actif): self
     {
         $this->actif = $actif;
+
+        return $this;
+    }
+
+    public function getStatutJuridique(): ?string
+    {
+        return $this->statutJuridique;
+    }
+
+    public function setStatutJuridique(string $statutJuridique): self
+    {
+        $this->statutJuridique = $statutJuridique;
 
         return $this;
     }
