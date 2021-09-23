@@ -46,7 +46,7 @@ class ClientModifType extends AbstractType
                 'required' => false,
                 'attr' => array(
                     'placeholder' => 'Nom de votre entreprise',
-                    'hidden' => 'hidden'
+                    //'hidden' => 'hidden'
                 )
             ])
             ->add('telMobile', TextType::class, [
@@ -91,7 +91,7 @@ class ClientModifType extends AbstractType
                 'required' => false,
                 'attr' => array(
                     'placeholder' => 'Nom de votre entreprise',
-                    'hidden' => 'hidden'
+                    //'hidden' => 'hidden'
                 )
             ])
             ->add('ribFile', FileType::class, [
@@ -99,7 +99,7 @@ class ClientModifType extends AbstractType
                 'required' => false,
                 'attr' => array(
                     'placeholder' => 'Nom de votre entreprise',
-                    'hidden' => 'hidden'
+                    //'hidden' => 'hidden'
                 )
             ])
         ;

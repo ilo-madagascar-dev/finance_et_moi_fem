@@ -18,7 +18,7 @@ class ResetViewController extends AbstractController
     {
         $form = $this->createForm(ChangePasswordFormType::class);
         // $form->handleRequest($request);
-        return $this->render('reset_password/skeleton.html.twig', [
+        return $this->render('reset_password/reset.html.twig', [
             'controller_name' => 'ResetViewController',
             'resetForm' => $form->createView(),
         ]);

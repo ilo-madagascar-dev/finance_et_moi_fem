@@ -22,7 +22,7 @@ div form {
 	margin-bottom: 70px;
 }
 
-div input {
+div input, div select {
 	width: 350px;
 	border-top: 0px;
 	border-left: 0px;

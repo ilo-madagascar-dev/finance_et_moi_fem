@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block title %}Reset your password{% endblock %}
 
@@ -19,4 +19,34 @@
 
         <button class="btn btn-primary">Send password reset email</button>
     {{ form_end(requestForm) }}
+{% endblock %} #}
+
+{% extends 'reset_password/skeleton.html.twig' %}
+
+{% block title %}Récuperation de compte{% endblock %}
+
+{% block modal %}
+
+    {# {{ form_start(resetForm) }}
+        {{ form_row(resetForm.plainPassword) }}
+        <button class="btn btn-primary">Reset password</button>
+    {{ form_end(resetForm) }} #}
+    <div class="reset-modal">
+                <h3 class="reset-title">Récuperation de compte</h3>
+                <h5 class="explain">Saisisser votre adresse e-mail</h5>
+                {{ form_start(requestForm) }}
+                    <div class="inputs-re">
+                        {{ form_row(requestForm.email) }}
+                    </div>
+    
+                    <p class="further-ex" style="margin-bottom: 20px;">
+                        <strong>•</strong> S'il ne s'agit pas de votre ordinateur, utilisez une fenêtre de navigation privée pour vous connecter.
+                    </p>
+                    <div class="buttons__">
+                        <a href={{ path("registration") }} class="link__to__register">Créer un compte</a>
+                        <button class="valid-btn">Suivant</button>
+                    </div>
+                {{ form_end(requestForm) }}
+            </div>
 {% endblock %}
+

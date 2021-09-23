@@ -1,0 +1,22 @@
+<head>
+	<meta charset="utf-8">
+	<title>Ajouter un sous-compte</title>
+	<link rel="stylesheet" type="text/css" href="/css/stylenirina.css">
+</head>
+<div style="margin-top: 40px;">
+    <span class="ajout"><img src={{ asset('images/icon/plus-d.svg') }} alt="">Ajouter un sous-compte</span><br><br>
+    {{ form_start(form)}}
+        {{ form_widget(form.nom) }}
+            {{ form_widget(form.prenom) }}
+            {{ form_widget(form.email) }}
+            {{ form_widget(form.nomEntreprise) }}
+            {{ form_widget(form.address) }}
+            {{ form_widget(form.telMobile) }}
+            {{ form_widget(form.telFixe) }}
+            {{ form_widget(form.siren) }}
+            {{ form_widget(form.extraitRCSFile) }}
+            {{ form_widget(form.ribFile) }}
+            {{ form_widget(form.type_abonnement) }}
+        <input type="submit" value="VALIDER" id="valider"> 
+    {{ form_end(form)}} 
+</div>
