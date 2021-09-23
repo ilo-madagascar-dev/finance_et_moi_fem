@@ -137,7 +137,7 @@ class Client
 
     /**
      * 
-     * @Vich\UploadableField(mapping="RCS", fileNameProperty="extraitRCSname")
+     * @Vich\UploadableField(mapping="rib", fileNameProperty="rib")
      * 
      */
     private $ribFile;

@@ -11,7 +11,12 @@
     <span class="ajout" style="font-size: 17px;"><i class="fa fa-plus-circle" style="font-size: 30px;"></i><p style="font-size: 20px;">Ajouter</p> 
     </span><br><br>
     {% for message in app.flashes('danger') %}
-        <div style="text-aligne: center">
+        <div style="text-align: center">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('success') %}
+        <div style="text-align: center">
             {{ message }}
         </div>
     {% endfor %}

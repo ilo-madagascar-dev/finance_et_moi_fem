@@ -72,28 +72,75 @@ class ModifClientController extends AbstractController
             }
             elseif($abonnement->getPriceID() === 'price_1JZs5tBW8SyIFHAgHT2LqoM7' || $abonnement->getPriceID() === 'price_1JZs9wBW8SyIFHAgwZgSId5i')
             {
-                //veriffication piece jointe
-
-                // if($clients->getIdentityProofFile()){
-                //     //dd($clients->getIdentityProofFile());
-                //     $this->addFlash('danger', "Vous devez uploader une copie de votre pièce d'identité pour l'abonnement Essentiel !!!");
-                //     return $this->redirectToRoute('modif_agence',['id' => $client->getId()]);
-                // }
-
-                // if($clients->getRibFile()){
-                //     //dd($clients->getRibFile());
-                //     $this->addFlash('danger', "Vous devez absolument rentrer votre RIB !!!");
-                //     return $this->redirectToRoute('modif_agence',['id' => $client->getId()]);
-                // }
-
-                // if($clients->getExtraitRCSFile()){
-                //     //dd($clients->getExtraitRCSFile());
-                //     $this->addFlash('danger', "Vous devez absolument rentrer votre extrait RCS !!!");
-                //     return $this->redirectToRoute('modif_agence',['id' => $client->getId()]);
-                // }
-
-                //gestion des pieces jointes
                 $mimeTypeAllowed = ['application/pdf', 'image/jpeg', 'image/png'];
+                if ($clients->getIdentityProofFile()) {
+
+                    /**Si l'extension de la pièce-jointe du identityProofFile*/
+                    if(!in_array($clients->getIdentityProofFile()->getMimeType(), $mimeTypeAllowed)){
+                        
+                        /** On réinitialise les champs pièces-jointes */
+                        $clients->setIdentityProofFile(null);
+                        $clients->setExtraitRCSFile(null);
+                        $clients->setRibFile(null);
+
+                        $this->addFlash('danger', "Seul les fichiers de type jpeg, png et pdf sont autorisés pour la pièce d'identité !!!!");
+                        
+                        return $this->redirectToRoute('modif_agence',['id' => $clients->getId()]);
+                    }
+
+                    $extension = explode('.', $clients->getIdentityProofFile()->getClientOriginalName())[1];
+                    $filename = md5(uniqid()).'_'.md5(uniqid()).'_'.md5(uniqid()).'.'.$extension;
+                    $clients->getIdentityProofFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/identityProof', $filename);
+                    $clients->setIdentityProofFile(null);
+                    $clients->setIdentityProof($filename);
+                }
+
+                if ($clients->getExtraitRCSFile()) {
+                    
+                    /**Si l'extension de la pièce-jointe du RCSFile n'est pas valide*/
+                    if(!in_array($clients->getExtraitRCSFile()->getMimeType(), $mimeTypeAllowed)){
+                        
+                        /** On réinitialise les champs pièces-jointes */
+                        $clients->setIdentityProofFile(null);
+                        $clients->setExtraitRCSFile(null);
+                        $clients->setRibFile(null);
+
+                        $this->addFlash('danger', "Seul les fichiers de type jpeg, png et pdf sont autorisés pour l'extrait RCS !!!!");
+                        
+                        return $this->redirectToRoute('modif_agence',['id' => $clients->getId()]);
+                    }
+                    
+                    $extension = explode('.', $clients->getExtraitRCSFile()->getClientOriginalName())[1];
+                    $filename = md5(uniqid()).'_'.md5(uniqid()).'_'.md5(uniqid()).'.'.$extension;
+                    $clients->getExtraitRCSFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/extrait_rcs', $filename);
+                    $clients->setExtraitRCSFile(null);
+                    $clients->setExtraitRCSname($filename);
+                }
+
+                if ($clients->getRibFile()) {
+
+                    /**Si l'extension de la pièce-jointe du rib n'est pas valide*/
+                    if(!in_array($clients->getRibFile()->getMimeType(), $mimeTypeAllowed)){
+                        
+                        /** On réinitialise les champs pièces-jointes */
+                        $clients->setIdentityProofFile(null);
+                        $clients->setExtraitRCSFile(null);
+                        $clients->setRibFile(null);
+
+                        $this->addFlash('danger', "Seul les fichiers de type jpeg, png et pdf sont autorisés pour la pièce-jointe du RIB !!!!");
+                        
+                        return $this->redirectToRoute('modif_agence',['id' => $clients->getId()]);
+                    }
+                    
+                    $extension = explode('.', $clients->getRibFile()->getClientOriginalName())[1];
+                    $filename = md5(uniqid()).'_'.md5(uniqid()).'_'.md5(uniqid()).'.'.$extension;
+                    $clients->getRibFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/rib', $filename);
+                    $clients->setRibFile(null);
+                    $clients->setRib($filename);
+                }
+                //dd($clients);
+                //gestion des pieces jointes
+                /* $mimeTypeAllowed = ['application/pdf', 'image/jpeg', 'image/png'];
                     
                 if ($clients->getIdentityProofFile()) {
 
@@ -113,10 +160,10 @@ class ModifClientController extends AbstractController
                     }
 
 
-                    //dd($newClient);
-                    //$newClient->setIdentityProof(null);
+                    //dd($clients);
+                    //$clients->setIdentityProof(null);
                     
-                    //dd($newClient->getIdentityProofFile());
+                    //dd($clients->getIdentityProofFile());
                     //dd(base64_decode($encodedFile));
                     
                 }
@@ -150,11 +197,105 @@ class ModifClientController extends AbstractController
                         return $this->redirectToRoute('modif_agence',['id' => $clients->getId()]);
                     }
                     
+                } */
+                //veriffication piece jointe
+                /* if($clients->getIdentityProofFile()){
+                    //dd($clients->getIdentityProofFile());
+                    //$this->addFlash('danger', "Vous devez uploader une copie de votre pièce d'identité pour l'abonnement Essentiel !!!");
+                   // return $this->redirectToRoute('modif_agence',['id' => $clients->getId()]);
+                } */
+
+                /* if($clients->getRibFile()){
+                    //dd($clients->getRibFile());
+                   // $this->addFlash('danger', "Vous devez absolument rentrer votre RIB !!!");
+                    //return $this->redirectToRoute('modif_agence',['id' => $clients->getId()]);
+                }*/
+
+                /*if($clients->getExtraitRCSFile()){
+                    //dd($clients->getExtraitRCSFile());
+                    $this->addFlash('danger', "Vous devez absolument rentrer votre extrait RCS !!!");
+                    //return $this->redirectToRoute('modif_agence',['id' => $clients->getId()]);
+                }*/
+                // if($clients->getIdentityProofFile()){
+                //     //dd($clients->getIdentityProofFile());
+                //     $this->addFlash('danger', "Vous devez uploader une copie de votre pièce d'identité pour l'abonnement Essentiel !!!");
+                //     return $this->redirectToRoute('modif_agence',['id' => $client->getId()]);
+                // }
+
+                // if($clients->getRibFile()){
+                //     //dd($clients->getRibFile());
+                //     $this->addFlash('danger', "Vous devez absolument rentrer votre RIB !!!");
+                //     return $this->redirectToRoute('modif_agence',['id' => $client->getId()]);
+                // }
+
+                // if($clients->getExtraitRCSFile()){
+                //     //dd($clients->getExtraitRCSFile());
+                //     $this->addFlash('danger', "Vous devez absolument rentrer votre extrait RCS !!!");
+                //     return $this->redirectToRoute('modif_agence',['id' => $client->getId()]);
+                // }
+
+                //gestion des pieces jointes
+                /* $mimeTypeAllowed = ['application/pdf', 'image/jpeg', 'image/png'];
+                    
+                if ($clients->getIdentityProofFile()) {
+
+                    if(!in_array($clients->getIdentityProofFile()->getMimeType(), $mimeTypeAllowed)){
+
+                        //dd($clients->getIdentityProofFile()->getMimeType());
+
+                        $this->addFlash('danger', "Seul les fichiers de type jpeg, png et pdf sont autorisés pour la pièce d'identité !!!!");
+                        
+                        $extension = explode('.', $clients->getIdentityProofFile()->getClientOriginalName())[1];
+                        $filename = md5(uniqid()).'_'.md5(uniqid()).'_'.md5(uniqid()).'.'.$extension;
+                        //$clients->getIdentityProofFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/identityProof', $filename);
+                        $clients->setIdentityProofFile(null);
+                        $clients->setIdentityProof($filename);
+                        //return new Response('text');                        
+                        return $this->redirectToRoute('modif_agence',['id' => $clients->getId()]);
+                    }
+
+
+                    //dd($clients);
+                    //$clients->setIdentityProof(null);
+                    
+                    //dd($clients->getIdentityProofFile());
+                    //dd(base64_decode($encodedFile));
+                    
                 }
 
-                //dd($clients);
+                if ($clients->getExtraitRCSFile()) {
+                    
+                    if(!in_array($clients->getExtraitRCSFile()->getMimeType(), $mimeTypeAllowed)){
+                        $this->addFlash('danger', "Seul les fichiers de type jpeg, png et pdf sont autorisés pour l'extrait RCS !!!!");
+                        
+                        $extension = explode('.', $clients->getExtraitRCSFile()->getClientOriginalName())[1];
+                        $filename = md5(uniqid()).'_'.md5(uniqid()).'_'.md5(uniqid()).'.'.$extension;
+                        // $clients->getExtraitRCSFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/extrait_rcs', $filename);
+                        $clients->setExtraitRCSFile(null);
+                        $clients->setExtraitRCSname($filename);
+
+                        return $this->redirectToRoute('modif_agence',['id' => $clients->getId()]);
+                    }
+                    
+                }
+
+                if ($clients->getRibFile()) {
+                    if(!in_array($clients->getRibFile()->getMimeType(), $mimeTypeAllowed)){
+                        $this->addFlash('danger', "Seul les fichiers de type jpeg, png et pdf sont autorisés pour la pièce-jointe du RIB !!!!");
+                        
+                        $extension = explode('.', $clients->getRibFile()->getClientOriginalName())[1];
+                        $filename = md5(uniqid()).'_'.md5(uniqid()).'_'.md5(uniqid()).'.'.$extension;
+                        // $clients->getRibFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/rib', $filename);
+                        $clients->setRibFile(null);
+                        $clients->setRib($filename);
+
+                        return $this->redirectToRoute('modif_agence',['id' => $clients->getId()]);
+                    }
+                    
+                } */
+
                 if( $clients->getEmail() !== $present_mail )
-                    {
+                {
                         $userExistence = $userRepository->findBy(['email' => $clients->getEmail()]);
                     
                         if ($userExistence) {
@@ -164,23 +305,37 @@ class ModifClientController extends AbstractController
                             return $this->redirectToRoute('modif_agence',['id' => $clients->getId()]);
                         }
         
-                    }
+                }
                     
-                    try{
-                        $clientsInfosFromLenbox = $apiService->postLenbox($clients->getNomEntreprise(), $clients->getEmail(), $clients->getTelMobile(), $uniqid, true);
-                    }
-                    catch (Exception $e){
-                        dd('Exception reçue : ', $e->getMessage() );
-                    }
+                try{
+                    $clientsInfosFromLenbox = $apiService->postLenbox($clients->getNomEntreprise(), $clients->getEmail(), $clients->getTelMobile(), $uniqid, true);
+                }
+                catch (Exception $e){
+                    dd('Exception reçue : ', $e->getMessage() );
+                }
                     
         
-                    $userRelatedToPotentialClient->setEmail($clients->getEmail());
-        
-                    $em->persist($clients);
-                    $em->flush();
-                //
-            }
+                $userRelatedToPotentialClient->setEmail($clients->getEmail());
+                
+                //dd($clients);
 
+                $em->persist($clients);
+                $em->flush();
+                    
+                return $this->redirectToRoute('modif_agence', ['id'=> $clients->getId()]);
+            //
+            }
+            //dd($clients);
+
+            /* dd($clients->getExtraitRCSFile(), $clients->getRibFile(), $clients->getIdentityProofFile());
+            $em->persist($clients);
+            $em->flush();
+
+            //dd($clients);
+            dd($clients->getRibFile());
+            dd($clients->getIdentityProofFile()); /*/
+
+            return $this->redirectToRoute('modif_agence', ['id'=> $clients->getId()]);
         }
 
         return $this->render('client/index.html.twig', [
