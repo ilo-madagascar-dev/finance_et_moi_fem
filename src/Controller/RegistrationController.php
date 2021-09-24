@@ -451,7 +451,7 @@ class RegistrationController extends AbstractController
          * Envoi du e-mail au client et à l'administrateur après la création du nouvel utilisateur
          */
         $email = (new TemplatedEmail())
-            ->from(new Address('fndmfindme@gmail.com', 'Financer et moi'))
+            ->from(new Address('admin@femcreditconso.fr', 'Financer et moi'))
             ->to($userRelatedToPotentialClient->getEmail())
             ->cc('hentsraf@gmail.com')
             ->subject("Facture d'abonnement Financer Et Moi")
