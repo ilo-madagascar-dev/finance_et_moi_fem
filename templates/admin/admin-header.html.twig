@@ -21,17 +21,17 @@
 				</div>
 				<div class="drop-d-content">
 					<div class="icl">
-						<a href="#">
+						<a href={{ path("modif_agence" , { id: client.id }) }}>
 							<img src={{ asset('images/icon/id-card.svg') }} alt="">
 							<p>Mon compte</p>
 						</a>
 					</div>
-					<div class="icl">
+					{# <div class="icl">
 						<a href="#">
 							<img src={{ asset('images/icon/gear.svg') }} alt="">
 							<p>Configuration</p>
 						</a>
-					</div>
+					</div> #}
 					<div class="icl">
 						<a href={{ path('app_logout') }}>
 							<img src={{ asset('images/icon/key.svg') }} alt="">
