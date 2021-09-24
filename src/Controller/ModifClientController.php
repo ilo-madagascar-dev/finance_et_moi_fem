@@ -28,7 +28,7 @@ class ModifClientController extends AbstractController
         }
         
         $abonnement = $this->getUser()->getClient()->getAbonnement()->getTypeAbonnement();
-        //dd($abonnement->getPriceID());
+        //dd($this->getUser()->getClient()->getAbonnement());
         $present_mail = $clients->getEmail();
 
         $form = $this->createForm(ClientModifType::class, $clients);
@@ -170,6 +170,7 @@ class ModifClientController extends AbstractController
 
             return $this->redirectToRoute('modif_agence', ['id'=> $clients->getId()]);
         }
+        //dd($abonnement);
 
         return $this->render('client/index.html.twig', [
             'client' => $this->getUser()->getClient(),
