@@ -75,7 +75,7 @@ class SousCompteController extends AbstractController
             
             //envoyer les modif a lenbox
             /* Paramètres supplémentaires */
-            $path = $_ENV['ENDPOINT_API_VD'];
+            $path = $_ENV['ENDPOINT_API_UID'];
             $authKey = $_ENV['AUTHKEY'];
             
             $clientsInfosFromLenbox = $apiService->postsousCompte($userConnectedVd, $souscompte->getEmail(), $souscompte->getTelMobile(), $souscompte->getNom(), $souscompte->getPrenom(), true, $path, $authKey);
