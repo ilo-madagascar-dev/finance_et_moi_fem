@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tarifs{% endblock %}
+{% block title %}FEM - Tarifs{% endblock %}
 
 
 {% block stylesheets %}
@@ -20,47 +20,83 @@
                 Nos offres
             </h1>
             <p class="deal">
-                Lorem ipsum dolor sit<br/>
-                Amet consectetur adipisicing elit. Animi, ad.
+                Nous vous offrons une interface des outils qui sera mis à votre disposition afin de pouvoir chercher la meilleure offre mais aussi le meilleur financement à proposer à vos futurs clients !
+            </p>
+            <p class="deal">
+                C’est seulement grâce à vous qu’ils vont pouvoir réaliser tous leurs projets !
             </p>
         </div>
         <div class="two-columns">
             <div class="ilany">
                 <h3 class="ilany-title">Starter</h3>
                 <p class="ilany-p"><span id="priceThingStarter">59€</span> HT/<span class="thingType">Mois</span> Agence tête de reseau</p>
+
+                <p class="ilany-p">
+                    + 49 €/Mois par utilisateurs supplémentaires
+                </p>
                 <div class="li-checks">
                     <div class="el">
                         <img src={{ asset('images/icon/check-dark.svg') }} alt="">
                         <p class="el-p">
-                            Lorem ipsum dolor (sit amet consectetur adipisicing elit).
+                            Crédit consommation
                         </p>
                     </div>
                     <div class="el">
                         <img src={{ asset('images/icon/check-dark.svg') }} alt="">
                         <p class="el-p">
-                            Lorem ipsum dolor (sit amet consectetur adipisicing elit).
+                            Accès à 4 banques - (Seulement particulier)
                         </p>
                     </div>
                     <div class="el b">
                         <img src={{ asset('images/icon/check.svg') }} alt="">
                         <p class="el-p">
-                            Lorem ipsum dolor (sit amet consectetur adipisicing elit).
+                            Crédit affecté (particuliers - professionnels)
                         </p>
                     </div>
                     <div class="el b">
                         <img src={{ asset('images/icon/check.svg') }} alt="">
                         <p class="el-p">
-                            Lorem ipsum dolor (sit amet consectetur adipisicing elit).
+                            Simulateur et module de financement sur mobile, tablette, site Web F E M
                         </p>
                     </div>
                     <div class="el b">
                         <img src={{ asset('images/icon/check.svg') }} alt="">
                         <p class="el-p">
-                            Lorem ipsum dolor (sit amet consectetur adipisicing elit).
+                            Réponse instantanée.
+                        </p>
+                    </div>
+                    <div class="el b">
+                        <img src={{ asset('images/icon/check.svg') }} alt="">
+                        <p class="el-p">
+                            Gestion centralisée du point de vente/tête de réseau et de vos sous comptes affiliés s’il y en a,
+                        </p>
+                    </div>
+                    <div class="el b">
+                        <img src={{ asset('images/icon/check.svg') }} alt="">
+                        <p class="el-p">
+                            Suivi de chacun des comptes associés sur votre interface.
+                        </p>
+                    </div>
+                    <div class="el b">
+                        <img src={{ asset('images/icon/check.svg') }} alt="">
+                        <p class="el-p">
+                            1 Utilisateurs
+                        </p>
+                    </div>
+                    <div class="el b">
+                        <img src={{ asset('images/icon/check.svg') }} alt="">
+                        <p class="el-p">
+                            Puis 49 € HT/mois par utilisateurs supplémentaires illimités
+                        </p>
+                    </div>
+                    <div class="el b">
+                        <img src={{ asset('images/icon/check.svg') }} alt="">
+                        <p class="el-p">
+                            Support par Chat, Email et /ou Tel
                         </p>
                     </div>
                 </div>
-                <form method="POST" action="{{ path('registration') }}">
+                <form method="POST" action="{{ path('registration') }}" style="margin-top: auto;">
                     <!-- Starter price -->
                     <input type="hidden" name="price_id" value="price_1JZs3OBW8SyIFHAgl3MjuPtc" id="price_id_starter">
                     <button type="submit" class="full-blue">Créer un compte</button>
@@ -69,39 +105,82 @@
             <div class="ilany">
                 <h3 class="ilany-title">Essentiel</h3>
                 <p class="ilany-p"><span id="priceThing">89</span>€ HT/<span class="thingType">Mois</span>  Agence tête de reseau</p>
+
+                <p class="ilany-p">
+                    + 49 €/Mois par utilisateurs supplémentaires
+                </p>
                 <div class="li-checks">
                     <div class="el">
                         <img src={{ asset('images/icon/check-dark.svg') }} alt="">
                         <p class="el-p">
-                            Lorem ipsum dolor (sit amet consectetur adipisicing elit).
+                            Crédit consommation
                         </p>
                     </div>
                     <div class="el">
                         <img src={{ asset('images/icon/check-dark.svg') }} alt="">
                         <p class="el-p">
-                            Lorem ipsum dolor (sit amet consectetur adipisicing elit).
+                            Accès à 4 banques - (Seulement particulier)
                         </p>
                     </div>
                     <div class="el b">
                         <img src={{ asset('images/icon/check.svg') }} alt="">
                         <p class="el-p">
-                            Lorem ipsum dolor (sit amet consectetur adipisicing elit).
+                            Crédit affecté (particuliers - professionnels)
                         </p>
                     </div>
                     <div class="el b">
                         <img src={{ asset('images/icon/check.svg') }} alt="">
                         <p class="el-p">
-                            Lorem ipsum dolor (sit amet consectetur adipisicing elit).
+                            Paiement en 4x et 10x de la somme de 50 à 6 000 euros (sous condition d'éligibilité avoir + 1 an d'activité<strong>*</strong>)
                         </p>
                     </div>
                     <div class="el b">
                         <img src={{ asset('images/icon/check.svg') }} alt="">
                         <p class="el-p">
-                            Lorem ipsum dolor (sit amet consectetur adipisicing elit).
+                            Simulateur et module de financement sur mobile, tablette, site Web F E M
+                        </p>
+                    </div>
+                    <div class="el b">
+                        <img src={{ asset('images/icon/check.svg') }} alt="">
+                        <p class="el-p">
+                            Réponse instantanée.
+                        </p>
+                    </div>
+                    <div class="el b">
+                        <img src={{ asset('images/icon/check.svg') }} alt="">
+                        <p class="el-p">
+                            Gestion centralisée du point de vente/tête de réseau et de vos sous comptes affiliés s’il y en a,
+                        </p>
+                    </div>
+                    <div class="el b">
+                        <img src={{ asset('images/icon/check.svg') }} alt="">
+                        <p class="el-p">
+                            Suivi de chacun des comptes associés sur votre interface.
+                        </p>
+                    </div>
+                    <div class="el b">
+                        <img src={{ asset('images/icon/check.svg') }} alt="">
+                        <p class="el-p">
+                            1 Utilisateurs
+                        </p>
+                    </div>
+                    <div class="el b">
+                        <img src={{ asset('images/icon/check.svg') }} alt="">
+                        <p class="el-p">
+                            Puis 49 € HT/mois par utilisateurs supplémentaires illimités
+                        </p>
+                    </div>
+                    <div class="el b">
+                        <img src={{ asset('images/icon/check.svg') }} alt="">
+                        <p class="el-p">
+                            Support par Chat, Email et/ou Tel
                         </p>
                     </div>
                 </div>
-                <form method="POST" action="{{ path('registration') }}">
+                <div class="noticer">
+                    *Sous réserve d'acceptation du dossier de nos partenaires bancaires.
+                </div>
+                <form method="POST" action="{{ path('registration') }}" style="margin-top: auto;">
                     <!-- Essentiel price -->
                     <input type="hidden" name="price_id" value="price_1JZs5tBW8SyIFHAgHT2LqoM7" id="price_id_essentiel">
                     <button type="submit" class="full-blue">Créer un compte</button>

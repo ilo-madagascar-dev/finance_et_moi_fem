@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomePageController!{% endblock %}
+{% block title %}FEM - Paiement fractionné{% endblock %}
 
 {% block stylesheets %}
     {# <link href="stylesheets/fonts/stylesheet-01.css" rel="text/css"/> #}
@@ -31,39 +31,40 @@
             <img src={{ asset('images/icon/1.png') }} alt="">
             <div class="box-title">Paiment en 4 et 10 fois</div>
             <div class="box-p">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure laudantium, molestiae nesciunt obcaecati recusandae quae!
+                Financez des montants de 200 à 3 000 € en 10x et de 50 à 6 000 € en 4x
             </div>
         </div>
         <div class="box">
             <img src={{ asset('images/icon/2.png') }} alt="">
             <div class="box-title">Avance de trésorerie</div>
             <div class="box-p">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure laudantium, molestiae nesciunt obcaecati recusandae quae!
+                Recevez le montant total de la commande à partir de 72h suivant l’achat
             </div>
         </div>
         <div class="box">
             <img src={{ asset('images/icon/6.png') }} alt="">
             <div class="box-title">Règlement multicanal</div>
             <div class="box-p">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure laudantium, molestiae nesciunt obcaecati recusandae quae!
+                Vente à distance ? Envoyez la demande de paiement directement sur le mobile de votre client
             </div>
         </div>
         <div class="box">
             <img src={{ asset('images/icon/thunder.svg') }} alt="">
             <div class="box-title">Instantanée</div>
             <div class="box-p">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure laudantium, molestiae nesciunt obcaecati recusandae quae!
+                Pré-acceptation et paiement en quelques secondes
             </div>
         </div>
         <div class="box" one>
             <img src={{ asset('images/icon/internet.svg') }} alt="">
             <div class="box-title">100% en ligne</div>
             <div class="box-p">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure laudantium, molestiae nesciunt obcaecati recusandae quae!
+                Plus besoin de TPE. Tout se fait depuis votre interface ou à distance depuis le mobile du client
             </div>
         </div>
     </div>
-    <button class="full-blue">Je m'abonne</button>
+    <button class="full-blue" onclick="goto__link()">Je m'abonne</button>
+    <a href={{ path("registration") }} class="invisible" id="l___">Redister</a>
 </div>
 
 <div class="undestand">
@@ -104,30 +105,66 @@
                         </div>
                         <div class="bol">Client</div>
                         <div class="corres">
-                            1,33% à 2,41% du montant financé
+                            1,33% à 2,41%<strong>*</strong> du montant financé
+                        </div>
+                        
+                        <div class="noticer">
+                            *Ref.tableau tarification client
+                        </div>
+                        <div class="corres">
+                            Le vendeur peut proposer du 4x gratuit<br/>en prenant en charge les frais clients
                         </div>
                     </td>
-                    <td></td>
+                    <td>
+                        <div class="bol">Vendeur</div>
+                        <div class="corres">
+                            Gratuit
+                        </div>
+                        <div class="bol">Client</div>
+                        <div class="corres">
+                            4,8% du montant financé
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td>Acceptation</td>
-                    <td>Lorem ipsum dolor sit amet consectetur<br/> adipisicing elit. Beatae, laborum.</td>
-                    <td>Lorem ipsum dolor sit amet consectetur<br/> adipisicing elit. Beatae, laborum.</td>
+                    <td>Instantanée</td>
+                    <td>Instantanée</td>
                 </tr>
                 <tr>
                     <td>Pièce justificative</td>
-                    <td></td>
-                    <td></td>
+                    <td>Aucune</td>
+                    <td>Carte d'identité</td>
                 </tr>
                 <tr>
                     <td>Règlement de la commande</td>
-                    <td></td>
-                    <td></td>
+                    <td>
+                        <div class="bol">Vendeur</div>
+                        <div class="corres">
+                            Virement du montant total de la commande<br/>sur votre compte à J+4
+                        </div>
+                        <div class="bol">Client</div>
+                        <div class="corres">
+                            Paiement de la 1ère mensualité au moment<br/>de l’achat puis 3 mensualités
+                        </div>
+                    </td>
+                    <td>
+                        <div class="bol">Vendeur</div>
+                        <div class="corres">
+                            Virement du montant total de la commande<br/>sur votre compte à J+7
+                        </div>
+                        <div class="bol">Client</div>
+                        <div class="corres">
+                            Paiement de la 1ère mensualité au moment<br/>de l’achat puis 9 mensualités
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td>Multicanal</td>
-                    <td>Lorem ipsum dolor sit amet consectetur<br/> adipisicing elit. Delectus, ipsum!<br/> Quae quia perspiciatis voluptas. Nostrum!</td>
-                    <td>Lorem ipsum dolor sit amet consectetur<br/> adipisicing elit. Delectus, ipsum!<br/> Quae quia perspiciatis voluptas. Nostrum!</td>
+                    <td colspan="2">
+                        Réalisation du financement dans le point de vente<br/>
+                        Réalisation du financement à distance (mobile) ou sur votre site
+                    </td>
                 </tr>
             </tbody>
 
@@ -156,19 +193,19 @@
                         </tr>
                         <tr>
                             <td>1000,01 à 1500€</td>
-                            <td>1000,01 à 1500€</td>
+                            <td>2,35%</td>
                         </tr>
                         <tr>
-                            <td>1000,01 à 1500€</td>
-                            <td>1000,01 à 1500€</td>
+                            <td>1 500,01 à 2 000€</td>
+                            <td>2,20%</td>
                         </tr>
                         <tr>
-                            <td>1000,01 à 1500€</td>
-                            <td>1000,01 à 1500€</td>
+                            <td>2 000,01 à 3 000€</td>
+                            <td>1,90%</td>
                         </tr>
                         <tr>
-                            <td>1000,01 à 1500€</td>
-                            <td>1000,01 à 1500€</td>
+                            <td>3 000,01 à 6 000€</td>
+                            <td>1,33%</td>
                         </tr>
                     </tbody>
                 </table>
@@ -179,11 +216,11 @@
             <p class="sub">Les raisons de dire oui</p>
             <div class="check-list">
                 <ul class="check-lister">
-                    <li class="list-item">Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                    <li class="list-item">Lorem ipsum dolor sit amet consectetur.</li>
-                    <li class="list-item">Lorem ipsum dolor sit.</li>
-                    <li class="list-item">Lorem ipsum dolor sit amet consectetur.</li>
-                    <li class="list-item">Ipsum dolor sit amet consectetur.</li>
+                    <li class="list-item">Augmentez vos marges avec les commissions</li>
+                    <li class="list-item">Gagnez du temps grâce à la prise en charge client</li>
+                    <li class="list-item">Sécurisez vos ventes en un temps record</li>
+                    <li class="list-item">Accélérez vos délais de vente</li>
+                    <li class="list-item">Complétez votre offre de solutions de financement</li>
                 </ul>
             </div>
         </div>
@@ -195,17 +232,24 @@
             </h3>
             <div class="steps">
                 <div class="step-number">1</div>
-                <div class="step-label">Lorem ipsum dolor sit amet.</div>
+                <div class="step-label">Renseignez les coordonnées du client</div>
                 <div class="step-number">2</div>
-                <div class="step-label">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus, nam.</div>
+                <div class="step-label">Il complète ses informations en quelques secondes</div>
                 <div class="step-number">3</div>
-                <div class="step-label">Lorem ipsum dolor sit amet.</div>
+                <div class="step-label">Le client obtient une réponse instantanée (crédit conso) ou sous 48h (crédit affecté)
+                </div>
             </div>
             <div class="blue-shape-thing"></div>
         </div>
     </div>
 </div>
 
+<script title="for the register link">
+    let link= document.querySelector('#l___');
+    function goto__link() {
+        link.click();
+    }
+</script>
 
 {% block footer %}
 {% include "mqbaka_home/footer.html.twig" %}

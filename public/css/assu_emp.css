@@ -2,11 +2,16 @@
 
 .container-assu{
     max-width: 960px;
-    margin: auto;
+    margin: 4em auto 2em;
 }
 
 .container-assu p{
     line-height: 1.5;
+    margin-top: 1em;
+}
+
+.item1 p, #tanana p{
+    line-height: 2;
 }
 
 #tableau1, #tableau2{

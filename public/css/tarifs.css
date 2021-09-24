@@ -26,6 +26,8 @@ p.deal{
     text-align: center;
     color: var(--dark-01);
     font-size: 1.1em;
+    max-width: 80%;
+    margin: auto;
 }
 
 .ilany{
@@ -107,6 +109,15 @@ p.deal{
 
 .circle.on .the-c{
     background: var(--dark-01);
+}
+
+.noticer{
+    font-size: .65em;
+    color: var(--dark-01);
+}
+
+.el-p strong{
+    color: var(--light-01);
 }
 
 @media only screen and (max-width: 750px){
