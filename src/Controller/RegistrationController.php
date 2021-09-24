@@ -394,7 +394,10 @@ class RegistrationController extends AbstractController
         $userRelatedToPotentialClient->setActive(true);
         $userRelatedToPotentialClient->setRoles(["ROLE_CLIENT"]);
         $uniqId = md5(uniqid());
-        $clientsInfosFromLenbox = $apiService->postLenbox($potentialClient->getNomEntreprise(), $potentialClient->getEmail(), $potentialClient->getTelMobile(), $uniqId);
+
+        $path = $_ENV['ENDPOINT_API_VD'];
+        $authKey = $_ENV['AUTHKEY'];
+        $clientsInfosFromLenbox = $apiService->postLenbox($path,$authKey,$potentialClient->getNomEntreprise(), $potentialClient->getEmail(), $potentialClient->getTelMobile(), $uniqId);
         $clientsVd = $clientsInfosFromLenbox['response']['vd'];
         
         //Données client à enregistrer
