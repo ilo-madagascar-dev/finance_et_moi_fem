@@ -576,7 +576,12 @@ class AdminController extends AbstractController
         $userRelatedToPotentialClient->setDateCreationUtilisateur(new DateTime());
         $userRelatedToPotentialClient->setActive(true);
         $userRelatedToPotentialClient->setRoles(["ROLE_SOUSCOMPTE"]);
-        $clientsInfosFromLenbox = $apiService->postsousCompte($userConnectedVd, $potentialClient->getEmail(), $potentialClient->getTelMobile(), $potentialClient->getNom(), $potentialClient->getPrenom());
+
+        /* Paramètres supplémentaires */
+        $path = $_ENV['ENDPOINT_API_VD'];
+        $authKey = $_ENV['AUTHKEY'];
+
+        $clientsInfosFromLenbox = $apiService->postsousCompte($userConnectedVd, $potentialClient->getEmail(), $potentialClient->getTelMobile(), $potentialClient->getNom(), $potentialClient->getPrenom(), false, $path, $authKey);
         $sousCompteUid = $clientsInfosFromLenbox['response']['uid'];
         
         //$uniqId = md5(uniqid());

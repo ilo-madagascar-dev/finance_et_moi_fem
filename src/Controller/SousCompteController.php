@@ -74,7 +74,11 @@ class SousCompteController extends AbstractController
             }
             
             //envoyer les modif a lenbox
-            $clientsInfosFromLenbox = $apiService->postsousCompte($userConnectedVd, $souscompte->getEmail(), $souscompte->getTelMobile(), $souscompte->getNom(), $souscompte->getPrenom(), true);
+            /* Paramètres supplémentaires */
+            $path = $_ENV['ENDPOINT_API_VD'];
+            $authKey = $_ENV['AUTHKEY'];
+            
+            $clientsInfosFromLenbox = $apiService->postsousCompte($userConnectedVd, $souscompte->getEmail(), $souscompte->getTelMobile(), $souscompte->getNom(), $souscompte->getPrenom(), true, $path, $authKey);
 
             $userRelatedToPotentialClient->setEmail($souscompte->getEmail());
 
