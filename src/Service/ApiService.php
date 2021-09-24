@@ -14,17 +14,17 @@ class ApiService
        $this->clientapi = $clientapi; 
     }
    
-    public function postLenbox($nomEntreprise,$email,$telMobile,$uniqid,$mjour=false): array
+    public function postLenbox($nomEntreprise,$email,$telMobile,$uniqid,$mjour=false,$path,$authkey): array
     {
         
         $response = $this->clientapi->request(
             'POST',
-            'https://app.finnocar.com/api/1.1/wf/getagency',[
+             $path,[
             'headers' => [
                     'content-type' => 'application/json'    
             ],
             'json' => [
-                'authkey' => '1627331075466x718359703300287400',
+                'authkey' => $authkey,
                 'nomEntreprise'=> $nomEntreprise,
                 'email'=> $email,
                 'telMobile'=> $telMobile,
@@ -35,17 +35,17 @@ class ApiService
      return $response->toArray();
     }
     
-    public function postsousCompte($vd,$email,$telMobile,$nom,$prenom,$mjour=false): array
+    public function postsousCompte($vd,$email,$telMobile,$nom,$prenom,$mjour=false,$path,$authkey): array
     {
         
         $response = $this->clientapi->request(
             'POST',
-            'https://app.finnocar.com/api/1.1/wf/getuser',[
+            $path,[
             'headers' => [
                     'content-type' => 'application/json'    
             ],
             'json' => [
-                'authkey' => '1627331075466x718359703300287400',
+                'authkey' => $authkey,
                 'vd'=>$vd,
                 'email'=> $email,
                 'telMobile'=> $telMobile,

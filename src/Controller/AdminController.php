@@ -109,13 +109,10 @@ class AdminController extends AbstractController
                 $conClient=$sousCompteRepository->findOneBy(['email'=>$connUser]);
                 $vdScompte=$conClient->getClient()->getVd();
             }
-           
-            $cle_groupe="1627331075466x718359703300287400";
             return $this->render('admin/components/admin-dashboard.html.twig', [
                 'controller_name' => 'AdminDash',
                 'client'=>$conClient,
                 'Scompte'=>$vdScompte,
-                'groupe'=>$cle_groupe,
                 'role'=>$role
             ]);
         } else {
@@ -123,7 +120,7 @@ class AdminController extends AbstractController
         }
     }
 
-    /**
+   /**
      * @Route("/demande-financement", name="demfi")
      */
     public function demFi(ClientRepository $clientrepository,UserRepository $userRepository,SousCompteRepository $sousCompteRepository): Response
@@ -134,18 +131,21 @@ class AdminController extends AbstractController
             $vdScompte='';
             if ($this->getUser()->getClient()) {
                 $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+                 $url_demande_finance= $_ENV['IFRAME_DEMANDE_FINANCEMENT'];
+                // dd($url_demande_finance);
             }
 
             if ($this->getUser()->getSousCompte()) {
                 $conClient=$sousCompteRepository->findOneBy(['email'=>$connUser]);
                 $vdScompte=$conClient->getClient()->getVd();
+                $url_demande_finance= $_ENV['IFRAME_DEMANDE_FINANCEMENT'];
+                //dd($url_demande_finance);
             }
-             $cle_groupe="1627331075466x718359703300287400";
             return $this->render('admin/components/admin-demande-fin.html.twig', [
                 'controller_name' => 'demFi',
                 'client'=>$conClient,
                 'Scompte'=>$vdScompte,
-                'groupe'=>$cle_groupe,
+                'demande_finance'=>$url_demande_finance,
                 'role'=>$role
             ]);
         } else {
@@ -162,20 +162,27 @@ class AdminController extends AbstractController
             $connUser=$this->getUser()->getEmail();
             $role=$this->getUser()->getRoles()[0];
             $vdScompte='';
+            $cle_groupe=$_ENV['AUTHKEY'];
             if ($this->getUser()->getClient()) {
                 $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
+                 $vd=$conClient->getVd();
+                 $url_suivi_dosier=$_ENV['IFRAME_SUIVI_DE_DOSSIER'].'idgroupe='.$cle_groupe.'&idagence='.$vd;
+            
             }
 
             if ($this->getUser()->getSousCompte()) {
                 $conClient=$sousCompteRepository->findOneBy(['email'=>$connUser]);
-                $vdScompte=$conClient->getClient()->getVd();
+                $vd=$conClient->getClient()->getVd();
+                $uid=$conClient->getUid();
+                $url_suivi_dosier=$_ENV['IFRAME_SUIVI_DE_DOSSIER'].'idgroupe='.$cle_groupe.'&idagence='.$vd.'&idcompte='.$uid;
+                
             }
-            $cle_groupe="1627331075466x718359703300287400";
+           
             return $this->render('admin/components/admin-suivi-doss.html.twig', [
                 'controller_name' => 'suiDoss',
                 'client'=>$conClient,
                 'Scompte'=>$vdScompte,
-                'groupe'=>$cle_groupe,
+                'url_suivi_dosier'=>$url_suivi_dosier,
                 'role'=>$role
             ]);
         } else {
@@ -195,20 +202,21 @@ class AdminController extends AbstractController
             if ($this->getUser()->getClient()) {
                 $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
                 $actifpay=$conClient->getActif();
+                $url_paiement_f=$_ENV['IFRAME_PAIEMENT_FRACTIONNE'];
             }
 
             if ($this->getUser()->getSousCompte()) {
                 $conClient=$sousCompteRepository->findOneBy(['email'=>$connUser]);
                 $vdScompte=$conClient->getClient()->getVd();
-                 $actifpay=$conClient->getClient()->getActif();
+                $actifpay=$conClient->getClient()->getActif();
+                $url_paiement_f=$_ENV['IFRAME_PAIEMENT_FRACTIONNE'];
             }
-            $cle_groupe="1627331075466x718359703300287400";
 
             return $this->render('admin/components/admin-payement-frac.html.twig', [
                 'controller_name' => 'payFrac',
                 'client'=>$conClient,
                 'Scompte'=>$vdScompte,
-                'groupe'=>$cle_groupe,
+                'url_paiement_f'=>$url_paiement_f,
                 'role'=>$role,
                 'agenceActif'=>$actifpay
             ]);
@@ -322,21 +330,23 @@ class AdminController extends AbstractController
             $connUser=$this->getUser()->getEmail();
             $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
             $souCompte=$sousCompteRepository->findOneBy(['id'=>$id,'client'=>$conClient]);
-            $cle_groupe="1627331075466x718359703300287400";
             $role = $this->getUser()->getRoles()[0];
             $vdScompte=$conClient->getVd();
+            $url_demande_finance= $_ENV['IFRAME_DEMANDE_FINANCEMENT'];
+
             return $this->render('admin/components/monitor/monitor-demande-fin.html.twig', [
                 'controller_name' => 'Slist',
                 'client'=>$conClient,
                 'Soucompte'=>$souCompte,
                 'Scompte'=>$vdScompte,
-                'groupe'=>$cle_groupe,
+                'url_demande_finance'=>$url_demande_finance,
                 'role'=>$role
             ]);
         } else {
             return $this->redirectToRoute('app_login');
         }
     }
+    
     /**
      * @Route("/s-payement-fractionne/{id}", name="saffichePf")
      */
@@ -346,23 +356,25 @@ class AdminController extends AbstractController
             $connUser=$this->getUser()->getEmail();
             $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
             $souCompte=$sousCompteRepository->findOneBy(['id'=>$id,'client'=>$conClient]);
-            $cle_groupe="1627331075466x718359703300287400";
             $role = $this->getUser()->getRoles()[0];
             $vdScompte=$conClient->getVd();
             $actifpay=$conClient->getActif();
+            $url_paiement_f=$_ENV['IFRAME_PAIEMENT_FRACTIONNE'];
+
             return $this->render('admin/components/monitor/monitor-payment-frac.html.twig', [
                 'controller_name' => 'Slist',
                 'client'=>$conClient,
                 'Soucompte'=>$souCompte,
                 'Scompte'=>$vdScompte,
-                'groupe'=>$cle_groupe,
                 'role'=>$role,
+                'url_paiement_f'=>$url_paiement_f,
                 'agenceActif'=>$actifpay
             ]);
         } else {
             return $this->redirectToRoute('app_login');
         }
     }
+
     /**
      * @Route("/s-suivi-dossier/{id}", name="safficheSd")
      */
@@ -372,15 +384,16 @@ class AdminController extends AbstractController
             $connUser=$this->getUser()->getEmail();
             $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
             $souCompte=$sousCompteRepository->findOneBy(['id'=>$id,'client'=>$conClient]);
-            $cle_groupe="1627331075466x718359703300287400";
+            $cle_groupe=$_ENV['AUTHKEY'];
             $role = $this->getUser()->getRoles()[0];
-            $vdScompte=$conClient->getVd();
+            $vd=$conClient->getVd();
+            $uid=$souCompte->getUid();
+            $url_suivi_dosier=$_ENV['IFRAME_SUIVI_DE_DOSSIER'].'idgroupe='.$cle_groupe.'&idagence='.$vd.'&idcompte='.$uid;
             return $this->render('admin/components/monitor/monitor-suivi.html.twig', [
                 'controller_name' => 'Slist',
                 'client'=>$conClient,
                 'Soucompte'=>$souCompte,
-                'Scompte'=>$vdScompte,
-                'groupe'=>$cle_groupe,
+                'url_suivi_dosier'=>$url_suivi_dosier,
                 'role'=>$role
             ]);
         } else {
