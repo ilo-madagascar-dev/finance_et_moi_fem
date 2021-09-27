@@ -14,6 +14,9 @@ vich_uploader:
             uri_prefix: /images/rib
             upload_destination: '%kernel.project_dir%/public/images/rib'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        legalStatus:
+            uri_prefix: /images/legalStatus
+            upload_destination: '%kernel.project_dir%/public/images/legalStatus'
     #mappings:
     #    products:
     #        uri_prefix: /images/products
