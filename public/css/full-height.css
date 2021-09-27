@@ -17,7 +17,7 @@ body{
     z-index: 1;
     display: flex;
     flex-direction: column;
-    gap: 2em;
+    gap: 1em;
 }
 
 .all-the *{
@@ -39,7 +39,7 @@ body{
 
 .finale-form{
     width: max-content;
-    margin: 3em auto 1em;
+    margin: 1em auto 1em;
 }
 
 .finale-form button, .button-togo{
@@ -255,7 +255,7 @@ a.button-togo{
 
 .details-title{
     width: max-content;
-    margin: auto;
+    margin:0 auto .5em;
 }
 
 .details-details{
@@ -293,7 +293,7 @@ a.button-togo{
 }
 
 .notice{
-    width: 20em;
+    width: 24em;
     margin: auto;
     position: relative;
     z-index: 1;
@@ -304,6 +304,7 @@ a.button-togo{
     font-family: monospace;
     height: 10em;
     overflow-y: auto;
+    padding-bottom: 1em;
 }
 
 .notice-p {
