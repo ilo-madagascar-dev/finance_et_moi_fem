@@ -78,7 +78,7 @@ class SousCompteController extends AbstractController
             $path = $_ENV['ENDPOINT_API_UID'];
             $authKey = $_ENV['AUTHKEY'];
             
-            $clientsInfosFromLenbox = $apiService->postsousCompte($userConnectedVd, $souscompte->getEmail(), $souscompte->getTelMobile(), $souscompte->getNom(), $souscompte->getPrenom(), true, $path, $authKey);
+            $clientsInfosFromLenbox = $apiService->postsousCompte($path, $authKey,$userConnectedVd, $souscompte->getEmail(), $souscompte->getTelMobile(), $souscompte->getNom(), $souscompte->getPrenom(),true);
 
             $userRelatedToPotentialClient->setEmail($souscompte->getEmail());
 
