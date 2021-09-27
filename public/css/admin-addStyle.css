@@ -183,22 +183,23 @@ span[green]{
 }
 
 .switch-cool{
-  width: 3em;
-  height: 1.5em;
+  width: 2em;
+  height: 1em;
   background: grey;
   border-radius: 50px;
   transition: .3s;
   position: relative;
   cursor: pointer;
   pointer-events: auto!important;
+  margin: auto;
 }
 
 .switch-but{
-    height: 1.5em;
-    width: 1.5em;
+    height: 1em;
+    width: 1em;
     background: var(--white--ish-01);
     border-radius: 50px;
-    transform: scale(.95);
+    transform: scale(.8);
     transition: .2s;
     position: absolute;
     left: 0;top: 0;
@@ -212,7 +213,8 @@ span[green]{
     left: 50%;
 }
 
-.table-agences{
+
+/* .table-agences{
     overflow: auto;
     max-height: 100%;
     margin: 0 1em;
@@ -231,16 +233,16 @@ table.agence{
 table.agence thead{
     /* position: sticky;
     top: 0; */
-}
+/* }
 
 table.agence td a{
     border: none;
-}
+} */
 
 [something]{
     border: none !important;
 }
-
+/* 
 table.agence *{
     border: 1px solid var(--blue-01);
 }
@@ -252,12 +254,104 @@ table.agence td, table.agence th{
 
 table.agence tr:nth-child(2n){
     background: #8882;
-}
+} */
 
 .middle-content{
     display: flex;
     flex-direction: column;
     padding-bottom: 2em;
+}
+
+.table-agences {
+    max-height: 100%;
+    overflow: auto;
+    scrollbar-width: none; 
+}
+
+.table-ext-wrapper{
+    background: #edecec;
+    padding: .4em .3em .4em;
+    border-radius: .7em .7em .3em .3em;
+    margin: 0 .8em;
+    flex-basis: 60vh;
+    max-height: 60vh;
+}
+
+table.agence {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+table.agence thead th {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: #edecec;
+    z-index: 1;
+}
+
+table.agence th{
+    border: none!important;
+}
+
+table.agence tbody{
+    background: grey;
+}
+
+table.agence tbody td,
+table.agence tbody td a{
+    font-family: monospace!important;
+}
+
+table.agence tbody tr{
+    background: white;
+    border-bottom: #edecec solid;
+}
+
+table.agence td{
+    padding: .5em 0;
+}
+
+table.agence tr td:first-child{
+    font-weight: 900;
+}
+
+table.agence tr th:not(:last-child)::after{
+    position: absolute;
+    content: '';
+    width: 1px;
+    height: 70%;
+    background: white;
+    right: 0;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+table.agence tbody td a{
+    color: white;
+    background: var(--dark-01);
+    text-transform: uppercase;
+    padding: .1em .3em;
+    text-decoration: none;
+    display: inline-block;
+    height: 100%;
+    border-radius: 3px;
+    opacity: .6;
+    transition: .4s;
+}
+
+table.agence tbody td a:hover{
+    opacity: 1;
+    transition: .4s;
+}
+
+table.agence tbody tr:hover{
+background: var(--bg--01);
+}
+
+table.agence tr th{
+    font-size: .8em;
 }
 
 @media only screen and (max-width: 800px){
