@@ -26,60 +26,63 @@
 		</div>
 	</div> #}
 
-	<div class="table-agences">
-		<table class="agence">
-			<thead>
-				<tr>
-					<th>Agence</th>
-					<th>Adresse</th>
-					<th>Type d'abonnement</th>
-					<th>Accès au paiement fractionné</th>
-					<th>Sous-comptes actifs</th>
-					<th>Fichiers</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for client in clients %}
+	<div class="table-ext-wrapper">
+		<div class="table-agences">
+			<table class="agence">
+				<thead>
 					<tr>
-						<td>{{ client.nom }}</td>
-						<td>{{ client.address }}</td>
-						<td>
-							{# {% if client.abonnement.statutPaiement == 1 %}
-								Paiement effectué
-								{% else %}
-									Paiement non effectué
-							{% endif %} #}
-							{{ client.abonnement.typeAbonnement ? client.abonnement.typeAbonnement.label : 'Aucun type d\'abonnement' }}
-						</td>
-						<td>
-							{% include "admin/components/switch.html.twig" with { attr : client.id , act: client.actif } only %}
-							{# {{(client.actif)?'toggle-button active':'toggle-button'}} #}
-						</td>
-						<td>
-							{% set i = 0 %}
-							{% for sous in client.sousComptes %}
-								{% set i = i + 1 %}
-							{% endfor %}
-							{{ i }}
-						</td>
-						<td>
-						{# {{ "http.." ~ client.om }} #}
-						{# {{ client.abonnement.typeAbonnement.label }} #}
-						{% if client.abonnement.typeAbonnement %}
-							{% if client.abonnement.typeAbonnement.priceID == "price_1JZs5tBW8SyIFHAgHT2LqoM7" %}
-								<a href={{urlIdentity ~ client.identityProof}} target="_blank">Cin</a>
-								<a href={{urlRib ~ client.rib}} target="_blank">Rib</a>
-								<a href={{urlExtrait_rcs ~ client.extraitRCSname}} target="_blank">Extrait Kbis</a>
-							{% else %}
-								pas de pièce jointe
-							{% endif %}
-						{% endif %}
-						</td>
+						<th>Agence</th>
+						<th>Adresse</th>
+						<th>Type d'abonnement</th>
+						<th>Sous-comptes actifs</th>
+						<th>Accès au paiement fractionné</th>
+						<th>Fichiers</th>
 					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					{% for client in clients %}
+						<tr>
+							<td>{{ client.nom }}</td>
+							<td>{{ client.address }}</td>
+							<td>
+								{# {% if client.abonnement.statutPaiement == 1 %}
+									Paiement effectué
+									{% else %}
+										Paiement non effectué
+								{% endif %} #}
+								{{ client.abonnement.typeAbonnement ? client.abonnement.typeAbonnement.label : 'Aucun type d\'abonnement' }}
+							</td>
+							<td>
+								{% set i = 0 %}
+								{% for sous in client.sousComptes %}
+									{% set i = i + 1 %}
+								{% endfor %}
+								{{ i }}
+							</td>
+							<td>
+								{% include "admin/components/switch.html.twig" with { attr : client.id , act: client.actif } only %}
+								{# {{(client.actif)?'toggle-button active':'toggle-button'}} #}
+							</td>
+							<td>
+							{# {{ "http.." ~ client.om }} #}
+							{# {{ client.abonnement.typeAbonnement.label }} #}
+							{% if client.abonnement.typeAbonnement %}
+								{% if client.abonnement.typeAbonnement.priceID == "price_1JZs5tBW8SyIFHAgHT2LqoM7" %}
+									<a href={{urlIdentity ~ client.identityProof}} target="_blank" title="Carte d'identité">Cin</a>
+									<a href={{urlRib ~ client.rib}} target="_blank" title="RIB">Rib</a>
+									<a href={{urlExtrait_rcs ~ client.extraitRCSname}} target="_blank" title="Extrait KBIS">Kbis</a>
+								{% else %}
+									Pas de pièces jointes
+								{% endif %}
+							{% endif %}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
 	</div>
+
 
 	{# {% for client in clients %}
 		<div class="bordur">
