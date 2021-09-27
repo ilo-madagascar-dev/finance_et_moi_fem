@@ -88,17 +88,22 @@ class RegistrationController extends AbstractController
              */
             if($priceId == 'price_1JZs5tBW8SyIFHAgHT2LqoM7' || $priceId == 'price_1JZs9wBW8SyIFHAgwZgSId5i'){
                 if(!$newClient->getIdentityProofFile()){
-                    $this->addFlash('danger', "Vous devez uploader une copie de votre pièce d'identité pour l'abonnement Essentiel !!!");
+                    $this->addFlash('danger', "Vous devez uploader une copie de votre pièce d'identité pour l'abonnement Essentiel !!!!");
                     return $this->redirectToRoute('registration', ['price_id' => $priceId]);
                 }
 
                 if(!$newClient->getRibFile()){
-                    $this->addFlash('danger', "Vous devez absolument rentrer votre RIB !!!");
+                    $this->addFlash('danger', "Vous devez absolument rentrer votre RIB !!!!");
                     return $this->redirectToRoute('registration', ['price_id' => $priceId]);
                 }
 
                 if(!$newClient->getExtraitRCSFile()){
-                    $this->addFlash('danger', "Vous devez absolument rentrer votre extrait RCS !!!");
+                    $this->addFlash('danger', "Vous devez absolument rentrer votre extrait RCS !!!!");
+                    return $this->redirectToRoute('registration', ['price_id' => $priceId]);
+                }
+
+                if(!$newClient->getLegalStatusFile()){
+                    $this->addFlash('danger', "Vous devez absolument uploader votre statut juridique !!!!");
                     return $this->redirectToRoute('registration', ['price_id' => $priceId]);
                 }
             }
@@ -139,7 +144,7 @@ class RegistrationController extends AbstractController
             /* Statut juridique de la société ? */
             if ($newClient->getLegalStatusFile()) {
                 if(!in_array($newClient->getLegalStatusFile()->getMimeType(), $mimeTypeAllowed)){
-                    $this->addFlash('danger', "Seul les fichiers de type jpeg, png et pdf sont autorisés pour la pièce-jointe du RIB !!!!");
+                    $this->addFlash('danger', "Seul les fichiers de type jpeg, png et pdf sont autorisés pour la pièce-jointe du statut juridique de la société !!!!");
                     return $this->redirectToRoute('registration', ['price_id' => $priceId]);
                 }
             }
