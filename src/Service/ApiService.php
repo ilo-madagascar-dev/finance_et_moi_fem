@@ -14,7 +14,7 @@ class ApiService
        $this->clientapi = $clientapi; 
     }
    
-    public function postLenbox($nomEntreprise,$email,$telMobile,$uniqid,$mjour=false,$path,$authkey): array
+    public function postLenbox($path,$authkey,$nomEntreprise,$email,$telMobile,$uniqid,$mjour=false): array
     {
         
         $response = $this->clientapi->request(
@@ -35,7 +35,7 @@ class ApiService
      return $response->toArray();
     }
     
-    public function postsousCompte($vd,$email,$telMobile,$nom,$prenom,$mjour=false,$path,$authkey): array
+    public function postsousCompte($path,$authkey,$vd,$email,$telMobile,$nom,$prenom,$mjour=false): array
     {
         
         $response = $this->clientapi->request(
