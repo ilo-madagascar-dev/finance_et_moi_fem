@@ -165,16 +165,16 @@ class AdminController extends AbstractController
             $cle_groupe=$_ENV['AUTHKEY'];
             if ($this->getUser()->getClient()) {
                 $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
-                 $vd=$conClient->getVd();
-                 $url_suivi_dosier=$_ENV['IFRAME_SUIVI_DE_DOSSIER'].'idgroupe='.$cle_groupe.'&idagence='.$vd;
+                 $iduniq=$conClient->getUniqid();
+                 $url_suivi_dosier=$_ENV['IFRAME_SUIVI_DE_DOSSIER'].'idgroupe='.$cle_groupe.'&idagence='.$iduniq;
             
             }
 
             if ($this->getUser()->getSousCompte()) {
                 $conClient=$sousCompteRepository->findOneBy(['email'=>$connUser]);
-                $vd=$conClient->getClient()->getVd();
+                $iduniq=$conClient->getClient()->getUniqid();
                 $uid=$conClient->getUid();
-                $url_suivi_dosier=$_ENV['IFRAME_SUIVI_DE_DOSSIER'].'idgroupe='.$cle_groupe.'&idagence='.$vd.'&idcompte='.$uid;
+                $url_suivi_dosier=$_ENV['IFRAME_SUIVI_DE_DOSSIER'].'idgroupe='.$cle_groupe.'&idagence='.$iduniq.'&idcompte='.$uid;
                 
             }
            
@@ -386,9 +386,9 @@ class AdminController extends AbstractController
             $souCompte=$sousCompteRepository->findOneBy(['id'=>$id,'client'=>$conClient]);
             $cle_groupe=$_ENV['AUTHKEY'];
             $role = $this->getUser()->getRoles()[0];
-            $vd=$conClient->getVd();
+            $iduniq=$conClient->getUniqid();
             $uid=$souCompte->getUid();
-            $url_suivi_dosier=$_ENV['IFRAME_SUIVI_DE_DOSSIER'].'idgroupe='.$cle_groupe.'&idagence='.$vd.'&idcompte='.$uid;
+            $url_suivi_dosier=$_ENV['IFRAME_SUIVI_DE_DOSSIER'].'idgroupe='.$cle_groupe.'&idagence='.$iduniq.'&idcompte='.$uid;
             return $this->render('admin/components/monitor/monitor-suivi.html.twig', [
                 'controller_name' => 'Slist',
                 'client'=>$conClient,
