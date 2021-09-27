@@ -106,37 +106,18 @@ class ClientType extends AbstractType
                 'label' => 'Pièce-jointe RIB',
                 'required' => false,
                 'attr' => array(
-                    'placeholder' => 'Nom de votre entreprise',
+                    'placeholder' => 'rib',
                     'hidden' => 'hidden'
                 )
             ])
-            ->add('statutJuridique', FileType::class, [
-                'label' => 'Pièce-jointe RIB',
+            ->add('legalStatusFile', FileType::class, [
+                'label' => 'Pièce-jointe statut juridique',
                 'required' => false,
                 'attr' => array(
-                    'placeholder' => 'Nom de votre entreprise',
+                    'placeholder' => 'rib',
                     'hidden' => 'hidden'
                 )
             ])
-            ->add('statutJuridique', ChoiceType::class, [
-                    'label' => "Statut Juridique de l'entreprise",
-                    'choices' => [
-                        'Entreprise individuelle' => 'EI',
-                        'Entreprise individuelle à responsabilité limitée' => 'EIRL',
-                        'Entreprise unipersonnelle à responsabilité limitée' => 'EURL',
-                        'Société à responsabilité limitée' => 'SARL',
-                        'Société anonyme' => 'SA',
-                        'Société par actions simplifiée unipersonnelle' => 'SASU',
-                        'Société par actions simplifiée' => 'SAS',
-                        'Société en nom collectif' => 'SNC',
-                        'Société en commandite simple' => 'SCS',
-                        'Société en commandite par actions' => 'SCA'
-                    ],
-                    'attr' => array(
-                        'placeholder' => "Type d'abonnement"
-                    )
-                ])
-            
         ;
     }
 

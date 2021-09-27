@@ -82,9 +82,6 @@
                 <div class="line" style="text-align:center;">
                     {{ form_row(form.type_abonnement) }}
                 </div>
-                <div class="line" style="text-align:center;">
-                    {{ form_row(form.statutJuridique) }}
-                </div>
 
                 <div class="double-line">
                     <div class="line line-essentiel" style="text-align:center;">
@@ -109,13 +106,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="line line-essentiel">
-                    <div class="fileDiv">
-                         <!-- label for="custom-identityProofFilename" id="custom-identityProofFilename-label"></label -->
-                         <button type="button" id="ribFileButton">RIB</button>
-                          <span id="ribFileName">Aucun fichier</span>
-                         {{ form_widget(form.ribFile) }}
-                     </div>
+                <div class="double-line">
+                    <div class="line line-essentiel">
+                        <div class="fileDiv">
+                            <!-- label for="custom-identityProofFilename" id="custom-identityProofFilename-label"></label -->
+                            <button type="button" id="ribFileButton">RIB</button>
+                            <span id="ribFileName">Aucun fichier</span>
+                            {{ form_widget(form.ribFile) }}
+                        </div>
+                    </div>
+                    <div class="line line-essentiel">
+                        <div class="fileDiv">
+                            <!-- label for="custom-identityProofFilename" id="custom-identityProofFilename-label"></label -->
+                            <button type="button" id="legalstatusFileButton">Statut juridique</button>
+                            <span id="legalstatusFileName">Aucun fichier</span>
+                            {{ form_widget(form.legalStatusFile) }}
+                        </div>
+                    </div>
                 </div>
                 <button type="submit" id="registrationSubmit">Inscription</button>
         </div>
@@ -159,6 +166,10 @@
             const client_ribFile = document.querySelector('#client_ribFile');
             const ribFileButton = document.querySelector('#ribFileButton');
             const ribFileName = document.querySelector('#ribFileName');
+
+            const client_legalStatusFile = document.querySelector('#client_legalStatusFile');
+            const legalstatusFileButton = document.querySelector('#legalstatusFileButton');
+            const legalstatusFileName = document.querySelector('#legalstatusFileName');
 
             console.log(priceId);
 
@@ -220,6 +231,19 @@
                     ribFileName.innerHTML = client_ribFile.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
                 } else {
                     ribFileName.innerHTML = 'Aucun fichier';
+                }
+            })
+
+            //Mise en forme du champ legalStatusFile.  
+            legalstatusFileButton.addEventListener('click', () => {
+                client_legalStatusFile.click();
+            });
+
+            client_legalStatusFile.addEventListener('change', () => {
+                if (client_legalStatusFile.value) {
+                     legalstatusFileName.innerHTML = client_legalStatusFile.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+                } else {
+                     legalstatusFileName.innerHTML = 'Aucun fichier';
                 }
             })
             

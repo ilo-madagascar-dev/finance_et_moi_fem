@@ -104,8 +104,13 @@ class RegistrationController extends AbstractController
             }
             
             
-            //Gestion des pièces-jointes
+            /***************************************
+             ****** GESTION DES PIECES JOINTES *****
+             ******** ABONNEMENT ESSENTIEL ********
+             **************************************/
             $mimeTypeAllowed = ['application/pdf', 'image/jpeg', 'image/png'];
+            
+            /* Envoi de la pièce jointe d'identité ? */
             if ($newClient->getIdentityProofFile()) {
                 
                 if(!in_array($newClient->getIdentityProofFile()->getMimeType(), $mimeTypeAllowed)){
@@ -113,27 +118,46 @@ class RegistrationController extends AbstractController
 
                     return $this->redirectToRoute('registration', ['price_id' => $priceId]);
                 }
+            }
 
+            /* Envoi de l'extrait CRSF ? */
+            if ($newClient->getExtraitRCSFile()) {
+                if(!in_array($newClient->getExtraitRCSFile()->getMimeType(), $mimeTypeAllowed)){
+                    $this->addFlash('danger', "Seul les fichiers de type jpeg, png et pdf sont autorisés pour l'extrait RCS !!!!");
+                    return $this->redirectToRoute('registration', ['price_id' => $priceId]);
+                }
+            }
+
+            /* Pièce-jointe du rib ? */
+            if ($newClient->getRibFile()) {
+                if(!in_array($newClient->getRibFile()->getMimeType(), $mimeTypeAllowed)){
+                    $this->addFlash('danger', "Seul les fichiers de type jpeg, png et pdf sont autorisés pour la pièce-jointe du RIB !!!!");
+                    return $this->redirectToRoute('registration', ['price_id' => $priceId]);
+                }
+            }
+
+            /* Statut juridique de la société ? */
+            if ($newClient->getLegalStatusFile()) {
+                if(!in_array($newClient->getLegalStatusFile()->getMimeType(), $mimeTypeAllowed)){
+                    $this->addFlash('danger', "Seul les fichiers de type jpeg, png et pdf sont autorisés pour la pièce-jointe du RIB !!!!");
+                    return $this->redirectToRoute('registration', ['price_id' => $priceId]);
+                }
+            }
+
+            /* Upload de la pièce d'identité */
+            if ($newClient->getIdentityProofFile()) 
+            {
                 $extension = explode('.', $newClient->getIdentityProofFile()->getClientOriginalName())[1];
                 $filename = md5(uniqid()).'_'.md5(uniqid()).'_'.md5(uniqid()).'.'.$extension;
                 $newClient->getIdentityProofFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/identityProof', $filename);
                 $newClient->setIdentityProofFile(null);
                 $newClient->setIdentityProof($filename);
-                //dd($newClient);
-                //$newClient->setIdentityProof(null);
-                
-                //dd($newClient->getIdentityProofFile());
-                //dd(base64_decode($encodedFile));
                 
             }
 
-            if ($newClient->getExtraitRCSFile()) {
-                
-                if(!in_array($newClient->getExtraitRCSFile()->getMimeType(), $mimeTypeAllowed)){
-                    $this->addFlash('danger', "Seul les fichiers de type jpeg, png et pdf sont autorisés pour l'extrait RCS !!!!");
-                    return $this->redirectToRoute('registration', ['price_id' => $priceId]);
-                }
-                
+            /* Upload de l'extrait CRSF */
+            if ($newClient->getExtraitRCSFile()) 
+            {    
                 $extension = explode('.', $newClient->getExtraitRCSFile()->getClientOriginalName())[1];
                 $filename = md5(uniqid()).'_'.md5(uniqid()).'_'.md5(uniqid()).'.'.$extension;
                 $newClient->getExtraitRCSFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/extrait_rcs', $filename);
@@ -141,17 +165,24 @@ class RegistrationController extends AbstractController
                 $newClient->setExtraitRCSname($filename);
             }
 
-            if ($newClient->getRibFile()) {
-                if(!in_array($newClient->getRibFile()->getMimeType(), $mimeTypeAllowed)){
-                    $this->addFlash('danger', "Seul les fichiers de type jpeg, png et pdf sont autorisés pour la pièce-jointe du RIB !!!!");
-                    return $this->redirectToRoute('registration', ['price_id' => $priceId]);
-                }
-                
+            /* Upload de la pièce-jointe du rib */
+            if ($newClient->getRibFile()) 
+            {
                 $extension = explode('.', $newClient->getRibFile()->getClientOriginalName())[1];
                 $filename = md5(uniqid()).'_'.md5(uniqid()).'_'.md5(uniqid()).'.'.$extension;
                 $newClient->getRibFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/rib', $filename);
                 $newClient->setRibFile(null);
                 $newClient->setRib($filename);
+            }
+
+            /* Upload du statut juridique de la société */
+            if ($newClient->getLegalStatusFile()) 
+            {
+                $extension = explode('.', $newClient->getLegalStatusFile()->getClientOriginalName())[1];
+                $filename = md5(uniqid()).'_'.md5(uniqid()).'_'.md5(uniqid()).'.'.$extension;
+                $newClient->getLegalStatusFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/legalStatus', $filename);
+                $newClient->setLegalStatusFile(null);
+                $newClient->setLegalStatus($filename);
             }
             
             //Mise en place de l'utilisateur potentiel dans la session
