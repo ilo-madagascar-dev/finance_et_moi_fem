@@ -2,16 +2,19 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Client;
 use App\Service\ApiService;
 use App\Form\ClientModifType;
 use App\Repository\UserRepository;
 use App\Repository\ClientRepository;
+use App\Form\ClientPasswordModifType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ModifClientController extends AbstractController
 {
@@ -177,6 +180,46 @@ class ModifClientController extends AbstractController
             'form' => $form->createView(),
             'role' => $this->getUser()->getRoles()[0],
             'type' => $abonnement,
+        ]);
+    }
+
+    /**
+     * @Route("/agence/modif/password/{id}", name="modif_password_agence")
+     */
+    public function modifPassword(Client $client, ClientRepository $clientrepos, Request $request, UserRepository $userRepository, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em, $id)
+    {
+        $relatedUser = $client->getUser();
+        //dd();
+        
+        $userRole = $client->getUser()->getRoles()[0];
+
+        if ($relatedUser->getId() !== intval($id)) {
+            $this->addFlash('danger', "Ce sous-compte n'est pas le vôtre.");
+            return $this->redirectToRoute('dash');
+        }
+
+        $form = $this->createForm(ClientPasswordModifType::class, $client);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $encryptedPassword = $passwordEncoder->encodePassword($relatedUser, $client->getPassword());
+            
+            //$client->setPassword($encryptedPassword);
+            //$relatedUser->setPassword($encryptedPassword);
+
+            dd("yes");
+            //$em->persist($client)
+            $em->flush();
+
+            $this->addFlash("success", "Le mot du passe du sous-compte a bien été modifié !!!!");
+        }
+
+        return $this->render('client/modifPassword.html.twig',[
+            'client' => $this->getUser()->getClient(),
+            'form' => $form->createView(),
+            'role'=> $userRole,
+            'sousCompte' => $client
         ]);
     }
 }

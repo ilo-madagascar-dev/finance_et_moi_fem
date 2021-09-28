@@ -496,6 +496,78 @@ margin-left: 1000px;
 
 }
 
+.hero{
+  position: relative;
+  width: 100%;
+}
+
+.hero img{
+  width: 100%;
+}
+
+.bulle{
+  position: absolute;
+  color: red;
+  bottom: 0;
+  display: flex;
+  gap: 1em;
+  width: max-content;
+  left: 50%;
+  transform: translate(-50%, 0);
+  align-items: end;
+  padding-bottom: .7em;
+  background-color: transparent;
+}
+
+.bulle div{
+  width: 12em;
+  height: 12em;
+  background: #203c76;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  text-transform: uppercase;
+  text-align: center;
+  color: #f9f8fa;
+  opacity: 0.7
+}
+
+.bulle div:nth-child(2){
+  width: 14em;
+  height: 14em;
+}
+
+@media only screen and ( max-width: 1000px){
+  .bulle div{
+    width: 10em;
+    height: 10em;
+  }
+  
+  .bulle div:nth-child(2){
+  width: 12em;
+  height: 12em;
+  }
+}
+
+@media only screen and ( max-width: 750px){
+  .bulle div{
+    width: 8em;
+    height: 8em;
+    font-size: 12px
+  }
+  
+  .bulle div:nth-child(2){
+  width: 10em;
+  height: 10em;
+  }
+}
+
+@media only screen and ( max-width: 500px){
+  .bulle {
+    display: none;
+  }
+
 @media only screen and ( max-width: 1000px)
 {
   .main{
@@ -853,82 +925,3 @@ margin-left: 1000px;
     width: 100%;
   }
 }
-
-
-  /* R E S P O N S I V E 
-  
-  @media (max-width: 750px){
-  .grid-container6 {
-      padding: 0px 50px !important; 
-  }
-  .paraghaphe {
-      margin: 0px 30px 0px;
-  }
-  .imgfinacer{
-    width: 200px;
-  }
-  .button1 {
-      margin-left: 0px;
-  }
-  .button1 {
-     margin: 10px auto;
-      display: block;
-  }
-  .grid1 {
-      display: grid;
-      grid-template-columns: 50% 50%;
-      padding: 0px 50px;
-  }
-  .grid2 {
-      display: grid;
-      grid-template-columns: 50% 50%;
-      padding: 0px 50px;
-  }
-  .button1{
-    display: none;
-  }
-  .imggrid{
-    width: 50%;
-  }
-  #franfinance1{
-  display: none;
-  }
-  #franfinance2{
-    display: block;
-    margin: auto;
-  }
-  .grid3 {
-    display: grid;
-    grid-template-columns: 20% 80%;
-    padding: 0px 200px;
-  }
-  .image7{
-    width: 50%;
-  }
-  .bordercapture{
-  margin: auto;
-  display: block;
-  }
-  
-  .titre-secion{
-    margin: auto 32px;
-  }
-  .button2{
-    margin: auto;
-  display: block;
-  }
-  
-  .gridcheck{
-    padding: 0px 100px;
-  }
-  .gridimage {
-      display: grid;
-      grid-template-columns: auto auto;
-      padding: 0px 10px;
-  }
-  }
-  @media (max-width: 500px){
-    .paraghaphe{
-      font-size: 14px;
-    }
-  }*/
