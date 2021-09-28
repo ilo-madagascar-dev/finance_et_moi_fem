@@ -497,14 +497,7 @@ margin-left: 1000px;
 
 }
 
-.hero{
-  position: relative;
-  width: 100%;
-}
 
-.hero img{
-  width: 100%;
-}
 
 @media only screen and ( max-width: 1000px)
 {

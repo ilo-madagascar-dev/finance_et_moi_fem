@@ -290,6 +290,16 @@
     }
 }
 
+
+.hero{
+    position: relative;
+    width: 100%;
+  }
+  
+.hero img{
+width: 100%;
+}
+
 .bulle{
     position: absolute;
     color: red;
