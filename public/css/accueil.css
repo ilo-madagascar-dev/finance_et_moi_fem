@@ -44,11 +44,12 @@
 .titre-content{
   color: #203c76;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 19px;
   line-height: 1.7em;
   padding:9em;
   padding-top: -0em;
   padding-bottom: 1.5em;
+  text-align: center;
 }
 
 .titre-2{

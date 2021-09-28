@@ -48,8 +48,14 @@ h3{
   color: var(--light-01);
   text-align: center;
 }
+.para1{
+  padding: 10px;
+  width: max-content;
+}
+
 .para{
    padding: 10px;
+   /*width: 50%;*/
 }
 .nike{
   color: var(--light-01);
@@ -93,7 +99,7 @@ color: var(--dark-01);
 }
 .grid-container5 {
   display: grid;  
-  grid-template-columns: auto auto;
+  grid-template-columns: auto 50%;
   padding: 0px 100px;
 }
 .image4{
