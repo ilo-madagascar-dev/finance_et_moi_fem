@@ -24,8 +24,11 @@ use Stripe\Stripe;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Constraints\Date;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class RegistrationController extends AbstractController
 {
@@ -513,7 +516,7 @@ class RegistrationController extends AbstractController
         /**
          * Envoi du e-mail au client et à l'administrateur après la création du nouvel utilisateur
          */
-        $email = (new TemplatedEmail())
+        /* $email = (new TemplatedEmail())
             ->from(new Address('admin@femcreditconso.fr', 'Financer et moi'))
             ->to($userRelatedToPotentialClient->getEmail())
             ->cc('hentsraf@gmail.com')
@@ -525,7 +528,63 @@ class RegistrationController extends AbstractController
             ])
         ;
 
-        $mailer->send($email);
+        $mailer->send($email); */
+
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+        
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('billing/billing_prototype_1.html.twig', [
+            'title' => "Facture financer et moi ... ",
+            'client' => $potentialClient,
+            'facture' => $nouvelleFacturePotentielle
+        ]);
+        
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+        
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Store PDF Binary Data
+        $output = $dompdf->output();
+        
+        $name = md5(uniqid());
+
+        // In this case, we want to write the file in the public directory
+        $publicDirectory = $_SERVER['DOCUMENT_ROOT'] . '/my_pdfs';
+
+        if (!file_exists($_SERVER['DOCUMENT_ROOT'] . '/my_pdfs')) {
+            mkdir($_SERVER['DOCUMENT_ROOT'] . '/my_pdfs', 0777, true);
+        }
+
+        // e.g /var/www/project/public/mypdf.pdf
+        $pdfFilepath =  $publicDirectory . "/" .$name . ".pdf";
+        
+        // Write file to the desired path
+        file_put_contents($pdfFilepath, $output);
+        
+        $mail = (new Email())
+        ->from('fem.conso.credit@gmail.com')
+        ->to('hentsraf@gmail.com')
+        ->html(
+            '
+                <h2 style="text-align:center;">Votre facture abonnement FEM</h2>
+
+                <p style="text-align:center;">Veuillez voir en pièce-jointe la facture relative à votre abonnement !!!!</p>
+                    
+            ')
+        // attach a file stream
+        ->attachFromPath( $pdfFilepath );
+
+        $mailer->send($mail);
 
         return $this->render('registration/successPayment.html.twig');
     }
