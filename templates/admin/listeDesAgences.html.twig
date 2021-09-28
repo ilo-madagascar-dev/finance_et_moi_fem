@@ -68,9 +68,18 @@
 							{# {{ client.abonnement.typeAbonnement.label }} #}
 							{% if client.abonnement.typeAbonnement %}
 								{% if client.abonnement.typeAbonnement.priceID == "price_1JZs5tBW8SyIFHAgHT2LqoM7" %}
-									<a href={{urlIdentity ~ client.identityProof}} target="_blank" title="Carte d'identité">Cin</a>
-									<a href={{urlRib ~ client.rib}} target="_blank" title="RIB">Rib</a>
-									<a href={{urlExtrait_rcs ~ client.extraitRCSname}} target="_blank" title="Extrait KBIS">Kbis</a>
+									{% if client.statutEntreprise == "Entreprise individuelle (EI)" %}
+										<a href={{urlIdentity ~ client.identityProof}} target="_blank" title="Carte d'identité">Cin</a>
+										<a href={{urlRib ~ client.rib}} target="_blank" title="RIB">Rib</a>
+										<a href={{urlExtrait_rcs ~ client.extraitRCSname}} target="_blank" title="Extrait KBIS">Kbis</a>
+										<a href={{urlLiasseFiscal ~ client.liasseFiscale}} target="_blank" title="Liasse Fiscale">LF</a>
+									{% else %}
+										<a href={{urlIdentity ~ client.identityProof}} target="_blank" title="Carte d'identité">Cin</a>
+										<a href={{urlRib ~ client.rib}} target="_blank" title="RIB">Rib</a>
+										<a href={{urlExtrait_rcs ~ client.extraitRCSname}} target="_blank" title="Extrait KBIS">Kbis</a>
+										<a href={{urlLiasseFiscal ~ client.liasseFiscale}} target="_blank" title="Liasse Fiscale">LF</a>
+										<a href={{urlLegalStatus ~ client.legalStatus}} target="_blank" title="Legal Status">STA</a>	
+									{% endif %}
 								{% else %}
 									Pas de pièces jointes
 								{% endif %}
