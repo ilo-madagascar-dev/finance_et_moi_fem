@@ -101,10 +101,17 @@ class RegistrationController extends AbstractController
                     $this->addFlash('danger', "Vous devez absolument rentrer votre extrait RCS !!!!");
                     return $this->redirectToRoute('registration', ['price_id' => $priceId]);
                 }
-
-                if(!$newClient->getLegalStatusFile()){
-                    $this->addFlash('danger', "Vous devez absolument uploader votre statut juridique !!!!");
+                
+                if(!$newClient->getLiasseFiscaleFile()){
+                    $this->addFlash('danger', "Vous devez absolument uploader votre liasse fiscale !!!!");
                     return $this->redirectToRoute('registration', ['price_id' => $priceId]);
+                }
+
+                if($newClient->getStatutEntreprise() !== "Entreprise individuelle (EI)"){
+                    if(!$newClient->getLegalStatusFile()){
+                        $this->addFlash('danger', "Vous devez absolument uploader votre statut juridique !!!!");
+                        return $this->redirectToRoute('registration', ['price_id' => $priceId]);
+                    }
                 }
             }
             
@@ -141,6 +148,14 @@ class RegistrationController extends AbstractController
                 }
             }
 
+            /* Pièce-jointe de la liasse fiscale */
+            if ($newClient->getLiasseFiscale()) {
+                if(!in_array($newClient->getLiasseFiscaleFile()->getMimeType(), $mimeTypeAllowed)){
+                    $this->addFlash('danger', "Seul les fichiers de type jpeg, png et pdf sont autorisés pour la pièce-jointe de la liasse fiscale !!!!");
+                    return $this->redirectToRoute('registration', ['price_id' => $priceId]);
+                }
+            }
+
             /* Statut juridique de la société ? */
             if ($newClient->getLegalStatusFile()) {
                 if(!in_array($newClient->getLegalStatusFile()->getMimeType(), $mimeTypeAllowed)){
@@ -157,7 +172,6 @@ class RegistrationController extends AbstractController
                 $newClient->getIdentityProofFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/identityProof', $filename);
                 $newClient->setIdentityProofFile(null);
                 $newClient->setIdentityProof($filename);
-                
             }
 
             /* Upload de l'extrait CRSF */
@@ -178,6 +192,16 @@ class RegistrationController extends AbstractController
                 $newClient->getRibFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/rib', $filename);
                 $newClient->setRibFile(null);
                 $newClient->setRib($filename);
+            }
+
+            /* Upload de la liasse fiscale */
+            if ($newClient->getLiasseFiscaleFile()) 
+            {
+                $extension = explode('.', $newClient->getLiasseFiscaleFile()->getClientOriginalName())[1];
+                $filename = md5(uniqid()).'_'.md5(uniqid()).'_'.md5(uniqid()).'.'.$extension;
+                $newClient->getLiasseFiscaleFile()->move($_SERVER['DOCUMENT_ROOT'] .'/images/liasseFiscale', $filename);
+                $newClient->setLiasseFiscaleFile(null);
+                $newClient->setLiasseFiscale($filename);
             }
 
             /* Upload du statut juridique de la société */
