@@ -36,17 +36,22 @@ class AdminSystemController extends AbstractController
         $this->em = $em;
     }
     /**
-    * @Route("/SuperAdmin", name="Sup-admin")
+    * @Route("/dashboard/Admin", name="dashboard-admin")
     */
     public function index(Request $request,UserRepository $userRepository): Response
     {
-       $nom["nom"] = "supeur Admin";
-       $role[]="ROLE_SupAdmin";
-        return $this->render('admin\components\listeDesAgencessous.html.twig', [
-            'controller_name' => 'AdminSystemController',
-            'clients'=>$nom,
-            'role'=>$role
-        ]);
+     if($this->getUser()){
+            $connUser=$this->getUser()->getEmail();
+            $role=$this->getUser()->getRoles()[0];
+            $conClient=$userRepository->findOneBy(['email'=>$connUser]);
+            return $this->render('admin/components/admin-dashboard.html.twig', [
+                'controller_name' => 'AdminDash',
+                'admin'=>$conClient,
+                'role'=>$role
+            ]);
+        } else {
+            return $this->redirectToRoute('app_login');
+        }
     }
     /**
     * @Route("/SuperAdmin/valid", name="Sup-admin_val")
@@ -63,13 +68,19 @@ class AdminSystemController extends AbstractController
             $urlidentityProof=$_ENV['DOWNLOAD_FILE'].'identityProof/';
             $urlrib=$_ENV['DOWNLOAD_FILE'].'rib/';
             $urlextrait_rcs=$_ENV['DOWNLOAD_FILE'].'extrait_rcs/';
+            $urlliasseFiscal=$_ENV['DOWNLOAD_FILE'].'liasseFiscale/';
+            $urllegalStatus=$_ENV['DOWNLOAD_FILE'].'legalStatus/';
+
 
             return $this->render('admin\components\listeDesAgencessous.html.twig', [
                 'controller_name' => 'AdminSystemController',
                 'clients'=>$client,
+                'admin'=>$admincon,
                 'urlIdentity'=>$urlidentityProof,
                 'urlRib'=> $urlrib,
                 'urlExtrait_rcs'=>$urlextrait_rcs,
+                'urlLiasseFiscal'=>$urlliasseFiscal,
+                'urlLegalStatus'=>$urllegalStatus,
                 'role'=>$role,
             ]);
         }

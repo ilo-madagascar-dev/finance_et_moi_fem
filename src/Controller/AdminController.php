@@ -15,6 +15,7 @@ use App\Form\SousCompteType;
 use Stripe\Checkout\Session;
 use App\Repository\UserRepository;
 use App\Repository\ClientRepository;
+use App\Repository\AdminRepository;
 use App\Repository\SousCompteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -95,12 +96,15 @@ class AdminController extends AbstractController
     /**
      * @Route("/dashboard", name="dash")
      */
-    public function adminDash(ClientRepository $clientrepository, SousCompteRepository $sousCompteRepository, UserRepository $userRepository): Response
+    public function adminDash(ClientRepository $clientrepository, SousCompteRepository $sousCompteRepository, UserRepository $userRepository,AdminRepository $adminrepository): Response
     {
         if($this->getUser()){
             $connUser=$this->getUser()->getEmail();
             $role=$this->getUser()->getRoles()[0];
             $vdScompte='';
+            if($this->getUser()->getAdmin()){
+                $conClient=$adminrepository->findOneBy(['email'=>$connUser]);
+            }
             if ($this->getUser()->getClient()) {
                 $conClient=$clientrepository->findOneBy(['email'=>$connUser]);
             }
