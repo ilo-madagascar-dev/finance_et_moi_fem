@@ -31,3 +31,9 @@
 
 /public/images/rib/**
 !/public/images/rib/**/
+
+/public/images/legalStatus/**
+!/public/images/legalStatus/**/
+
+/public/images/liasseFiscale/**
+!/public/images/liasseFiscale/**/
