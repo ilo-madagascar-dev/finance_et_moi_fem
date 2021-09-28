@@ -102,6 +102,40 @@ class ResetViewController extends AbstractController
     }
 
     /**
+     * @Route("/emaila", name="emaila")
+     */
+    public function emailA(): Response
+    {
+        $type_abonnement = array(
+            "expirationMessageKey" => "22-02-23",
+            "expirationMessageData" => ["This is a data"],
+        );
+        return $this->render('reset_password/check_email.html.twig', [
+            'controller_name' => 'emailA',
+            "resetToken" => $type_abonnement,
+        ]);
+    }
+
+    /**
+     * @Route("/sec-stepa", name="seca")
+     */
+    public function secStepA(): Response
+    {
+        $type_abonnement = array(
+            "montantHT" => "23232er",
+            "pourcentageTva" => "23232er",
+            "montantTtcFacture" => "23232er",
+            "factureAcquitee" => false,
+            "pourcentageTva" => "23232er",
+            "montantTtcFacture" => "23232er",
+        );
+        return $this->render('registration/secondStepRegistration_trial.html.twig', [
+            'facture' => $type_abonnement,
+            'rappel'=> true
+        ]);
+    }
+
+    /**
      * @Route("/lista", name="lista")
      */
     public function listTypes(): Response

@@ -83,7 +83,7 @@
                     {{ form_row(form.type_abonnement) }}
                 </div>
                 <div class="line" style="text-align:center;">
-                    {{ form_row(form.statutJuridique) }}
+                    {{ form_row(form.statutEntreprise) }}
                 </div>
 
                 <div class="double-line">
@@ -109,13 +109,33 @@
                         </div>
                     </div>
                 </div>
-                <div class="line line-essentiel">
-                    <div class="fileDiv">
-                         <!-- label for="custom-identityProofFilename" id="custom-identityProofFilename-label"></label -->
-                         <button type="button" id="ribFileButton">RIB</button>
-                          <span id="ribFileName">Aucun fichier</span>
-                         {{ form_widget(form.ribFile) }}
-                     </div>
+                <div class="double-line">
+                    <div class="line line-essentiel">
+                        <div class="fileDiv">
+                            <!-- label for="custom-identityProofFilename" id="custom-identityProofFilename-label"></label -->
+                            <button type="button" id="ribFileButton">RIB</button>
+                            <span id="ribFileName">Aucun fichier</span>
+                            {{ form_widget(form.ribFile) }}
+                        </div>
+                    </div>
+                    <div class="line line-essentiel">
+                        <div class="fileDiv">
+                            <!-- label for="custom-identityProofFilename" id="custom-identityProofFilename-label"></label -->
+                            <button type="button" id="liasseFileButton">Liasse fiscale</button>
+                            <span id="liasseFileName">Aucun fichier</span>
+                            {{ form_widget(form.liasseFiscaleFile) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="double-line" id="legalstatusContainer">
+                    <div class="line line-essentiel">
+                        <div class="fileDiv">
+                            <!-- label for="custom-identityProofFilename" id="custom-identityProofFilename-label"></label -->
+                            <button type="button" id="legalstatusFileButton">Pièce jointe Statut juridique</button>
+                            <span id="legalstatusFileName">Aucun fichier</span>
+                            {{ form_widget(form.legalStatusFile) }}
+                        </div>
+                    </div>
                 </div>
                 <button type="submit" id="registrationSubmit">Inscription</button>
         </div>
@@ -160,9 +180,40 @@
             const ribFileButton = document.querySelector('#ribFileButton');
             const ribFileName = document.querySelector('#ribFileName');
 
+            const client_liasseFiscaleFile = document.querySelector('#client_liasseFiscaleFile');
+            const liasseFileButton = document.querySelector('#liasseFileButton');
+            const liasseFileName = document.querySelector('#liasseFileName');
+
+            const client_legalStatusFile = document.querySelector('#client_legalStatusFile');
+            const legalstatusFileButton = document.querySelector('#legalstatusFileButton');
+            const legalstatusFileName = document.querySelector('#legalstatusFileName');
+
             console.log(priceId);
 
+            const client_statutEntreprise = document.querySelector('#client_statutEntreprise');
+
             const everyLineEssentiel = Array.from(document.querySelectorAll('.line-essentiel'));
+
+            /* Apparition ou non du statut légal de l'entreprise */
+            const legalStatusLoaded = document.querySelector('#client_statutEntreprise');
+
+            if (legalStatusLoaded.value == 'Entreprise individuelle (EI)') {
+                document.querySelector('#legalstatusContainer').style.display='none';
+            } else {
+               document.querySelector('#legalstatusContainer').style.display='block'; 
+            }
+
+            //Affichage du champ statut juridique en fonction du statut juridique choisi dans le select
+            client_statutEntreprise.addEventListener('change', () => {
+                //let legalStatusSelected = document.querySelector('#client_statutEntreprise');
+
+                if (legalStatusLoaded.value == 'Entreprise individuelle (EI)') {
+                    document.querySelector('#legalstatusContainer').style.display='none';
+                } else {
+                   document.querySelector('#legalstatusContainer').style.display='block'; 
+                }
+            })
+
             //Affichage des champs pièces jointes en fonction de l'abonnement choisi auparavant    
             if(priceId == 'price_1JZs5tBW8SyIFHAgHT2LqoM7' || priceId == 'price_1JZs9wBW8SyIFHAgwZgSId5i'){
                 everyLineEssentiel.forEach(element => {
@@ -220,6 +271,32 @@
                     ribFileName.innerHTML = client_ribFile.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
                 } else {
                     ribFileName.innerHTML = 'Aucun fichier';
+                }
+            })
+
+            //"Mise en forme du champ liasseFiscaleFile. "   
+            liasseFileButton.addEventListener('click', () => {
+                client_liasseFiscaleFile.click();
+            });
+
+            client_liasseFiscaleFile.addEventListener('change', () => {
+                if (client_liasseFiscaleFile.value) {
+                   liasseFileName.innerHTML = client_liasseFiscaleFile.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+                } else {
+                    liasseFileName.innerHTML = 'Aucun fichier';
+                }
+            })
+
+            //Mise en forme du champ legalStatusFile.  
+            legalstatusFileButton.addEventListener('click', () => {
+                client_legalStatusFile.click();
+            });
+
+            client_legalStatusFile.addEventListener('change', () => {
+                if (client_legalStatusFile.value) {
+                     legalstatusFileName.innerHTML = client_legalStatusFile.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+                } else {
+                     legalstatusFileName.innerHTML = 'Aucun fichier';
                 }
             })
             

@@ -94,6 +94,24 @@ class ClientType extends AbstractType
                     'placeholder' => "Type d'abonnement"
                 )
             ])
+            ->add('statutEntreprise', ChoiceType::class, [
+                'label' => 'Statut de l\'entreprise',
+                    'choices' => [
+                        'Entreprise individuelle' => 'Entreprise individuelle (EI)',
+                        'Entreprise individuelle à responsabilité limitée' => 'Entreprise individuelle à responsabilité limitée (EIRL)',
+                        'Entreprise unipersonnelle à responsabilité limitée' => 'Entreprise unipersonnelle à responsabilité limitée (EURL)',
+                        'Société à responsabilité limitée' => 'Société à responsabilité limitée (SARL)',
+                        'Société anonyme' => 'Société anonyme (SA)',
+                        'Société par actions simplifiée unipersonnelle' => 'Société par actions simplifiée unipersonnelle (SASU)',
+                        'Société par actions simplifiée' => 'Société par actions simplifiée (SAS)',
+                        'Société en nom collectif' => 'Société en nom collectif (SNC)',
+                        'Société en commandite simple' => 'Société en commandite simple (SCS)',
+                        'Société en commandite par actions' => 'Société en commandite par actions (SCA)'
+                    ],
+                    'attr' => array(
+                        'placeholder' => "Type d'abonnement"
+                    )
+            ])
             ->add('extraitRCSFile', FileType::class, [
                 'label' => 'Votre extrait RCS',
                 'required' => false,
@@ -106,37 +124,26 @@ class ClientType extends AbstractType
                 'label' => 'Pièce-jointe RIB',
                 'required' => false,
                 'attr' => array(
-                    'placeholder' => 'Nom de votre entreprise',
+                    'placeholder' => 'rib',
                     'hidden' => 'hidden'
                 )
             ])
-            ->add('statutJuridique', FileType::class, [
-                'label' => 'Pièce-jointe RIB',
+            ->add('legalStatusFile', FileType::class, [
+                'label' => 'Pièce-jointe statut juridique',
                 'required' => false,
                 'attr' => array(
-                    'placeholder' => 'Nom de votre entreprise',
+                    'placeholder' => 'Statut juridique',
                     'hidden' => 'hidden'
                 )
             ])
-            ->add('statutJuridique', ChoiceType::class, [
-                    'label' => "Statut Juridique de l'entreprise",
-                    'choices' => [
-                        'Entreprise individuelle' => 'EI',
-                        'Entreprise individuelle à responsabilité limitée' => 'EIRL',
-                        'Entreprise unipersonnelle à responsabilité limitée' => 'EURL',
-                        'Société à responsabilité limitée' => 'SARL',
-                        'Société anonyme' => 'SA',
-                        'Société par actions simplifiée unipersonnelle' => 'SASU',
-                        'Société par actions simplifiée' => 'SAS',
-                        'Société en nom collectif' => 'SNC',
-                        'Société en commandite simple' => 'SCS',
-                        'Société en commandite par actions' => 'SCA'
-                    ],
-                    'attr' => array(
-                        'placeholder' => "Type d'abonnement"
-                    )
-                ])
-            
+            ->add('liasseFiscaleFile', FileType::class, [
+                'label' => 'Pièce-jointe liasse fiscale',
+                'required' => false,
+                'attr' => array(
+                    'placeholder' => 'Liasse fiscale',
+                    'hidden' => 'hidden'
+                )
+            ])
         ;
     }
 

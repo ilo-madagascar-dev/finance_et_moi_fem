@@ -64,7 +64,7 @@ class Client
     private $siren;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="client", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="client", cascade={"persist", "remove"}, fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -148,6 +148,34 @@ class Client
      * @var string|null
      */
     private $rib;
+
+    /**
+     * 
+     * @Vich\UploadableField(mapping="legalStatus", fileNameProperty="legalStatus")
+     * 
+     */
+    private $legalStatusFile;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     *
+     * @var string|null
+     */
+    private $legalStatus;
+
+    /**
+     * 
+     * @Vich\UploadableField(mapping="liasseFiscale", fileNameProperty="liasseFiscale")
+     * 
+     */
+    private $liasseFiscaleFile;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     *
+     * @var string|null
+     */
+    private $liasseFiscale;
     
     /**
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
@@ -177,9 +205,14 @@ class Client
     private $actif;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $legalStatusValidated;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
-    private $statutJuridique;
+    private $statutEntreprise;
 
     public function __construct()
     {
@@ -505,6 +538,86 @@ class Client
         return $this->rib;
     }
     
+    /**
+     * 
+     * Legal Status File
+     * 
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null ribFile
+     */
+    public function setLegalStatusFile($legalStatusFile = null): Client
+    {
+        $this->legalStatusFile = $legalStatusFile;
+
+        if (null !== $legalStatusFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+        return $this;
+    }
+
+    public function getLegalStatusFile()
+    {
+        return $this->legalStatusFile;
+    }
+
+    public function setLegalStatus(?string $legalStatus): Client
+    {
+        $this->legalStatus = $legalStatus;
+        return $this;
+    }
+
+    public function getLegalStatus(): ?string
+    {
+        return $this->legalStatus;
+    }
+
+    /**
+     * 
+     * Legal Status File
+     * 
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null ribFile
+     */
+    public function setLiasseFiscaleFile($liasseFiscaleFile = null): Client
+    {
+        $this->liasseFiscaleFile = $liasseFiscaleFile;
+
+        if (null !== $liasseFiscaleFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+        return $this;
+    }
+
+    public function getLiasseFiscaleFile()
+    {
+        return $this->liasseFiscaleFile;
+    }
+
+    public function setLiasseFiscale(?string $liasseFiscale): Client
+    {
+        $this->liasseFiscale = $liasseFiscale;
+        return $this;
+    }
+
+    public function getLiasseFiscale(): ?string
+    {
+        return $this->liasseFiscale;
+    }
+
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
@@ -601,14 +714,26 @@ class Client
         return $this;
     }
 
-    public function getStatutJuridique(): ?string
+    public function getLegalStatusValidated(): ?bool
     {
-        return $this->statutJuridique;
+        return $this->legalStatusValidated;
     }
 
-    public function setStatutJuridique(string $statutJuridique): self
+    public function setLegalStatusValidated(?bool $legalStatusValidated): self
     {
-        $this->statutJuridique = $statutJuridique;
+        $this->legalStatusValidated = $legalStatusValidated;
+
+        return $this;
+    }
+
+    public function getStatutEntreprise(): ?string
+    {
+        return $this->statutEntreprise;
+    }
+
+    public function setStatutEntreprise(string $statutEntreprise): self
+    {
+        $this->statutEntreprise = $statutEntreprise;
 
         return $this;
     }

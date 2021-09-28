@@ -107,6 +107,34 @@ body{
     transition: .4s;
 }
 
+.thingsHere{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--light-01-half);
+    color: var(--dark-01);
+    padding: 0 5vw;
+}
+
+.thingsHere p{
+    background: transparent;
+    text-align: center;
+}
+
+.thingsHere a{
+    background: transparent;
+    text-decoration: none;
+    color: var(--light-01);
+}
+
+.thingsHere a:hover{
+    color: var(--dark-01);
+}
+
 @media only screen and (max-width: 600px){
     body{
         height: auto;
