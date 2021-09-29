@@ -209,11 +209,11 @@ class ModifClientController extends AbstractController
             
             $client->setPassword($encryptedPassword);
             $relatedUser->setPassword($encryptedPassword);
-            
+
             //$em->persist($client)
             $em->flush();
 
-            $this->addFlash("success", "Le mot du passe du sous-compte a bien été modifié !!!!");
+            $this->addFlash("success", "Le mot du passe du compte a bien été modifié !!!!");
         }
 
         return $this->render('client/modifPassword.html.twig',[
