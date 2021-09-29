@@ -258,6 +258,7 @@
     color: white;
     border-width: 0px;
     margin: auto;
+    cursor: pointer;
 }
 .grand_border{
     border-radius: 20px 20px;
