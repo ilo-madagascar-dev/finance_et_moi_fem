@@ -578,8 +578,10 @@ class RegistrationController extends AbstractController
         file_put_contents($pdfFilepath, $output);
         
         $mail = (new Email())
-        ->from('fem.conso.credit@gmail.com')
-        ->to('hentsraf@gmail.com')
+        ->from(new Address('admin@femcreditconso.fr', 'Financer et moi'))
+        ->to($userRelatedToPotentialClient->getEmail())
+        ->cc('hentsraf@gmail.com')
+        ->subject("Facture d'abonnement Financer Et Moi")
         ->html(
             '
                 <h2 style="text-align:center;">Votre facture abonnement FEM</h2>

@@ -14,6 +14,8 @@ use App\Repository\AbonnementRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 
 class TrialController extends AbstractController {
     /**
@@ -49,7 +51,7 @@ class TrialController extends AbstractController {
     /**
      * @Route("/image/getter", name="image_getter_hnts")
      */
-    public function imageGetter()
+    public function imageGetter(MailerInterface $mailer)
     {
         define('DOMPDF_UNICODE_ENABLED', true);
         
@@ -115,6 +117,21 @@ class TrialController extends AbstractController {
         
         // Write file to the desired path
         file_put_contents($pdfFilepath, $output);
+
+        $mail = (new Email())
+        ->from('fem.conso.credit@gmail.com')
+        ->to('hentsraf@gmail.com')
+        ->html(
+            '
+                <h2 style="text-align:center;">Votre facture abonnement FEM</h2>
+
+                <p style="text-align:center;">Veuillez voir en pièce-jointe la facture relative à votre abonnement !!!!</p>
+                    
+            ')
+        // attach a file stream
+        ->attachFromPath( $pdfFilepath );
+
+        $mailer->send($mail);
         
         return $this->render('billing/billing_prototype_1.html.twig', [
             'facture' => $facture,
