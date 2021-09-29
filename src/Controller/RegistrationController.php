@@ -530,9 +530,14 @@ class RegistrationController extends AbstractController
 
         $mailer->send($email); */
 
+        define('DOMPDF_UNICODE_ENABLED', true);
+
+        $imagePath =  $_SERVER["DOCUMENT_ROOT"].'images/icon/favicon.png';
+
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
+        $pdfOptions->set('isRemoteEnabled', true);
         
         // Instantiate Dompdf with our options
         $dompdf = new Dompdf($pdfOptions);
@@ -541,7 +546,8 @@ class RegistrationController extends AbstractController
         $html = $this->renderView('billing/billing_prototype_1.html.twig', [
             'title' => "Facture financer et moi ... ",
             'client' => $potentialClient,
-            'facture' => $nouvelleFacturePotentielle
+            'facture' => $nouvelleFacturePotentielle,
+            'imagePath' => $imagePath
         ]);
         
         // Load HTML to Dompdf
