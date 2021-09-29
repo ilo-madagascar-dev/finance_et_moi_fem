@@ -192,10 +192,12 @@ class ModifClientController extends AbstractController
         //dd();
         
         $userRole = $client->getUser()->getRoles()[0];
-
-        if ($relatedUser->getId() !== intval($id)) {
-            $this->addFlash('danger', "Ce sous-compte n'est pas le vôtre.");
-            return $this->redirectToRoute('dash');
+        
+        if ($relatedUser->getClient()) {    
+            if ($relatedUser->getClient()->getId() !== intval($id)) {
+                $this->addFlash('danger', "Ce sous-compte n'est pas le vôtre.");
+                return $this->redirectToRoute('dash');
+            }
         }
 
         $form = $this->createForm(ClientPasswordModifType::class, $client);
@@ -205,10 +207,9 @@ class ModifClientController extends AbstractController
             
             $encryptedPassword = $passwordEncoder->encodePassword($relatedUser, $client->getPassword());
             
-            //$client->setPassword($encryptedPassword);
-            //$relatedUser->setPassword($encryptedPassword);
-
-            dd("yes");
+            $client->setPassword($encryptedPassword);
+            $relatedUser->setPassword($encryptedPassword);
+            
             //$em->persist($client)
             $em->flush();
 
