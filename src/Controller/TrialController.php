@@ -65,7 +65,7 @@ class TrialController extends AbstractController {
         $facture->setMontantTtcFacture(58.8);
         $facture->setPourcentageTva(20);
 
-        $imagePath =  $_SERVER["DOCUMENT_ROOT"].'images/icon/favicon.png';
+        $imagePath =  $_SERVER["DOCUMENT_ROOT"].'/images/icon/favicon.png';
 
         //dd($imagePath);
 

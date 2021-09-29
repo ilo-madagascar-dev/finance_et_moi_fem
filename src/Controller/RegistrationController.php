@@ -532,7 +532,7 @@ class RegistrationController extends AbstractController
 
         define('DOMPDF_UNICODE_ENABLED', true);
 
-        $imagePath =  $_SERVER["DOCUMENT_ROOT"].'images/icon/favicon.png';
+        $imagePath =  $_SERVER["DOCUMENT_ROOT"].'/images/icon/favicon.png';
 
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
