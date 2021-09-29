@@ -12,9 +12,9 @@
             /* background: #1c9fd922; */
             border: 1px dotted black;
             font-family: monospace!important;
+            text-align: left;
             }
-
-            [a]h1{
+            h1{
             text-align: center;
             color: #203c76;
             }
@@ -30,49 +30,21 @@
             row-gap: .8em;
             }
 
-            [a] [c] span{
-            position: relative;
-            }
-
-            [a] [c] span:nth-child(2n){
-            font-weight: 800;
-            text-align: right;
-            }
-
-            [a] [c] span:nth-child(2n+1)::after{
-            content:":";
-            position: absolute;
-            right: 0; top: 50%;
-            transform: translate(100%, -50%);
-            }
-
-            [a] [c] span:nth-child(2n+1){
-            padding-right: 1em;
-            }
-
-            .lalala {
-                color:block
-            }
             [b]{
-                display: grid;
-                grid-template-columns: auto auto;
+                /* /* display: grid;
+                grid-template-columns: auto auto; 
+                display: flex; */
                 column-gap: 2em;
-                font-size: 1.2em;
+                flex-wrap: wrap;
             }
-            /* [f]{
-                font-weight: 800;
+            [f]{
                 position: relative;
-            }
-            [f]::after{
-                content: ":";
-                position: absolute;
-                top: 50%;
-                right: 0;
-                transform: translate(100%, -50%);
+                color: black;
             }
             [f], [r] {
                 margin: .5em 0;
-            } */
+                flex-basis: 50%;
+            }
         </style>
     </head>
     <body>
@@ -82,38 +54,21 @@
         <h1 style="text-align:center; color: #1c9fd9; font-family: sans-serif">Facture FEM</h1>
         <div a>
             <div b>
-                <p f>Nom</p>
-                <p r>{{ client.nom }}</p>
+                <p f>Nom : {{ client.nom }}</p>
                 
-                <p f>Prenom</p>
-                <p r>{{ client.prenom }}</p>
+                <p f>Prenom : {{ client.prenom }}</p>
                 
-                <p f>Montant HT</p>
-                <p r>{{ facture.montantHT }}</p>
+                <p f>Montant HT : {{ facture.montantHT }}</p>
                 
-                <p f>TVA</p>
-                <p r>{{ facture.pourcentageTva }}</p>
+                <p f>TVA : {{ facture.pourcentageTva }}</p>
                 
-                <p f>Montant TTC</p>
-                <p r>{{ facture.montantTtcFacture }}</p>
+                <p f>Montant TTC : {{ facture.montantTtcFacture }}</p>
                 
-                <p f>Etat de la facture</p>
-                <p r>{{ facture.factureAcquitee ? 'facture acquitée':'facture non acquitée' }}</p>
+                <p f>Etat de la facture : {{ facture.factureAcquitee ? 'facture acquitée':'facture non acquitée' }}</p>
             </div>
-            {# <p>Prenom : {{ client.prenom }}</p>
-            <p>Montant HT : {{ facture.montantHT }} €</p>
-            <p>TVA : {{ facture.pourcentageTva }}%</p>
-            <p>Montant TTC : {{ facture.montantTtcFacture }}€</p>
-            <p>Etat de la facture : {{ facture.factureAcquitee ? 'facture acquitée':'facture non acquitée '}}</p> #}
         </div>
-        {# <div a>
-            <h1 style="text-align:center; color: #1c9fd9">Facture FEM</h1>
-            <p>Nom : {{ client.nom }}</p>
-            <p>Prenom : {{ client.prenom }}</p>
-            <p>Montant HT : {{ facture.montantHT }} €</p>
-            <p>TVA : {{ facture.pourcentageTva }}%</p>
-            <p>Montant TTC : {{ facture.montantTtcFacture }}€</p>
-            <p>Etat de la facture : {{ facture.factureAcquitee ? 'facture acquitée':'facture non acquitée '}}</p>
-        </div> #}
+        <p style="font-family: sans-serif; width: 500px; margin: 2em auto">
+            Merci d'avoir choisi nos services !
+        </p>
     </body>
 </html>
