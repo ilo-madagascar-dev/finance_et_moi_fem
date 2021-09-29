@@ -112,8 +112,10 @@ p.deal{
 }
 
 .noticer{
-    font-size: .65em;
     color: var(--dark-01);
+    font-size: .90em;
+    margin-top: 1.5em;
+    text-align: center;
 }
 
 .el-p strong{
