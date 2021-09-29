@@ -1,9 +1,25 @@
-<h1>Hi!</h1>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<div class="head" style="display: grid; grid-template-columns: 3fr 2fr; gap: 1em;">
+    <img src="https://femcreditconso.fr/images/icon/favicon.png" alt="logo">
+    <div style="display: flex; justify-content: space-between; padding: 1.5em 0; flex-direction: column;">
+        <div style="display: flex; gap: 1em; align-items: center;">
+            <img src="https://femcreditconso.fr/images/icon/phone.png" alt="" style="width: 1.5em">
+            <p style="color: #1c9fd9; font-family: Montserrat">06 85 41 84 56</p>
+        </div>
+        <div style="display: flex; gap: 1em; align-items: center;">
+            <img src="https://femcreditconso.fr/images/icon/mail.png" alt="" style="width: 1.5em">
+            <p style="color: #1c9fd9; font-family: Montserrat">contact@fincanceetmoi.fr</p>
+        </div>
+    </div>
+</div>
 
-<p>To reset your password, please visit the following link</p>
+
+<h1 style="color: #1c9fd9; font-family: Montserrat">Bonjour,</h1>
+
+<p style="color: #203c76; font-family: Montserrat">Cliquez sur le lien suivant pour réinitialiser votre mot de passe.</p>
 
 <a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
 
-<p>This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
+<p id="p" style="color: #203c76; font-family: Montserrat!important">Ce lien va expirer dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
 
-<p>Cheers!</p>
+<p style="color: #203c76; font-family: Montserrat">A bentôt sur FEM !</p>
