@@ -1,18 +1,20 @@
-{% extends 'base.html.twig' %}
+{% extends "base.html.twig" %}
 
-{% block title %}FEM - Tarifs{% endblock %}
-
+{% block title %}
+    FEM - Tarifs
+{% endblock %}
 
 {% block stylesheets %}
-    {# <link href="stylesheets/fonts/stylesheet-01.css" rel="text/css"/> #}
     <link href={{ asset('css/stylesheet.css') }} rel="stylesheet">
     <link href={{ asset('css/colors.css') }} rel="stylesheet">
-    <link href={{ asset('css/tarifs.css') }} rel="stylesheet">
-    {% block addstyle %}
-    {% endblock %}
+    <link rel="stylesheet" href={{ asset('css/tarifs.css') }}>
+    <link href={{ asset('css/accueil.css') }} rel="stylesheet">
+    {#<link rel="stylesheet" href={{ asset('css/apropos&accueil.css') } #}
 {% endblock %}
 {% block body %}
-    {% include "mqbaka_home/header.html.twig" %}
+    {% block header %}
+        {% include "mqbaka_home/header.html.twig" %}
+    {% endblock %}
 
     <div class="main-content">
         <div class="title-block">
@@ -177,15 +179,16 @@
                         </p>
                     </div>
                 </div>
-                <div class="noticer">
-                    *Sous réserve d'acceptation du dossier de nos partenaires bancaires.
-                </div>
+                
                 <form method="POST" action="{{ path('registration') }}" style="margin-top: auto;">
                     <!-- Essentiel price -->
                     <input type="hidden" name="price_id" value="price_1JZs5tBW8SyIFHAgHT2LqoM7" id="price_id_essentiel">
                     <button type="submit" class="full-blue">Créer un compte</button>
                 </form>
             </div>
+        </div>
+        <div class="noticer">
+            *Sous réserve d'acceptation du dossier de nos partenaires bancaires.
         </div>
         <div class="switcher">
             <div class="switcher-inner">
