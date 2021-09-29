@@ -39,4 +39,4 @@
 !/public/images/liasseFiscale/**/
 
 /public/my_pdfs/**
-!/public/my_pdfs/**
+!/public/my_pdfs/**/
