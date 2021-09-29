@@ -1,9 +1,16 @@
-<h1>Hi!</h1>
+{# <img src="" alt=""> #}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<style>
+    p#p a{
+        font-family: Montserrat!important;
+    }
+</style>
+<h1 style="color: #1c9fd9; font-family: Montserrat">Bonjour,</h1>
 
-<p>To reset your password, please visit the following link</p>
+<p style="color: #203c76; font-family: Montserrat">Cliquez sur le lien suivant pour réinitialiser votre mot de passe.</p>
 
 <a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
 
-<p>This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
+<p id="p" style="color: #203c76; font-family: Montserrat!important">Ce lien va expirer dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
 
-<p>Cheers!</p>
+<p style="color: #203c76; font-family: Montserrat">A bentôt sur FEM !</p>
