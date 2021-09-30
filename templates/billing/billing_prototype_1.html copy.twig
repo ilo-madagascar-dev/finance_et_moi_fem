@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Facture FEM</title>
+        <style>
+            div[a]{
+            width: 500px;
+            margin: auto;
+            max-width: 95vw;
+            padding: 1em 2em;
+            /* background: #1c9fd922; */
+            border: 1px dotted black;
+            font-family: monospace!important;
+            text-align: left;
+            }
+            h1{
+            text-align: center;
+            color: #203c76;
+            }
+
+            [c]{
+            background: white;
+            border: 1px dashed black;
+            padding: 1em;
+            font-family: monospace;
+            display: grid;
+            grid-template-columns: max-content auto;
+            column-gap: .5em;
+            row-gap: .8em;
+            }
+
+            [b]{
+                /* /* display: grid;
+                grid-template-columns: auto auto; 
+                display: flex; */
+                column-gap: 2em;
+                flex-wrap: wrap;
+            }
+            [f]{
+                position: relative;
+                color: black;
+            }
+            [f], [r] {
+                margin: .5em 0;
+                flex-basis: 50%;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="text-align:center; margin-top: 50px; margin-bottom: 50px;">
+            <img src={{imagePath}} alt="" style="width:auto; height:auto;">
+        </div>
+        <h1 style="text-align:center; color: #1c9fd9; font-family: sans-serif">Facture FEM</h1>
+        <div a>
+            <div b>
+                <p f>Nom : {{ client.nom }}</p>
+                
+                <p f>Prenom : {{ client.prenom }}</p>
+                
+                <p f>Montant HT : {{ facture.montantHT }}</p>
+                
+                <p f>TVA : {{ facture.pourcentageTva }}</p>
+                
+                <p f>Montant TTC : {{ facture.montantTtcFacture }}</p>
+                
+                <p f>Etat de la facture : {{ facture.factureAcquitee ? 'facture acquitée':'facture non acquitée' }}</p>
+            </div>
+        </div>
+        <p style="font-family: sans-serif; width: 500px; margin: 2em auto">
+            Merci d'avoir choisi nos services !
+        </p>
+    </body>
+</html>

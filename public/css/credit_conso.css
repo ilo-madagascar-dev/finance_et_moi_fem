@@ -256,6 +256,14 @@ p.sub{
     gap: 1em;
 }
 
+.box:hover {
+    background-color: #203c76;
+}
+.box:hover *{
+    background-color: #203c76;
+    color: #f5f5ff;
+}
+
 .box-title{
     font-size: 1.3em;
     font-weight: 700;
@@ -264,6 +272,7 @@ p.sub{
 
 .box-p{
     color: var(--light-01);
+    text-align: center;
 }
 
 .boxes-inner{
