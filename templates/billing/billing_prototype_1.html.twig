@@ -51,7 +51,7 @@
             #fac-content{
                 border-collapse: collapse;
                 width: 100%;
-                margin-top: 4em;
+                margin-top: 2em;
             }
             #fac-content td, #fac-content th{
                 border: 1px solid black;
@@ -80,6 +80,9 @@
             }
             [l]{
                 font-family: monospace;
+            }
+            #client-det{
+                margin-top: 3em;
             }
         </style>
     </head>
@@ -116,7 +119,6 @@
                         Facture n°: xxxx-xx<br/>
                         Date : xxxx-xx<br/>
                         Client n°: xxxx-xx<br/>
-                        Page : 1/1 (?)
                     </td>
                 </tr>
                 <tr m>
@@ -129,11 +131,23 @@
                 </tr>
             </tbody>
         </table>
+        <table id="client-det">
+            <tr>
+                <td o="">Nom de l'entreprise </td>
+                <td>:</td>
+                <td l="">{{ client.prenom }} {{ client.nom }}</td>
+            </tr>
+            <tr>
+                <td o="">Adresse</td>
+                <td>:</td>
+                <td l="">122 Road of The Fishermen</td>
+            </tr>
+        </table>
         <table id="fac-content">
             <thead>
                 <tr>
-                    <th>Nom de l'entreprise</th>
-                    <th>Adresse</th>
+                    <th>Ref</th>
+                    <th>Type d'abonnement</th>
                     <th>Montant HT</th>
                     <th>TVA</th>
                     <th>Montant TTC</th>
@@ -142,10 +156,10 @@
             <tbody>
                 <tr>
                     <td>
-                        {{ client.prenom }} {{ client.nom }}
+                        {{ "REF00" }}
                     </td>
                     <td>
-                        122 Road of The Fishermen
+                        {{ "client.typeAbonnement" }}
                     </td>
                     <td r>
                         {{ facture.montantHT }}€
