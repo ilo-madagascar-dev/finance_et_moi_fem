@@ -51,19 +51,23 @@ class TrialController extends AbstractController {
     /**
      * @Route("/image/getter", name="image_getter_hnts")
      */
-    public function imageGetter(MailerInterface $mailer)
+    public function imageGetter(MailerInterface $mailer, ClientRepository $clientRepository, FactureRepository $factureRepository)
     {
         define('DOMPDF_UNICODE_ENABLED', true);
         
-        $client = new Client;
-        $facture = new Facture();
+        $client = $clientRepository->find(70);
+        $facture = $client->getAbonnement()->getFactures()[0];
 
-        $client->setNom('Rafidinarivo');
+        //dd($client, $facture);
+
+        /* $client->setNom('Rafidinarivo');
         $client->setPrenom('Henintsoa');
+        $client->setAddress('122 Rue of The Fisherman');
+        
 
         $facture->setMontantHT(49);
         $facture->setMontantTtcFacture(58.8);
-        $facture->setPourcentageTva(20);
+        $facture->setPourcentageTva(20); */
 
         $imagePath =  $_SERVER["DOCUMENT_ROOT"].'/images/icon/favicon.png';
 

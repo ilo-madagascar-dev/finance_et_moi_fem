@@ -116,9 +116,9 @@
                         <img src={{imagePath}} alt="" style="width:200px; height:auto;">
                     </td>
                     <td t>
-                        Facture n°: xxxx-xx<br/>
-                        Date : xxxx-xx<br/>
-                        Client n°: xxxx-xx<br/>
+                        Facture n°: {{ facture.id }}<br/>
+                        Date : {{ facture.dateEmissionFacture|date('d-m-Y') }}<br/>
+                        Client n°: {{ client.abonnement.id }}<br/>
                     </td>
                 </tr>
                 <tr m>
@@ -140,7 +140,7 @@
             <tr>
                 <td o="">Adresse</td>
                 <td>:</td>
-                <td l="">122 Road of The Fishermen</td>
+                <td l="">{{ client.prenom }}</td>
             </tr>
         </table>
         <table id="fac-content">
@@ -156,10 +156,10 @@
             <tbody>
                 <tr>
                     <td>
-                        {{ "REF00" }}
+                        {{ client.abonnement.typeAbonnement.priceID }}
                     </td>
                     <td>
-                        {{ "client.typeAbonnement" }}
+                        {{ client.abonnement.typeAbonnement.label }}
                     </td>
                     <td r>
                         {{ facture.montantHT }}€
