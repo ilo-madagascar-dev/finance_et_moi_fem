@@ -192,10 +192,12 @@ class ModifClientController extends AbstractController
         //dd();
         
         $userRole = $client->getUser()->getRoles()[0];
-
-        if ($relatedUser->getId() !== intval($id)) {
-            $this->addFlash('danger', "Ce sous-compte n'est pas le vôtre.");
-            return $this->redirectToRoute('dash');
+        
+        if ($relatedUser->getClient()) {    
+            if ($relatedUser->getClient()->getId() !== intval($id)) {
+                $this->addFlash('danger', "Ce sous-compte n'est pas le vôtre.");
+                return $this->redirectToRoute('dash');
+            }
         }
 
         $form = $this->createForm(ClientPasswordModifType::class, $client);
@@ -205,14 +207,13 @@ class ModifClientController extends AbstractController
             
             $encryptedPassword = $passwordEncoder->encodePassword($relatedUser, $client->getPassword());
             
-            //$client->setPassword($encryptedPassword);
-            //$relatedUser->setPassword($encryptedPassword);
+            $client->setPassword($encryptedPassword);
+            $relatedUser->setPassword($encryptedPassword);
 
-            dd("yes");
             //$em->persist($client)
             $em->flush();
 
-            $this->addFlash("success", "Le mot du passe du sous-compte a bien été modifié !!!!");
+            $this->addFlash("success", "Le mot du passe du compte a bien été modifié !!!!");
         }
 
         return $this->render('client/modifPassword.html.twig',[

@@ -4,13 +4,13 @@
         <meta charset="UTF-8">
         <title>Facture FEM</title>
         <style>
-            div[a]{
+            /* div[a]{
             width: 500px;
             margin: auto;
             max-width: 95vw;
-            padding: 1em 2em;
+            padding: 1em 2em; */
             /* background: #1c9fd922; */
-            border: 1px dotted black;
+            /* border: 1px dotted black;
             font-family: monospace!important;
             text-align: left;
             }
@@ -30,11 +30,11 @@
             row-gap: .8em;
             }
 
-            [b]{
+            [b]{ */
                 /* /* display: grid;
                 grid-template-columns: auto auto; 
                 display: flex; */
-                column-gap: 2em;
+                /* column-gap: 2em;
                 flex-wrap: wrap;
             }
             [f]{
@@ -44,11 +44,50 @@
             [f], [r] {
                 margin: .5em 0;
                 flex-basis: 50%;
+            }*/
+            .spacer{
+                width: 200px;
+            }
+            #fac-content{
+                border-collapse: collapse;
+                width: 100%;
+                margin-top: 2em;
+            }
+            #fac-content td, #fac-content th{
+                border: 1px solid black;
+            }
+            #fac-content td{
+                font-family: monospace;
+            }
+            [r]{
+                text-align: right;
+            }
+            #table-head{
+                width: 100%;
+            }
+            [m]{
+                margin: 2em 0;
+            }
+            #details{
+                border-collapse: collapse;
+                margin-top: 2em;
+            }
+            #details td{
+                border: 1px solid black;
+            }
+            [o]{
+                font-weight: 800;
+            }
+            [l]{
+                font-family: monospace;
+            }
+            #client-det{
+                margin-top: 3em;
             }
         </style>
     </head>
     <body>
-        <div style="text-align:center; margin-top: 50px; margin-bottom: 50px;">
+        {# <div style="text-align:center; margin-top: 50px; margin-bottom: 50px;">
             <img src={{imagePath}} alt="" style="width:auto; height:auto;">
         </div>
         <h1 style="text-align:center; color: #1c9fd9; font-family: sans-serif">Facture FEM</h1>
@@ -69,6 +108,86 @@
         </div>
         <p style="font-family: sans-serif; width: 500px; margin: 2em auto">
             Merci d'avoir choisi nos services !
-        </p>
+        </p> #}
+        <table id="table-head">
+            <tbody>
+                <tr>
+                    <td>
+                        <img src={{imagePath}} alt="" style="width:200px; height:auto;">
+                    </td>
+                    <td t>
+                        Facture n°: xxxx-xx<br/>
+                        Date : xxxx-xx<br/>
+                        Client n°: xxxx-xx<br/>
+                    </td>
+                </tr>
+                <tr m>
+                    <td>
+                        Finance et Moi<br/>
+                        84, rue des Quatre Vents<br/>
+                        79300 BRESSUIRE
+                    </td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <table id="client-det">
+            <tr>
+                <td o="">Nom de l'entreprise </td>
+                <td>:</td>
+                <td l="">{{ client.prenom }} {{ client.nom }}</td>
+            </tr>
+            <tr>
+                <td o="">Adresse</td>
+                <td>:</td>
+                <td l="">122 Road of The Fishermen</td>
+            </tr>
+        </table>
+        <table id="fac-content">
+            <thead>
+                <tr>
+                    <th>Ref</th>
+                    <th>Type d'abonnement</th>
+                    <th>Montant HT</th>
+                    <th>TVA</th>
+                    <th>Montant TTC</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        {{ "REF00" }}
+                    </td>
+                    <td>
+                        {{ "client.typeAbonnement" }}
+                    </td>
+                    <td r>
+                        {{ facture.montantHT }}€
+                    </td>
+                    <td r>
+                        {{ facture.pourcentageTva }}%
+                    </td>
+                    <td r>
+                        {{ facture.montantTtcFacture }}€
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table id="details">
+            <tbody>
+                <tr>
+                    <td o>Etat de la facture</td>
+                    <td l>
+                        {{ facture.factureAcquitee ? 'acquitée':'non acquitée' }}
+                    </td>
+                </tr>
+                <tr>
+                    <td o>Mode de paiement</td>
+                    <td l>
+                        Carte Bancaire
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </body>
 </html>
