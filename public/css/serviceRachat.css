@@ -94,13 +94,23 @@
     width: 410px;
 }
 .palet2{
-    padding: 20px;
+    padding: 50px !important;
     border: 0.5px solid var(--dark-01);
     border-radius: 20px 20px;
     width: 380px;
     /* height: 350px; */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+.palet2:hover{
+    background-color: #203c76;
+}
+
+.palet2:hover *{
+    background-color: #203c76;
+    color: #f5f5ff;
+}
+
 .palet2 p{
     color: var(--dark-01);
 }
