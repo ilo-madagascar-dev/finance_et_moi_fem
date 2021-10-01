@@ -580,7 +580,7 @@ class RegistrationController extends AbstractController
         $mail = (new Email())
         ->from(new Address('admin@femcreditconso.fr', 'Financer et moi'))
         ->to($userRelatedToPotentialClient->getEmail())
-        ->cc('contact@fincanceetmoi.fr')
+        ->cc('contact@financeetmoi.fr')
         ->subject("Facture d'abonnement Financer Et Moi")
         ->html(
             '
