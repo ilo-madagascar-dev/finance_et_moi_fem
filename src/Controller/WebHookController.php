@@ -29,27 +29,46 @@ class WebHookController extends AbstractController
             http_response_code(400);
             exit();
         }
+
         // Handle the event
         switch ($event->type) {
-        case 'payment_intent.succeeded':
-            $paymentIntent = $event->data->object; // contains a \Stripe\PaymentIntent
-            // Then define and call a method to handle the successful payment intent.
-            // handlePaymentIntentSucceeded($paymentIntent);
-            break;
-        case 'payment_method.attached':
-            $paymentMethod = $event->data->object; // contains a \Stripe\PaymentMethod
-            // Then define and call a method to handle the successful attachment of a PaymentMethod.
-            // handlePaymentMethodAttached($paymentMethod);
-            break;
+        case 'invoice.created':
+            $invoice = $event->data->object;
+        case 'invoice.deleted':
+            $invoice = $event->data->object;
+        case 'invoice.finalization_failed':
+            $invoice = $event->data->object;
+        case 'invoice.finalized':
+            $invoice = $event->data->object;
+        case 'invoice.marked_uncollectible':
+            $invoice = $event->data->object;
+        case 'invoice.paid':
+            $invoice = $event->data->object;
+        case 'invoice.payment_action_required':
+            $invoice = $event->data->object;
+        case 'invoice.payment_failed':
+            $invoice = $event->data->object;
+        case 'invoice.payment_succeeded':
+            $invoice = $event->data->object;
+        case 'invoice.sent':
+            $invoice = $event->data->object;
+        case 'invoice.upcoming':
+            $invoice = $event->data->object;
+        case 'invoice.updated':
+            $invoice = $event->data->object;
+        case 'invoice.voided':
+            $invoice = $event->data->object;
+        // ... handle other event types
         default:
-            // Unexpected event type
-            echo 'Received unknown event type';
+            echo 'Received unknown event type ' . $event->type;
         }
+        
         http_response_code(200);
         
-        return new Response(json_encode([
-            'paymentIntent' => $paymentIntent
-        ]));
+        $data =  ['invoice' => $invoice];
+        $response = $this->json($data, 200, [], ['groups'=>'conversation:read']);
+
+        return $response;
         /* return $this->render('web_hook/index.html.twig', [
             'controller_name' => 'WebHookController',
         ]); */
