@@ -46,9 +46,12 @@ class WebHookController extends AbstractController
             echo 'Received unknown event type';
         }
         http_response_code(200);
-
-        return $this->render('web_hook/index.html.twig', [
+        
+        return new Response(json_encode([
+            'paymentIntent' => $paymentIntent
+        ]));
+        /* return $this->render('web_hook/index.html.twig', [
             'controller_name' => 'WebHookController',
-        ]);
+        ]); */
     }
 }
