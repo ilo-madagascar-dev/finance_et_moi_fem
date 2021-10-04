@@ -69,12 +69,12 @@ class ClientType extends AbstractType
                     'placeholder' => 'Téléphone fixe'
                 )
             ])
-            /* ->add('address', TextType::class, [
+            ->add('address', TextType::class, [
                 'label' => 'adresse',
                 'attr' => array(
                     'placeholder' => 'Adresse'
                 )
-            ]) */
+            ])
             ->add('street', TextType::class, [
                 'label' => 'Rue',
                 'attr' => array(
