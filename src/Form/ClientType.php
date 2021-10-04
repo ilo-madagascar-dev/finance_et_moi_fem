@@ -78,19 +78,19 @@ class ClientType extends AbstractType
             ->add('street', TextType::class, [
                 'label' => 'Rue',
                 'attr' => array(
-                    'placeholder' => 'Adresse'
+                    'placeholder' => 'Rue'
                 )
             ])
             ->add('town', TextType::class, [
                 'label' => 'Ville',
                 'attr' => array(
-                    'placeholder' => 'Adresse'
+                    'placeholder' => 'Ville'
                 )
             ])
             ->add('postalCode', TextType::class, [
                 'label' => 'Code postal',
                 'attr' => array(
-                    'placeholder' => 'Adresse'
+                    'placeholder' => 'Code postal'
                 )
             ])
             ->add('siren', TextType::class, [
