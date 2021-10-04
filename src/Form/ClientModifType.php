@@ -66,23 +66,17 @@ class ClientModifType extends AbstractType
                 'attr' => array(
                     'placeholder' => 'Adresse'
                 )
-            ])
-            ->add('street', TextType::class, [
-                'label' => 'Rue',
+            ])          
+            ->add('postalCode', TextType::class, [
+                'label' => 'Code postal',
                 'attr' => array(
-                    'placeholder' => 'Rue'
+                    'placeholder' => 'Code postal'
                 )
             ])
             ->add('town', TextType::class, [
                 'label' => 'Ville',
                 'attr' => array(
                     'placeholder' => 'Ville'
-                )
-            ])
-            ->add('postalCode', TextType::class, [
-                'label' => 'Code postal',
-                'attr' => array(
-                    'placeholder' => 'Code postal'
                 )
             ])
             ->add('siren', TextType::class, [
