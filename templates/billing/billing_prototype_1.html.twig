@@ -75,24 +75,19 @@
                 <td l="">{{ client.prenom }} {{ client.nom }}</td>
             </tr>
             <tr>
-                <td o="">Adresse</td>
+                <td o="">Rue</td>
                 <td>:</td>
-                <td l="">{{ client.address }}</td>
-            </tr>
-            <tr>
-                <td o="">Code postale</td>
-                <td>:</td>
-                <td l="">{{ client.address }}</td>{# To change later when the server part ready #}
+                <td l="">{{ client.street }}</td>{# To change later when the server part ready #}
             </tr>
             <tr>
                 <td o="">Ville</td>
                 <td>:</td>
-                <td l="">{{ client.address }}</td>{# To change later when the server part ready #}
+                <td l="">{{ client.town }}</td>{# To change later when the server part ready #}
             </tr>
             <tr>
-                <td o="">Rue</td>
+                <td o="">Code postal</td>
                 <td>:</td>
-                <td l="">{{ client.address }}</td>{# To change later when the server part ready #}
+                <td l="">{{ client.postalCode }}</td>{# To change later when the server part ready #}
             </tr>
         </table>
         <table id="fac-content">
