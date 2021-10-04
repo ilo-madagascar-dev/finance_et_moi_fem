@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Facture FEM</title>
+        <style>
+            .spacer{
+                width: 200px;
+            }
+            #fac-content{
+                border-collapse: collapse;
+                width: 100%;
+                margin-top: 2em;
+            }
+            #fac-content td, #fac-content th{
+                border: 1px solid black;
+            }
+            #fac-content td{
+                font-family: monospace;
+            }
+            [r]{
+                text-align: right;
+            }
+            #table-head{
+                width: 100%;
+            }
+            [m]{
+                margin: 2em 0;
+            }
+            #details{
+                border-collapse: collapse;
+                margin-top: 2em;
+            }
+            #details td{
+                border: 1px solid black;
+            }
+            [o]{
+                font-weight: 800;
+            }
+            [l]{
+                font-family: monospace;
+            }
+            #client-det{
+                margin-top: 3em;
+            }
+        </style>
+    </head>
+    <body>
+        <table id="table-head">
+            <tbody>
+                <tr>
+                    <td>
+                        <img src={{imagePath}} alt="" style="width:200px; height:auto;">
+                    </td>
+                    <td t>
+                        Facture n°: {{ facture.id }}<br/>
+                        Date : {{ facture.dateEmissionFacture|date('d-m-Y') }}<br/>
+                        Client n°: {{ client.abonnement.id }}<br/>
+                    </td>
+                </tr>
+                <tr m>
+                    <td>
+                        Finance et Moi<br/>
+                        84, rue des Quatre Vents<br/>
+                        79300 BRESSUIRE
+                    </td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <table id="client-det">
+            <tr>
+                <td o="">Nom de l'entreprise </td>
+                <td>:</td>
+                <td l=""> {{ client.nomEntreprise }}</td>
+            </tr>
+            <tr>
+                <td o="">Ville</td>
+                <td>:</td>
+                <td l="">{{ client.ville }}</td>{# To change later when the server part ready #}
+            </tr>
+            <tr>
+                <td o="">Code postal</td>
+                <td>:</td>
+                <td l="">{{ client.codePostal }}</td>{# To change later when the server part ready #}
+            </tr>
+        </table>
+        <table id="fac-content">
+            <thead>
+                <tr>
+                    <th>Ref</th>
+                    <th>Type d'abonnement</th>
+                    <th>Montant HT</th>
+                    <th>TVA</th>
+                    <th>Montant TTC</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        {{ client.abonnement.typeAbonnement.priceID }}
+                    </td>
+                    <td>
+                        {{ client.abonnement.typeAbonnement.label }}
+                    </td>
+                    <td r>
+                        {{ facture.montantHT }}€
+                    </td>
+                    <td r>
+                        {{ facture.pourcentageTva }}%
+                    </td>
+                    <td r>
+                        {{ facture.montantTtcFacture }}€
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table id="details">
+            <tbody>
+                <tr>
+                    <td o>Etat de la facture</td>
+                    <td l>
+                        {{ facture.factureAcquitee ? 'acquitée':'non acquitée' }}
+                    </td>
+                </tr>
+                <tr>
+                    <td o>Mode de paiement</td>
+                    <td l>
+                        Carte Bancaire
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

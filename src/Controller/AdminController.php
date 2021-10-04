@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use DateTime;
+use Dompdf\Dompdf;
 use Stripe\Stripe;
+use Dompdf\Options;
 use App\Entity\User;
 use DateTimeImmutable;
 use App\Entity\Facture;
@@ -14,9 +16,10 @@ use App\Service\ApiService;
 use App\Form\SousCompteType;
 use Stripe\Checkout\Session;
 use App\Repository\UserRepository;
-use App\Repository\ClientRepository;
 use App\Repository\AdminRepository;
+use App\Repository\ClientRepository;
 use App\Repository\SousCompteRepository;
+use App\Repository\TypeAbonnementRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +27,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Address;
 
 class AdminController extends AbstractController
 {
@@ -507,7 +513,7 @@ class AdminController extends AbstractController
     public function sousCompteRegistrationPayment(SessionInterface $session):Response
     {
         Stripe::setApiKey($_ENV['STRIPE_SECRET']);
-        $priceId = 'price_1JY72lBW8SyIFHAgJEyG0fLk';
+        $priceId = $_ENV['SOUS_COMPTE_PRICE_ID'];
 
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
@@ -533,7 +539,7 @@ class AdminController extends AbstractController
     /**
      * @Route("/sous-compte/registration/payment/success", name="sous-compte_registration_payment_success")
      */
-    public function sousCompteRegistrationPaymentSuccess(Request $request, SessionInterface $session, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, ApiService $apiService):Response
+    public function sousCompteRegistrationPaymentSuccess(Request $request, SessionInterface $session, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, ApiService $apiService, MailerInterface $mailer, TypeAbonnementRepository $typeAbonnementRepository):Response
     {
         if (!$this->getUser()) {
             if (!$this->getUser()->getClient()) {
@@ -556,9 +562,21 @@ class AdminController extends AbstractController
 
         $potentialClient = $session->get('eventuallyNewSousCompte');
         $userConnectedVd = $session->get('userConnectedVd');
+        $priceId = $_ENV['SOUS_COMPTE_PRICE_ID'];
+        $montantHT = 49;
         //dd($potentialClient, $userConnectedVd);
-        //Création d'un nouvel abonnement
+        
+        //Création d'un nouvel abonnement 
         $nouvelAbonnementPotentiel = new Abonnement();
+        $typeAbonnement = $typeAbonnementRepository->findOneBy(['price_ID' => $priceId]);
+
+        if (!$typeAbonnement) 
+        {
+            $this->addFlash('danger', "Aucun type d'abonnement n'a été choisi (ou n'existe encore dans la base de données)");
+
+            return $this->redirectToRoute('registration');
+        }
+
         
         $nouvelAbonnementPotentiel->setStripeSubscriptionId($stripe_session->subscription);
         $nouvelAbonnementPotentiel->setStripeCusId($stripe_session->customer);
@@ -566,8 +584,10 @@ class AdminController extends AbstractController
         $nouvelAbonnementPotentiel->setStatutPaiement($stripe_session->payment_status);
         $nouvelAbonnementPotentiel->setDateDebutAbonnement(new DateTime());
         $nouvelAbonnementPotentiel->setSousCompte($potentialClient);
+        $nouvelAbonnementPotentiel->setTypeAbonnement($typeAbonnement);
+        //dd($nouvelAbonnementPotentiel);
         
-        $session->set('abonnementPotentiel', $nouvelAbonnementPotentiel);
+        //$session->set('abonnementPotentiel', $nouvelAbonnementPotentiel);
        
         //Création de l'entité user relatif au client
         $userRelatedToPotentialClient = new User;
@@ -608,6 +628,7 @@ class AdminController extends AbstractController
  
         $nouvelleFacturePotentielle->setDateEmissionFacture(new DateTime());
         $nouvelleFacturePotentielle->setFactureAcquitee($statutFacture);
+        $nouvelleFacturePotentielle->setMontantHT($montantHT);
         $nouvelleFacturePotentielle->setMontantTtcFacture($stripe_session->amount_total/100);
         $nouvelleFacturePotentielle->setAbonnement($nouvelAbonnementPotentiel);
         $nouvelleFacturePotentielle->setPourcentageTva(20);
@@ -629,6 +650,71 @@ class AdminController extends AbstractController
 
         $em->persist($paiement);
         $em->flush();
+
+        //Envoi du mail au propriétaire du sous-compte
+        define('DOMPDF_UNICODE_ENABLED', true);
+
+        $imagePath =  $_SERVER["DOCUMENT_ROOT"].'/images/icon/favicon.png';
+
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+        $pdfOptions->set('isRemoteEnabled', true);
+        
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('billing/billing_sous_compte_prototype_1.html.twig', [
+            'title' => "Facture financer et moi ... ",
+            'client' => $potentialClient,
+            'facture' => $nouvelleFacturePotentielle,
+            'imagePath' => $imagePath
+        ]);
+        
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+        
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Store PDF Binary Data
+        $output = $dompdf->output();
+        
+        $name = md5(uniqid());
+
+        // In this case, we want to write the file in the public directory
+        $publicDirectory = $_SERVER['DOCUMENT_ROOT'] . '/my_pdfs';
+
+        if (!file_exists($_SERVER['DOCUMENT_ROOT'] . '/my_pdfs')) {
+            mkdir($_SERVER['DOCUMENT_ROOT'] . '/my_pdfs', 0777, true);
+        }
+
+        // e.g /var/www/project/public/mypdf.pdf
+        $pdfFilepath =  $publicDirectory . "/" .$name . ".pdf";
+        
+        // Write file to the desired path
+        file_put_contents($pdfFilepath, $output);
+        
+        $mail = (new Email())
+        ->from(new Address('admin@femcreditconso.fr', 'Financer et moi'))
+        ->to($this->getUser()->getEmail())
+        ->cc('contact@financeetmoi.fr')
+        ->subject("Facture d'abonnement Financer Et Moi")
+        ->html(
+            '
+                <h2 style="text-align:center;">Votre facture abonnement FEM</h2>
+
+                <p style="text-align:center;">Veuillez voir en pièce-jointe la facture relative à l\' abonnement !!!!</p>
+                    
+            ')
+        // attach a file stream
+        ->attachFromPath( $pdfFilepath );
+
+        $mailer->send($mail);
 
         return $this->render('sous-comptes/souscompte_success_payment.html.twig');
     }

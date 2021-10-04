@@ -75,12 +75,6 @@ class ClientType extends AbstractType
                     'placeholder' => 'Adresse'
                 )
             ])
-            ->add('street', TextType::class, [
-                'label' => 'Rue',
-                'attr' => array(
-                    'placeholder' => 'Rue'
-                )
-            ])
             ->add('town', TextType::class, [
                 'label' => 'Ville',
                 'attr' => array(
