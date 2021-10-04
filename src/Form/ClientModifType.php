@@ -61,12 +61,12 @@ class ClientModifType extends AbstractType
                     'placeholder' => 'Téléphone fixe'
                 )
             ])
-            // ->add('address', TextType::class, [
-            //     'label' => 'adresse',
-            //     'attr' => array(
-            //         'placeholder' => 'Adresse'
-            //     )
-            // ])
+            ->add('address', TextType::class, [
+                'label' => 'adresse',
+                'attr' => array(
+                    'placeholder' => 'Adresse'
+                )
+            ])
             ->add('street', TextType::class, [
                 'label' => 'Rue',
                 'attr' => array(
