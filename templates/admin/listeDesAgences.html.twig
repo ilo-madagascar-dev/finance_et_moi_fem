@@ -32,7 +32,7 @@
 				<thead>
 					<tr>
 						<th>Agence</th>
-						<th>Adresse</th>
+						<th>Ville</th>
 						<th>Type d'abonnement</th>
 						<th>Sous-comptes actifs</th>
 						<th>Accès au paiement fractionné</th>
@@ -43,7 +43,7 @@
 					{% for client in clients %}
 						<tr>
 							<td>{{ client.nom }}</td>
-							<td>{{ client.address }}</td>
+							<td>{{ client.town }}</td>
 							<td>
 								{# {% if client.abonnement.statutPaiement == 1 %}
 									Paiement effectué
