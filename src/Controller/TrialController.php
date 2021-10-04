@@ -55,7 +55,7 @@ class TrialController extends AbstractController {
     {
         define('DOMPDF_UNICODE_ENABLED', true);
         
-        $client = $clientRepository->find(70);
+        $client = $clientRepository->find(20);
         $facture = $client->getAbonnement()->getFactures()[0];
 
         //dd($client, $facture);
