@@ -49,7 +49,7 @@ class Client
     private $vd;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $address;
 
@@ -213,6 +213,21 @@ class Client
      * @ORM\Column(type="string", length=255)
      */
     private $statutEntreprise;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $street;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $postalCode;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $town;
 
     public function __construct()
     {
@@ -734,6 +749,42 @@ class Client
     public function setStatutEntreprise(string $statutEntreprise): self
     {
         $this->statutEntreprise = $statutEntreprise;
+
+        return $this;
+    }
+
+    public function getStreet(): ?string
+    {
+        return $this->street;
+    }
+
+    public function setStreet(?string $street): self
+    {
+        $this->street = $street;
+
+        return $this;
+    }
+
+    public function getPostalCode(): ?string
+    {
+        return $this->postalCode;
+    }
+
+    public function setPostalCode(string $postalCode): self
+    {
+        $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
+    public function getTown(): ?string
+    {
+        return $this->town;
+    }
+
+    public function setTown(?string $town): self
+    {
+        $this->town = $town;
 
         return $this;
     }
