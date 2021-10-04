@@ -73,19 +73,23 @@
 
                 <div class="double-line">
                     <div class="line">
-                        {{ form_widget(form.siren) }}
+                        {{ form_widget(form.address) }}
                     </div>
-                    <div class="line">
-                        {{ form_widget(form.street) }}
-                    </div>
-                </div>
-                <div class="double-line">
                     <div class="line">
                         {{ form_widget(form.town) }}
+                    </div>
+                </div>
+
+                <div class="double-line">
+                    <div class="line">
+                        {{ form_widget(form.street) }}
                     </div>
                     <div class="line">
                         {{ form_widget(form.postalCode) }}
                     </div>
+                </div>
+                <div class="line">
+                    {{ form_widget(form.siren) }}
                 </div>
                 <div class="line" style="text-align:center;">
                     {{ form_row(form.type_abonnement) }}
