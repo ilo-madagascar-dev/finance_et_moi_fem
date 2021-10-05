@@ -103,7 +103,7 @@
             <tbody>
                 <tr>
                     <td>
-                        {{ client.abonnement.typeAbonnement.reference ~ '-' ~ client.id }}-{{facture.dateEmissionFacture|date('H-i-s') }}
+                        {{ client.abonnement.typeAbonnement.reference ~ '-' ~ client.id }}-{{facture.dateEmissionFacture|date('d-m-Y') }}
                     </td>
                     <td>
                         {{ client.abonnement.typeAbonnement.label }}
