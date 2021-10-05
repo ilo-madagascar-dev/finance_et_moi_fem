@@ -103,7 +103,7 @@
             <tbody>
                 <tr>
                     <td>
-                        {{ client.abonnement.typeAbonnement.priceID }}
+                        {{ client.abonnement.typeAbonnement.reference ? client.abonnement.typeAbonnement.reference : '' }}
                     </td>
                     <td>
                         {{ client.abonnement.typeAbonnement.label }}

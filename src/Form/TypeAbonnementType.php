@@ -19,6 +19,9 @@ class TypeAbonnementType extends AbstractType
             ->add('price_ID', TextType::class, [
                 'label' => 'Price ID : '
             ])
+            ->add('reference', TextType::class, [
+                'label' => 'Réference :'
+            ])
         ;
     }
 
