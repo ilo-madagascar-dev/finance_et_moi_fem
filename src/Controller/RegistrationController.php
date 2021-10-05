@@ -594,6 +594,13 @@ class RegistrationController extends AbstractController
 
         $mailer->send($mail);
 
+        $today = new DateTime;
+        $factureReference = $typeAbonnement->getReference() . '-' . $potentialClient->getId() . '-' . $today->format('H-i-s');
+
+        $nouvelleFacturePotentielle->setReference($factureReference);
+        $em->persist($nouvelleFacturePotentielle);
+        $em->flush();
+
         return $this->render('registration/successPayment.html.twig');
     }
 

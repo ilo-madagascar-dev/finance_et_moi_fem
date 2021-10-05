@@ -72,7 +72,7 @@
             <tr>
                 <td o="">Nom de l'entreprise </td>
                 <td>:</td>
-                <td l="">{{ client.prenom }} {{ client.nom }}</td>
+                <td l="">{{client.nomEntreprise}}</td>
             </tr>
             <tr>
                 <td o="">Adresse</td>
@@ -103,7 +103,7 @@
             <tbody>
                 <tr>
                     <td>
-                        {{ client.abonnement.typeAbonnement.reference ? client.abonnement.typeAbonnement.reference : '' }}
+                        {{ client.abonnement.typeAbonnement.reference ~ '-' ~ client.id }}-{{facture.dateEmissionFacture|date('H-i-s') }}
                     </td>
                     <td>
                         {{ client.abonnement.typeAbonnement.label }}
