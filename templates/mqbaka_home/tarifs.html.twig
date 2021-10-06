@@ -100,7 +100,7 @@
                 </div>
                 <form method="POST" action="{{ path('registration') }}" style="margin-top: auto;">
                     <!-- Starter price -->
-                    <input type="hidden" name="price_id" value="price_1JZs3OBW8SyIFHAgl3MjuPtc" id="price_id_starter">
+                    <input type="hidden" name="price_id" value="price_1JhVMsDd9O5GRESHUkFY2u1b" id="price_id_starter">
                     <button type="submit" class="full-blue">Créer un compte</button>
                 </form>
             </div>
@@ -182,7 +182,7 @@
                 
                 <form method="POST" action="{{ path('registration') }}" style="margin-top: auto;">
                     <!-- Essentiel price -->
-                    <input type="hidden" name="price_id" value="price_1JZs5tBW8SyIFHAgHT2LqoM7" id="price_id_essentiel">
+                    <input type="hidden" name="price_id" value="price_1JhVQ4Dd9O5GRESHdiPVy78a" id="price_id_essentiel">
                     <button type="submit" class="full-blue">Créer un compte</button>
                 </form>
             </div>
@@ -221,16 +221,16 @@
                         p2.classList.remove('on');
                         document.querySelector('#priceThingStarter').innerHTML= "59";
                         document.querySelector('#priceThing').innerHTML= "89";
-                        document.querySelector('#price_id_starter').value = "price_1JZs3OBW8SyIFHAgl3MjuPtc";
-                        document.querySelector('#price_id_essentiel').value = "price_1JZs5tBW8SyIFHAgHT2LqoM7";
+                        document.querySelector('#price_id_starter').value = "price_1JhVMsDd9O5GRESHUkFY2u1b";
+                        document.querySelector('#price_id_essentiel').value = "price_1JhVQ4Dd9O5GRESHdiPVy78a";
                         Array.from(document.querySelectorAll('.thingType')).forEach((item) => {item.innerHTML = "Mois"});
                     } else {
                         p2.classList.add('on');
                         p1.classList.remove('on');
                         document.querySelector('#priceThingStarter').innerHTML= "590";
                         document.querySelector('#priceThing').innerHTML= "890";
-                        document.querySelector('#price_id_starter').value = "price_1JZs71BW8SyIFHAgnS6niVw1";
-                        document.querySelector('#price_id_essentiel').value = "price_1JZs9wBW8SyIFHAgwZgSId5i";
+                        document.querySelector('#price_id_starter').value = "price_1JhVTyDd9O5GRESHV8J7fRE4";
+                        document.querySelector('#price_id_essentiel').value = "price_1JhVVADd9O5GRESHmTYt6nzu";
                         Array.from(document.querySelectorAll('.thingType')).forEach((item) => {item.innerHTML = "An"});
                     }
                 }

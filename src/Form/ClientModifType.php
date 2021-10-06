@@ -89,10 +89,10 @@ class ClientModifType extends AbstractType
             'label' => 'Abonnement',
                 'mapped' => false,
                 'choices' => [
-                    'Starter mensuel' => 'price_1JZs3OBW8SyIFHAgl3MjuPtc',
-                    'Essentiel mensuel' => 'price_1JZs5tBW8SyIFHAgHT2LqoM7',
-                    'Starter annuel' => 'price_1JZs71BW8SyIFHAgnS6niVw1',
-                    'Essentiel annuel' => 'price_1JZs9wBW8SyIFHAgwZgSId5i'
+                    'Starter mensuel' => 'price_1JhVMsDd9O5GRESHUkFY2u1b',
+                    'Essentiel mensuel' => 'price_1JhVQ4Dd9O5GRESHdiPVy78a',
+                    'Starter annuel' => 'price_1JhVTyDd9O5GRESHV8J7fRE4',
+                    'Essentiel annuel' => 'price_1JhVVADd9O5GRESHmTYt6nzu'
                 ],
                 'attr' => array(
                     'placeholder' => "Type d'abonnement"
