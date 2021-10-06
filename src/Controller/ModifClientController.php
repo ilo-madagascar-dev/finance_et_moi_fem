@@ -41,7 +41,7 @@ class ModifClientController extends AbstractController
             $userConnectedVd = $clients->getVd();
             $uniqid = $clients->getUniqid();
 
-            if( $abonnement->getPriceID() === 'price_1JhVMsDd9O5GRESHUkFY2u1b' || $abonnement->getPriceID() === 'price_1JhVTyDd9O5GRESHV8J7fRE4' ){
+            if( $abonnement->getPriceID() === 'price_1JhYktDd9O5GRESHnFpw0RIY' || $abonnement->getPriceID() === 'price_1JhYmrDd9O5GRESHSSYcJGNb' ){
                 //dd("starter io");
                 if( $clients->getEmail() !== $present_mail )
                 {
