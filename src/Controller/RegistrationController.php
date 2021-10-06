@@ -89,7 +89,7 @@ class RegistrationController extends AbstractController
             /**
              * Vérification de l'upload de pièces-jointes pour l'abonnement Essentiel
              */
-            if($priceId == 'price_1JZs5tBW8SyIFHAgHT2LqoM7' || $priceId == 'price_1JZs9wBW8SyIFHAgwZgSId5i'){
+            if($priceId == 'price_1JhVQ4Dd9O5GRESHdiPVy78a' || $priceId == 'price_1JhVVADd9O5GRESHmTYt6nzu'){
                 if(!$newClient->getIdentityProofFile()){
                     $this->addFlash('danger', "Vous devez uploader une copie de votre pièce d'identité pour l'abonnement Essentiel !!!!");
                     return $this->redirectToRoute('registration', ['price_id' => $priceId]);
@@ -258,15 +258,15 @@ class RegistrationController extends AbstractController
          }
         
          //Afficher le message de rappel de la deuxième étape grâce à la variable $fileUploadRappel
-        if ($priceId == 'price_1JZs5tBW8SyIFHAgHT2LqoM7' || $priceId == 'price_1JZs9wBW8SyIFHAgwZgSId5i') {
+        if ($priceId == 'price_1JhVQ4Dd9O5GRESHdiPVy78a' || $priceId == 'price_1JhVVADd9O5GRESHmTYt6nzu') {
             $fileUploadRappel = true;
         }
 
          $priceArray = [
-             'price_1JZs3OBW8SyIFHAgl3MjuPtc',
-             'price_1JZs5tBW8SyIFHAgHT2LqoM7',
-             'price_1JZs71BW8SyIFHAgnS6niVw1',
-             'price_1JZs9wBW8SyIFHAgwZgSId5i'
+             'price_1JhVMsDd9O5GRESHUkFY2u1b',
+             'price_1JhVQ4Dd9O5GRESHdiPVy78a',
+             'price_1JhVTyDd9O5GRESHV8J7fRE4',
+             'price_1JhVVADd9O5GRESHmTYt6nzu'
          ];
  
          if (!in_array($priceId, $priceArray)) {
@@ -286,19 +286,19 @@ class RegistrationController extends AbstractController
         ];
 
         switch ($priceId) {
-            case 'price_1JZs3OBW8SyIFHAgl3MjuPtc':
+            case 'price_1JhVMsDd9O5GRESHUkFY2u1b':
                 $price = $priceValues['starter_mensuel'];
                 $montantHT = 59;
                 break;
-            case 'price_1JZs5tBW8SyIFHAgHT2LqoM7':
+            case 'price_1JhVQ4Dd9O5GRESHdiPVy78a':
                 $price = $priceValues['essentiel_mensuel'];
                 $montantHT = 89;
                 break;
-            case 'price_1JZs71BW8SyIFHAgnS6niVw1':
+            case 'price_1JhVTyDd9O5GRESHV8J7fRE4':
                 $price = $priceValues['starter_annuel'];
                 $montantHT = 590;
                 break;
-            case 'price_1JZs9wBW8SyIFHAgwZgSId5i':
+            case 'price_1JhVVADd9O5GRESHmTYt6nzu':
                 $price = $priceValues['essentiel_annuel'];
                 $montantHT = 890;
                 break;
@@ -327,7 +327,7 @@ class RegistrationController extends AbstractController
     public function registrationPayment(SessionInterface $session):Response
     {
         Stripe::setApiKey($_ENV['STRIPE_SECRET']);
-        $priceId = 'price_1JZs3OBW8SyIFHAgl3MjuPtc';
+        $priceId = 'price_1JhVMsDd9O5GRESHUkFY2u1b';
 
         if ($session->get('price_id')) {
            $priceId = $session->get('price_id');
@@ -337,10 +337,10 @@ class RegistrationController extends AbstractController
         }
 
         $priceArray = [
-            'price_1JZs3OBW8SyIFHAgl3MjuPtc',
-            'price_1JZs5tBW8SyIFHAgHT2LqoM7',
-            'price_1JZs71BW8SyIFHAgnS6niVw1',
-            'price_1JZs9wBW8SyIFHAgwZgSId5i'
+            'price_1JhVMsDd9O5GRESHUkFY2u1b',
+            'price_1JhVQ4Dd9O5GRESHdiPVy78a',
+            'price_1JhVTyDd9O5GRESHV8J7fRE4',
+            'price_1JhVVADd9O5GRESHmTYt6nzu'
         ];
 
         if (!in_array($priceId, $priceArray)) 
@@ -380,7 +380,7 @@ class RegistrationController extends AbstractController
         /**
          * Le priceId permettra de choisir l'abonnement équivalent dans la base de données
          */
-        $priceId = 'price_1JZs3OBW8SyIFHAgl3MjuPtc';
+        $priceId = 'price_1JhVMsDd9O5GRESHUkFY2u1b';
 
         if ($session->get('price_id')) {
            $priceId = $session->get('price_id');
@@ -393,16 +393,16 @@ class RegistrationController extends AbstractController
          * Montant Hors-taxe relatif à l'abonnement
          */
         switch ($priceId) {
-            case 'price_1JZs3OBW8SyIFHAgl3MjuPtc':
+            case 'price_1JhVMsDd9O5GRESHUkFY2u1b':
                 $montantHT = 59;
                 break;
-            case 'price_1JZs5tBW8SyIFHAgHT2LqoM7':
+            case 'price_1JhVQ4Dd9O5GRESHdiPVy78a':
                 $montantHT = 89;
                 break;
-            case 'price_1JZs71BW8SyIFHAgnS6niVw1':
+            case 'price_1JhVTyDd9O5GRESHV8J7fRE4':
                 $montantHT = 590;
                 break;
-            case 'price_1JZs9wBW8SyIFHAgwZgSId5i':
+            case 'price_1JhVVADd9O5GRESHmTYt6nzu':
                 $montantHT = 890;
                 break;
         }
