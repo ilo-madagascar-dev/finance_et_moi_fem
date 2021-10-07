@@ -152,11 +152,19 @@
 
     </div>
 </div>
+    <div id="sm" style=" display: none;">{{ STARTER_MENSUEL_PRICE_ID }}</div>
+    <div id="sa" style=" display: none;">{{ STARTER_ANNUEL_PRICE_ID }}</div>
+    <div id="em" style=" display: none;">{{ ESSENTIEL_MENSUEL_PRICE_ID }}</div>
+    <div id="ea" style=" display: none;">{{ ESSENTIEL_ANNUEL_PRICE_ID }}</div>
 
 {% endblock %}
 
 {% block javascripts %}
     <script>
+        let sm = document.querySelector('#em');
+        let sa = document.querySelector('#ea');
+        let em = document.querySelector('#em');
+        let ea = document.querySelector('#ea');
 
         document.addEventListener('DOMContentLoaded', function() {
             const priceIdElement = document.querySelector('.js-price-id');
@@ -224,13 +232,13 @@
             })
 
             //Affichage des champs pièces jointes en fonction de l'abonnement choisi auparavant    
-            if(priceId == 'price_1JhYlvDd9O5GRESHGGpHRBtY' || priceId == 'price_1JhYrKDd9O5GRESH9vmFlb33'){
+            if(priceId == sm || priceId == sa){
                 everyLineEssentiel.forEach(element => {
                     element.style.display = 'inline';
                 });
                 //document.querySelector('.line-essentiel').style.display = 'inline';
                 //client_identityProofFile.required = true;
-            } else if(priceId == 'price_1JhYktDd9O5GRESHnFpw0RIY' || priceId == 'price_1JhYmrDd9O5GRESHSSYcJGNb') {
+            } else if(priceId == $_ENV['STARTER_MENSUEL_PRICE_ID'] || priceId == $_ENV['STARTER_ANNUEL_PRICE_ID']) {
                 everyLineEssentiel.forEach(element => {
                     element.style.display = 'none';
                 });
@@ -311,13 +319,13 @@
             
             //Affichage des champs pièces jointes en fonction de la valeur du select choisie sur la page    
             client_type_abonnement.addEventListener('change', () => {
-                if(client_type_abonnement.value == 'price_1JhYlvDd9O5GRESHGGpHRBtY' || client_type_abonnement.value == 'price_1JhYrKDd9O5GRESH9vmFlb33'){
+                if(client_type_abonnement.value == em || client_type_abonnement.value == ea){
                     everyLineEssentiel.forEach(element => {
                         element.style.display = 'inline';
                     });
                     //document.querySelector('.line-essentiel').style.display = 'inline';
                     //client_identityProofFile.required = true;
-                } else if(client_type_abonnement.value == 'price_1JhYktDd9O5GRESHnFpw0RIY' || client_type_abonnement.value == 'price_1JhYmrDd9O5GRESHSSYcJGNb') {
+                } else if(client_type_abonnement.value == $_ENV['STARTER_MENSUEL_PRICE_ID'] || client_type_abonnement.value == $_ENV['STARTER_ANNUEL_PRICE_ID']) {
                     everyLineEssentiel.forEach(element => {
                         element.style.display = 'none';
                     });

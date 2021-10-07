@@ -6,3 +6,9 @@ twig:
     paths:
         # point this wherever your images live
         '%kernel.project_dir%/public/images': images
+    globals:
+        SOUS_COMPTE_PRICE_ID: '%env(SOUS_COMPTE_PRICE_ID)%'
+        STARTER_MENSUEL_PRICE_ID: '%env(STARTER_MENSUEL_PRICE_ID)%'
+        ESSENTIEL_MENSUEL_PRICE_ID: '%env(ESSENTIEL_MENSUEL_PRICE_ID)%'
+        STARTER_ANNUEL_PRICE_ID: '%env(STARTER_ANNUEL_PRICE_ID)%'
+        ESSENTIEL_ANNUEL_PRICE_ID: '%env(ESSENTIEL_ANNUEL_PRICE_ID)%'

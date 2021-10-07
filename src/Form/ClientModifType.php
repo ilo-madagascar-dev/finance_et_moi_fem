@@ -89,10 +89,10 @@ class ClientModifType extends AbstractType
             'label' => 'Abonnement',
                 'mapped' => false,
                 'choices' => [
-                    'Starter mensuel' => 'price_1JhYktDd9O5GRESHnFpw0RIY',
-                    'Essentiel mensuel' => 'price_1JhYlvDd9O5GRESHGGpHRBtY',
-                    'Starter annuel' => 'price_1JhYmrDd9O5GRESHSSYcJGNb',
-                    'Essentiel annuel' => 'price_1JhYrKDd9O5GRESH9vmFlb33'
+                    'Starter mensuel' => $_ENV['STARTER_MENSUEL_PRICE_ID'],
+                    'Essentiel mensuel' => $_ENV['ESSENTIEL_MENSUEL_PRICE_ID'],
+                    'Starter annuel' => $_ENV['STARTER_ANNUEL_PRICE_ID'],
+                    'Essentiel annuel' => $_ENV['ESSENTIEL_ANNUEL_PRICE_ID']
                 ],
                 'attr' => array(
                     'placeholder' => "Type d'abonnement"

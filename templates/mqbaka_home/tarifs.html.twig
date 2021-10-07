@@ -100,7 +100,7 @@
                 </div>
                 <form method="POST" action="{{ path('registration') }}" style="margin-top: auto;">
                     <!-- Starter price -->
-                    <input type="hidden" name="price_id" value="price_1JhYktDd9O5GRESHnFpw0RIY" id="price_id_starter">
+                    <input type="hidden" name="price_id" value={{ STARTER_MENSUEL_PRICE_ID }} id="price_id_starter">
                     <button type="submit" class="full-blue">Créer un compte</button>
                 </form>
             </div>
@@ -182,7 +182,7 @@
                 
                 <form method="POST" action="{{ path('registration') }}" style="margin-top: auto;">
                     <!-- Essentiel price -->
-                    <input type="hidden" name="price_id" value="price_1JhYlvDd9O5GRESHGGpHRBtY" id="price_id_essentiel">
+                    <input type="hidden" name="price_id" value= {{ ESSENTIEL_MENSUEL_PRICE_ID }} id="price_id_essentiel">
                     <button type="submit" class="full-blue">Créer un compte</button>
                 </form>
             </div>
@@ -205,7 +205,17 @@
                     </div>
                 </div>
             </div>
+
+            <div id="sm" style=" display: none;">{{ STARTER_MENSUEL_PRICE_ID }}</div>
+            <div id="sa" style=" display: none;">{{ STARTER_ANNUEL_PRICE_ID }}</div>
+            <div id="em" style=" display: none;">{{ ESSENTIEL_MENSUEL_PRICE_ID }}</div>
+            <div id="ea" style=" display: none;">{{ ESSENTIEL_ANNUEL_PRICE_ID }}</div>
             <script title="for the switcher">
+                let sm = document.querySelector('#em');
+                let sa = document.querySelector('#ea');
+                let em = document.querySelector('#em');
+                let ea = document.querySelector('#ea');
+
                 let c1= document.querySelector('#c-1');
                 let c2= document.querySelector('#c-2');
 
@@ -221,16 +231,16 @@
                         p2.classList.remove('on');
                         document.querySelector('#priceThingStarter').innerHTML= "59";
                         document.querySelector('#priceThing').innerHTML= "89";
-                        document.querySelector('#price_id_starter').value = "price_1JhYktDd9O5GRESHnFpw0RIY";
-                        document.querySelector('#price_id_essentiel').value = "price_1JhYlvDd9O5GRESHGGpHRBtY";
+                        document.querySelector('#price_id_starter').value = sm.innerText;
+                        document.querySelector('#price_id_essentiel').value = em.innerText; 
                         Array.from(document.querySelectorAll('.thingType')).forEach((item) => {item.innerHTML = "Mois"});
                     } else {
                         p2.classList.add('on');
                         p1.classList.remove('on');
                         document.querySelector('#priceThingStarter').innerHTML= "590";
                         document.querySelector('#priceThing').innerHTML= "890";
-                        document.querySelector('#price_id_starter').value = "price_1JhYmrDd9O5GRESHSSYcJGNb";
-                        document.querySelector('#price_id_essentiel').value = "price_1JhYrKDd9O5GRESH9vmFlb33";
+                        document.querySelector('#price_id_starter').value = sa.innerText;
+                        document.querySelector('#price_id_essentiel').value = ea.innerText;
                         Array.from(document.querySelectorAll('.thingType')).forEach((item) => {item.innerHTML = "An"});
                     }
                 }
