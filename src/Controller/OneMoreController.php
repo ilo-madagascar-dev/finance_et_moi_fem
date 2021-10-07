@@ -73,8 +73,17 @@ class OneMoreController extends AbstractController
      */
     public function pageTarifs(): Response
     {
+        $envStarterMensuelPriceId = $_ENV['STARTER_MENSUEL_PRICE_ID'];
+        $envEssentielMensuelPriceId = $_ENV['ESSENTIEL_MENSUEL_PRICE_ID'];
+        $envStarterAnnuelPriceId = $_ENV['STARTER_ANNUEL_PRICE_ID'];
+        $envEssentielAnnuelPriceId = $_ENV['ESSENTIEL_ANNUEL_PRICE_ID'];
+
         return $this->render('mqbaka_home/tarifs.html.twig', [
             'controller_name' => 'TarifsController',
+            'envStarterMensuelPriceId' => $envStarterMensuelPriceId,
+            'envEssentielMensuelPriceId' => $envEssentielMensuelPriceId,
+            'envStarterMensuelPriceId' => $envStarterAnnuelPriceId,
+            'envEssentielMensuelPriceId' => $envEssentielAnnuelPriceId
         ]);
     }
 }

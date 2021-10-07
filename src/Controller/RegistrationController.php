@@ -89,7 +89,10 @@ class RegistrationController extends AbstractController
             /**
              * Vérification de l'upload de pièces-jointes pour l'abonnement Essentiel
              */
-            if($priceId == 'price_1JhYlvDd9O5GRESHGGpHRBtY' || $priceId == 'price_1JhYrKDd9O5GRESH9vmFlb33'){
+            $envEssentielMensuelPriceId = $_ENV['ESSENTIEL_MENSUEL_PRICE_ID'];
+            $envEssentielAnnuelPriceId = $_ENV['ESSENTIEL_ANNUEL_PRICE_ID'];
+            
+            if($priceId == $envEssentielMensuelPriceId || $priceId == $envEssentielAnnuelPriceId){
                 if(!$newClient->getIdentityProofFile()){
                     $this->addFlash('danger', "Vous devez uploader une copie de votre pièce d'identité pour l'abonnement Essentiel !!!!");
                     return $this->redirectToRoute('registration', ['price_id' => $priceId]);
@@ -258,15 +261,16 @@ class RegistrationController extends AbstractController
          }
         
          //Afficher le message de rappel de la deuxième étape grâce à la variable $fileUploadRappel
-        if ($priceId == 'price_1JhYlvDd9O5GRESHGGpHRBtY' || $priceId == 'price_1JhYrKDd9O5GRESH9vmFlb33') {
+         
+        if ($priceId == $_ENV['ESSENTIEL_MENSUEL_PRICE_ID'] || $priceId == $_ENV['ESSENTIEL_ANNUEL_PRICE_ID']) {
             $fileUploadRappel = true;
         }
 
          $priceArray = [
-             'price_1JhYktDd9O5GRESHnFpw0RIY',
-             'price_1JhYlvDd9O5GRESHGGpHRBtY',
-             'price_1JhYmrDd9O5GRESHSSYcJGNb',
-             'price_1JhYrKDd9O5GRESH9vmFlb33'
+             $_ENV['STARTER_MENSUEL_PRICE_ID'],
+             $_ENV['ESSENTIEL_MENSUEL_PRICE_ID'],
+             $_ENV['STARTER_ANNUEL_PRICE_ID'],
+             $_ENV['ESSENTIEL_ANNUEL_PRICE_ID']
          ];
  
          if (!in_array($priceId, $priceArray)) {
@@ -286,19 +290,19 @@ class RegistrationController extends AbstractController
         ];
 
         switch ($priceId) {
-            case 'price_1JhYktDd9O5GRESHnFpw0RIY':
+            case $_ENV['STARTER_MENSUEL_PRICE_ID']:
                 $price = $priceValues['starter_mensuel'];
                 $montantHT = 59;
                 break;
-            case 'price_1JhYlvDd9O5GRESHGGpHRBtY':
+            case $_ENV['ESSENTIEL_MENSUEL_PRICE_ID']:
                 $price = $priceValues['essentiel_mensuel'];
                 $montantHT = 89;
                 break;
-            case 'price_1JhYmrDd9O5GRESHSSYcJGNb':
+            case $_ENV['STARTER_ANNUEL_PRICE_ID']:
                 $price = $priceValues['starter_annuel'];
                 $montantHT = 590;
                 break;
-            case 'price_1JhYrKDd9O5GRESH9vmFlb33':
+            case $_ENV['ESSENTIEL_ANNUEL_PRICE_ID']:
                 $price = $priceValues['essentiel_annuel'];
                 $montantHT = 890;
                 break;
@@ -327,8 +331,8 @@ class RegistrationController extends AbstractController
     public function registrationPayment(SessionInterface $session):Response
     {
         Stripe::setApiKey($_ENV['STRIPE_SECRET']);
-        $priceId = 'price_1JhYktDd9O5GRESHnFpw0RIY';
-
+        $priceId = $_ENV['STARTER_MENSUEL_PRICE_ID'];
+        
         if ($session->get('price_id')) {
            $priceId = $session->get('price_id');
         } else {
@@ -337,10 +341,10 @@ class RegistrationController extends AbstractController
         }
 
         $priceArray = [
-            'price_1JhYktDd9O5GRESHnFpw0RIY',
-            'price_1JhYlvDd9O5GRESHGGpHRBtY',
-            'price_1JhYmrDd9O5GRESHSSYcJGNb',
-            'price_1JhYrKDd9O5GRESH9vmFlb33'
+            $_ENV['STARTER_MENSUEL_PRICE_ID'],
+            $_ENV['ESSENTIEL_MENSUEL_PRICE_ID'],
+            $_ENV['STARTER_ANNUEL_PRICE_ID'],
+            $_ENV['ESSENTIEL_ANNUEL_PRICE_ID']
         ];
 
         if (!in_array($priceId, $priceArray)) 
@@ -380,7 +384,7 @@ class RegistrationController extends AbstractController
         /**
          * Le priceId permettra de choisir l'abonnement équivalent dans la base de données
          */
-        $priceId = 'price_1JhYktDd9O5GRESHnFpw0RIY';
+        $priceId = $_ENV['STARTER_MENSUEL_PRICE_ID'];
 
         if ($session->get('price_id')) {
            $priceId = $session->get('price_id');
@@ -393,16 +397,16 @@ class RegistrationController extends AbstractController
          * Montant Hors-taxe relatif à l'abonnement
          */
         switch ($priceId) {
-            case 'price_1JhYktDd9O5GRESHnFpw0RIY':
+            case $_ENV['STARTER_MENSUEL_PRICE_ID']:
                 $montantHT = 59;
                 break;
-            case 'price_1JhYlvDd9O5GRESHGGpHRBtY':
+            case $_ENV['ESSENTIEL_MENSUEL_PRICE_ID']:
                 $montantHT = 89;
                 break;
-            case 'price_1JhYmrDd9O5GRESHSSYcJGNb':
+            case $_ENV['STARTER_ANNUEL_PRICE_ID']:
                 $montantHT = 590;
                 break;
-            case 'price_1JhYrKDd9O5GRESH9vmFlb33':
+            case $_ENV['ESSENTIEL_ANNUEL_PRICE_ID']:
                 $montantHT = 890;
                 break;
         }
