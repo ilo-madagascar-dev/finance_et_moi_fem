@@ -55,7 +55,7 @@
                     <td t>
                         Facture n°: {{ facture.id }}<br/>
                         Date : {{ facture.dateEmissionFacture|date('d-m-Y') }}<br/>
-                        Client n°: {{ client.abonnement.id }}<br/>
+                        Client n°: {{ client.id }}<br/>
                     </td>
                 </tr>
                 <tr m>
@@ -72,7 +72,7 @@
             <tr>
                 <td o="">Nom de l'entreprise </td>
                 <td>:</td>
-                <td l="">{{ client.prenom }} {{ client.nom }}</td>
+                <td l="">{{client.nomEntreprise}}</td>
             </tr>
             <tr>
                 <td o="">Adresse</td>
@@ -103,7 +103,7 @@
             <tbody>
                 <tr>
                     <td>
-                        {{ client.abonnement.typeAbonnement.priceID }}
+                        {{ client.abonnement.typeAbonnement.reference ~ '-' ~ client.id }}-{{facture.dateEmissionFacture|date('d-m-Y') }}
                     </td>
                     <td>
                         {{ client.abonnement.typeAbonnement.label }}

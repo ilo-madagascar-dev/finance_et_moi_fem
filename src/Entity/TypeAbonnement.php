@@ -44,6 +44,11 @@ class TypeAbonnement
      */
     private $price_ID;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $reference;
+
     public function __construct()
     {
         $this->abonnements = new ArrayCollection();
@@ -128,6 +133,18 @@ class TypeAbonnement
     public function setPriceID(string $price_ID): self
     {
         $this->price_ID = $price_ID;
+
+        return $this;
+    }
+
+    public function getReference(): ?string
+    {
+        return $this->reference;
+    }
+
+    public function setReference(string $reference): self
+    {
+        $this->reference = $reference;
 
         return $this;
     }

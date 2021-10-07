@@ -41,7 +41,7 @@ class ModifClientController extends AbstractController
             $userConnectedVd = $clients->getVd();
             $uniqid = $clients->getUniqid();
 
-            if( $abonnement->getPriceID() === 'price_1JZs3OBW8SyIFHAgl3MjuPtc' || $abonnement->getPriceID() === 'price_1JZs71BW8SyIFHAgnS6niVw1' ){
+            if( $abonnement->getPriceID() === 'price_1JhYktDd9O5GRESHnFpw0RIY' || $abonnement->getPriceID() === 'price_1JhYmrDd9O5GRESHSSYcJGNb' ){
                 //dd("starter io");
                 if( $clients->getEmail() !== $present_mail )
                 {
@@ -72,7 +72,7 @@ class ModifClientController extends AbstractController
                 $em->persist($clients);
                 $em->flush();
             }
-            elseif($abonnement->getPriceID() === 'price_1JZs5tBW8SyIFHAgHT2LqoM7' || $abonnement->getPriceID() === 'price_1JZs9wBW8SyIFHAgwZgSId5i')
+            elseif($abonnement->getPriceID() === 'price_1JhVQ4Dd9O5GRESHdiPVy78a' || $abonnement->getPriceID() === 'price_1JhVVADd9O5GRESHmTYt6nzu')
             {
                 $mimeTypeAllowed = ['application/pdf', 'image/jpeg', 'image/png'];
                 if ($clients->getIdentityProofFile()) {
