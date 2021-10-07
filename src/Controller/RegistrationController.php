@@ -36,7 +36,18 @@ class RegistrationController extends AbstractController
      * @Route("/registration", name="registration")
      */
     public function index(Request $request, SessionInterface $session, UserRepository $userRepository, TypeAbonnementRepository $typeAbonnementRepository): Response
-    {                
+    {  
+        /**
+         * Récupération des price_ID dans le fichier .env 
+         * */
+        $envStarterMensuelPriceId = $_ENV['STARTER_MENSUEL_PRICE_ID'];
+        $envEssentielMensuelPriceId = $_ENV['ESSENTIEL_MENSUEL_PRICE_ID'];
+        $envStarterAnnuelPriceId = $_ENV['STARTER_ANNUEL_PRICE_ID'];
+        $envEssentielAnnuelPriceId = $_ENV['ESSENTIEL_ANNUEL_PRICE_ID'];
+        
+        /**
+         * Initialisation d price_ID 
+         * */
         $priceId = '';
 
         /**
@@ -89,9 +100,6 @@ class RegistrationController extends AbstractController
             /**
              * Vérification de l'upload de pièces-jointes pour l'abonnement Essentiel
              */
-            $envEssentielMensuelPriceId = $_ENV['ESSENTIEL_MENSUEL_PRICE_ID'];
-            $envEssentielAnnuelPriceId = $_ENV['ESSENTIEL_ANNUEL_PRICE_ID'];
-            
             if($priceId == $envEssentielMensuelPriceId || $priceId == $envEssentielAnnuelPriceId){
                 if(!$newClient->getIdentityProofFile()){
                     $this->addFlash('danger', "Vous devez uploader une copie de votre pièce d'identité pour l'abonnement Essentiel !!!!");
@@ -235,7 +243,11 @@ class RegistrationController extends AbstractController
         return $this->render('registration/index.html.twig', [
             'controller_name' => 'RegistrationController',
             'form' => $form->createView(),
-            'priceId' => $priceId
+            'priceId' => $priceId,
+            'envStarterMensuelPriceId' => $envStarterMensuelPriceId,
+            'envEssentielMensuelPriceId' => $envEssentielMensuelPriceId,
+            'envStarterAnnuelPriceId' => $envStarterAnnuelPriceId,
+            'envEssentielAnnuelPriceId' => $envEssentielAnnuelPriceId
         ]);
     }
 
@@ -332,7 +344,7 @@ class RegistrationController extends AbstractController
     {
         Stripe::setApiKey($_ENV['STRIPE_SECRET']);
         $priceId = $_ENV['STARTER_MENSUEL_PRICE_ID'];
-        
+
         if ($session->get('price_id')) {
            $priceId = $session->get('price_id');
         } else {
