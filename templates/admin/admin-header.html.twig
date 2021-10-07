@@ -15,7 +15,7 @@
 			<div class="drop-d-icon">
 				<div class="clickable-thing">
 					<div class="icl">
-						<p> <span green></span><span>{{ client.nomEntreprise ? client.nomEntreprise : client.nom }}</span></p>
+						<p> <span green></span><span>{{ client.nomEntreprise is defined ? client.nomEntreprise : client.nom }}</span></p>
 						<img src={{ asset('images/icon/power.svg') }} alt="">
 					</div>
 				</div>
