@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class OneMoreController extends AbstractController
 {
     /**
-     * @Route("/page/two", name="page_two")
+     * @Route("/a_propos", name="page_two")
      */
     public function pageTwo(): Response
     {
@@ -29,7 +29,7 @@ class OneMoreController extends AbstractController
     }
 
     /**
-     * @Route("/page/four", name="page_four")
+     * @Route("/rachat_de_credit", name="page_four")
      */
     public function pageFour(): Response
     {
@@ -39,7 +39,7 @@ class OneMoreController extends AbstractController
     }
 
     /**
-     * @Route("/page/five", name="page_five")
+     * @Route("/service_remere", name="page_five")
      */
     public function pageFive(): Response
     {
@@ -49,7 +49,7 @@ class OneMoreController extends AbstractController
     }
 
     /**
-     * @Route("/page/six", name="page_six")
+     * @Route("/service_in_fine", name="page_six")
      */
     public function pageSix(): Response
     {
@@ -69,7 +69,7 @@ class OneMoreController extends AbstractController
     }
 
     /**
-     * @Route("/page/tarifs", name="page_tarifs")
+     * @Route("/tarifs", name="page_tarifs")
      */
     public function pageTarifs(): Response
     {
