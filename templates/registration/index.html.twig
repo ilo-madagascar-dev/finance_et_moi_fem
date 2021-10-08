@@ -161,12 +161,10 @@
 
 {% block javascripts %}
     <script>
-        let sm = document.querySelector('#em');
-        let sa = document.querySelector('#ea');
-        let em = document.querySelector('#em');
-        let ea = document.querySelector('#ea');
+        
 
         document.addEventListener('DOMContentLoaded', function() {
+
             const priceIdElement = document.querySelector('.js-price-id');
             const priceId = priceIdElement.dataset.priceId;
             const selectOptions = document.getElementsByTagName('option');
@@ -181,6 +179,12 @@
     </script>
     <script>
         document.addEventListener('DOMContentLoaded',() => {
+
+            let sm = document.querySelector('#sm').innerText;
+            let sa = document.querySelector('#sa').innerText;
+            let em = document.querySelector('#em').innerText;
+            let ea = document.querySelector('#ea').innerText;
+
             const priceIdElement = document.querySelector('.js-price-id');
             const priceId = priceIdElement.dataset.priceId;
             const client_type_abonnement = document.querySelector('#client_type_abonnement');
@@ -232,13 +236,13 @@
             })
 
             //Affichage des champs pièces jointes en fonction de l'abonnement choisi auparavant    
-            if(priceId == sm || priceId == sa){
+            if(priceId == em || priceId == ea){
                 everyLineEssentiel.forEach(element => {
                     element.style.display = 'inline';
                 });
                 //document.querySelector('.line-essentiel').style.display = 'inline';
                 //client_identityProofFile.required = true;
-            } else if(priceId == $_ENV['STARTER_MENSUEL_PRICE_ID'] || priceId == $_ENV['STARTER_ANNUEL_PRICE_ID']) {
+            } else if(priceId == sm || priceId == sa) {
                 everyLineEssentiel.forEach(element => {
                     element.style.display = 'none';
                 });
@@ -325,7 +329,7 @@
                     });
                     //document.querySelector('.line-essentiel').style.display = 'inline';
                     //client_identityProofFile.required = true;
-                } else if(client_type_abonnement.value == $_ENV['STARTER_MENSUEL_PRICE_ID'] || client_type_abonnement.value == $_ENV['STARTER_ANNUEL_PRICE_ID']) {
+                } else if(client_type_abonnement.value == sm || client_type_abonnement.value == sa) {
                     everyLineEssentiel.forEach(element => {
                         element.style.display = 'none';
                     });
