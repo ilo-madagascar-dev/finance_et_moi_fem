@@ -143,4 +143,11 @@ class TrialController extends AbstractController {
             'imagePath' => $imagePath
         ]);
     }
+
+    /**
+     * @Route("/email/rendering", name="email_rendering")
+     */
+    public function emailRendering(){
+        return $this->render('billing/billingEmailTemplate.html.twig');
+    }
 }

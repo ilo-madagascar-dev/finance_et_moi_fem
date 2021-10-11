@@ -593,19 +593,13 @@ class RegistrationController extends AbstractController
         // Write file to the desired path
         file_put_contents($pdfFilepath, $output);
         
-        $mail = (new Email())
+        $mail = (new TemplatedEmail())
         ->from(new Address('admin@femcreditconso.fr', 'Financer et moi'))
         ->to($userRelatedToPotentialClient->getEmail())
         ->cc('contact@financeetmoi.fr')
         ->subject("Facture d'abonnement Financer Et Moi")
-        ->html(
-            '
-                <h2 style="text-align:center;">Votre facture abonnement FEM</h2>
-
-                <p style="text-align:center;">Veuillez voir en pièce-jointe la facture relative à votre abonnement !!!!</p>
-                    
-            ')
-        // attach a file stream
+        ->htmlTemplate('billing/billingEmailTemplate.html.twig')
+        // attach aa file stream
         ->attachFromPath( $pdfFilepath );
 
         $mailer->send($mail);
