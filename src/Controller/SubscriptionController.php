@@ -128,7 +128,7 @@ class SubscriptionController extends AbstractController
         $abonnement->setActif(false);
         $this->em->flush();
 
-        return $this->render('subscription/client_cancel.html.twig', [
+        return $this->render('subscription/client_subscription_reactivation.html.twig', [
             'controller_name' => 'SubscriptionController',
         ]);
     }

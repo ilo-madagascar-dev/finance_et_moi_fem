@@ -6,16 +6,18 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Entity\Client;
 use App\Entity\Facture;
+use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
 use App\Repository\ClientRepository;
 use App\Repository\FactureRepository;
 use App\Repository\PaiementRepository;
 use App\Repository\AbonnementRepository;
+use Stripe\Stripe;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 
 class TrialController extends AbstractController {
     /**
@@ -25,7 +27,7 @@ class TrialController extends AbstractController {
     {
         $user = $userRepository->find(1);
         $usersAbonnement = $user->getClient()->getAbonnement();
-        
+
         dd($usersAbonnement);
         
         //dd($user); */
@@ -149,5 +151,37 @@ class TrialController extends AbstractController {
      */
     public function emailRendering(){
         return $this->render('billing/billingEmailTemplate.html.twig');
+    }
+
+    /**
+     * @Route("/stripe/payment/trial", name="stripe_payment_trial")
+     */
+    public function livepayment()
+    {
+        Stripe::setApiKey('sk_test_51JAyRkDd9O5GRESHwySMe7BscZHT8npvPTAnFRUUFzrUtxKsytTSetDABLsB74Np0ODjjhY26VpkZIJXiwvkxB7a00G4pDH3n1');
+
+        $priceId = 'price_1Jji0vDd9O5GRESHXgnEXe6K';
+
+        $paymentSession = \Stripe\Checkout\Session::create([
+            'success_url' => $this->generateUrl('live_payment_success', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'cancel_url' => $this->generateUrl('registration_payment_failed', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'payment_method_types' => ['card'],
+            'mode' => 'subscription',
+            'line_items' => [[
+                'price' => $priceId,
+                // For metered billing, do not pass quantity
+                'quantity' => 1,
+            ]],
+        ]);
+
+        return $this->redirect($paymentSession->url, 303);
+    }
+    
+
+    /**
+     * @Route("/live/payment/success", name="live_payment_success")
+     */
+    public function livePaymentSuccess(){
+        return $this->render('subscription/oneEuroSubscription.html.twig');
     }
 }

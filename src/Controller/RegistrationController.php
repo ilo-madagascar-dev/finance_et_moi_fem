@@ -601,7 +601,7 @@ class RegistrationController extends AbstractController
         ->htmlTemplate('billing/billingEmailTemplate.html.twig')
         // attach aa file stream
         ->attachFromPath( $pdfFilepath );
-
+        
         $mailer->send($mail);
 
         $today = new DateTime;
