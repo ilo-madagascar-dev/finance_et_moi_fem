@@ -148,12 +148,12 @@ class WebHookController extends AbstractController
      */
     public function henintsoaAccountWebHook(Request $request): Response
     {
-        \Stripe\Stripe::setApiKey('sk_test_VePHdqKTYQjKNInc7u56JBrQ');
+        \Stripe\Stripe::setApiKey('sk_test_51JSbdPBW8SyIFHAgGLf2rFeDFKCcS0UfKFRuGifDaCKnQg9t1m6PSK1NxwSuf23JcmY5HK8ZTcV0Pvaex4E2RaIt00fbf8PcYC');
         //$payload = @file_get_contents('php://input');
         $payload = $request->getContent();
         
         $event = null;
-        
+
         try {
             $event = \Stripe\Event::constructFrom(
             json_decode($payload, true)
