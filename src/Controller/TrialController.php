@@ -23,9 +23,9 @@ class TrialController extends AbstractController {
      */
     public function clientGetter(PaiementRepository $paiementRepository, ClientRepository $clientRepository, UserRepository $userRepository, AbonnementRepository $abonnementRepository, FactureRepository $factureRepository):Response
     {
-        $user = $userRepository->find(34);
+        $user = $userRepository->find(1);
         $usersAbonnement = $user->getClient()->getAbonnement();
-
+        
         dd($usersAbonnement);
         
         //dd($user); */

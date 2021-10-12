@@ -715,6 +715,12 @@ class AdminController extends AbstractController
         ->attachFromPath( $pdfFilepath );
 
         $mailer->send($mail);
+        
+        /**
+         * Modification du paramètre actif de l'abonnement.
+         */
+        $nouvelAbonnementPotentiel->setActif(true);
+        $em->flush();
 
         return $this->render('sous-comptes/souscompte_success_payment.html.twig');
     }

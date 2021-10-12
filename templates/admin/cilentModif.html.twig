@@ -76,4 +76,7 @@
         {# <input type="hidden" name="uservd" value="{{ userVd }}"> #}
         <input type="submit" value="VALIDER" id="valider"> 
     {{ form_end(form)}} 
+    <div style="margin-bottom:80px; text-align:center;">
+        <a href={{ path('client_subscription_cancel_at_period_end', {id: client.id}) }}>Annuler mon abonnement</a>
+    </div>
 </div>

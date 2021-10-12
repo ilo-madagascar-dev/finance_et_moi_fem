@@ -1,0 +1,198 @@
+<?php
+
+namespace App\Controller;
+
+use App\Entity\Client;
+use App\Entity\SousCompte;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+class SubscriptionController extends AbstractController
+{
+    
+    private $em;
+
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+    }
+
+    /**
+     * @Route("client/subscription/cancel/{id}", name="client_subscription_cancel")
+     */
+    public function clientSubscriptionCancel(Client $client, Request $request): Response
+    {
+        $userConnect = $this->getUser();
+
+        if (!$userConnect || !$userConnect->getClient()) {
+            $this->redirectToRoute('login');
+        }
+
+        /*if ($userConnect->getClient()->getId() !== $client->getId()) {
+            $this->addFlash('danger', "Ce compte n'est pas le vôtre !!!!");
+            $this->redirectToRoute('login');
+        }*/
+
+        $abonnement = $client->getAbonnement();
+
+        \Stripe\Stripe::setApiKey('sk_test_51JAyRkDd9O5GRESHwySMe7BscZHT8npvPTAnFRUUFzrUtxKsytTSetDABLsB74Np0ODjjhY26VpkZIJXiwvkxB7a00G4pDH3n1');
+
+        $subscription = \Stripe\Subscription::retrieve($abonnement->getStripeSubscriptionId());
+
+        //dd($subscription);
+
+        $subscription->cancel();
+        
+        $abonnement->setActif(false);
+        $this->em->flush();
+
+        return $this->render('subscription/client_cancel.html.twig', [
+            'controller_name' => 'SubscriptionController',
+        ]);
+    }
+
+    /**
+     * @Route("client/subscription/cancel/period/end/{id}", name="client_subscription_cancel_at_period_end")
+     */
+    public function clientSubscriptionCancelAtPeriodEnd(Client $client, Request $request): Response
+    {
+        $userConnect = $this->getUser();
+
+        if (!$userConnect || !$userConnect->getClient()) {
+            $this->redirectToRoute('login');
+        }
+
+        /*if ($userConnect->getClient()->getId() !== $client->getId()) {
+            $this->addFlash('danger', "Ce compte n'est pas le vôtre !!!!");
+            $this->redirectToRoute('login');
+        }*/
+
+        $abonnement = $client->getAbonnement();
+
+        \Stripe\Stripe::setApiKey('sk_test_51JAyRkDd9O5GRESHwySMe7BscZHT8npvPTAnFRUUFzrUtxKsytTSetDABLsB74Np0ODjjhY26VpkZIJXiwvkxB7a00G4pDH3n1');
+
+        //$subscription = \Stripe\Subscription::retrieve($abonnement->getStripeSubscriptionId());
+        
+        \Stripe\Subscription::update(
+            $abonnement->getStripeSubscriptionId(),
+            [
+              'cancel_at_period_end' => true,
+            ]
+        );
+        
+        $abonnement->setActif(false);
+        $this->em->flush();
+
+        return $this->render('subscription/client_cancel.html.twig', [
+            'controller_name' => 'SubscriptionController',
+        ]);
+    }
+
+    /**
+     * @Route("client/subscription/reactivate/period/end/{id}", name="client_subscription_reactivate_before_period_end")
+     */
+    public function clientReactivateBeforePeriodEnd(Client $client, Request $request): Response
+    {
+        $userConnect = $this->getUser();
+
+        if (!$userConnect || !$userConnect->getClient()) {
+            $this->redirectToRoute('login');
+        }
+
+        /*if ($userConnect->getClient()->getId() !== $client->getId()) {
+            $this->addFlash('danger', "Ce compte n'est pas le vôtre !!!!");
+            $this->redirectToRoute('login');
+        }*/
+
+        $abonnement = $client->getAbonnement();
+
+        \Stripe\Stripe::setApiKey('sk_test_51JAyRkDd9O5GRESHwySMe7BscZHT8npvPTAnFRUUFzrUtxKsytTSetDABLsB74Np0ODjjhY26VpkZIJXiwvkxB7a00G4pDH3n1');
+
+        //$subscription = \Stripe\Subscription::retrieve($abonnement->getStripeSubscriptionId());
+        
+        $subscription = \Stripe\Subscription::retrieve($abonnement->getStripeSubscriptionId());
+        \Stripe\Subscription::update($abonnement->getStripeSubscriptionId(), [
+        'cancel_at_period_end' => false,
+        'proration_behavior' => 'create_prorations',
+        'items' => [
+            [
+            'id' => $subscription->items->data[0]->id,
+            'price' => $client->getAbonnement()->getTypeAbonnement()->getPriceID(),
+            ],
+        ],
+        ]);
+        
+        $abonnement->setActif(false);
+        $this->em->flush();
+
+        return $this->render('subscription/client_cancel.html.twig', [
+            'controller_name' => 'SubscriptionController',
+        ]);
+    }
+
+    /**
+     * @Route("sous/compte/subscription/cancel/{id}", name="sous_compte_subscription_cancel")
+     */
+    public function sousCompteSubscriptionCancel(SousCompte $sousCompte, Request $request): Response
+    {
+        $userConnect = $this->getUser();
+
+        if (!$userConnect || !$userConnect->getSouscompte()) {
+            $this->redirectToRoute('login');
+        }
+
+        $abonnement = $sousCompte->getAbonnement();
+
+        \Stripe\Stripe::setApiKey('sk_test_51JAyRkDd9O5GRESHwySMe7BscZHT8npvPTAnFRUUFzrUtxKsytTSetDABLsB74Np0ODjjhY26VpkZIJXiwvkxB7a00G4pDH3n1');
+
+        $subscription = \Stripe\Subscription::retrieve($abonnement->getStripeSubscriptionId());
+        $subscription->cancel();
+        
+        $abonnement->setActif(false);
+        $this->em->flush();
+
+        return $this->render('subscription/client_cancel.html.twig', [
+            'controller_name' => 'SubscriptionController',
+        ]);
+    }
+
+
+    /* \Stripe\Subscription::update(
+        $abonnement->getStripeSubscriptionId(),
+        [
+          'cancel_at_period_end' => true,
+        ]
+    ); */
+    /**
+     * @Route("sous/compte/subscription/cancel/period/end/{id}", name="sous_compte_subscription_cancel_period_end")
+     */
+    public function sousCompteSubscriptionCancelPeriodEnd(SousCompte $sousCompte, Request $request): Response
+    {
+        $userConnect = $this->getUser();
+
+        if (!$userConnect || !$userConnect->getSouscompte()) {
+            $this->redirectToRoute('login');
+        }
+
+        $abonnement = $sousCompte->getAbonnement();
+
+        \Stripe\Stripe::setApiKey('sk_test_51JAyRkDd9O5GRESHwySMe7BscZHT8npvPTAnFRUUFzrUtxKsytTSetDABLsB74Np0ODjjhY26VpkZIJXiwvkxB7a00G4pDH3n1');
+
+        \Stripe\Subscription::update(
+            $abonnement->getStripeSubscriptionId(),
+            [
+              'cancel_at_period_end' => true,
+            ]
+        );
+        
+        $abonnement->setActif(false);
+        $this->em->flush();
+
+        return $this->render('subscription/client_cancel.html.twig', [
+            'controller_name' => 'SubscriptionController',
+        ]);
+    }
+}

@@ -607,7 +607,13 @@ class RegistrationController extends AbstractController
         $today = new DateTime;
         $factureReference = $typeAbonnement->getReference() . '-' . $potentialClient->getId() . '-' . $today->format('H-i-s');
 
+        /**
+         * Paramètres supplémentaires.
+         */
+        $nouvelAbonnementPotentiel->setActif(true);
+        
         $nouvelleFacturePotentielle->setReference($factureReference);
+        
         $em->persist($nouvelleFacturePotentielle);
         $em->flush();
 
