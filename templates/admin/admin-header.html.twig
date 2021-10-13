@@ -20,12 +20,15 @@
 					</div>
 				</div>
 				<div class="drop-d-content">
+					{% if app.user.roles[0] == "ROLE_CLIENT" %}
 					<div class="icl">
 						<a href={{ path("modif_agence" , { id: client.id }) }}>
 							<img src={{ asset('images/icon/id-card.svg') }} alt="">
+							{#{ dump(app.user.roles[0]) }#}
 							<p>Mon compte</p>
 						</a>
 					</div>
+					{% endif %}
 					{# <div class="icl">
 						<a href="#">
 							<img src={{ asset('images/icon/gear.svg') }} alt="">
