@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Client;
 use App\Entity\SousCompte;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,13 +24,21 @@ class SubscriptionController extends AbstractController
     /**
      * @Route("client/subscription/cancel/{id}", name="client_subscription_cancel")
      */
-    public function clientSubscriptionCancel(Client $client, Request $request): Response
+    public function clientSubscriptionCancel(Client $client, Request $request, UserRepository $userRepository): Response
     {
         $userConnect = $this->getUser();
+        $userInDatabase = $userRepository->findOneBy(['email' => $this->getUser()->getUsername()]);
 
         if (!$userConnect || !$userConnect->getClient()) {
             $this->redirectToRoute('login');
         }
+        //dd($request->request->get('_token'));
+        if (!$this->isCsrfTokenValid('subscription_cancel'.$client->getId(), $request->request->get('_token'))) {
+            //dd('Invalid token');
+            $this->redirectToRoute('login');
+        }
+
+        //dd('Valid Token');
 
         /*if ($userConnect->getClient()->getId() !== $client->getId()) {
             $this->addFlash('danger', "Ce compte n'est pas le vôtre !!!!");
@@ -47,8 +56,11 @@ class SubscriptionController extends AbstractController
         $subscription->cancel();
         
         $abonnement->setActif(false);
-        $this->em->flush();
+        $userInDatabase->setActive(false);
+        $this->em->persist($userInDatabase);
 
+        $this->em->flush();
+        
         return $this->render('subscription/client_cancel.html.twig', [
             'controller_name' => 'SubscriptionController',
         ]);

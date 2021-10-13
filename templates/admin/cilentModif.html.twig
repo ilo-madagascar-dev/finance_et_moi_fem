@@ -77,6 +77,10 @@
         <input type="submit" value="VALIDER" id="valider"> 
     {{ form_end(form)}} 
     <div style="margin-bottom:80px; text-align:center;">
-        <a href={{ path('client_subscription_cancel_at_period_end', {id: client.id}) }}>Annuler mon abonnement</a>
+        {# <a href={{ path('client_subscription_cancel', {id: client.id}) }}>Annuler mon abonnement</a> #}
+        <form method="post" action="{{ path('client_subscription_cancel', {id :client.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir annuler votre abonnement ? Le processus est irréversible.');" style="padding-bottom:40px;">
+            <input type="hidden" name="_token" value="{{ csrf_token('subscription_cancel' ~ client.id) }}">
+            <button class="create-sous">Annuler mon abonnement</button>
+        </form>
     </div>
 </div>

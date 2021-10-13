@@ -184,4 +184,11 @@ class TrialController extends AbstractController {
     public function livePaymentSuccess(){
         return $this->render('subscription/oneEuroSubscription.html.twig');
     }
+
+    /**
+     * @Route("/client/cancel/subscription/success/trial", name="client_cancel_trial")
+     */
+    public function clientCancelSubscriptionSuccessTrial(){
+        return $this->render('subscription/client_cancel.html.twig');
+    }
 }
