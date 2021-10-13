@@ -27,15 +27,26 @@ class SubscriptionController extends AbstractController
     public function clientSubscriptionCancel(Client $client, Request $request, UserRepository $userRepository): Response
     {
         $userConnect = $this->getUser();
-        $userInDatabase = $userRepository->findOneBy(['email' => $this->getUser()->getUsername()]);
 
+        
+        $userInDatabase = $userRepository->findOneBy(['email' => $this->getUser()->getUsername()]);
+        
         if (!$userConnect || !$userConnect->getClient()) {
-            $this->redirectToRoute('login');
+            return $this->redirectToRoute('app_login');
         }
+
+        if ($userConnect->getClient()->getId() != $client->getId()) {
+            //dd('different id');
+            $this->addFlash('danger', 'Ce n\'est point votre profil');
+            return $this->redirectToRoute('dash');
+        }
+
+        //dd('same id');
+
         //dd($request->request->get('_token'));
         if (!$this->isCsrfTokenValid('subscription_cancel'.$client->getId(), $request->request->get('_token'))) {
             //dd('Invalid token');
-            $this->redirectToRoute('login');
+            return $this->redirectToRoute('app_login');
         }
 
         //dd('Valid Token');
