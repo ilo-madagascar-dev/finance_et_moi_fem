@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 class TrialController extends AbstractController {
     /**
@@ -177,6 +178,28 @@ class TrialController extends AbstractController {
         return $this->redirect($paymentSession->url, 303);
     }
     
+    /**
+     * @Route("/daily/payment/trial", name="daily_payment_trial")
+     */
+    public function dailyPaymentTrial(Request $request){
+        Stripe::setApiKey('sk_test_51JAyRkDd9O5GRESHwySMe7BscZHT8npvPTAnFRUUFzrUtxKsytTSetDABLsB74Np0ODjjhY26VpkZIJXiwvkxB7a00G4pDH3n1');
+
+        $priceId = 'price_1Jk7cxDd9O5GRESHtTiQbqeR';
+
+        $paymentSession = \Stripe\Checkout\Session::create([
+            'success_url' => $this->generateUrl('live_payment_success', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'cancel_url' => $this->generateUrl('registration_payment_failed', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'payment_method_types' => ['card'],
+            'mode' => 'subscription',
+            'line_items' => [[
+                'price' => $priceId,
+                // For metered billing, do not pass quantity
+                'quantity' => 1,
+            ]],
+        ]);
+
+        return $this->redirect($paymentSession->url, 303);
+    }
 
     /**
      * @Route("/live/payment/success", name="live_payment_success")
