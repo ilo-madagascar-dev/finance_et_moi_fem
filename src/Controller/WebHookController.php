@@ -350,7 +350,7 @@ class WebHookController extends AbstractController
         $stripeEvent->setSubscriptionId($invoice->subscription);
         $stripeEvent->setCustomerId($invoice->customer);
         $stripeEvent->setCreatedAt(new DateTimeImmutable()); //amount_due
-        $stripeEvent->setMontantTTCFacture($invoice->amount_due); //amount_due
+        $stripeEvent->setMontantTTCFacture($invoice->amount_due/100); //amount_due
 
         $this->em->persist($stripeEvent);
         $this->em->flush();
