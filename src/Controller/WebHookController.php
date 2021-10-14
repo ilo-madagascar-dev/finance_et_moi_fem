@@ -204,13 +204,23 @@ class WebHookController extends AbstractController
         case 'invoice.payment_succeeded':
             $invoice = $event->data->object;
             $abonnement = $abonnementRepository->findOneBy(['stripe_subscription_id' => $payloadDecoded->data->object->subscription, 'stripe_cus_id' => $payloadDecoded->data->object->customer]);
+            
+            //dd($abonnement);
 
             if ($abonnement) {
-                # code...
+
+                //dd($abonnement);
+
+                $date_difference = date_diff(new DateTime(), $abonnement->getFactures()->getValues()[0]->getDateEmissionFacture());
+                
+                if($date_difference->d < 1) {
+                    return new Response("Facture venant d'être créée. ");
+                }                     
+                
                 //dd($abonnement->getFactures()->getValues());
                 //Création de la facture potentielle relative à l'abonneement
                  $nouvelleFacturePotentielle = new Facture;
-     
+                
                  $statutFacture = $invoice->paid === "paid" ? true : false;
          
                  $nouvelleFacturePotentielle->setMontantHT($invoice->amount_paid/100);
@@ -219,7 +229,9 @@ class WebHookController extends AbstractController
                  $nouvelleFacturePotentielle->setMontantTtcFacture($invoice->amount_paid/100);
                  $nouvelleFacturePotentielle->setAbonnement($abonnement);
                  $nouvelleFacturePotentielle->setPourcentageTva(20);
-     
+                 
+                 $abonnement->addFacture($nouvelleFacturePotentielle);
+
                  //Création du paiement relatif à l'abonnement (et donc à la facture)
                  $paiement = new Paiement();
                  $paiement->setMontantTtc($invoice->amount_paid/100);
@@ -233,13 +245,14 @@ class WebHookController extends AbstractController
                  $this->em->persist($paiement);
      
                  $this->em->flush();
+
+                 //dd($nouvelleFacturePotentielle);
+                 return new Response('Nouvelle facture ajoutée');
             }
+            
+            return new Response("Pas d'abonnement relatif à cette facture !!!!");
 
-           //dd($abonnement->getFactures()->getValues());
-
-            return new Response('Nouvelle facture ajoutée');
-
-        case 'invoice.sent':
+            case 'invoice.sent':
             $invoice = $event->data->object;
         case 'invoice.upcoming':
             $invoice = $event->data->object;
@@ -266,7 +279,7 @@ class WebHookController extends AbstractController
     /**
      * @Route("/daily/payment/webhook", name="daily_payment_webhook")
      */
-    public function dailyPaymentWebhook(Request $request){
+    public function dailyPaymentWebhook(Request $request, AbonnementRepository $abonnementRepository){
         
         $payload = json_decode($request->getContent());
         
@@ -308,21 +321,6 @@ class WebHookController extends AbstractController
             $invoice = $event->data->object;
         case 'invoice.payment_succeeded':
             $invoice = $event->data->object;
-            
-            /*
-            
-            $nouvelleFacturePotentielle = new Facture;
-
-            $statutFacture = $invoice->paid === "paid" ? true : false;
-    
-            $nouvelleFacturePotentielle->setMontantHT($invoice->amount_paid/100);
-            $nouvelleFacturePotentielle->setDateEmissionFacture(new DateTime());
-            $nouvelleFacturePotentielle->setFactureAcquitee($statutFacture);
-            $nouvelleFacturePotentielle->setMontantTtcFacture($invoice->amount_paid/100);
-            $nouvelleFacturePotentielle->setAbonnement($abonnement);
-            $nouvelleFacturePotentielle->setPourcentageTva(20); 
-            
-            */
         case 'invoice.sent':
             $invoice = $event->data->object;
         case 'invoice.upcoming':
@@ -342,23 +340,138 @@ class WebHookController extends AbstractController
         $response = $this->json($data, 200, [], ['groups'=>'conversation:read']);
 
         $stripeEvent = new StripeEvent();
-            
-        $statutFacture = $invoice->paid === "paid" ? true : false;
+
+        $statutFacture = $invoice->status === "paid" ? true : false;
         $stripeEvent->setLabel('Event test');
-        $stripeEvent->setPaid($statutFacture);
         $stripeEvent->setPaid($statutFacture);
         $stripeEvent->setSubscriptionId($invoice->subscription);
         $stripeEvent->setCustomerId($invoice->customer);
         $stripeEvent->setCreatedAt(new DateTimeImmutable()); //amount_due
         $stripeEvent->setMontantTTCFacture($invoice->amount_due/100); //amount_due
-
+        
         $this->em->persist($stripeEvent);
         $this->em->flush();
 
         return $response;
-        //return $this->render('web_hook/index.html.twig', [
-        //    'controller_name' => 'WebHookController',
-        //]);
+    }
+
+    /**
+     * @Route("/account/billing/webhook", name="account_billing_web_hook", methods={"POST"})
+     */
+    public function accountBillingWebHook(Request $request, AbonnementRepository $abonnementRepository): Response
+    {
+        \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET']);
+        //$payload = @file_get_contents('php://input');
+        $payload = $request->getContent();
+        $payloadDecoded = json_decode($payload);
+
+        //dd($payloadDecoded->data->object->customer);
+        //dd($payloadDecoded->data->object->subscription);
+
+        $event = null;
+
+        try {
+            $event = \Stripe\Event::constructFrom(
+            json_decode($payload, true)
+        );
+        } catch(\UnexpectedValueException $e) {
+            // Invalid payload
+            echo '⚠️  Webhook error while parsing basic request.';
+            http_response_code(400);
+            exit();
+        }
+
+        // Handle the event
+        switch ($event->type) {
+        case 'invoice.created':
+            $invoice = $event->data->object;
+        case 'invoice.deleted':
+            $invoice = $event->data->object;
+        case 'invoice.finalization_failed':
+            $invoice = $event->data->object;
+        case 'invoice.finalized':
+            $invoice = $event->data->object;
+        case 'invoice.marked_uncollectible':
+            $invoice = $event->data->object;
+        case 'invoice.paid':
+            $invoice = $event->data->object;
+        case 'invoice.payment_action_required':
+            $invoice = $event->data->object;
+        case 'invoice.payment_failed':
+            $invoice = $event->data->object;
+        case 'invoice.payment_succeeded':
+            $invoice = $event->data->object;
+
+            $abonnement = $abonnementRepository->findOneBy(['stripe_subscription_id' => $payloadDecoded->data->object->subscription, 'stripe_cus_id' => $payloadDecoded->data->object->customer]);
+
+            //dd($abonnement);
+
+            if ($abonnement) {
+
+                $date_difference = date_diff(new DateTime(), $abonnement->getFactures()->getValues()[0]->getDateEmissionFacture());
+                
+                if($date_difference->d < 1) {
+                    return new Response("Facture venant d'être créée. ");
+                }        
+
+                //Création de la facture relative à l'abonnement
+                 $nouvelleFacturePotentielle = new Facture;
+                
+                 $statutFacture = $invoice->paid === "paid" ? true : false;
+         
+                 $nouvelleFacturePotentielle->setMontantHT($invoice->amount_paid/100);
+                 $nouvelleFacturePotentielle->setDateEmissionFacture(new DateTime());
+                 $nouvelleFacturePotentielle->setFactureAcquitee($statutFacture);
+                 $nouvelleFacturePotentielle->setMontantTtcFacture($invoice->amount_paid/100);
+                 $nouvelleFacturePotentielle->setAbonnement($abonnement);
+                 $nouvelleFacturePotentielle->setPourcentageTva(20);
+                 
+                 $abonnement->addFacture($nouvelleFacturePotentielle);
+
+                 //Création du paiement relatif à l'abonnement (et donc à la facture)
+                 $paiement = new Paiement();
+                 $paiement->setMontantTtc($invoice->amount_paid/100);
+                 $paiement->setPaid(true);
+                 $paiement->setPaidAt(new DateTimeImmutable());
+                 $paiement->setFacture($nouvelleFacturePotentielle);
+     
+                 $nouvelleFacturePotentielle->addPaiement($paiement);
+     
+                 $this->em->persist($nouvelleFacturePotentielle);
+                 $this->em->persist($paiement);
+     
+                 $this->em->flush();
+
+                 //dd($nouvelleFacturePotentielle);
+                 //http_response_code(200);
+
+                 return new Response('Nouvelle facture ajoutée');
+            }
+            
+            return new Response("Pas d'abonnement relatif à cette facture !!!!");
+
+            case 'invoice.sent':
+            $invoice = $event->data->object;
+        case 'invoice.upcoming':
+            $invoice = $event->data->object;
+        case 'invoice.updated':
+            $invoice = $event->data->object;
+        case 'invoice.voided':
+            $invoice = $event->data->object;
+        // ... handle other event types
+        default:
+            echo 'Received unknown event type ' . $event->type;
+        }
+        
+        http_response_code(200);
+        
+        $data =  ['invoice' => $invoice];
+        $response = $this->json($data, 200, [], ['groups'=>'conversation:read']);
+
+        return $response;
+        /* return $this->render('web_hook/index.html.twig', [
+            'controller_name' => 'WebHookController',
+        ]); */
     }
 }
 

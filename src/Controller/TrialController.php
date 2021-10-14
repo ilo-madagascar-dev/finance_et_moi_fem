@@ -2,16 +2,22 @@
 
 namespace App\Controller;
 
+use App\Entity\Abonnement;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Entity\Client;
 use App\Entity\Facture;
+use App\Entity\Paiement;
 use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
 use App\Repository\ClientRepository;
 use App\Repository\FactureRepository;
 use App\Repository\PaiementRepository;
 use App\Repository\AbonnementRepository;
+use App\Repository\TypeAbonnementRepository;
+use DateTime;
+use DateTimeImmutable;
+use Doctrine\ORM\EntityManagerInterface;
 use Stripe\Stripe;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,15 +27,33 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
 class TrialController extends AbstractController {
+    private $em;
+
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+    }
+
     /**
      * @Route("/client-trial/get", name="client_getter_trial")
      */
     public function clientGetter(PaiementRepository $paiementRepository, ClientRepository $clientRepository, UserRepository $userRepository, AbonnementRepository $abonnementRepository, FactureRepository $factureRepository):Response
     {
-        $user = $userRepository->find(1);
+        $user = $userRepository->find(25);
         $usersAbonnement = $user->getClient()->getAbonnement();
+        
+        $abonnement = $abonnementRepository->find(9);
 
-        dd($usersAbonnement);
+        //$abonnement = $abonnementRepository->findOneBy(['stripe_subscription_id' => "sub_1JkOjZDd9O5GRESHJmd2gvVw"]);
+        //dd($abonnement);
+
+        dd($abonnement->getFactures()->getValues());
+
+        $date_difference = date_diff(new DateTime(), $abonnement->getFactures()->getValues()[2]->getDateEmissionFacture());
+
+
+        //dd($date_difference);
+        dd($abonnement->getFactures()->getValues());
         
         //dd($user); */
 
@@ -185,9 +209,10 @@ class TrialController extends AbstractController {
         Stripe::setApiKey('sk_test_51JAyRkDd9O5GRESHwySMe7BscZHT8npvPTAnFRUUFzrUtxKsytTSetDABLsB74Np0ODjjhY26VpkZIJXiwvkxB7a00G4pDH3n1');
 
         $priceId = 'price_1Jk7cxDd9O5GRESHtTiQbqeR';
+        $success_url = $_ENV['DAILY_PAYMENT_REGISTRATION_SUCCESS_URL'];
 
         $paymentSession = \Stripe\Checkout\Session::create([
-            'success_url' => $this->generateUrl('live_payment_success', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'success_url' => $success_url,
             'cancel_url' => $this->generateUrl('registration_payment_failed', [], UrlGeneratorInterface::ABSOLUTE_URL),
             'payment_method_types' => ['card'],
             'mode' => 'subscription',
@@ -197,8 +222,65 @@ class TrialController extends AbstractController {
                 'quantity' => 1,
             ]],
         ]);
-
+        
         return $this->redirect($paymentSession->url, 303);
+    }
+
+    /**
+     * @Route("/daily/payment/success", name="daily_payment_success")
+     */
+    public function dailyPaymentSuccess(Request $request, TypeAbonnementRepository $typeAbonnementRepository){
+        $session_id = $request->get('session_id');
+        $priceId = 'price_1JhVWhDd9O5GRESH5JElyqUy';
+
+        $typeAbonnement = $typeAbonnementRepository->findOneBy(['price_ID' => $priceId]);
+
+        Stripe::setApiKey($_ENV['STRIPE_SECRET']);
+
+        $stripe_session = \Stripe\Checkout\Session::retrieve(
+          $session_id,
+          []
+        );
+
+        $nouvelAbonnementPotentiel = new Abonnement();
+        $nouvelAbonnementPotentiel->setStripeSubscriptionId($stripe_session->subscription);
+        $nouvelAbonnementPotentiel->setStripeCusId($stripe_session->customer);
+        $nouvelAbonnementPotentiel->setMode($stripe_session->mode);
+        $nouvelAbonnementPotentiel->setStatutPaiement($stripe_session->payment_status);
+        $nouvelAbonnementPotentiel->setDateDebutAbonnement(new DateTime());
+        //$nouvelAbonnementPotentiel->setClient($potentialClient);
+        $nouvelAbonnementPotentiel->setTypeAbonnement($typeAbonnement);
+        $nouvelAbonnementPotentiel->setActif(true);
+        
+
+        //Création de la facture potentielle relative à l'abonneement
+        $nouvelleFacturePotentielle = new Facture;
+
+        $statutFacture = $stripe_session->payment_status === "paid" ? true : false;
+ 
+        $nouvelleFacturePotentielle->setMontantHT(1);
+        $nouvelleFacturePotentielle->setDateEmissionFacture(new DateTime());
+        $nouvelleFacturePotentielle->setFactureAcquitee($statutFacture);
+        $nouvelleFacturePotentielle->setMontantTtcFacture($stripe_session->amount_total/100);
+        $nouvelleFacturePotentielle->setAbonnement($nouvelAbonnementPotentiel);
+        $nouvelleFacturePotentielle->setPourcentageTva(20);
+
+        //Création du paiement relatif à l'abonnement (et donc à la facture)
+        $paiement = new Paiement();
+        $paiement->setMontantTtc($stripe_session->amount_total/100);
+        $paiement->setPaid(true);
+        $paiement->setPaidAt(new DateTimeImmutable());
+        $paiement->setFacture($nouvelleFacturePotentielle);
+
+        $nouvelleFacturePotentielle->addPaiement($paiement);
+
+        $this->em->persist($nouvelleFacturePotentielle);
+        $this->em->persist($nouvelAbonnementPotentiel);
+        $this->em->persist($paiement);
+
+        $this->em->flush();
+        
+        return $this->render('subscription/oneEuroSubscription.html.twig');
     }
 
     /**
