@@ -183,6 +183,7 @@ class TrialController extends AbstractController {
      */
     public function livepayment()
     {
+        //Remplacer la clé api et le price_ID par la clé api live et le priceID live
         Stripe::setApiKey('sk_test_51JAyRkDd9O5GRESHwySMe7BscZHT8npvPTAnFRUUFzrUtxKsytTSetDABLsB74Np0ODjjhY26VpkZIJXiwvkxB7a00G4pDH3n1');
 
         $priceId = 'price_1Jji0vDd9O5GRESHXgnEXe6K';
