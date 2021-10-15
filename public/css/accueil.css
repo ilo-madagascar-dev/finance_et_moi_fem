@@ -105,6 +105,11 @@
   margin-top: 5em;
 }
 
+
+.h1{
+  font-size: 28px
+}
+
 .p-contenue ul{
   list-style: none;
   padding:0;
@@ -162,12 +167,6 @@
   text-align: center;
 }
 
-/*.para1{
-  color: var(--dark-01);
-  font-size: 25px;
-  margin: 1em 20px;
-  text-align: center;
-}*/
 
 .avt-1:hover {
   background-color: #203c76;
@@ -475,11 +474,6 @@ margin-left: 1000px;
     font-size: 26px;
   }
 
-  /*.para1{
-    color: var(--dark-01);
-    font-size: 23px;
-    margin: 1em 20px;
-  }*/
   .para2{
     color: var(--dark-01);
     font-size: 20px;
@@ -546,6 +540,10 @@ margin-left: 1000px;
   #img-drt {
     margin: 1em;
     padding: 2em;
+  }
+
+  .h1{
+    font-size: 26px
   }
 
   #charge{
@@ -658,6 +656,10 @@ margin-left: 1000px;
     padding: 1em;
   }
 
+  .h1{
+    font-size: 25px
+  }
+
   .gridcheck > div {
     padding: 10px 10px;
   }
@@ -705,6 +707,10 @@ margin-left: 1000px;
     background-color: transparent;
   }
 
+  .h1{
+    font-size: 24px
+  }
+  
   .prendmamain-container {
     color: #265baa;
     font-size: 16px;

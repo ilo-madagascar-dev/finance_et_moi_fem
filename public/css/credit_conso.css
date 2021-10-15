@@ -30,7 +30,7 @@
 
 .double-rounded{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .double-rounded .rounded{

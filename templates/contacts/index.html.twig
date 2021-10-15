@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contactez-nous!!!{% endblock %}
+
+{% block stylesheets %}
+    <link href={{ asset('css/contact.css') }} rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <link href={{ asset('css/stylesheet.css') }} rel="stylesheet">
+    <link href={{ asset('css/colors.css') }} rel="stylesheet">
+
+    {% block header %}
+        {% include "mqbaka_home/header.html.twig" %}
+    {% endblock %}
+
+    <div class='main-content'>
+        <div class='contact-content'>
+            <div class="contact-content-1">
+                <h1 class="h1"> Contactez-nous </h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non lacus convallis, porta magna a, sollicitudin ex. Pellentesque est est, dignissim at accumsan sed, sodales nec odio. Donec ullamcorper in justo sit amet scelerisque. Suspendisse sed pretium odio.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non lacus convallis, porta magna a, sollicitudin ex. Pellentesque est est, dignissim at accumsan sed, sodales nec odio. Donec ullamcorper in justo sit amet scelerisque. Suspendisse sed pretium odio.
+                </p>
+            </div>
+            
+            <div class="contact-content-2">
+                <h2 class="h2"> Envoyé votre e-mail </h2>
+
+                {{ form_start(contacts_form) }}
+                    <div class="form-container">
+                        {{ form_widget(contacts_form.nom,
+                            {
+                                'attr': 
+                                    {
+                                        'class': 'contact-input',
+                                        'placeholder': 'nom'
+                                    }
+                            }) }}
+                        {{ form_widget(contacts_form.adressEmail,
+                            {
+                                'attr': 
+                                    {
+                                        'class': 'contact-input',
+                                        'placeholder': 'Adresse mail'
+                                    }
+                            }) }}
+                        {{ form_widget(contacts_form.message,
+                            {
+                                'attr': 
+                                    {
+                                        'class': 'contact-input',
+                                        'placeholder': 'Votre message'
+                                    }
+                            }) }}
+                    </div>
+                    <button class="contact_submit" type="submit">Envoyé <img src="images/send.svg" class="fuse" alt="fusé"></button>
+                {{ form_end(contacts_form) }}
+            </div>
+            
+        </div>
+        <div class='contact-content-2'>
+            <img src="images/22.png" class="sary22" alt="contact_image">
+        </div>
+    </div>
+
+    {% include "mqbaka_home/footer.html.twig" %}
+{% endblock %}

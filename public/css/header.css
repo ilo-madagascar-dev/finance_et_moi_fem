@@ -332,6 +332,11 @@ width: 100%;
     width: 14em;
     height: 14em;
   }
+
+.mail a{
+    text-decoration: none;
+    color: var(--dark-01);
+}
   
   @media only screen and ( max-width: 1000px){
     .bulle div{
