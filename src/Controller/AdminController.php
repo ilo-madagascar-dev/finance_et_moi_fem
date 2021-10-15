@@ -716,10 +716,14 @@ class AdminController extends AbstractController
 
         $mailer->send($mail);
         
+        $today = new DateTime;
+        $factureReference = $typeAbonnement->getReference() . '-' . $potentialClient->getId() . '-' . $today->format('H-i-s');
+        
         /**
          * Modification du paramètre actif de l'abonnement.
          */
         $nouvelAbonnementPotentiel->setActif(true);
+        $nouvelleFacturePotentielle->setReference($factureReference);
         $em->flush();
 
         return $this->render('sous-comptes/souscompte_success_payment.html.twig');
