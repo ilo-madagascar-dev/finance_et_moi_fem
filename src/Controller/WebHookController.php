@@ -9,10 +9,15 @@ use App\Entity\Paiement;
 use App\Entity\StripeEvent;
 use App\Repository\AbonnementRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 
 class WebHookController extends AbstractController
 {
@@ -358,7 +363,7 @@ class WebHookController extends AbstractController
     /**
      * @Route("/account/billing/webhook", name="account_billing_web_hook", methods={"POST"})
      */
-    public function accountBillingWebHook(Request $request, AbonnementRepository $abonnementRepository): Response
+    public function accountBillingWebHook(Request $request, AbonnementRepository $abonnementRepository, MailerInterface $mailer): Response
     {
         \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET']);
         //$payload = @file_get_contents('php://input');
@@ -404,22 +409,44 @@ class WebHookController extends AbstractController
 
             $abonnement = $abonnementRepository->findOneBy(['stripe_subscription_id' => $payloadDecoded->data->object->subscription, 'stripe_cus_id' => $payloadDecoded->data->object->customer]);
 
-            //dd($abonnement);
-
+            
+            //Si un abonnement existe
             if ($abonnement) {
-
+                
                 $date_difference = date_diff(new DateTime(), $abonnement->getFactures()->getValues()[0]->getDateEmissionFacture());
                 
                 if($date_difference->d < 1) {
                     return new Response("Facture venant d'être créée. ");
                 }        
 
+                //Détermination du montant HT
+                $montantHT = 59;
+                
+                /**
+                 * STARTER_MENSUEL_PRICE_ID=price_1JhVMsDd9O5GRESHUkFY2u1b
+                 * ESSENTIEL_MENSUEL_PRICE_ID=price_1JhVQ4Dd9O5GRESHdiPVy78a
+                 * STARTER_ANNUEL_PRICE_ID=price_1JhVTyDd9O5GRESHV8J7fRE4
+                 * ESSENTIEL_ANNUEL_PRICE_ID=price_1JhVVADd9O5GRESHmTYt6nzu
+                 * SOUS_COMPTE_PRICE_ID=price_1JhVWhDd9O5GRESH5JElyqUy
+                 */
+                if ($abonnement->getTypeAbonnement()->getPriceID() == $_ENV['STARTER_MENSUEL_PRICE_ID']) {
+                    $montantHT = 59;
+                }elseif ($abonnement->getTypeAbonnement()->getPriceID() == $_ENV['ESSENTIEL_MENSUEL_PRICE_ID']) {
+                    $montantHT = 89;
+                }elseif ($abonnement->getTypeAbonnement()->getPriceID() == $_ENV['STARTER_ANNUEL_PRICE_ID']) {
+                    $montantHT = 590;
+                }elseif ($abonnement->getTypeAbonnement()->getPriceID() == $_ENV['ESSENTIEL_ANNUEL_PRICE']) {
+                    $montantHT = 890;
+                }elseif ($abonnement->getTypeAbonnement()->getPriceID() == $_ENV['SOUS_COMPTE_PRICE_ID']) {
+                    $montantHT = 49;
+                }
+
                 //Création de la facture relative à l'abonnement
                  $nouvelleFacturePotentielle = new Facture;
                  //dd($invoice->paid);
                  $statutFacture = $invoice->paid;
          
-                 $nouvelleFacturePotentielle->setMontantHT($invoice->amount_paid/100);
+                 $nouvelleFacturePotentielle->setMontantHT($montantHT);
                  $nouvelleFacturePotentielle->setDateEmissionFacture(new DateTime());
                  $nouvelleFacturePotentielle->setFactureAcquitee($statutFacture);
                  $nouvelleFacturePotentielle->setMontantTtcFacture($invoice->amount_paid/100);
@@ -427,7 +454,7 @@ class WebHookController extends AbstractController
                  $nouvelleFacturePotentielle->setPourcentageTva(20);
                  
                  $abonnement->addFacture($nouvelleFacturePotentielle);
-
+                
                  //Création du paiement relatif à l'abonnement (et donc à la facture)
                  $paiement = new Paiement();
                  $paiement->setMontantTtc($invoice->amount_paid/100);
@@ -444,6 +471,78 @@ class WebHookController extends AbstractController
 
                  //dd($nouvelleFacturePotentielle);
                  //http_response_code(200);
+                 
+
+                define('DOMPDF_UNICODE_ENABLED', true);
+
+                $imagePath =  $_SERVER["DOCUMENT_ROOT"].'/images/icon/favicon.png';
+
+                // Configure Dompdf according to your needs
+                $pdfOptions = new Options();
+                $pdfOptions->set('defaultFont', 'Arial');
+                $pdfOptions->set('isRemoteEnabled', true);
+                
+                // Instantiate Dompdf with our options
+                $dompdf = new Dompdf($pdfOptions);
+
+                // Retrieve the HTML generated in our twig file
+                $html = $this->renderView('billing/billing_prototype_1.html.twig', [
+                    'title' => "Facture financer et moi ... ",
+                    'client' => $abonnement->getClient(),
+                    'facture' => $nouvelleFacturePotentielle,
+                    'imagePath' => $imagePath
+                ]);
+                
+                // Load HTML to Dompdf
+                $dompdf->loadHtml($html);
+                
+                // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+                $dompdf->setPaper('A4', 'portrait');
+
+                // Render the HTML as PDF
+                $dompdf->render();
+
+                // Store PDF Binary Data
+                $output = $dompdf->output();
+                
+                $name = md5(uniqid());
+
+                // In this case, we want to write the file in the public directory
+                $publicDirectory = $_SERVER['DOCUMENT_ROOT'] . '/my_pdfs';
+
+                if (!file_exists($_SERVER['DOCUMENT_ROOT'] . '/my_pdfs')) {
+                    mkdir($_SERVER['DOCUMENT_ROOT'] . '/my_pdfs', 0777, true);
+                }
+
+                // e.g /var/www/project/public/mypdf.pdf
+                $pdfFilepath =  $publicDirectory . "/" .$name . ".pdf";
+                
+                // Write file to the desired path
+                file_put_contents($pdfFilepath, $output);
+                
+                $mail = (new TemplatedEmail())
+                ->from(new Address('admin@femcreditconso.fr', 'Financer et moi'))
+                ->to($abonnement->getClient()->getUser()->getUsername())
+                ->cc('contact@financeetmoi.fr')
+                ->subject("Facture d'abonnement Financer Et Moi")
+                ->htmlTemplate('billing/billingEmailTemplate.html.twig')
+                // attach aa file stream
+                ->attachFromPath( $pdfFilepath );
+                
+                $mailer->send($mail);
+
+                $today = new DateTime;
+                $factureReference = $abonnement->getTypeAbonnement()->getReference() . '-' . $abonnement->getClient()->getId() . '-' . $today->format('H-i-s');
+
+                /**
+                 * Paramètres supplémentaires.
+                 */
+                //$nouvelAbonnementPotentiel->setActif(true);
+                
+                $nouvelleFacturePotentielle->setReference($factureReference);
+                
+                $this->em->persist($nouvelleFacturePotentielle);
+                $this->em->flush();
 
                  return new Response('Nouvelle facture ajoutée');
             }

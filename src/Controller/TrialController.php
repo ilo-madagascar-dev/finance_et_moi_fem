@@ -43,11 +43,11 @@ class TrialController extends AbstractController {
         $usersAbonnement = $user->getClient()->getAbonnement();
         
         $abonnement = $abonnementRepository->find(13);
-
+        
         //$abonnement = $abonnementRepository->findOneBy(['stripe_subscription_id' => "sub_1JkOjZDd9O5GRESHJmd2gvVw"]);
         //dd($abonnement);
 
-        dd($abonnement->getFactures()->getValues());
+        dd($abonnement);
 
         $date_difference = date_diff(new DateTime(), $abonnement->getFactures()->getValues()[2]->getDateEmissionFacture());
 
