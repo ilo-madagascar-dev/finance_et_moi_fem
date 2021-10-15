@@ -549,7 +549,7 @@ class WebHookController extends AbstractController
             
             return new Response("Pas d'abonnement relatif à cette facture !!!!");
 
-            case 'invoice.sent':
+        case 'invoice.sent':
             $invoice = $event->data->object;
         case 'invoice.upcoming':
             $invoice = $event->data->object;
