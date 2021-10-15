@@ -416,8 +416,8 @@ class WebHookController extends AbstractController
 
                 //Création de la facture relative à l'abonnement
                  $nouvelleFacturePotentielle = new Facture;
-                
-                 $statutFacture = $invoice->paid === "paid" ? true : false;
+                 //dd($invoice->paid);
+                 $statutFacture = $invoice->paid;
          
                  $nouvelleFacturePotentielle->setMontantHT($invoice->amount_paid/100);
                  $nouvelleFacturePotentielle->setDateEmissionFacture(new DateTime());
