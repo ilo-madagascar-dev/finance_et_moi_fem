@@ -1,0 +1,16 @@
+body{
+    color: var(--dark-01);
+}
+
+.confid{
+    margin: 5em;
+    padding: 0 5em
+}
+
+h1{
+    margin: 1em 0;
+}
+
+p{
+    margin-bottom: 1em;
+}
