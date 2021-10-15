@@ -1,8 +1,7 @@
 .grid-container {
   display: grid;
-  
   grid-template-columns: auto auto;
-  padding: 0px 180px;
+  padding: 3em 180px;
 }
 .grid-container > div {
   
@@ -10,32 +9,39 @@
 
 }
 .image0{
-  width: 100%;
+  width: 70%;
 }
 .titre{
   color: var(--dark-01);
-  margin-top: 175px;
+  display: flex;
+  margin: auto;
 }
 
 .grid-container2 {
   display: grid;
-  grid-template-columns: auto auto;
-  padding: 0px 100px;
+  grid-template-columns: 50% 50%;
+  padding: 1px 100px;
+  grid-gap: 5em;
 }
+
 .border{
 z-index: 1;
 background: transparent;
-}
-.image{
 width: 100%;
-margin-top: 113px;
+}
+
+.image{
+  height: 20em;
 }
 .text_interne{
   border-radius: 20px 20px;
-   border-style: solid;
-border-width: 1px;
-margin: 4%;
-color: var(--dark-01);
+  border-style: solid;
+  border-width: 1px;
+  /*margin: 4%;*/
+  color: var(--dark-01);
+  width: 100%;
+  height: 100%;
+  display: flex;
 }
 hr{
   margin: 50px auto;
@@ -64,9 +70,11 @@ h3{
 .grid{
   display: grid;
   grid-template-columns: 10% auto;
+  padding: .5em;
+  margin-bottom: -1em;
 }
 .marge{
-      margin: 4%;
+      margin: auto;
 }
 .grid-container3 {
   display: grid;
@@ -84,39 +92,43 @@ margin-top: 23px;
 }
 .text_interne2{
   border-radius: 20px 20px;
-border-style: solid;
-border-width: 1px;
-margin: 9%;
-color: var(--dark-01);
+  border-style: solid;
+  border-width: 1px;
+  color: var(--dark-01);
+  width: 100%;
+  height: 100%;
+  display: flex;
 }
+
 .grid-container4 {
   display: grid;
-  
-  grid-template-columns: auto auto;
-  padding: 0px 100px;
+  grid-template-columns: 50% 50%;
+  padding: 1px 100px;
 }
+
 .image3{
   width: 50%;
+  margin: auto;
 }
 .grid-container5 {
   display: grid;  
-  grid-template-columns: auto 50%;
-  padding: 0px 100px;
+  grid-template-columns: 50% 50%;
+  padding: 1em 100px;
+  grid-gap: 2em;
 }
 .image4{
   width: 100%;
-margin-top: 23px;
 }
 .border3{
-z-index: 1;
-background: transparent;
-margin-top: 118px
+  z-index: 1;
+  background: transparent;
 }
 .grid-container{
   display: grid;
-  
-  grid-template-columns: auto auto;
-  padding: 0px 100px;
+  grid-template-columns: 50% 50%;
+  padding: 1em 100px;
+  grid-gap: 2em;
+  margin: 2em 0;
 }
 .border4{ 
 z-index: 1;
@@ -124,15 +136,15 @@ background: transparent;
 }
 .text_interne3{
   border-radius: 20px 20px; 
-border-style: solid;
-border-width: 1px;
-margin: 5%;
-color: var(--dark-01);
-
+  border-style: solid;
+  border-width: 1px;
+  color: var(--dark-01);
+  height: 100%;
+  padding: 1em;
+  display: flex;
 }
 .image5{
-    width: 75%;
-    margin-top: 30px;
+    width: 100%;
 }
 p{
   text-align: left;
