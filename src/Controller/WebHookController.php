@@ -473,7 +473,7 @@ class WebHookController extends AbstractController
                  //http_response_code(200);
                  
 
-                define('DOMPDF_UNICODE_ENABLED', true);
+                /* define('DOMPDF_UNICODE_ENABLED', true);
 
                 $imagePath =  $_SERVER["DOCUMENT_ROOT"].'/images/icon/favicon.png';
 
@@ -529,7 +529,7 @@ class WebHookController extends AbstractController
                 // attach aa file stream
                 ->attachFromPath( $pdfFilepath );
                 
-                $mailer->send($mail);
+                $mailer->send($mail);*/
 
                 $today = new DateTime;
                 $factureReference = $abonnement->getTypeAbonnement()->getReference() . '-' . $abonnement->getClient()->getId() . '-' . $today->format('H-i-s');
