@@ -205,6 +205,28 @@ img[alt='orias-logo']{
     color: var(--light-01);
 }
 
+.condition-list{
+    display: flex;
+    gap: 1em;
+    width: max-content;
+    margin: -0.5em auto;
+    font-size: 22px;
+    color: var(--dark-01);
+    margin: -1em auto;
+}
+
+.item-condition{
+    position: relative;
+}
+
+.item-condition:first-child::after {
+    content: "-";
+    position: absolute;
+    right: -1em;
+    transform: translate(-50%);
+    font-weight: bold;
+}
+
 @media only screen and (max-width: 1050px){
     .three-bloc-thing{
         grid-template-columns: 1fr 1fr;
