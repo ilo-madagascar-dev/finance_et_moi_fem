@@ -1,0 +1,25 @@
+body{
+    color: var(--dark-01);
+}
+
+h1{
+    margin: 1em 0
+}
+
+.cgu{
+    margin: 5em;
+    padding: 0 5em
+}
+
+.p{
+    margin: 1em 0 1em 1em
+}
+
+.ul_cookies{
+    margin-left: 3em;
+    list-style-type: square;
+}
+
+.ul_cookies li{
+    line-height: 1.5em;
+}

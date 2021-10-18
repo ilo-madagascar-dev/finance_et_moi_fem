@@ -1,6 +1,14 @@
 <link rel="stylesheet" href={{ asset("css/sidebar.css") }}>
 <div class="sidebarMenu">
     <ul class="tablinks">
+        {# --- #}
+        <li class="tablink">
+            {# <a href="#"> #}
+            <a href={{ path("message") }}>
+                <img src={{ asset('images/icon/subscribe-w.svg') }} alt="">
+                Message
+            </a>
+        </li>
         <!-- li class="tablink">
             <a href={#{ path("dash") }#}>
                 <img src={#{ asset('images/Icon-awesome-home.png') }#} alt="">
@@ -28,5 +36,6 @@
                 Type d'abonnements
             </a>
         </li>
+        
     </ul>
 </div>

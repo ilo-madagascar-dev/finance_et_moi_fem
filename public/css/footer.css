@@ -215,6 +215,8 @@ img[alt='orias-logo']{
     margin: -1em auto;
 }
 
+
+
 .item-condition{
     position: relative;
 }
@@ -225,6 +227,11 @@ img[alt='orias-logo']{
     right: -1em;
     transform: translate(-50%);
     font-weight: bold;
+}
+
+.condition li a{
+    text-decoration: none;
+    color: var(--dark-01);
 }
 
 @media only screen and (max-width: 1050px){

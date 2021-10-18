@@ -17,13 +17,6 @@
     <div class='main-content'>
         <div class='contact-content'>
             <div class="contact-content-1">
-                <h1 class="h1"> Contactez-nous </h1>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non lacus convallis, porta magna a, sollicitudin ex. Pellentesque est est, dignissim at accumsan sed, sodales nec odio. Donec ullamcorper in justo sit amet scelerisque. Suspendisse sed pretium odio.
-                </p>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non lacus convallis, porta magna a, sollicitudin ex. Pellentesque est est, dignissim at accumsan sed, sodales nec odio. Donec ullamcorper in justo sit amet scelerisque. Suspendisse sed pretium odio.
-                </p>
             </div>
             
             <div class="contact-content-2">
@@ -31,22 +24,70 @@
 
                 {{ form_start(contacts_form) }}
                     <div class="form-container">
-                        {{ form_widget(contacts_form.nom,
+                        <div class="form-groupe">
+                            {{ form_widget(contacts_form.nom,
+                                {
+                                    'attr': 
+                                        {
+                                            'class': 'contact-input',
+                                            'placeholder': 'nom'
+                                        }
+                                }) }}
+                            {{ form_widget(contacts_form.prenom,
+                                {
+                                    'attr': 
+                                        {
+                                            'class': 'contact-input',
+                                            'placeholder': 'prenom'
+                                        }
+                                }) }}
+                        </div>
+                        <div class="form-groupe-1">
+                        {{ form_widget(contacts_form.adress,
                             {
                                 'attr': 
                                     {
                                         'class': 'contact-input',
-                                        'placeholder': 'nom'
+                                        'placeholder': 'Adresse'
                                     }
                             }) }}
-                        {{ form_widget(contacts_form.adressEmail,
+                        {{ form_widget(contacts_form.ville,
                             {
                                 'attr': 
                                     {
                                         'class': 'contact-input',
-                                        'placeholder': 'Adresse mail'
+                                        'placeholder': 'Ville'
                                     }
                             }) }}
+                        {{ form_widget(contacts_form.codePostal,
+                            {
+                                'attr': 
+                                    {
+                                        'class': 'contact-input',
+                                        'placeholder': 'Code postal'
+                                    }
+                            }) }}
+                        </div>
+
+                        <div class="form-groupe">
+                            {{ form_widget(contacts_form.phone,
+                                {
+                                    'attr': 
+                                        {
+                                            'class': 'contact-input',
+                                            'placeholder': 'Telephone'
+                                        }
+                                }) }}
+                            {{ form_widget(contacts_form.adressEmail,
+                                {
+                                    'attr': 
+                                        {
+                                            'class': 'contact-input',
+                                            'placeholder': 'moi@mondomain.com'
+                                        }
+                                }) }}
+                        </div>
+                        
                         {{ form_widget(contacts_form.message,
                             {
                                 'attr': 

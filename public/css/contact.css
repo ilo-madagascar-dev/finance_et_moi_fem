@@ -66,3 +66,15 @@ body{
 .sary22{
     width: 100%;
 }
+
+.form-groupe{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 2%
+  }
+
+  .form-groupe-1{
+    display: grid;
+    grid-template-columns: 32% 32% 32%;
+    grid-gap: 2%
+  }
