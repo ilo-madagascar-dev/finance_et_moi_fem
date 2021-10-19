@@ -450,7 +450,7 @@ class AdminController extends AbstractController
     
                     $this->addFlash('danger', 'Cet e-mail est déjà relié à un utilisateur');
     
-                    return $this->redirectToRoute('registration');
+                    return $this->redirectToRoute('sajout');
                 }
     
                 $session->set('possibleNewSousCompte', $eventuallyNewSousCompte);
