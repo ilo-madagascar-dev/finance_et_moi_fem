@@ -435,7 +435,7 @@ class WebHookController extends AbstractController
                     $montantHT = 89;
                 }elseif ($abonnement->getTypeAbonnement()->getPriceID() == $_ENV['STARTER_ANNUEL_PRICE_ID']) {
                     $montantHT = 590;
-                }elseif ($abonnement->getTypeAbonnement()->getPriceID() == $_ENV['ESSENTIEL_ANNUEL_PRICE']) {
+                }elseif ($abonnement->getTypeAbonnement()->getPriceID() == $_ENV['ESSENTIEL_ANNUEL_PRICE_ID']) {
                     $montantHT = 890;
                 }elseif ($abonnement->getTypeAbonnement()->getPriceID() == $_ENV['SOUS_COMPTE_PRICE_ID']) {
                     $montantHT = 49;
@@ -532,7 +532,18 @@ class WebHookController extends AbstractController
                 $mailer->send($mail);*/
 
                 $today = new DateTime;
-                $factureReference = $abonnement->getTypeAbonnement()->getReference() . '-' . $abonnement->getClient()->getId() . '-' . $today->format('H-i-s');
+                
+                if ($abonnement->getClient()) {
+                    $factureReference = $abonnement->getTypeAbonnement()->getReference() . '-' . $abonnement->getClient()->getId() . '-' . $today->format('H-i-s');
+                }
+                
+                if ($abonnement->getSousCompte()) {
+                    $factureReference = $abonnement->getTypeAbonnement()->getReference() . '-' . $abonnement->getSousCompte()->getId() . '-' . $today->format('H-i-s');
+                }
+
+                if (!$abonnement->getClient() && !$abonnement->getSousCompte()) {
+                    $factureReference = "lalala";
+                }
 
                 /**
                  * Paramètres supplémentaires.
