@@ -23,7 +23,7 @@ class ContactsController extends AbstractController
         $contacts_form->handleRequest($request);
         
         if ($contacts_form->isSubmitted() && $contacts_form->isValid()) { 
-            dd($request);
+            //dd($request);
             $em->persist($contacts);
             $em->flush();
 

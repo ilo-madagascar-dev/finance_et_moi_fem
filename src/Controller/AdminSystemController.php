@@ -13,6 +13,7 @@ use App\Entity\SousCompte;
 use Stripe\Checkout\Session;
 use App\Repository\UserRepository;
 use App\Repository\ClientRepository;
+use App\Repository\ContactsRepository;
 use App\Repository\SousCompteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -103,6 +104,17 @@ class AdminSystemController extends AbstractController
        $this->em->flush();
        
        return new Response("true");
+    }
+
+    /**
+     * @Route("/message", name="message")
+     */
+    public function FunctionName( ContactsRepository $mrep): Response
+    {
+        $message = $mrep->findAll();
+        return $this->render('admin\components\message.twig', [
+            'message'=>$message
+        ]);
     }
     
 }
