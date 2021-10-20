@@ -306,7 +306,7 @@ class TrialController extends AbstractController {
     public function mailerTrial(MailerInterface $mailer)
     {
         $mail = (new TemplatedEmail())
-        ->from('hentsraf@gmail.com')
+        ->from(new Address('admin@femcreditconso.fr', 'Financer et moi'))
         ->to('henintsoa.rafidy@gmail.com')
         ->subject("Facture d'abonnement Financer Et Moi")
         ->html('<p>Lalala</p>');
