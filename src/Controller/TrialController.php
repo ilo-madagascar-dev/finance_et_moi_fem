@@ -19,12 +19,14 @@ use DateTime;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Stripe\Stripe;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mime\Address;
 
 class TrialController extends AbstractController {
     private $em;
@@ -42,14 +44,14 @@ class TrialController extends AbstractController {
         $user = $userRepository->find(25);
         $usersAbonnement = $user->getClient()->getAbonnement();
         
-        $abonnement = $abonnementRepository->find(13);
+        $abonnement = $abonnementRepository->find(27);
         
         //$abonnement = $abonnementRepository->findOneBy(['stripe_subscription_id' => "sub_1JkOjZDd9O5GRESHJmd2gvVw"]);
         //dd($abonnement);
 
-        dd($abonnement);
+        //dd($abonnement);
 
-        $date_difference = date_diff(new DateTime(), $abonnement->getFactures()->getValues()[2]->getDateEmissionFacture());
+        //$date_difference = date_diff(new DateTime(), $abonnement->getFactures()->getValues()[2]->getDateEmissionFacture());
 
 
         //dd($date_difference);
@@ -296,5 +298,21 @@ class TrialController extends AbstractController {
      */
     public function clientCancelSubscriptionSuccessTrial(){
         return $this->render('subscription/client_cancel.html.twig');
+    }
+
+    /**
+     * @Route("/fem-mailer/trial", name="fem_mailer_trial")
+     */
+    public function mailerTrial(MailerInterface $mailer)
+    {
+        $mail = (new TemplatedEmail())
+        ->from(new Address('admin@femcreditconso.fr', 'Financer et moi'))
+        ->to('henintsoa.rafidy@gmail.com')
+        ->subject("Facture d'abonnement Financer Et Moi")
+        ->html('<p>Lalala</p>');
+
+        $mailer->send($mail);
+
+        return new Response('Mail sent !!!!');
     }
 }

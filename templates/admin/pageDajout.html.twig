@@ -5,6 +5,11 @@
 </head>
 <div style="margin-top: 40px;">
     <span class="ajout"><img src={{ asset('images/icon/plus-d.svg') }} alt="">Ajouter un sous-compte</span><br><br>
+    {% for message in app.flashes('danger') %}
+        <div style="text-align:center; border: 1px solid; border-color: blue; border-radius: 20px; color: #265baa; font-size: 18px; padding: 1em; width: 460px; margin:auto; margin-bottom: 20px;">
+            {{ message }}
+        </div>
+    {% endfor %}
     {{ form_start(form)}}
         {{ form_widget(form.nom)}} 
         {{ form_widget(form.prenom)}} 
