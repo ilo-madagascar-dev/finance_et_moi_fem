@@ -14,9 +14,6 @@ body{
     overflow-x: hidden;
 }
 
-.contact-content{
-    width: 30em;
-}
 
 .h1{
     font-size: 28px;
@@ -32,7 +29,6 @@ body{
     display: flex;
     flex-direction: column;
     gap: 2em;
-    width: 80%;
     justify-content: center;
 }
 
@@ -71,10 +67,33 @@ body{
     display: grid;
     grid-template-columns: 50% 50%;
     grid-gap: 2%
-  }
+}
 
-  .form-groupe-1{
+.form-groupe-1{
     display: grid;
     grid-template-columns: 32% 32% 32%;
     grid-gap: 2%
+}
+
+@media only screen and (max-width: 1000px){
+    .main-content{
+      display: grid;
+      grid-template-columns: auto;
+      margin: 3em;
+    }
+    
+    .form-groupe{
+      grid-template-columns: auto;
+      gap: 2em
+    }
+    .form-groupe-1{
+      grid-template-columns: auto;
+      gap: 2em
+    }
+  }
+  
+  @media only screen and (max-width: 450px){
+    .main-content{
+      margin: 1em
+    }
   }

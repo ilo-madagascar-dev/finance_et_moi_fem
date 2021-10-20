@@ -3,7 +3,7 @@ body{
 }
 
 .confid{
-    margin: 5em;
+    margin: auto;
     padding: 0 5em
 }
 
@@ -14,3 +14,20 @@ h1{
 p{
     margin-bottom: 1em;
 }
+
+@media only screen and ( max-width: 920px){
+    .confid{
+      padding: 3em;
+    }
+  }
+  
+  @media only screen and ( max-width: 700px ){
+    .confid{
+      font-size: 12px
+    }
+  }
+  @media only screen and ( max-width: 500px ){
+    .confid{
+      font-size: 11px
+    }
+  }

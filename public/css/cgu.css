@@ -7,13 +7,17 @@ h1{
 }
 
 .cgu{
-    margin: 5em;
+    margin: auto;
     padding: 0 5em
 }
 
 .p{
     margin: 1em 0 1em 1em
 }
+
+#p_zah{
+    margin: 1em 0 1em 1em;
+  }
 
 .ul_cookies{
     margin-left: 3em;
@@ -23,3 +27,20 @@ h1{
 .ul_cookies li{
     line-height: 1.5em;
 }
+
+@media only screen and ( max-width: 920px){
+    .cgu{
+      padding: 3em;
+    }
+  }
+  
+  @media only screen and ( max-width: 700px ){
+    .cgu{
+      font-size: 12px
+    }
+  }
+  @media only screen and ( max-width: 500px ){
+    .cgu{
+      font-size: 11px
+    }
+  }
