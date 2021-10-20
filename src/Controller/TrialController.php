@@ -19,12 +19,14 @@ use DateTime;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Stripe\Stripe;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mime\Address;
 
 class TrialController extends AbstractController {
     private $em;
@@ -296,5 +298,21 @@ class TrialController extends AbstractController {
      */
     public function clientCancelSubscriptionSuccessTrial(){
         return $this->render('subscription/client_cancel.html.twig');
+    }
+
+    /**
+     * @Route("/fem-mailer/trial", name="fem_mailer_trial")
+     */
+    public function mailerTrial(MailerInterface $mailer)
+    {
+        $mail = (new TemplatedEmail())
+        ->from(new Address('admin@femcreditconso.fr', 'Financer et moi'))
+        ->to('henintsoa.rafidy@gmail.com')
+        ->subject("Facture d'abonnement Financer Et Moi")
+        ->html('<p>Lalala</p>');
+
+        $mailer->send($mail);
+
+        return new Response('Mail sent !!!!');
     }
 }

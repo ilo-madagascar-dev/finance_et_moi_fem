@@ -485,13 +485,38 @@ class WebHookController extends AbstractController
                 // Instantiate Dompdf with our options
                 $dompdf = new Dompdf($pdfOptions);
 
+                $html = null;
+
+                //Si l'abonnement est l'abonnement d'un client
+                if ($abonnement->getClient()) {
+                    $html = $this->renderView('billing/billing_prototype_1.html.twig', [
+                        'title' => "Facture financer et moi ... ",
+                        'client' => $abonnement->getClient(),
+                        'facture' => $nouvelleFacturePotentielle,
+                        'imagePath' => $imagePath
+                    ]);
+                }
+
+                //Si l'abonnement est l'abonnement d'un sous-compte
+                if ($abonnement->getSousCompte()) {
+                    $html = $this->renderView('billing/billing_sous_compte_prototype_1.html.twig', [
+                        'title' => "Facture financer et moi ... ",
+                        'client' => $abonnement->getSousCompte(),
+                        'facture' => $nouvelleFacturePotentielle,
+                        'imagePath' => $imagePath
+                    ]);
+                }
+
+                //Si c'est un abonnement
+                if (!$abonnement->getClient() && !$abonnement->getSousCompte()) {
+                    $html = $this->renderView('billing/billing_prototype_1.html.twig', [
+                        'title' => "Facture financer et moi ... ",
+                        'client' => $abonnement->getClient(),
+                        'facture' => $nouvelleFacturePotentielle,
+                        'imagePath' => $imagePath
+                    ]);
+                }
                 // Retrieve the HTML generated in our twig file
-                $html = $this->renderView('billing/billing_prototype_1.html.twig', [
-                    'title' => "Facture financer et moi ... ",
-                    'client' => $abonnement->getClient(),
-                    'facture' => $nouvelleFacturePotentielle,
-                    'imagePath' => $imagePath
-                ]);
                 
                 // Load HTML to Dompdf
                 $dompdf->loadHtml($html);
@@ -530,7 +555,7 @@ class WebHookController extends AbstractController
                 if ($abonnement->getSousCompte()) {
                     $mailClientIfExits = $abonnement->getSousCompte()->getClient()->getEmail();
                 }
-
+                
                 $mail = (new TemplatedEmail())
                 ->from(new Address('admin@femcreditconso.fr', 'Financer et moi'))
                 ->to($mailClientIfExits)
