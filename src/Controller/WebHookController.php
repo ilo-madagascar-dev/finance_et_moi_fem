@@ -473,7 +473,7 @@ class WebHookController extends AbstractController
                  //http_response_code(200);
                  
 
-                /* define('DOMPDF_UNICODE_ENABLED', true);
+                define('DOMPDF_UNICODE_ENABLED', true);
 
                 $imagePath =  $_SERVER["DOCUMENT_ROOT"].'/images/icon/favicon.png';
 
@@ -520,16 +520,27 @@ class WebHookController extends AbstractController
                 // Write file to the desired path
                 file_put_contents($pdfFilepath, $output);
                 
+                //$mailClientIfExits = 'contact@financeetmoi.fr';
+                $mailClientIfExits = 'hentsraf@gmail.com';
+                
+                if ($abonnement->getClient()) {
+                    $mailClientIfExits = $abonnement->getClient()->getEmail();
+                }
+
+                if ($abonnement->getSousCompte()) {
+                    $mailClientIfExits = $abonnement->getSousCompte()->getEmail();
+                }
+
                 $mail = (new TemplatedEmail())
                 ->from(new Address('admin@femcreditconso.fr', 'Financer et moi'))
-                ->to($abonnement->getClient()->getUser()->getUsername())
+                ->to($mailClientIfExits)
                 ->cc('contact@financeetmoi.fr')
                 ->subject("Facture d'abonnement Financer Et Moi")
                 ->htmlTemplate('billing/billingEmailTemplate.html.twig')
                 // attach aa file stream
                 ->attachFromPath( $pdfFilepath );
                 
-                $mailer->send($mail);*/
+                $mailer->send($mail);
 
                 $today = new DateTime;
                 
@@ -542,7 +553,7 @@ class WebHookController extends AbstractController
                 }
 
                 if (!$abonnement->getClient() && !$abonnement->getSousCompte()) {
-                    $factureReference = "lalala";
+                    $factureReference = "Abonnement quotidien à 1€";
                 }
 
                 /**
