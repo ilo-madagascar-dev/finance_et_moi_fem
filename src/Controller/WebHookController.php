@@ -528,7 +528,7 @@ class WebHookController extends AbstractController
                 }
 
                 if ($abonnement->getSousCompte()) {
-                    $mailClientIfExits = $abonnement->getSousCompte()->getEmail();
+                    $mailClientIfExits = $abonnement->getSousCompte()->getClient()->getEmail();
                 }
 
                 $mail = (new TemplatedEmail())
