@@ -233,10 +233,11 @@
 }
 
 .titre-3 .ttr{
-  font-weight: normal;
-  margin: 1em 5em;
+  font-weight: bold;
+  margin: 2em 5em;
   text-align: center;
   color: var(--light-01);
+  font-size: 24px;
 }
 .ensavoirplus{
   text-align: center;
@@ -310,7 +311,8 @@ padding: 10px;
 .petit_titre{
   color: var(--light-01);
   text-align: center;
-  padding: 29px;
+  padding: 20px;
+font-size: 26px; 
 }
 .titre3{
   text-align: center;
@@ -794,6 +796,11 @@ margin-left: 1000px;
 
 @media only screen and ( max-width: 450px)
 {
+  .main{
+    padding: 0;
+    margin: 1.5em;
+  }
+
   #charge{
     margin: 0px;
     padding: 2em;
@@ -859,6 +866,72 @@ margin-left: 1000px;
     color: var(--light-01);
     text-align: left;
   }
+
+  .bordercapture {
+    padding: 16px;
+    margin: 1em 0px;
+  }
+
+  .bordercapture2 {
+    margin: 0 auto 2em;
+    padding: 23px;
+    text-align: center;
+  }
+
+  .full-blue, .not-so-full-blue {
+    border: none;
+    padding: 0.8em 2em;
+    border-radius: 50px;
+    color: var(--white--ish-01);
+    transition: .4s;
+    cursor: pointer;
+  }
+
+  .petit_titre {
+    color: var(--light-01);
+    text-align: center;
+    padding: 30px;
+    font-size: 15px;
+  }
+
+  .grid1 {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 3px 0px;
+    margin-top: -2em;
+  }
+
+  .grid2 {
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 0px 5em;
+    margin-top: -1.5em;
+  }
+
+  .grid3 {
+    display: grid;
+    grid-template-columns: auto;
+    padding: 0;
+  }
+
+  .h1{
+    font-size: 14px;
+  }
+
+  .grand_border {
+    border-radius: 20px 20px;
+    border-style: solid;
+    border-width: 1px;
+    margin: 0px auto;
+    color: var(--dark-01);
+    padding: 6px;
+  }
+
+  .img{
+    width: 100%;
+    padding: 12px;
+  }
+
 }
 
 @media only screen and ( max-width: 325px ){
