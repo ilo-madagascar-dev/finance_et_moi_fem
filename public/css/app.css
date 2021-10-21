@@ -9,7 +9,7 @@
 
 }
 .image0{
-  width: 70%;
+  height: 20em;
 }
 .titre{
   color: var(--dark-01);
@@ -53,6 +53,7 @@ hr{
 h3{
   color: var(--light-01);
   text-align: center;
+  font-size: 22px;
 }
 /* .para1{
   padding: 10px;
@@ -61,7 +62,6 @@ h3{
 
 .para{
    padding: 10px;
-   font-size: 20px;
    /*width: 50%;*/
 }
 .nike{
@@ -107,8 +107,8 @@ margin-top: 23px;
 }
 
 .image3{
-  width: 50%;
   margin: auto;
+  height: 20em;
 }
 .grid-container5 {
   display: grid;  
@@ -117,7 +117,8 @@ margin-top: 23px;
   grid-gap: 2em;
 }
 .image4{
-  width: 100%;
+  height: 20em;
+  margin: auto;
 }
 .border3{
   z-index: 1;
@@ -144,7 +145,7 @@ background: transparent;
   display: flex;
 }
 .image5{
-    width: 100%;
+    height: 20em;
 }
 p{
   text-align: left;
@@ -154,6 +155,10 @@ p{
   text-align: center;
 }
 
+.img-grids{
+  display: flex;
+  margin: auto;
+}
         
 @media (max-width: 750px){
   .grid-container {
@@ -235,6 +240,110 @@ width: 75%;
 margin: 40px auto;
 display: block;
     }
+}
+
+@media only screen and ( max-width: 550px){
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 100%;
+    padding: 0px 25px;
+  }
+  .image0{
+    height: 15em;
+  }
+  
+  .h1{
+    font-size: 17px;
+  }
+
+  .grid-container2 {
+    display: grid;
+    grid-template-columns: auto;
+    padding: 0px 25px;
+  }
+
+  .grid-container3 {
+    display: grid;
+    grid-template-columns: auto;
+    padding: 0px 25px;
+  }
+
+  .grid-container4 {
+    display: grid;
+    grid-template-columns: auto;
+    padding: 0px 25px;
+  }
+
+  .grid-container5 {
+    display: grid;
+    grid-template-columns: auto;
+    padding: 0px 25px;
+  }
+
+  .text_interne {
+    margin: auto;
+    border-radius: 30px 30px;
+  }
+
+  .text_interne2 {
+    margin: auto;
+    border-radius: 30px 30px;
+  }
+
+  .text_interne3 {
+    margin: auto;
+    padding: 0;
+    border-radius: 30px 30px;
+  }
+
+  h3{
+    font-size: 16px;
+  }
+
+  .marge{
+    margin: 4%;
+  }
+
+  .image {
+    width: 78%;
+    margin: auto;
+    display: block;
+    height: unset;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 10% auto;
+    padding: .5em;
+    margin: auto;
+  }
+
+  .para{
+    font-size: 14px;
+    background: transparent;
+  }
+
+  .image3 {
+    width: 50%;
+    margin: 0px auto 2em;
+    display: block;
+    height: unset;
+  }
+
+  .image4{
+    width: 100%;
+    display: flex;
+    height: unset;
+  }
+  .image5{
+    width: 75%;
+    margin: auto;
+    display: flex;
+    height: unset;
+  }
+
+
 }
 
 /*.image6{
