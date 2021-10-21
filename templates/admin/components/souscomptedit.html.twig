@@ -2,10 +2,25 @@
 	<meta charset="utf-8">
 	<title>Editer un sous-compte</title>
 	<link rel="stylesheet" type="text/css" href="/css/stylenirina.css">
+    <link rel="stylesheet" href={{ asset('/css/sousCompteAdditionnalCss.css')}}>
 </head>
 <div style="margin-top: 40px;">
 
 <span class="ajout"><img src={{ asset('images/icon/edit-pen-d.svg') }} alt="">Editer un sous-compte</span><br><br>
+
+<!-- Message flash -->
+{% for message in app.flashes('success') %}
+    <div class="messageContainer">
+        {{ message }}
+    </div>    
+{% endfor %}
+
+{% for message in app.flashes('danger') %}
+    <div class="messageContainer">
+        {{ message }}
+    </div>    
+{% endfor %}
+
     {{ form_start(form)}}
         {{ form_widget(form.nom)}} 
         {{ form_widget(form.prenom)}} 
@@ -22,5 +37,12 @@
     {{ form_end(form)}}
     <div style="text-align:center; margin-bottom:40px;">
         <a href="{{ path('sous_compte_modif_password', {id: souscompte.id}) }}" class="create-sous">Modifier le mot de passe du sous-compte</a>
+    </div>
+    <div style="margin-bottom:80px; text-align:center;">
+        {# <a href={{ path('client_subscription_cancel', {id: client.id}) }}>Annuler mon abonnement</a> #}
+        <form method="post" action="{{ path('affiliate_subscription_cancel', {id :souscompte.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir annuler votre abonnement ? Le processus est irréversible.');" style="padding-bottom:40px;">
+            <input type="hidden" name="_token" value="{{ csrf_token('subscription_cancel' ~ souscompte.id) }}">
+            <button class="create-sous">Annuler mon abonnement</button>
+        </form>
     </div>
 </div>

@@ -315,4 +315,42 @@ class TrialController extends AbstractController {
 
         return new Response('Mail sent !!!!');
     }
+
+    /**
+     * @Route("/get/payment/method", name="get_payment_method")
+     */
+    public function getPaymentMethod()
+    {
+        $stripe = new \Stripe\StripeClient(
+            'sk_test_51JAyRkDd9O5GRESHwySMe7BscZHT8npvPTAnFRUUFzrUtxKsytTSetDABLsB74Np0ODjjhY26VpkZIJXiwvkxB7a00G4pDH3n1'
+          );
+          
+        $stripeData =  $stripe->paymentMethods->all([
+            'customer' => 'cus_KORmSsUBgwDcOA',
+            'type' => 'card',
+          ]);
+
+        return $this->json($stripeData);
+    }
+
+    /**
+     * @Route("/update/payment/method", name="update_payment_method")
+     */
+    public function updatePaymentMethod()
+    {
+       $stripe = new \Stripe\StripeClient(
+       'sk_test_51JAyRkDd9O5GRESHwySMe7BscZHT8npvPTAnFRUUFzrUtxKsytTSetDABLsB74Np0ODjjhY26VpkZIJXiwvkxB7a00G4pDH3n1'
+       );
+       $stripeData = $stripe->paymentMethods->update(
+       'pm_1JjetFDd9O5GRESHknjF3nM5',
+       ['card' => [
+            //'number' => '4242424242424343',
+            'exp_month' => 10,
+            'exp_year' => 2022,
+            'cvc' => '314',
+        ]],
+       );
+
+       return $this->json($stripeData);
+    }
 }

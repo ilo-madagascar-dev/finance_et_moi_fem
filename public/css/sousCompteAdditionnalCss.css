@@ -1,0 +1,20 @@
+.messageContainer{
+    text-align: center;
+    border: 1px solid #13141D;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: #13141D;
+    color: white;
+    font-weight: bold;
+    margin: 4%;
+}
+
+.disabledSousCompteWriting {
+    margin-left: 20px;
+    padding: 5px 10px;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    background-color: #13141D;
+    color: white;
+    font-weight:bold;
+}

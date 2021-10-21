@@ -62,19 +62,99 @@ class SubscriptionController extends AbstractController
 
         $subscription = \Stripe\Subscription::retrieve($abonnement->getStripeSubscriptionId());
 
-        //dd($subscription);
-
         $subscription->cancel();
         
+        //Désabonnement des sous-compte
+        $sousComptesClient = $client->getSousComptes()->getValues();
         $abonnement->setActif(false);
         $userInDatabase->setActive(false);
         $this->em->persist($userInDatabase);
 
         $this->em->flush();
         
+        /*foreach ($sousComptesClient as $uniqueSousCompteClient) {
+            $sousComptesClientAbonnement = $uniqueSousCompteClient->getAbonnement();
+            
+            if ($uniqueSousCompteClient->getUser()->getActive() !== false) {
+                \Stripe\Stripe::setApiKey('sk_test_51JAyRkDd9O5GRESHwySMe7BscZHT8npvPTAnFRUUFzrUtxKsytTSetDABLsB74Np0ODjjhY26VpkZIJXiwvkxB7a00G4pDH3n1');
+
+                $sousCompteSubscription = \Stripe\Subscription::retrieve($sousComptesClientAbonnement->getStripeSubscriptionId());
+                $sousCompteSubscription->cancel();
+                $uniqueSousCompteClient->getUser()->setActive(false);
+            }
+            $this->em->persist($sousComptesClientAbonnement);
+            $this->em->persist($uniqueSousCompteClient);
+            $this->em->flush();
+        }*/
+        
+        //dd($subscription);
+
         return $this->render('subscription/client_cancel.html.twig', [
             'controller_name' => 'SubscriptionController',
         ]);
+    }
+
+    /**
+     * @Route("affiliate/subscription/cancel/{id}", name="affiliate_subscription_cancel")
+     */
+    public function affiliateSubscriptionCancel(SousCompte $sousCompte, Request $request, UserRepository $userRepository): Response
+    {
+        $userConnect = $this->getUser();
+
+        
+        $userInDatabase = $userRepository->findOneBy(['email' => $sousCompte->getUser()->getUsername()]);
+        
+        if (!$userConnect || !$userConnect->getClient()) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        $usersSousComptes = $userConnect->getClient()->getSousComptes()->getValues();
+        $sousCompteIds = [];
+
+        foreach ($usersSousComptes as $uniqueSousCompte) {
+            $sousCompteIds[] = $uniqueSousCompte->getId();
+        }
+
+        //dd($sousCompte->getId(), $sousCompteIds);
+
+        if (!in_array($sousCompte->getId(), $sousCompteIds)) {
+            //dd('Not user\'s sous-compte !!!!');
+            $this->addFlash('danger', 'Ce n\'est point votre profil');
+            return $this->redirectToRoute('dash');
+        }
+
+        //dd("User's sous-compte");
+
+        //dd('same id');
+
+        //dd($request->request->get('_token'));
+        if (!$this->isCsrfTokenValid('subscription_cancel'.$sousCompte->getId(), $request->request->get('_token'))) {
+            //dd('Invalid token');
+            return $this->redirectToRoute('app_login');
+        }
+        $abonnement = $sousCompte->getAbonnement();
+
+        \Stripe\Stripe::setApiKey('sk_test_51JAyRkDd9O5GRESHwySMe7BscZHT8npvPTAnFRUUFzrUtxKsytTSetDABLsB74Np0ODjjhY26VpkZIJXiwvkxB7a00G4pDH3n1');
+
+        $subscription = \Stripe\Subscription::retrieve($abonnement->getStripeSubscriptionId());
+
+        //dd($subscription);
+
+        $subscription->cancel();
+            
+        $abonnement->setActif(false);
+        $userInDatabase->setActive(false);
+        $this->em->persist($userInDatabase);
+
+        $this->em->flush();
+            
+        $this->addFlash('success',"Le désabonnement du sous-compte a bien été réalisé !!!!");
+        
+        return $this->redirectToRoute('slist');
+        /** return $this->render('subscription/client_cancel.html.twig', [
+         *   'controller_name' => 'SubscriptionController',
+         * ]); 
+         **/
     }
 
     /**

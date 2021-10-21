@@ -51,6 +51,11 @@ class SousCompteController extends AbstractController
 
         $cle_groupe="1622543601638x611830994992322700";
 
+        if ($souscompte->getUser()->getActive() == false) {
+            $this->addFlash('danger', "L'abonnement de ce sous-compte a été désactivé !!!!");
+            return $this->redirectToRoute('slist');
+        }
+
         $form = $this->createForm(AdminSousCompteType::class, $souscompte);
         $form->handleRequest($request);
         //dd($souscompte->getUser());
@@ -69,7 +74,7 @@ class SousCompteController extends AbstractController
 
                     $this->addFlash('danger', 'Cet e-mail est déjà relié à un utilisateur');
 
-                    return $this->redirectToRoute('modif_sous_compte');
+                    return $this->redirectToRoute('modif_sous_compte', ['id' => $souscompte->getId()]);
                 }
             }
             
@@ -84,6 +89,8 @@ class SousCompteController extends AbstractController
 
             $em->persist($souscompte);
             $em->flush();
+
+            $this->addFlash('success', 'Le sous-compte a été modifié avec succès !!!!');
 
         }
         
@@ -106,10 +113,15 @@ class SousCompteController extends AbstractController
     {
         $userRelatedToSousCompte = $sousCompte->getClient()->getUser();
         $userRole = $this->getUser()->getRoles()[0];
-
+        
         if ($userRelatedToSousCompte->getId() !== $this->getUser()->getId()) {
             $this->addFlash('danger', "Ce sous-compte n'est pas le vôtre.");
             return $this->redirectToRoute('dash');
+        }
+
+        if ($sousCompte->getUser()->getActive() == false) {
+            $this->addFlash('danger', "L'abonnement du sous-compte a été désactivé !!!!");
+            $this->redirectToRoute('slist');
         }
 
         $form = $this->createForm(AdminSousComptePasswordModifType::class, $sousCompte);

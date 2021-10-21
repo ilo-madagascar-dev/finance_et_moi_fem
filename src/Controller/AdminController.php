@@ -21,6 +21,7 @@ use App\Repository\ClientRepository;
 use App\Repository\SousCompteRepository;
 use App\Repository\TypeAbonnementRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -699,18 +700,12 @@ class AdminController extends AbstractController
         // Write file to the desired path
         file_put_contents($pdfFilepath, $output);
         
-        $mail = (new Email())
+        $mail = (new TemplatedEmail())
         ->from(new Address('admin@femcreditconso.fr', 'Financer et moi'))
         ->to($this->getUser()->getEmail())
         ->cc('contact@financeetmoi.fr')
         ->subject("Facture d'abonnement Financer Et Moi")
-        ->html(
-            '
-                <h2 style="text-align:center;">Votre facture abonnement FEM</h2>
-
-                <p style="text-align:center;">Veuillez voir en pièce-jointe la facture relative à l\' abonnement !!!!</p>
-                    
-            ')
+        ->htmlTemplate('billing/billingEmailTemplate.html.twig')
         // attach a file stream
         ->attachFromPath( $pdfFilepath );
 

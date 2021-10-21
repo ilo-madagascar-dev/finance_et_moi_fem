@@ -7,18 +7,31 @@
 	{# <link href= {{ asset("/css/admin.css") }} rel="stylesheet"> #}
 	<link href= {{ asset("/css/admin-dash.css") }} rel="stylesheet">
     <link href={{ asset('css/list.css') }} rel="stylesheet">
-
+    <link href={{ asset('css/sousCompteAdditionnalCss.css') }} rel="stylesheet">
+   
     <div class="dash-outliner">
         {% include "admin/admin-header.html.twig" %}
         <div class="dash-container sidebared">
             {% include "admin/components/sidebar.html.twig" %}
 
+
             {% if usersAccounts %}
             <div class="sub-accounts">
                 <h2 class="tête" f><img class="image" src={{ asset('images/icon/list-d.svg') }}>Sous-comptes</h2>
 
+                {% for message in app.flashes('success') %}
+                    <div class="messageContainer">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+                {% for message in app.flashes('danger') %}
+                    <div class="messageContainer">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
                 {% set i=0 %}
-                
                 {% for userAccount in usersAccounts %}
                     
                     <div class="bordur" onclick="move(event);" id={{ "b-" ~ i }}>
@@ -55,7 +68,7 @@
                             </div>
                         </div>
                         <div class="sousCompteLink pointer">
-                            <a href={{ path("modif_sous_compte", {id: userAccount.id}) }} class="pointer" id={{ "l-" ~ i}}>Editer le sous-compte <img class="link-pen" src={{ asset('images/icon/edit-pen-d.svg') }}></a>
+                            <a href={{ path("modif_sous_compte", {id: userAccount.id}) }} class="pointer" id={{ "l-" ~ i}}>Editer le sous-compte <img class="link-pen" src={{ asset('images/icon/edit-pen-d.svg') }}></a> {% if userAccount.user.active == false %}<span class="disabledSousCompteWriting"> Sous-compte désactivé </span>{% endif %}
                         </div>
                         <a href={{ path("saffiche", {id: userAccount.id}) }} class="invisible linktoIt" id={{ "l-" ~ i}}>Voir le sous-compte</a>
                     </div>
