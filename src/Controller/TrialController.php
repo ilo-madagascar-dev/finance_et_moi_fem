@@ -45,6 +45,10 @@ class TrialController extends AbstractController {
         $usersAbonnement = $user->getClient()->getAbonnement();
         
         $abonnement = $abonnementRepository->find(27);
+
+        $client = $clientRepository->find(28);
+
+        dd($client->getSousComptes()[0]->getUser()->getActive());
         
         //$abonnement = $abonnementRepository->findOneBy(['stripe_subscription_id' => "sub_1JkOjZDd9O5GRESHJmd2gvVw"]);
         //dd($abonnement);

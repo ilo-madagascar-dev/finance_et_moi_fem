@@ -586,6 +586,7 @@ class AdminController extends AbstractController
         $nouvelAbonnementPotentiel->setDateDebutAbonnement(new DateTime());
         $nouvelAbonnementPotentiel->setSousCompte($potentialClient);
         $nouvelAbonnementPotentiel->setTypeAbonnement($typeAbonnement);
+        $nouvelAbonnementPotentiel->setActif(true);
         //dd($nouvelAbonnementPotentiel);
         
         //$session->set('abonnementPotentiel', $nouvelAbonnementPotentiel);

@@ -57,6 +57,7 @@ class SubscriptionController extends AbstractController
         }*/
 
         $abonnement = $client->getAbonnement();
+        //dd($client->getSousComptes()->getValues()[0], $client->getSousComptes()->getValues()[0]->getAbonnement()->getStripeSubscriptionId());
 
         \Stripe\Stripe::setApiKey('sk_test_51JAyRkDd9O5GRESHwySMe7BscZHT8npvPTAnFRUUFzrUtxKsytTSetDABLsB74Np0ODjjhY26VpkZIJXiwvkxB7a00G4pDH3n1');
 
@@ -64,28 +65,30 @@ class SubscriptionController extends AbstractController
 
         $subscription->cancel();
         
-        //Désabonnement des sous-compte
-        $sousComptesClient = $client->getSousComptes()->getValues();
         $abonnement->setActif(false);
         $userInDatabase->setActive(false);
         $this->em->persist($userInDatabase);
-
+        
         $this->em->flush();
         
-        /*foreach ($sousComptesClient as $uniqueSousCompteClient) {
+        //Désabonnement des sous-compte
+        $sousComptesClient = $client->getSousComptes()->getValues();
+
+        foreach ($sousComptesClient as $uniqueSousCompteClient) {
             $sousComptesClientAbonnement = $uniqueSousCompteClient->getAbonnement();
             
             if ($uniqueSousCompteClient->getUser()->getActive() !== false) {
-                \Stripe\Stripe::setApiKey('sk_test_51JAyRkDd9O5GRESHwySMe7BscZHT8npvPTAnFRUUFzrUtxKsytTSetDABLsB74Np0ODjjhY26VpkZIJXiwvkxB7a00G4pDH3n1');
+                //\Stripe\Stripe::setApiKey('sk_test_51JAyRkDd9O5GRESHwySMe7BscZHT8npvPTAnFRUUFzrUtxKsytTSetDABLsB74Np0ODjjhY26VpkZIJXiwvkxB7a00G4pDH3n1');
 
                 $sousCompteSubscription = \Stripe\Subscription::retrieve($sousComptesClientAbonnement->getStripeSubscriptionId());
                 $sousCompteSubscription->cancel();
                 $uniqueSousCompteClient->getUser()->setActive(false);
             }
+
             $this->em->persist($sousComptesClientAbonnement);
             $this->em->persist($uniqueSousCompteClient);
             $this->em->flush();
-        }*/
+        }
         
         //dd($subscription);
 

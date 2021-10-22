@@ -37,6 +37,9 @@ class RegistrationController extends AbstractController
      */
     public function index(Request $request, SessionInterface $session, UserRepository $userRepository, TypeAbonnementRepository $typeAbonnementRepository): Response
     {  
+        if ($this->getUser()) {
+            return $this->redirectToRoute('dash');
+        }
         /**
          * Récupération des price_ID dans le fichier .env 
          * */
