@@ -6,11 +6,12 @@
 {% block body %}
 {% include "mqbaka_home/header.html.twig" %}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/css/accueil.css" rel="stylesheet">
 <link href="/css/serviceRachat.css" rel="stylesheet">
 <h2 id="titre">Augmenter votre pouvoir d'achat</h2>
 <img src="/images/avant-apres.png" class="imgcenter">
 <div class="container">
-    <div class="grid2">
+    <div class="grids2">
         <div class="palet">
             <h4>Le rachat de crédits consiste à regrouper tous vos crédits:</h4>
             <div class="margeG">
@@ -43,7 +44,7 @@
     <hr class="Hr">
     <div style="height: 50px"></div>
 
-    <div class="grid2">
+    <div class="grids2">
         <img class="imgG" src="/images/13.png">
         <div class="palet">
             <h4>Les bonnes raisons d'opter pour le rachat de crédit:</h4>
@@ -76,7 +77,7 @@
     <hr class="Hr">
     <div style="height: 50px"></div>
 
-    <div class="grid2">
+    <div class="grids2">
         <div class="palet">
             <h3>Les raisons essentielles d’un rachat de crédits</h3>
             <div class="margeG">
@@ -90,7 +91,7 @@
                 </div>
                 <div class="gridIntern3">
                     <img class="imgcheck" src="/images/icon/check.svg">
-                    <p>Envisager une accession à la</p>
+                    <p>Envisager une accession à la propieté</p>
                 </div>
                 <div class="gridIntern3">
                     <img class="imgcheck" src="/images/icon/check.svg">
@@ -134,5 +135,98 @@
         </div>
     </div>
 </div>
+
+    <div class="video-bg">
+    	<img class="image6" src={{ asset('images/video-bg.png') }}>
+	</div>
+
+	<div class="main">
+		<div class="titre2">
+			<h1 class="h1">Financez tous types de projets !</h1>
+		</div>
+
+		<div class="grid-container6">
+			<div class="lecredit">
+				<img src={{ asset('images/image_apropos/leCreditPourTous.png') }}>
+			</div>
+			<div>
+				<p class="paraghaphe">Vous avez des projets à réaliser, des ambitions ! <br>
+					Nous sommes là pour vous conseiller et vous épauler.
+				</p>
+				<a href={{path('page_tarifs')}}><button  class="full-blue">Rejoignez-nous!</button></a>
+			</div>
+		</div>
+
+		<div class="titre-3">
+			<h1 class="ttr">Vos clients n'ont pas obtenu un accord favorable de la part de nos partenaires bancaires?</h1>
+		</div>
+
+		<div class="grid3">
+			<div>
+				<img class="image7" src={{ asset('images/image_apropos/Capture3.png') }}>
+			</div>
+			<div>
+				<div class="bordercapture">
+					<p class="paraghaphe2">
+						Pensez et proposez à vos clients un rachat, regroupement de crédits pour diminuer et réduire leur taux d'endettement et repartir sur de nouveaux projets !
+					</p>
+				</div>
+			</div>
+		</div>
+		
+		<div class="bordercapture2">
+			<p class="paraghaphe2">
+				Avec FEM vous ne passez jamais à côté d'une vente, nous recherchons pour vous toutes les solutions possibles et adaptées afin de transformer chacun de vos prospects en clients.
+			</p>
+		</div>
+
+		<div class="ensavoirplus">
+			<a href={{path('page_four')}} ><button class="full-blue" style="width: unset">En savoir plus</button></a>
+		</div>
+		<div class="section">
+			<h1 class="petit_titre">
+				Nos partenaires Rachat, regroupement de Crédits, <br> Prêt Immobilier
+			</h1>
+			
+			<p class="para1">
+				Prêts pour des solutions, réalisez les projets de vos clients ! <br> Le crédit n'a jamais été aussi simple ?
+			</p>
+			
+			<p class="para2">Plus besoin d'ORIAS pour proposer du financement, F E M s'occupe de tout !</p>
+		</div>
+
+		<div class="btn-parti">
+			<div class="gridcheck">
+				<div> <img src={{ asset('images/icon/check.svg') }}></div>
+				<div> <p class="para3"> Convertissez vos ventes plus rapidement grâce aux pré-accords instantanés.</p></div>
+			</div>
+			<div class="gridcheck">
+				<div> <img src={{ asset('images/icon/check.svg') }}></div>
+				<div> <p class="para3">Des accords de principe en quelques secondes</p></div>
+			</div>
+			<div class="gridcheck">
+				<div> <img src={{ asset('images/icon/check.svg') }}></div>
+				<div> <p class="para3">Equipez votre entreprise du module de financement de F.E.M via votre ordinateur, tablette, mobile. </p></div>
+			</div>
+			<a href={{path('page_tarifs')}}><button class="full-blue" style="width: unset">C'est parti !</button></a>
+		</div>
+		<div class="gridimage">
+			<div><img class="img" src={{ asset('images/image_apropos/6.png') }}></div>
+			<div><img class="img" src={{ asset('images/image_apropos/13.png') }}></div>
+			<div><img class="img" src={{ asset('images/image_apropos/7.png') }}></div>
+		</div>
+		<div class="gridimage">
+			<div><img class="img" src={{ asset('images/image_apropos/12.png') }}></div>
+			<div><img class="img" src={{ asset('images/image_apropos/8.png') }}></div>
+			<div><img class="img" src={{ asset('images/image_apropos/10.png') }}></div>
+			
+		</div>
+		<div class="gridimage">
+			<div><img class="img" src={{ asset('images/image_apropos/9.png') }}></div>
+			<div><img class="img" src={{ asset('images/image_apropos/11.png') }}></div>
+			<div></div>
+		</div>
+	</div>
+
 {% include "mqbaka_home/footer.html.twig" %}
 {% endblock %}

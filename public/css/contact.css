@@ -94,6 +94,26 @@ body{
   
   @media only screen and (max-width: 450px){
     .main-content{
-      margin: 1em
+      margin: auto;
+      padding: 2em;
+    }
+
+    /* .contact-input{
+        max-width: calc(100vw - 4em);
+    } */
+
+    .contact_submit {
+        float: unset;
+        width: 10em;
+        margin: 1.5em auto;
+        border: none;
+        border-radius: 9px;
+        background-color: var(--dark-01);
+        color: var(--bg--02);
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        align-items: center;
     }
   }

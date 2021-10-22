@@ -77,6 +77,8 @@
 p.sub{
     color: var(--light-01);
     text-align: center;
+    font-size: 24px;
+    font-weight: bold;
 }
 
 .advantages h4{

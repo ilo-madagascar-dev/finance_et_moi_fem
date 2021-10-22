@@ -53,7 +53,7 @@ img[alt='orias-logo']{
 }
 
 .mini-bloc p{
-    text-align: left;
+    text-align: center;
 }
 
 .logo-label{
@@ -112,6 +112,11 @@ img[alt='orias-logo']{
     font-size: 1.5em;
     font-weight: 600;
     margin: 1em 0;
+    color: var(--light-01);
+}
+
+.b-sub-title p{
+    text-decoration: none;
     color: var(--light-01);
 }
 

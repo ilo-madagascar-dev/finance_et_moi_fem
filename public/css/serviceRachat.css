@@ -7,13 +7,15 @@
     width: 85%;
     margin: auto;
     display: block;
+    margin-bottom: 2em;
 }
 #titre{
     color: var(--dark-01);
     text-align: center;
     margin-top: 20px;
+    font-size: 28px;
 }
-.grid2{
+.grids2{
     display: grid;
     grid-template-columns: auto auto;
     grid-column-gap: 60px;
@@ -140,7 +142,7 @@
     }
 }
 @media (max-width: 900px){
-    .grid2{
+    .grids2{
         grid-template-columns: auto;
     }
     .palet{
@@ -231,6 +233,9 @@
     }
     .gridIntern3 p{
         font-size: 15px;
+    }
+    #titre{
+        font-size: 20px;
     }
 }
 @media (min-width: 576px){
