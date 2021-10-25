@@ -17,6 +17,7 @@
 
 .simple-rounded{
     width: 100%;
+    text-align: center;
 }
 
 .rounded{
@@ -26,6 +27,7 @@
     border-radius: 1.2em;
     margin: auto;
     width: max-content;
+    margin-bottom: .5em;
 }
 
 .double-rounded{
@@ -49,6 +51,17 @@
     height: max-content;
 }
 
+.bank-logos2{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    row-gap: .5em;
+}
+
+.bank-logos2>*{
+    width: 22%;
+    height: max-content;
+}
 .check-lister{
     margin-top: 2.5em;
 }
@@ -120,9 +133,32 @@ p.sub{
     color: var(--white--ish-01);
 }
 
+.box[one] {
+    position: relative;
+    left: calc(100% + var(--boxes-gap)/2);
+    transform: translate(-50%);
+}
+
 .slanted-box *{
     background: transparent;
 }
+
+.loha{
+    width: 100%;
+    --angle: 3deg;
+    transform: rotate(calc(-1 * var(--angle)));
+    background-color: #1c9fd9;
+}
+
+
+
+.loha h3{
+    padding: 1em;
+    text-align: center;
+    position: relative;
+}
+
+
 
 .slanted-inner{
     width: max-content;
@@ -440,6 +476,10 @@ p.sub{
     left: 2em;
 }
 
+td[tda]{
+    font-weight: bold;
+}
+
 /*
                 L e t ' s   g e t   r e s p o n s i v e !!!
 */
@@ -578,6 +618,11 @@ p.sub{
     }
     .im-over-txt img{
         margin-top: 0;
+    }
+
+    .box[one] {
+        position: static;
+        transform: none;
     }
 }
 
