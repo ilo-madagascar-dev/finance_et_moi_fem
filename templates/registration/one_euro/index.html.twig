@@ -1,0 +1,291 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Finance et moi -- Inscription{% endblock %}
+{% block stylesheets %}
+<link href={{ asset('css/stylesheet.css') }} rel="stylesheet">
+<link href={{ asset('css/colors.css') }} rel="stylesheet">
+{% endblock %}
+
+
+{% block body %}
+<link rel="stylesheet" href={{ asset('css/registration.css') }}>
+
+{% block header %}
+    {% include "mqbaka_home/header-compact.html.twig" %}
+{% endblock %}
+
+<div class="form-register">
+    <div class="background">
+        <img src={{ asset('images/favicon.png') }} alt="">
+    </div>
+    <div class="inner-bg">
+        <div class="the-img">
+            <img src={{ asset('images/vectors/19.png') }} alt="">
+        </div>
+        
+        {{ form_start(form, {'attr': {'id': 'registration-form'}}) }}
+        
+        {#% Flash message %#}
+        {% for message in app.flashes('danger') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+        
+        <!-- Data to test with Javascript -->
+        <div class="js-price-id" data-price-id="{{ priceId ? priceId : null }}"></div>
+        <div class="form-container">
+                <div class="double-line">
+                    <div class="line">
+                        {{ form_widget(form.nom) }}
+                    </div>
+                    <div class="line">
+                        {{ form_widget(form.prenom) }}
+                    </div>
+                </div>
+
+                <div class="double-line">
+                    <div class="line">
+                        {{ form_widget(form.nomEntreprise) }}
+                    </div>
+                    <div class="line">
+                        {{ form_widget(form.email) }}
+                    </div>
+                </div>
+
+                <div class="double-line">
+                    <div class="line">
+                        {{ form_widget(form.telMobile) }}
+                    </div>
+                    <div class="line">
+                        {{ form_widget(form.telFixe) }}
+                    </div>
+                </div>
+
+                <div class="double-line">
+                    <div class="line">
+                        {{ form_widget(form.password.first) }}
+                    </div>
+                    <div class="line">
+                        {{ form_widget(form.password.second) }}
+                    </div>
+                </div>
+
+                <div class="double-line">
+                    <div class="line">
+                        {{ form_widget(form.address) }}
+                    </div>
+                    <div class="line">
+                        {{ form_widget(form.postalCode) }}
+                    </div>
+                    
+                </div>
+
+                <div class="double-line">
+                    <div class="line">
+                        {{ form_widget(form.town) }}
+                    </div>
+                    <div class="line">
+                        {{ form_widget(form.siren) }}
+                    </div>
+                </div>
+                <div class="line" style="text-align:center;">
+                    {{ form_row(form.type_abonnement) }}
+                </div>
+                <div class="line" style="text-align:center;">
+                    {{ form_row(form.statutEntreprise) }}
+                </div>
+                <button type="submit" id="registrationSubmit">Inscription</button>
+        </div>
+        {{ form_end(form) }}
+
+    </div>
+</div>
+    <div id="sm" style=" display: none;">{{ STARTER_MENSUEL_PRICE_ID }}</div>
+    <div id="sa" style=" display: none;">{{ STARTER_ANNUEL_PRICE_ID }}</div>
+    <div id="em" style=" display: none;">{{ ESSENTIEL_MENSUEL_PRICE_ID }}</div>
+    <div id="ea" style=" display: none;">{{ ESSENTIEL_ANNUEL_PRICE_ID }}</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        
+
+        /* document.addEventListener('DOMContentLoaded', function() {
+
+            const priceIdElement = document.querySelector('.js-price-id');
+            const priceId = priceIdElement.dataset.priceId;
+            const selectOptions = document.getElementsByTagName('option');
+            const optionsArray = Array.from(selectOptions);
+
+            for (let option of optionsArray) {
+                if(option.value == priceId){
+                    option.selected='selected';
+                }
+            }
+        }); */
+    </script>
+    <script>
+        /* document.addEventListener('DOMContentLoaded',() => {
+
+            let sm = document.querySelector('#sm').innerText;
+            let sa = document.querySelector('#sa').innerText;
+            let em = document.querySelector('#em').innerText;
+            let ea = document.querySelector('#ea').innerText;
+
+            const priceIdElement = document.querySelector('.js-price-id');
+            const priceId = priceIdElement.dataset.priceId;
+            const client_type_abonnement = document.querySelector('#client_type_abonnement');
+            
+            const realFileBtn = document.querySelector('#client_identityProofFile');
+            const customBtn = document.querySelector('#custom-identityProofFile');
+            const identityProofFilename = document.querySelector('#custom-identityProofFilename');
+
+            const client_extraitRCSFile = document.querySelector('#client_extraitRCSFile');
+            const extraitRCSFileBtn = document.querySelector('#extraitRCSFile');
+            const extraitRCSfilename = document.querySelector('#extraitRCSfilename');
+
+            const client_ribFile = document.querySelector('#client_ribFile');
+            const ribFileButton = document.querySelector('#ribFileButton');
+            const ribFileName = document.querySelector('#ribFileName');
+
+            const client_liasseFiscaleFile = document.querySelector('#client_liasseFiscaleFile');
+            const liasseFileButton = document.querySelector('#liasseFileButton');
+            const liasseFileName = document.querySelector('#liasseFileName');
+
+            const client_legalStatusFile = document.querySelector('#client_legalStatusFile');
+            const legalstatusFileButton = document.querySelector('#legalstatusFileButton');
+            const legalstatusFileName = document.querySelector('#legalstatusFileName');
+
+            console.log(priceId);
+
+            const client_statutEntreprise = document.querySelector('#client_statutEntreprise');
+
+            const everyLineEssentiel = Array.from(document.querySelectorAll('.line-essentiel'));*/
+
+            /* Apparition ou non du statut légal de l'entreprise */
+            /* const legalStatusLoaded = document.querySelector('#client_statutEntreprise');
+
+            if (legalStatusLoaded.value == 'Entreprise individuelle (EI)') {
+                document.querySelector('#legalstatusContainer').style.display='none';
+            } else {
+               document.querySelector('#legalstatusContainer').style.display='block'; 
+            }
+
+            //Affichage du champ statut juridique en fonction du statut juridique choisi dans le select
+            client_statutEntreprise.addEventListener('change', () => {
+                //let legalStatusSelected = document.querySelector('#client_statutEntreprise');
+
+                if (legalStatusLoaded.value == 'Entreprise individuelle (EI)') {
+                    document.querySelector('#legalstatusContainer').style.display='none';
+                } else {
+                   document.querySelector('#legalstatusContainer').style.display='block'; 
+                }
+            })
+
+            //Affichage des champs pièces jointes en fonction de l'abonnement choisi auparavant    
+            if(priceId == em || priceId == ea){
+                everyLineEssentiel.forEach(element => {
+                    element.style.display = 'inline';
+                });
+                //document.querySelector('.line-essentiel').style.display = 'inline';
+                //client_identityProofFile.required = true;
+            } else if(priceId == sm || priceId == sa) {
+                everyLineEssentiel.forEach(element => {
+                    element.style.display = 'none';
+                });
+                //document.querySelector('.line-essentiel').style.display = 'none';
+                //client_identityProofFile.required = false;
+            } else {
+                everyLineEssentiel.forEach(element => {
+                    element.style.display = 'none';
+                });
+                //document.querySelector('.line-essentiel').style.display = 'none';
+                //client_identityProofFile.required = false;
+            }
+
+            //"Mise en forme du champ pièce d'identité. "   
+            customBtn.addEventListener('click', () => {
+                realFileBtn.click();
+            });
+
+            realFileBtn.addEventListener('change', () => {
+                if (realFileBtn.value) {
+                    identityProofFilename.innerHTML = realFileBtn.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+                } else {
+                    identityProofFilename.innerHTML = 'Aucun fichier';
+                }
+            })
+            
+            //"Mise en forme du champ extrait RCS. "   
+            extraitRCSFileBtn.addEventListener('click', () => {
+                client_extraitRCSFile.click();
+            });
+
+            client_extraitRCSFile.addEventListener('change', () => {
+                if (client_extraitRCSFile.value) {
+                    extraitRCSfilename.innerHTML = client_extraitRCSFile.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+                } else {
+                    extraitRCSfilename.innerHTML = 'Aucun fichier';
+                }
+            })
+
+            //"Mise en forme du champ ribFile. "   
+            ribFileButton.addEventListener('click', () => {
+                client_ribFile.click();
+            });
+
+            client_ribFile.addEventListener('change', () => {
+                if (client_ribFile.value) {
+                    ribFileName.innerHTML = client_ribFile.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+                } else {
+                    ribFileName.innerHTML = 'Aucun fichier';
+                }
+            })
+
+            //"Mise en forme du champ liasseFiscaleFile. "   
+            liasseFileButton.addEventListener('click', () => {
+                client_liasseFiscaleFile.click();
+            });
+
+            client_liasseFiscaleFile.addEventListener('change', () => {
+                if (client_liasseFiscaleFile.value) {
+                   liasseFileName.innerHTML = client_liasseFiscaleFile.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+                } else {
+                    liasseFileName.innerHTML = 'Aucun fichier';
+                }
+            })
+
+            //Mise en forme du champ legalStatusFile.  
+            legalstatusFileButton.addEventListener('click', () => {
+                client_legalStatusFile.click();
+            });
+
+            client_legalStatusFile.addEventListener('change', () => {
+                if (client_legalStatusFile.value) {
+                     legalstatusFileName.innerHTML = client_legalStatusFile.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+                } else {
+                     legalstatusFileName.innerHTML = 'Aucun fichier';
+                }
+            })
+            
+            //Affichage des champs pièces jointes en fonction de la valeur du select choisie sur la page    
+            client_type_abonnement.addEventListener('change', () => {
+                if(client_type_abonnement.value == em || client_type_abonnement.value == ea){
+                    everyLineEssentiel.forEach(element => {
+                        element.style.display = 'inline';
+                    });
+                    //document.querySelector('.line-essentiel').style.display = 'inline';
+                    //client_identityProofFile.required = true;
+                } else if(client_type_abonnement.value == sm || client_type_abonnement.value == sa) {
+                    everyLineEssentiel.forEach(element => {
+                        element.style.display = 'none';
+                    });
+                    //document.querySelector('.line-essentiel').style.display = 'none';
+                    //client_identityProofFile.required = false;
+                };
+            });
+        }); */
+    </script>
+{% endblock %}

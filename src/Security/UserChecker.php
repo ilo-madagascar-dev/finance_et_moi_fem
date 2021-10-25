@@ -15,7 +15,7 @@ class UserChecker implements UserCheckerInterface
         }
 
         if ($user->getActive() == false) {
-            throw new CustomUserMessageAuthenticationException('Votre compte est désactivé; probablement du fait d\'un désabonnent. Si ce n\'est pas le cas, veuillez contacter l\'administrateur du site.');
+            throw new CustomUserMessageAuthenticationException('Votre compte est désactivé, probablement du fait d\'un désabonnement. Si ce n\'est pas le cas, veuillez contacter l\'administrateur du site.');
         }
         
         // user is deleted, show a generic Account Not Found message.
