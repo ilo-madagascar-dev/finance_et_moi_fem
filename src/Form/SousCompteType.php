@@ -29,10 +29,10 @@ class SousCompteType extends AbstractType
                 'placeholder' => 'Numéro mobile'
             )])
             ->add('nomEntreprise', TextType::class, ['attr' => array(
-                'placeholder' => 'Nom du filiale'
+                'placeholder' => 'Nom du sous-compte'
             )])
             ->add('addresseEntreprise', TextType::class, ['attr' => array(
-                'placeholder' => 'Addresse du filiale'
+                'placeholder' => 'Addresse du sous-compte'
             )])
             ->add('codePostal', TextType::class, ['attr' => array(
                 'placeholder' => 'Code postal'
