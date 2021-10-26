@@ -71,24 +71,49 @@
         </table>
         <table id="client-det">
             <tr>
-                <td o="">Nom de l'entreprise </td>
+                <td o=""> Nom de l'entreprise </td>
                 <td>:</td>
                 <td l=""> {{ client.client.nomEntreprise }}</td>
             </tr>
             <tr>
-                <td o="">Nom de la filiale </td>
+                <td o=""> Addresse </td>
                 <td>:</td>
-                <td l=""> {{ client.nomEntreprise }}</td>
+                <td l=""> {{ client.client.address }}</td>
             </tr>
             <tr>
-                <td o="">Ville</td>
+                <td o="">Code Postal </td>
                 <td>:</td>
-                <td l="">{{ client.ville }}</td>{# To change later when the server part ready #}
+                <td l=""> {{ client.client.postalCode }}</td>
+            </tr>
+            <tr>
+                <td o=""> Ville </td>
+                <td>:</td>
+                <td l=""> {{ client.client.town }}</td>
+            </tr>
+            <tr>
+                <td o="" style="padding-top:20px;">Nom </td>
+                <td style="padding-top:20px;">:</td>
+                <td l="" style="padding-top:20px;"> {{ client.nom }}</td>
+            </tr>
+            <tr>
+                <td o="">Prenom </td>
+                <td>:</td>
+                <td l=""> {{ client.prenom }}</td>
+            </tr>
+            <tr>
+                <td o="">Addresse </td>
+                <td>:</td>
+                <td l=""> {{ client.addresseEntreprise }}</td>
             </tr>
             <tr>
                 <td o="">Code postal</td>
                 <td>:</td>
                 <td l="">{{ client.codePostal }}</td>{# To change later when the server part ready #}
+            </tr>
+            <tr>
+                <td o="">Ville</td>
+                <td>:</td>
+                <td l="">{{ client.ville }}</td>{# To change later when the server part ready #}
             </tr>
         </table>
         <table id="fac-content">
