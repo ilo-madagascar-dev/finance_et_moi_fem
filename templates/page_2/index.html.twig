@@ -15,7 +15,7 @@
 <meta name="viewport" content="widht=device-widht , initial-scale=1.0">
     <link href={{ asset('css/stylesheet.css') }} rel="stylesheet">
     <link href={{ asset('css/colors.css') }} rel="stylesheet">
-    <link href={{ asset('css/accueil.css') }} rel="stylesheet">
+    {# <link href={{ asset('css/accueil.css') }} rel="stylesheet"> #}
     <link href={{ asset('css/app.css') }} rel="stylesheet">
 <div class="grid-container">
     <div class="img-grids">
@@ -90,7 +90,8 @@
                 <div>
                     <p class="para">Le prêt personnel permet de disposer librement de la somme
                     empruntée : aucun justificatif d’utilisation n’est à fournir. 
-                    <br> Ce prêt peut permettre de financer intégralement un ou plusieurs
+                    <br/>
+                    <br/> Ce prêt peut permettre de financer intégralement un ou plusieurs
                     achat(s) (voiture, équipement ménager, etc) ou de répondre à
                     un besoin de trésorerie.</p>
                 </div>
@@ -170,7 +171,7 @@
 </div>
 
 
-<div class="video-bg">
+{# <div class="video-bg">
     	<img class="image6" src={{ asset('images/video-bg.png') }}>
 	</div>
 
@@ -285,7 +286,7 @@
 			<div><img class="img" src={{ asset('images/image_apropos/11.png') }}></div>
 			<div></div>
 		</div>
-	</div>
+	</div> #}
 
 {% block footer %}
 {% include "mqbaka_home/footer.html.twig" %}

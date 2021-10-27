@@ -69,7 +69,7 @@
     margin: auto;
     margin-bottom: 10px;
 }
-.grid3{
+.grids3{
     display: grid;
     grid-template-columns: 40% 60%;
     grid-column-gap: 0px;
@@ -238,7 +238,7 @@
     .downl p {
         font-size: 15px;
     }
-    .grid3{
+    .grids3{
         grid-template-columns: auto;
     }
     .bigPaletD {

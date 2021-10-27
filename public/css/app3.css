@@ -12,12 +12,12 @@
 .image{
 	width: 100%;
 }
-.para1{
+.paras1{
 	font-size: 20px;
 	color: var(--dark-01);
 	margin: 0px 10px 0px 132px;
 }
-.para2{
+.paras2{
 	font-size: 20px;
 	padding-top: 126px;
 	color: var(--dark-01);
@@ -37,7 +37,7 @@ color: var(--dark-01);
 padding: 5px;
 background: #ffffff82;
 }
-.para3{
+.paras3{
 	padding: 10px;
 	background: #ffffff82;
 }
@@ -96,7 +96,7 @@ background: transparent;
     grid-template-columns: auto;
     padding: 40px 50px;
 }
-.para2 {
+.paras2 {
     padding-top: 16px;
 }
 .grid-container2 {
@@ -125,10 +125,10 @@ background: transparent;
 }
 }
 @media (max-width: 500px){
-	.para1{
+	.paras1{
 		margin: auto;
 	}
-	.para2{
+	.paras2{
 		margin: auto;
 	}
 }
