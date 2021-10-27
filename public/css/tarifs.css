@@ -21,6 +21,7 @@
 h1.block{
     color: var(--dark-01);
     text-align: center;
+    font-size: 30px;
 }
 p.deal{
     text-align: center;
@@ -76,6 +77,7 @@ p.deal{
 
 .ilany-p{
     text-align: center;
+    font-weight: bold;
 }
 
 .switcher{
