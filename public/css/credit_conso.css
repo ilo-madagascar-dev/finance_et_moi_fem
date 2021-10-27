@@ -77,9 +77,8 @@
     content: '';
     background-image: url(../images/icon/check.svg);
     display: inline-block;
-    width: unset;
+    width: 19.2px;
     height: 19.2px;
-    aspect-ratio: 1;
     background-position: center;
     background-size: contain;
     position: absolute;
