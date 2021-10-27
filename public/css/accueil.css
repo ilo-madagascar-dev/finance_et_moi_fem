@@ -276,12 +276,17 @@
 }
 .grand_border{
     border-radius: 20px 20px;
-border-style: solid;
-border-width: 1px;
-margin: 0px 49px 0px 49px;
-color: var(--dark-01);
-padding: 10px;
+    border-style: solid;
+    border-width: 1px;
+    margin: 0 49px 0px 49px;
+    color: var(--dark-01);
+    padding: 10px;
 }
+
+#grand_border_2{
+  margin-top: 2em;
+}
+
 .grid1{
   display: grid;
   grid-template-columns: 35% 35% 35%;
