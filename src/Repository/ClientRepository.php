@@ -34,13 +34,13 @@ class ClientRepository extends ServiceEntityRepository
         }
 
         if ($search->getTown()) {
-            $query->andWhere('c.town = :town')
-            ->setParameter('town', $search->getTown());
+            $query->andWhere('c.town LIKE :town')
+            ->setParameter('town', '%' . $search->getTown() .'%');
         }
 
         if ($search->getPostalCode()) {
-            $query->andWhere('c.postalCode = :postalCode')
-            ->setParameter('postalCode', $search->getPostalCode());
+            $query->andWhere('c.postalCode LIKE :postalCode')
+            ->setParameter('postalCode', '%' . $search->getPostalCode() . '%');
         }
         
         $query = $query->getQuery()->getResult();

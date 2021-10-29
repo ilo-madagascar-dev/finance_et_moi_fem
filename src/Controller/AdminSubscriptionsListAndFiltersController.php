@@ -40,9 +40,9 @@ class AdminSubscriptionsListAndFiltersController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()){
             $everyClient = $this->clientRepository->findAllClientsResearched($search);
+            dd($everyClient);
         }
         
-        dd($everyClient);
 
         return $this->render('admin_subscriptions_list_and_filters/index.html.twig', [
             'controller_name' => 'AdminSubscriptionsListAndFiltersController',
