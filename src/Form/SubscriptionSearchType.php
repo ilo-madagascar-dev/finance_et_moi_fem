@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\SubscriptionSearch;
+use App\Entity\TypeAbonnement;
 use Doctrine\DBAL\Types\StringType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -16,6 +17,8 @@ class SubscriptionSearchType extends AbstractType
     {
         $builder
             ->add('subscription', EntityType::class, [
+                'class' => TypeAbonnement::class,
+                'choice_label' => 'label',
                 'required' => false,
                 'label' => false,
                 'attr' => [
@@ -44,7 +47,12 @@ class SubscriptionSearchType extends AbstractType
         $resolver->setDefaults([
             'data_class' => SubscriptionSearch::class,
             'method' => 'get',
-            'csrfprotection' => false
+            'csrf_protection' => false
         ]);
+    }
+
+    public function getBlockPrefix()
+    {
+        return '';
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\SubscriptionSearch;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -25,6 +26,26 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
      */
+    public function findAllUsersResearched(SubscriptionSearch $search)
+    {
+        $query = $this->createQueryBuilder('u');
+
+        //Tarina jointures
+        if ($search->getSubscription()) {
+            /* $query->andWhere('u.abonnement = :val')
+            ->setParameter('val', $value); */
+        }
+
+        if ($search->getSubscription()) {
+            /* $query->andWhere('u.abonnement = :val')
+            ->setParameter('val', $value); */
+        }
+        
+        $query = $query->getQuery()->getResult();
+
+        return $query;
+    }
+
     public function upgradePassword(UserInterface $user, string $newHashedPassword): void
     {
         if (!$user instanceof User) {
@@ -35,6 +56,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->persist($user);
         $this->_em->flush();
     }
+    
 
     // /**
     //  * @return User[] Returns an array of User objects
