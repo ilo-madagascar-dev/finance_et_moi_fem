@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\SubscriptionSearch;
+use App\Form\SubscriptionSearchType;
 use App\Repository\AbonnementRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,15 +20,18 @@ class AdminSubscriptionsListAndFiltersController extends AbstractController
     /**
      * @Route("/admin/subscription/list/and/filters", name="admin_subscription_list_and_filters")
      */
-    public function index(UserRepository $userRepository): Response
+    public function index(Request $request, UserRepository $userRepository): Response
     {
         $search = new SubscriptionSearch();
+        $form = $this->createForm(SubscriptionSearchType::class, $search);
+        $form->handleRequest($request);
 
         $everyUser = $userRepository->findAll();
 
         return $this->render('admin_subscriptions_list_and_filters/index.html.twig', [
             'controller_name' => 'AdminSubscriptionsListAndFiltersController',
-            'abonnements' => $everyUser
+            'abonnements' => $everyUser,
+            'form' => $form->createView()
         ]);
     }
 
