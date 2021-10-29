@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Client;
 use App\Entity\SubscriptionSearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -26,11 +27,11 @@ class ClientRepository extends ServiceEntityRepository
     public function findAllClientsResearched(SubscriptionSearch $search)
     {
         $query = $this->createQueryBuilder('c');
-
+        
         //Tarina jointures
         if ($search->getSubscription()) {
-            /* $query->andWhere('u.abonnement = :val')
-            ->setParameter('val', $value); */
+            $query = $query->join('c.abonnement', 'ca', Join::WITH, $query->expr()->eq('ca.typeAbonnement', ':typeAbonnement'));
+            $query = $query->setParameter(':typeAbonnement', $search->getSubscription());
         }
 
         if ($search->getTown()) {

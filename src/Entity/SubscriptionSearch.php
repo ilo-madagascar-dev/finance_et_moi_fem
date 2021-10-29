@@ -19,12 +19,12 @@ class SubscriptionSearch
      */
     private $postalCode;
 
-    public function getSubscription():?Abonnement
+    public function getSubscription()
     {
         return $this->subscription;
     }
 
-    public function setSubscription(Abonnement $subscription)
+    public function setSubscription($subscription)
     {
         $this->subscription = $subscription;
 
