@@ -59,7 +59,7 @@ class SubscriptionController extends AbstractController
         $abonnement = $client->getAbonnement();
         //dd($client->getSousComptes()->getValues()[0], $client->getSousComptes()->getValues()[0]->getAbonnement()->getStripeSubscriptionId());
 
-        \Stripe\Stripe::setApiKey('sk_test_51JAyRkDd9O5GRESHwySMe7BscZHT8npvPTAnFRUUFzrUtxKsytTSetDABLsB74Np0ODjjhY26VpkZIJXiwvkxB7a00G4pDH3n1');
+        \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET']);
 
         $subscription = \Stripe\Subscription::retrieve($abonnement->getStripeSubscriptionId());
 
@@ -137,7 +137,7 @@ class SubscriptionController extends AbstractController
         }
         $abonnement = $sousCompte->getAbonnement();
 
-        \Stripe\Stripe::setApiKey('sk_test_51JAyRkDd9O5GRESHwySMe7BscZHT8npvPTAnFRUUFzrUtxKsytTSetDABLsB74Np0ODjjhY26VpkZIJXiwvkxB7a00G4pDH3n1');
+        \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET']);
 
         $subscription = \Stripe\Subscription::retrieve($abonnement->getStripeSubscriptionId());
 
