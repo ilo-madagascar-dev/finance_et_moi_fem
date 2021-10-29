@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Client;
+use App\Entity\SubscriptionSearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +18,34 @@ class ClientRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Client::class);
+    }
+
+    /**
+     * Used to upgrade (rehash) the user's password automatically over time.
+     */
+    public function findAllClientsResearched(SubscriptionSearch $search)
+    {
+        $query = $this->createQueryBuilder('c');
+
+        //Tarina jointures
+        if ($search->getSubscription()) {
+            /* $query->andWhere('u.abonnement = :val')
+            ->setParameter('val', $value); */
+        }
+
+        if ($search->getTown()) {
+            $query->andWhere('c.town = :town')
+            ->setParameter('town', $search->getTown());
+        }
+
+        if ($search->getPostalCode()) {
+            $query->andWhere('c.postalCode = :postalCode')
+            ->setParameter('postalCode', $search->getPostalCode());
+        }
+        
+        $query = $query->getQuery()->getResult();
+
+        return $query;
     }
 
     // /**
