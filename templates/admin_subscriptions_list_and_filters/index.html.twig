@@ -59,10 +59,10 @@
                             <table class="agence">
                                 <thead>
                                     <tr>
-                                        <th>Nom & prenom</th>
                                         <th>Agence <br>  </th>
                                         <th>Adresse</th>
-                                        <th>Coordonnées</th>
+                                        <th>email</th>
+                                        <th>télephone</th>
                                         <th>Type d'abonnement</th>
                                         <th>debut de l'abonnement</th>
                                     </tr>
@@ -70,7 +70,6 @@
                                 <tbody>
                                     {% for client in clients %}
                                         <tr>
-                                            <td>{{ client.prenom }} {{ client.nom }}</td>
                                             <td>{{ client.nomEntreprise }}</td>
                                             <td>
                                                 {{ client.address }} </br> 
@@ -78,6 +77,8 @@
                                             </td>
                                             <td>
                                                 {{ client.email }}<br>
+                                            </td>
+                                            <td>
                                                 {{ client.telMobile }}
                                             </td>
                                             <td>
