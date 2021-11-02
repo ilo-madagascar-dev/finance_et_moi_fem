@@ -1,0 +1,86 @@
+{% extends 'mqbaka_home/index.html.twig' %}
+
+{% block title %}Tableau de bord - Admin
+{% endblock %}
+
+{% block body %}
+    <meta name="viewport" content="widht=device-widht , initial-scale=1.0">
+	<link href= {{ asset("/css/admin-dash.css") }} rel="stylesheet">
+    <link href={{ asset('css/list.css') }} rel="stylesheet">
+
+
+        <div class="dash-outliner">
+            {% include "admin/admin-header-admin.html.twig" %}
+            <div class="dash-container sidebared">
+                {% include "admin/components/sidebarAdmin.html.twig" %} 
+                <div class="middle-content">
+ 	                {# <h2 class="tête" f><img class="image" src={{ asset('images/icon/list-d.svg') }}>Liste des agences</h2> #}
+                    <div class="table-ext-wrapper" style="display: flex;flex-direction: column;">
+                        
+                        <div class="table-agences">
+                            <table class="agence">
+                                <thead>
+                                    <tr>
+                                        <th>Nom sous-compte <br>  </th>
+                                        <th>Adresse</th>
+                                        <th>email</th>
+                                        <th>télephone</th>
+                                        <th>Type d'abonnement</th>
+                                        <th>debut de l'abonnement</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for client in sous_comptes %}
+                                        <tr>
+                                            
+                                            <td>
+                                                {{ client.nomEntreprise }}
+                                            </td>
+                                            <td>
+                                                {{ client.addresseEntreprise }} </br> 
+                                                {{ client.codePostal }} - {{ client.ville }}  
+                                            </td>
+                                            <td>
+                                                {{ client.email }}<br>
+                                            </td>
+                                            <td>
+                                                {{ client.telMobile }}
+                                            </td>
+                                            <td>
+                                                {{ client.abonnement.typeAbonnement ? client.abonnement.typeAbonnement.label : 'Aucun type d\'abonnement' }}
+                                            </td>
+                                            <td>
+                                                {{ client.abonnement.dateDebutAbonnement|date("m/d/Y") }}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    <div class="mobile-ham" onclick="toggleSideMobile()">
+        <div class="ham-line"></div>
+        <div class="ham-line"></div>
+        <div class="ham-line"></div>
+    </div>
+    <script title="for the sidebar to show and collapse">
+
+        function toggleSide(){
+            let side= document.querySelector(".dash-container");
+            side.classList.toggle('sidebared');
+        }
+
+        function toggleSideMobile(){
+            let side= document.querySelector('.sidebarMenu');
+            let ham= document.querySelector('.mobile-ham');
+
+            ham.classList.toggle('expanded');
+            side.classList.toggle('expanded');
+        }
+    </script>
+
+{% endblock %}

@@ -213,6 +213,11 @@ span[green]{
     left: 50%;
 }
 
+#agence_sous_compte_liste{
+    background-color: unset;
+    color:#1d1d1d;
+}
+
 
 /* .table-agences{
     overflow: auto;

@@ -3,15 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\SubscriptionSearch;
-use App\Form\SubscriptionSearchType;
-use App\Repository\AbonnementRepository;
-use App\Repository\ClientRepository;
 use App\Repository\UserRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Form\SubscriptionSearchType;
+use App\Repository\ClientRepository;
+use App\Repository\AbonnementRepository;
+use App\Repository\SousCompteRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @IsGranted("ROLE_ADMIN")
@@ -53,10 +54,16 @@ class AdminSubscriptionsListAndFiltersController extends AbstractController
     }
 
     /**
-     * @Route("/admin/search/subscriptions", name="admin_search_subscriptions")
-     */
-    public function searchEngine(Request $request)
+    * @Route("/admin/sous_compte/list/{id}", name="admin_sous_compte_list")
+    */
+    public function sousCompte( int $id, SousCompteRepository $sousCompteRepository, ClientRepository $clientrepository ): Response
     {
+        $conClient=$clientrepository->findOneBy(['id'=>$id]);
+        $consous = $conClient->getSouscomptes()->getValues();
         
+        return $this->render('admin_subscriptions_list_and_filters/sous_compte.html.twig',[
+            'sous_comptes' => $consous
+        ]);
     }
+
 }

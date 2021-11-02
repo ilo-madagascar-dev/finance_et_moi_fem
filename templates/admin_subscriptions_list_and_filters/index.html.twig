@@ -70,7 +70,12 @@
                                 <tbody>
                                     {% for client in clients %}
                                         <tr>
-                                            <td>{{ client.nomEntreprise }}</td>
+                                            
+                                            <td>
+                                                <a id="agence_sous_compte_liste" href="{{ path('admin_sous_compte_list', { id: client.id }) }}">
+                                                    {{ client.nomEntreprise }}
+                                                </a>
+                                            </td>
                                             <td>
                                                 {{ client.address }} </br> 
                                                 {{ client.postalCode }} - {{ client.town }}  
