@@ -1,4 +1,143 @@
-{% extends 'base.html.twig' %}
+{% extends 'mqbaka_home/index.html.twig' %}
+
+{% block title %}Tableau de bord - Admin
+{% endblock %}
+
+{% block body %}
+    <meta name="viewport" content="widht=device-widht , initial-scale=1.0">
+	<link href= {{ asset("/css/admin-dash.css") }} rel="stylesheet">
+    <link href={{ asset('css/list.css') }} rel="stylesheet">
+
+
+        <div class="dash-outliner">
+            {% include "admin/admin-header-admin.html.twig" %}
+            <div class="dash-container sidebared">
+                {% include "admin/components/sidebarAdmin.html.twig" %} 
+                <div class="middle-content">
+ 	                {# <h2 class="tête" f><img class="image" src={{ asset('images/icon/list-d.svg') }}>Liste des agences</h2> #}
+                    <div class="table-ext-wrapper" style="display: flex;flex-direction: column;">
+                        <div class="form">
+                            {{ form_start(form) }}
+                                <div class="form-container">
+                                    <div class="list-filter">
+                                        <div class="form-control">
+                                            {{ form_widget(form.subscription,
+                                                {
+                                                    'attr':{
+                                                        'class':'champ-filtre'  
+                                                    }
+                                                }) 
+                                            }}
+                                        </div>
+
+                                        <div class="form-control">
+                                            {{ form_widget(form.town,
+                                                {
+                                                    'attr':{
+                                                        'class':'champ-filtre'  
+                                                    }
+                                                }) 
+                                            }}
+                                        </div>
+
+                                        <div class="form-control">
+                                            {{ form_widget(form.postalCode,
+                                                {
+                                                    'attr':{
+                                                        'class':'champ-filtre'  
+                                                    }
+                                                }) 
+                                            }}
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn-search">Rechercher</button>
+                                </div>
+                                    
+                            {{ form_end(form) }}
+                        </div>
+                        <div class="table-agences">
+                            <table class="agence">
+                                <thead>
+                                    <tr>
+                                        <th>Nom & prenom</th>
+                                        <th>Agence <br>  </th>
+                                        <th>Adresse</th>
+                                        <th>Coordonnées</th>
+                                        <th>Type d'abonnement</th>
+                                        <th>debut de l'abonnement</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for client in clients %}
+                                        <tr>
+                                            <td>{{ client.prenom }} {{ client.nom }}</td>
+                                            <td>{{ client.nomEntreprise }}</td>
+                                            <td>
+                                                {{ client.address }} </br> 
+                                                {{ client.postalCode }} - {{ client.town }}  
+                                            </td>
+                                            <td>
+                                                {{ client.email }}<br>
+                                                {{ client.telMobile }}
+                                            </td>
+                                            <td>
+                                                {{ client.abonnement.typeAbonnement ? client.abonnement.typeAbonnement.label : 'Aucun type d\'abonnement' }}
+                                            </td>
+                                            <td>
+                                                {{ client.abonnement.dateDebutAbonnement|date("m/d/Y") }}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    <div class="mobile-ham" onclick="toggleSideMobile()">
+        <div class="ham-line"></div>
+        <div class="ham-line"></div>
+        <div class="ham-line"></div>
+    </div>
+    <script title="for the sidebar to show and collapse">
+
+        function toggleSide(){
+            let side= document.querySelector(".dash-container");
+            side.classList.toggle('sidebared');
+        }
+
+        function toggleSideMobile(){
+            let side= document.querySelector('.sidebarMenu');
+            let ham= document.querySelector('.mobile-ham');
+
+            ham.classList.toggle('expanded');
+            side.classList.toggle('expanded');
+        }
+    </script>
+
+{% endblock %}
+
+
+
+
+
+{# extends 'base.html.twig' %}
+
+.list-filter{
+  background-color: #203c7688;
+  padding: 1em;
+  width: max;
+  border-radius: 5px
+}
+
+.champ-filtre{
+  height: 2em;
+  border: none;
+  border-bottom: solid 1px;
+  color: white;
+}
 
 {% block title %}Hello AdminSubscriptionListAndFiltersController!{% endblock %}
 
@@ -26,4 +165,4 @@
         <button type="submit">Rechercher</button>
     {{ form_end(form) }}
 </div>
-{% endblock %}
+{% endblock #}

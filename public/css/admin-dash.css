@@ -252,6 +252,30 @@ table.table tr:nth-child(2n){
     margin: 1.5em 0;
 }
 
+.form{
+    background-color: #dad8d8;
+    padding: 1em;
+    border-radius: 5px;
+}
+
+.form-container{
+display: grid;
+grid-template-columns: auto auto;
+width: 100%;
+}
+
+.list-filter{
+display: grid;
+grid-template-columns: auto auto auto; 
+width: 100%; 
+}
+
+.champ-filtre{
+height: 2em;
+border: none;
+border-bottom: 1px solid;
+}
+
 .flex-line{
     display: flex;
     gap: 1em;
@@ -368,3 +392,29 @@ form[name="type_abonnement"] #type_abonnement div input{
         width: 300px;
     }
 }
+
+/*.list-filter{
+    background-color: #203c7688;
+    padding: 1em;
+    border-radius: 5px;
+}
+  
+.champ-filtre{
+    height: 2em;
+    border: none;
+    border-bottom: solid 1px;
+    color: white;
+    width: 100%;
+}
+
+.form-container{
+    display: grid;
+    grid-template-columns: 32% 32% 32%;
+    gap: 4em;
+    width: 100%;
+}
+
+.form-control{
+    background-color:black;
+}
+*/
