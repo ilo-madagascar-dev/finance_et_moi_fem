@@ -43,11 +43,11 @@ class AdminSubscriptionsListAndFiltersController extends AbstractController
             $everyClient = $this->clientRepository->findAllClientsResearched($search);
         }
 
-        dd($everyClient);
+        //dd($everyClient);
 
         return $this->render('admin_subscriptions_list_and_filters/index.html.twig', [
             'controller_name' => 'AdminSubscriptionsListAndFiltersController',
-            'abonnements' => $everyClient,
+            'clients' => $everyClient,
             'form' => $form->createView()
         ]);
     }
