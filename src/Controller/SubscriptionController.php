@@ -5,11 +5,13 @@ namespace App\Controller;
 use App\Entity\Client;
 use App\Entity\SousCompte;
 use App\Repository\UserRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Validator\Constraints\Date;
 
 class SubscriptionController extends AbstractController
 {
@@ -36,28 +38,15 @@ class SubscriptionController extends AbstractController
         }
 
         if ($userConnect->getClient()->getId() != $client->getId()) {
-            //dd('different id');
             $this->addFlash('danger', 'Ce n\'est point votre profil');
             return $this->redirectToRoute('dash');
         }
 
-        //dd('same id');
-
-        //dd($request->request->get('_token'));
         if (!$this->isCsrfTokenValid('subscription_cancel'.$client->getId(), $request->request->get('_token'))) {
-            //dd('Invalid token');
             return $this->redirectToRoute('app_login');
         }
 
-        //dd('Valid Token');
-
-        /*if ($userConnect->getClient()->getId() !== $client->getId()) {
-            $this->addFlash('danger', "Ce compte n'est pas le vôtre !!!!");
-            $this->redirectToRoute('login');
-        }*/
-
         $abonnement = $client->getAbonnement();
-        //dd($client->getSousComptes()->getValues()[0], $client->getSousComptes()->getValues()[0]->getAbonnement()->getStripeSubscriptionId());
 
         \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET']);
 
@@ -66,6 +55,7 @@ class SubscriptionController extends AbstractController
         $subscription->cancel();
         
         $abonnement->setActif(false);
+        $abonnement->setDateFinAbonnement(new DateTime());
         $userInDatabase->setActive(false);
         $this->em->persist($userInDatabase);
         
@@ -84,6 +74,9 @@ class SubscriptionController extends AbstractController
                 $sousCompteSubscription->cancel();
                 $uniqueSousCompteClient->getUser()->setActive(false);
             }
+
+            $sousComptesClientAbonnement->setActif(false);
+            $sousComptesClientAbonnement->setDateFinAbonnement(new DateTime());
 
             $this->em->persist($sousComptesClientAbonnement);
             $this->em->persist($uniqueSousCompteClient);
@@ -146,6 +139,7 @@ class SubscriptionController extends AbstractController
         $subscription->cancel();
             
         $abonnement->setActif(false);
+        $abonnement->setDateFinAbonnement(new DateTime());
         $userInDatabase->setActive(false);
         $this->em->persist($userInDatabase);
 
@@ -178,7 +172,7 @@ class SubscriptionController extends AbstractController
 
         $abonnement = $client->getAbonnement();
 
-        \Stripe\Stripe::setApiKey('sk_test_51JAyRkDd9O5GRESHwySMe7BscZHT8npvPTAnFRUUFzrUtxKsytTSetDABLsB74Np0ODjjhY26VpkZIJXiwvkxB7a00G4pDH3n1');
+        \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET']);
 
         //$subscription = \Stripe\Subscription::retrieve($abonnement->getStripeSubscriptionId());
         
@@ -215,8 +209,8 @@ class SubscriptionController extends AbstractController
 
         $abonnement = $client->getAbonnement();
 
-        \Stripe\Stripe::setApiKey('sk_test_51JAyRkDd9O5GRESHwySMe7BscZHT8npvPTAnFRUUFzrUtxKsytTSetDABLsB74Np0ODjjhY26VpkZIJXiwvkxB7a00G4pDH3n1');
-
+        \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET']);
+        
         //$subscription = \Stripe\Subscription::retrieve($abonnement->getStripeSubscriptionId());
         
         $subscription = \Stripe\Subscription::retrieve($abonnement->getStripeSubscriptionId());
@@ -252,12 +246,13 @@ class SubscriptionController extends AbstractController
 
         $abonnement = $sousCompte->getAbonnement();
 
-        \Stripe\Stripe::setApiKey('sk_test_51JAyRkDd9O5GRESHwySMe7BscZHT8npvPTAnFRUUFzrUtxKsytTSetDABLsB74Np0ODjjhY26VpkZIJXiwvkxB7a00G4pDH3n1');
+        \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET']);
 
         $subscription = \Stripe\Subscription::retrieve($abonnement->getStripeSubscriptionId());
         $subscription->cancel();
         
         $abonnement->setActif(false);
+        $abonnement->setDateFinAbonnement(new Datetime());
         $this->em->flush();
 
         return $this->render('subscription/client_cancel.html.twig', [
@@ -285,7 +280,7 @@ class SubscriptionController extends AbstractController
 
         $abonnement = $sousCompte->getAbonnement();
 
-        \Stripe\Stripe::setApiKey('sk_test_51JAyRkDd9O5GRESHwySMe7BscZHT8npvPTAnFRUUFzrUtxKsytTSetDABLsB74Np0ODjjhY26VpkZIJXiwvkxB7a00G4pDH3n1');
+        \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET']);
 
         \Stripe\Subscription::update(
             $abonnement->getStripeSubscriptionId(),
