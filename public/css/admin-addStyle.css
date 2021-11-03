@@ -318,6 +318,32 @@ table.agence td{
     padding: .5em 0;
 }
 
+
+table.agence tr td a{
+    font-size: 14px;
+}
+  
+table.agence tr td{
+    font-size: 14px;
+    padding: 1em 0.5em;
+}
+  
+table.agence tr td:not(:last-child){
+    position: relative;
+}
+  
+table.agence tr td:not(:last-child)::after {
+    position: absolute;
+    content: '';
+    width: 1px;
+    height: 70%;
+    background: #dad8d8;
+    right: 0;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
 table.agence tr td:first-child{
     font-weight: 900;
 }
