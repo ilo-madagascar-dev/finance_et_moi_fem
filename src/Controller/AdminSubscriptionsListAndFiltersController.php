@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Client;
+use App\Entity\Abonnement;
 use App\Entity\SubscriptionSearch;
 use App\Repository\UserRepository;
 use App\Form\SubscriptionSearchType;
 use App\Repository\ClientRepository;
 use App\Repository\AbonnementRepository;
 use App\Repository\SousCompteRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -63,6 +66,29 @@ class AdminSubscriptionsListAndFiltersController extends AbstractController
         
         return $this->render('admin_subscriptions_list_and_filters/sous_compte.html.twig',[
             'sous_comptes' => $consous
+        ]);
+    }
+
+    /**
+     * @Route("/des", name="des")
+     */
+    public function listDesabonne(EntityManagerInterface $em, AbonnementRepository $Arep ,ClientRepository $clientrepository ): Response
+    {
+        //$conClient=$clientrepository->findAll();
+        ///$abonnne = $Arep->findAll()
+
+        $conClients = $em->createQuery('SELECT c FROM App\Entity\Client c JOIN App\Entity\Abonnement a WHERE c.id = a.client AND a.date_fin_abonnement IS NOT NULL')
+                ->getResult(); 
+        //$conClients=$clientrepository->findAllUnsubscribe();  a.date_fin_abonnement IS NULL
+
+        // dd($conClients);
+        
+        // if(!$conClients){
+        //     dd("tsy mis nininona");
+        // }
+
+        return $this->render('admin_subscriptions_list_and_filters/listDesabonne.html.twig', [
+            'clients' => $conClients
         ]);
     }
 

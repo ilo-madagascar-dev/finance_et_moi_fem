@@ -2,26 +2,14 @@
 <div class="sidebarMenu">
     <ul class="tablinks">
         {# --- #}
-        <li class="tablink">
-            {# <a href="#"> #}
-            <a href={{ path("message") }}>
-                <img src={{ asset('images/icon/subscribe-w.svg') }} alt="">
-                Message
-            </a>
-        </li>
+        
         <!-- li class="tablink">
             <a href={#{ path("dash") }#}>
                 <img src={#{ asset('images/Icon-awesome-home.png') }#} alt="">
                 Tableau de bord
             </a>
         </li -->
-        <li class="tablink">
-            {# <a href=""> #}
-            <a href={{ path("Sup-admin_val") }}>
-                <img src={{ asset('images/Icon-awesome-list-ul.png') }} alt="">
-                Liste des agences
-            </a>
-        </li>
+        
 
         <li class="tablink">
             {# <a href=""> #}
@@ -30,13 +18,23 @@
                 Agences info
             </a>
         </li>
-        {# <li class="tablink">
-            <a href="">
-            <a href={{ path("Sup-admin_val") }}>
-                <img src={{ asset('images/Icon-awesome-clipboard-check.png') }} alt="">
-                Validation
+
+        <li class="tablink">
+            {# <a href="#"> #}
+            <a href={{ path("message") }}>
+                <img src={{ asset('images/icon/subscribe-w.svg') }} alt="">
+                Message
             </a>
-        </li> #}
+        </li>
+
+        <li class="tablink">
+            {# <a href=""> #}
+            <a href={{ path("Sup-admin_val") }}>
+                <img src={{ asset('images/Icon-awesome-list-ul.png') }} alt="">
+                Liste des agences
+            </a>
+        </li>
+        
         <li class="tablink">
             {# <a href="#"> #}
             <a href={{ path("type_abonnement_index") }}>
@@ -45,5 +43,12 @@
             </a>
         </li>
         
+        <li class="tablink">
+            <a href={{ path("des") }}>
+                <img src={{ asset('images/Icon-awesome-clipboard-check.png') }} alt="">
+                Liste des désabonné
+            </a>
+        </li>
+
     </ul>
 </div>
