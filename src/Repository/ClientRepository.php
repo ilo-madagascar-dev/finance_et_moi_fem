@@ -43,7 +43,15 @@ class ClientRepository extends ServiceEntityRepository
             $query->andWhere('c.postalCode LIKE :postalCode')
             ->setParameter('postalCode', '%' . $search->getPostalCode() . '%');
         }
+
+        if ($search->getDateDebutInterval() && $search->getDateFinInterval()) {
+            $query->innerJoin('c.abonnement', 'cs')
+            ->andWhere('cs.date_debut_abonnement BETWEEN :dateDebutInterval AND :dateFinInterval')
+            ->setParameter(':dateDebutInterval', $search->getDateDebutInterval())
+            ->setParameter(':dateFinInterval', $search->getDateFinInterval());
+        }
         
+        $query = $query->orderBy('c.id', 'DESC');
         $query = $query->getQuery()->getResult();
 
         return $query;
@@ -70,6 +78,13 @@ class ClientRepository extends ServiceEntityRepository
         if ($search->getPostalCode()) {
             $query->andWhere('c.postalCode LIKE :postalCode')
             ->setParameter('postalCode', '%' . $search->getPostalCode() . '%');
+        }
+
+        if ($search->getDateDebutInterval() && $search->getDateFinInterval()) {
+            $query->innerJoin('c.abonnement', 'cs')
+            ->andWhere('cs.date_fin_abonnememnt BETWEEN :dateDebutInterval AND :dateFinInterval')
+            ->setParameter(':dateDebutInterval', $search->getDateDebutInterval())
+            ->setParameter(':dateFinInterval', $search->getDateFinInterval());
         }
 
         $query = $query->innerjoin('c.user', 'u', Join::WITH, $query->expr()->eq('u.active', ':unactive'));

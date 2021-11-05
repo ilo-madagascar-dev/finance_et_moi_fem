@@ -43,9 +43,10 @@ class AdminSubscriptionsListAndFiltersController extends AbstractController
         $everyClient = $this->clientRepository->findAll();
 
         if ($form->isSubmitted() && $form->isValid()){
-            //dd($search);
             $everyClient = $this->clientRepository->findAllClientsResearched($search);
+            //dd($everyClient);
         }
+        //dd($everyClient);
 
         //dd($everyClient);
 

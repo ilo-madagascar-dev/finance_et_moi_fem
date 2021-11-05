@@ -4,9 +4,9 @@ namespace App\Form;
 
 use App\Entity\SubscriptionSearch;
 use App\Entity\TypeAbonnement;
-use Doctrine\DBAL\Types\StringType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -38,6 +38,22 @@ class SubscriptionSearchType extends AbstractType
                 'attr' => [
                     'placeholder' => "Code postal"
                 ]
+            ])
+            ->add('dateDebutInterval', DateType::class, [
+                'required' => false,
+                'label' => false,
+                'attr' => [
+                    'placeholder' => "Début interval"
+                ],
+                'widget' => 'single_text',
+            ])
+            ->add('dateFinInterval', DateType::class, [
+                'required' => false,
+                'label' => false,
+                'attr' => [
+                    'placeholder' => "Fin interval"
+                ],
+                'widget' => 'single_text',
             ])
         ;
     }

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use DateTime;
+
 class SubscriptionSearch 
 {   
     /**
@@ -18,6 +20,17 @@ class SubscriptionSearch
      * @var string|null 
      */
     private $postalCode;
+
+    /**
+     * @var Datetime|null 
+     */
+    private $dateDebutInterval;
+
+    /**
+     * @var Datetime|null 
+     */
+    private $dateFinInterval;
+
 
     public function getSubscription()
     {
@@ -51,6 +64,30 @@ class SubscriptionSearch
     public function setPostalCode(string $postalCode)
     {
         $this->postalCode =$postalCode;
+
+        return $this;
+    }
+
+    public function getDateDebutInterval()
+    {
+        return $this->dateDebutInterval;
+    }
+
+    public function setDateDebutInterval($dateDebutInterval)
+    {
+        $this->dateDebutInterval =$dateDebutInterval;
+
+        return $this;
+    }
+
+    public function getDateFinInterval()
+    {
+        return $this->dateFinInterval;
+    }
+
+    public function setDateFinInterval($dateFinInterval)
+    {
+        $this->dateFinInterval =$dateFinInterval;
 
         return $this;
     }
