@@ -44,11 +44,7 @@ class AdminSubscriptionsListAndFiltersController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()){
             $everyClient = $this->clientRepository->findAllClientsResearched($search);
-            //dd($everyClient);
         }
-        //dd($everyClient);
-
-        //dd($everyClient);
 
         return $this->render('admin_subscriptions_list_and_filters/index.html.twig', [
             'controller_name' => 'AdminSubscriptionsListAndFiltersController',
@@ -82,7 +78,9 @@ class AdminSubscriptionsListAndFiltersController extends AbstractController
         $conClients = $clientrepository->findAllUnsubscribedUsers();
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //dd($unsubscribedClientsSearch);
             $conClients = $clientrepository->findUnsubscribedClients($unsubscribedClientsSearch);
+            //dd($conClients);
         }
         
         return $this->render('admin_subscriptions_list_and_filters/listDesabonne.html.twig', [
