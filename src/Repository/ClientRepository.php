@@ -22,7 +22,7 @@ class ClientRepository extends ServiceEntityRepository
     }
 
     /**
-     * Used to upgrade (rehash) the user's password automatically over time.
+     * Used to filter the clients by subscription, by town and/or by postal code :-) :-) ^_^ ^_^ ^_^ ^_^
      */
     public function findAllClientsResearched(SubscriptionSearch $search)
     {
@@ -49,6 +49,54 @@ class ClientRepository extends ServiceEntityRepository
         return $query;
     }
 
+    /**
+     * Used to filter the unsubscribed clients by subscription, by town and/or by postal code :-) :-) ^_^ ^_^ ^_^ ^_^
+     */
+    public function findUnsubscribedClients(SubscriptionSearch $search)
+    {
+        $query = $this->createQueryBuilder('c');
+        
+        //Tairina jointures
+        if ($search->getSubscription()) {
+            $query = $query->innerjoin('c.abonnement', 'ca', Join::WITH, $query->expr()->eq('ca.typeAbonnement', ':typeAbonnement'));
+            $query = $query->setParameter(':typeAbonnement', $search->getSubscription());
+        }
+
+        if ($search->getTown()) {
+            $query->andWhere('c.town LIKE :town')
+            ->setParameter('town', '%' . $search->getTown() .'%');
+        }
+
+        if ($search->getPostalCode()) {
+            $query->andWhere('c.postalCode LIKE :postalCode')
+            ->setParameter('postalCode', '%' . $search->getPostalCode() . '%');
+        }
+
+        $query = $query->innerjoin('c.user', 'u', Join::WITH, $query->expr()->eq('u.active', ':unactive'));
+        $query->setParameter(':unactive', false);
+        $query = $query->innerJoin('c.abonnement', 'a')
+        ->orderBy('a.date_fin_abonnement', 'DESC');
+
+        $query = $query->getQuery()->getResult();
+
+        return $query;
+    }
+
+    /**
+     * Finds every unsubscribed Client
+     */
+    public function findAllUnsubscribedUsers()
+    {
+        $query = $this->createQueryBuilder('c');
+        $query = $query->innerJoin('c.user', 'u', Join::WITH, $query->expr()->eq('u.active', ':unactive'));
+        $query->setParameter(':unactive', false);
+        $query = $query->innerJoin('c.abonnement', 'a')
+        ->orderBy('a.date_fin_abonnement', 'DESC');
+        
+        $query = $query->getQuery()->getResult();
+
+        return $query;
+    }
 
     // /**
     //  * @return Client[] Returns an array of Client objects

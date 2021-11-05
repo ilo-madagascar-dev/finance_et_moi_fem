@@ -72,23 +72,21 @@ class AdminSubscriptionsListAndFiltersController extends AbstractController
     /**
      * @Route("/des", name="des")
      */
-    public function listDesabonne(EntityManagerInterface $em, AbonnementRepository $Arep ,ClientRepository $clientrepository ): Response
+    public function listDesabonne(Request $request, EntityManagerInterface $em, AbonnementRepository $Arep ,ClientRepository $clientrepository ): Response
     {
-        //$conClient=$clientrepository->findAll();
-        ///$abonnne = $Arep->findAll()
-
-        $conClients = $em->createQuery('SELECT c FROM App\Entity\Client c JOIN App\Entity\Abonnement a WHERE c.id = a.client AND a.date_fin_abonnement IS NOT NULL')
-                ->getResult(); 
-        //$conClients=$clientrepository->findAllUnsubscribe();  a.date_fin_abonnement IS NULL
-
-        // dd($conClients);
+        $unsubscribedClientsSearch = new SubscriptionSearch();
+        $form = $this->createForm(SubscriptionSearchType::class, $unsubscribedClientsSearch);
+        $form->handleRequest($request);
         
-        // if(!$conClients){
-        //     dd("tsy mis nininona");
-        // }
+        $conClients = $clientrepository->findAllUnsubscribedUsers();
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $conClients = $clientrepository->findUnsubscribedClients($unsubscribedClientsSearch);
+        }
+        
         return $this->render('admin_subscriptions_list_and_filters/listDesabonne.html.twig', [
-            'clients' => $conClients
+            'clients' => $conClients,
+            'formSearch' => $form->createView()
         ]);
     }
 
