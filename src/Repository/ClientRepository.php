@@ -48,7 +48,7 @@ class ClientRepository extends ServiceEntityRepository
             $query->innerJoin('c.abonnement', 'cs')
             ->andWhere('cs.date_debut_abonnement BETWEEN :dateDebutInterval AND :dateFinInterval')
             ->setParameter(':dateDebutInterval', $search->getDateDebutInterval())
-            ->setParameter(':dateFinInterval', $search->getDateFinInterval());
+            ->setParameter(':dateFinInterval', $search->getDateFinInterval()->setTime(23, 59, 59));
         }
         
         $query = $query->orderBy('c.id', 'DESC');
