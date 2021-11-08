@@ -270,6 +270,11 @@ grid-template-columns: auto auto auto auto;
 justify-items: center;
 }
 
+.list-filter1{
+    display: grid;
+    grid-template-columns: auto auto;  
+    justify-items: center;
+}
 
 .champ-filtre{
     height: 2em;
