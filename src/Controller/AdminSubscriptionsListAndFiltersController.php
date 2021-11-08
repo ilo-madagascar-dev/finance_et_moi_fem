@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Client;
 use App\Entity\Abonnement;
+use App\Form\FormSearchType;
 use App\Entity\SubscriptionSearch;
 use App\Repository\UserRepository;
 use App\Form\SubscriptionSearchType;
@@ -37,7 +38,7 @@ class AdminSubscriptionsListAndFiltersController extends AbstractController
     public function index(Request $request): Response
     {
         $search = new SubscriptionSearch();
-        $form = $this->createForm(SubscriptionSearchType::class, $search);
+        $form = $this->createForm(FormSearchType::class, $search);
         $form->handleRequest($request);
 
         $everyClient = $this->clientRepository->findAll();
@@ -85,7 +86,7 @@ class AdminSubscriptionsListAndFiltersController extends AbstractController
         
         return $this->render('admin_subscriptions_list_and_filters/listDesabonne.html.twig', [
             'clients' => $conClients,
-            'formSearch' => $form->createView()
+            'form' => $form->createView()
         ]);
     }
 

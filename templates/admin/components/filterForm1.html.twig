@@ -1,0 +1,58 @@
+<div class="form">
+    {{ form_start(form) }}
+        <div class="form-container">
+            {# <div class="form-filter"> #}
+                <div class="list-filter">
+                    <div class="form-control">
+                        {{ form_widget(form.subscription,
+                            {
+                                'attr':{
+                                    'class':'champ-filtre'  
+                                }
+                            }) 
+                        }}
+                    </div>
+
+                    <div class="form-control">
+                        {{ form_widget(form.town,
+                            {
+                                'attr':{
+                                    'class':'champ-filtre'  
+                                }
+                            }) 
+                        }}
+                    </div>
+
+                {# </div>
+
+                <div class="list-filter"> #}
+
+                    <div class="form-control">
+                        {{ form_widget(form.postalCode,
+                            {
+                                'attr':{
+                                    'class':'champ-filtre'  
+                                }
+                            }) 
+                        }}
+                    </div>
+
+                    <div class="form-control">
+                        {{ form_widget(form.dateDebutInterval,
+                            {
+                                'attr':{
+                                    'class':'champ-filtre'  
+                                }
+                            }) 
+                        }}
+                    </div>
+                </div>
+            {# </div> #}
+
+            <div class="form-control">
+                <button type="submit" class="btn-search">Rechercher</button>
+            </div>
+        </div>
+            
+    {{ form_end(form) }}
+</div>

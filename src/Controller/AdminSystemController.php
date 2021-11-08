@@ -10,7 +10,9 @@ use App\Entity\Facture;
 use App\Entity\Paiement;
 use App\Entity\Abonnement;
 use App\Entity\SousCompte;
+use App\Form\FormSearchType;
 use Stripe\Checkout\Session;
+use App\Entity\SubscriptionSearch;
 use App\Repository\UserRepository;
 use App\Repository\ClientRepository;
 use App\Repository\ContactsRepository;
@@ -57,21 +59,30 @@ class AdminSystemController extends AbstractController
     /**
     * @Route("/SuperAdmin/valid", name="Sup-admin_val")
     */
-    public function valid(UserRepository $userRepository,ClientRepository $clientrepository): Response
+    public function valid(UserRepository $userRepository,ClientRepository $clientrepository, Request $request): Response
     { 
      if($this->getUser()){
        $connUser=$this->getUser()->getEmail();
        $admincon=$userRepository->findOneBy(['email'=>$connUser]);
        $role=$admincon->getRoles()[0];
       if($role==='ROLE_ADMIN'){
+
+            $search = new SubscriptionSearch();
+            $form = $this->createForm(FormSearchType::class, $search);
+            $form->handleRequest($request);
+            
             $client=$clientrepository->findAll();
+
+            if ($form->isSubmitted() && $form->isValid()){
+                $client = $clientrepository->findAllClientsResearched($search);
+            }
 
             $urlidentityProof=$_ENV['DOWNLOAD_FILE'].'identityProof/';
             $urlrib=$_ENV['DOWNLOAD_FILE'].'rib/';
             $urlextrait_rcs=$_ENV['DOWNLOAD_FILE'].'extrait_rcs/';
             $urlliasseFiscal=$_ENV['DOWNLOAD_FILE'].'liasseFiscale/';
             $urllegalStatus=$_ENV['DOWNLOAD_FILE'].'legalStatus/';
-
+            // dd($form->createView());
 
             return $this->render('admin\components\listeDesAgencessous.html.twig', [
                 'controller_name' => 'AdminSystemController',
@@ -83,6 +94,7 @@ class AdminSystemController extends AbstractController
                 'urlLiasseFiscal'=>$urlliasseFiscal,
                 'urlLegalStatus'=>$urllegalStatus,
                 'role'=>$role,
+                'form' => $form->createView(),
             ]);
         }
         else {

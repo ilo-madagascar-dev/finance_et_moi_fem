@@ -4,15 +4,87 @@
 {% endblock %}
 
 {% block body %}
+    <meta name="viewport" content="widht=device-widht , initial-scale=1.0">
 	<link href= {{ asset("/css/admin-dash.css") }} rel="stylesheet">
+    <link href={{ asset('css/list.css') }} rel="stylesheet">
 
-    <div class="dash-outliner">
-        {% include "admin/admin-header-admin.html.twig" %}
-        <div class="dash-container sidebared">
-            {% include "admin/components/sidebarAdmin.html.twig" %}
-            {% include "admin/listeDesAgences.html.twig" with { clients: clients, urlIdentity: urlIdentity, urlRib: urlRib, urlExtrait_rcs: urlExtrait_rcs, urlLiasseFiscal:urlLiasseFiscal, urlLegalStatus:urlLegalStatus } only %}
+
+        <div class="dash-outliner">
+            {% include "admin/admin-header-admin.html.twig" %}
+            <div class="dash-container sidebared">
+                {% include "admin/components/sidebarAdmin.html.twig" %} 
+                <div class="middle-content">
+ 	                <h2 class="tête" f><img class="image" src={{ asset('images/icon/list-d.svg') }}>Liste des agences</h2>
+                    <div class="table-ext-wrapper" style="display: flex;flex-direction: column;">
+                        {% include "admin/components/filterForm1.html.twig" %}
+                        <div class="table-agences">
+						<table class="agence">
+							<thead>
+								<tr>
+									<th>Agence</th>
+									<th>Ville</th>
+									<th>Type d'abonnement</th>
+									<th>Sous-comptes actifs</th>
+									<th>Accès au paiement fractionné</th>
+									<th>Fichiers</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for client in clients %}
+									<tr>
+										<td>{{ client.nom }}</td>
+										<td>{{ client.town }}</td>
+										<td>
+											{# {% if client.abonnement.statutPaiement == 1 %}
+												Paiement effectué
+												{% else %}
+													Paiement non effectué
+											{% endif %} #}
+											{{ client.abonnement.typeAbonnement ? client.abonnement.typeAbonnement.label : 'Aucun type d\'abonnement' }}
+										</td>
+										<td>
+											{% set i = 0 %}
+											{% for sous in client.sousComptes %}
+												{% set i = i + 1 %}
+											{% endfor %}
+											{{ i }}
+										</td>
+										<td>
+											{% include "admin/components/switch.html.twig" with { attr : client.id , act: client.actif } only %}
+											{# {{(client.actif)?'toggle-button active':'toggle-button'}} #}
+										</td>
+										<td>
+										{# {{ "http.." ~ client.om }} #}
+										{# {{ client.abonnement.typeAbonnement.label }} #}
+										{% if client.abonnement.typeAbonnement %}
+											{% if client.abonnement.typeAbonnement.priceID == "price_1JZs5tBW8SyIFHAgHT2LqoM7" %}
+												{% if client.statutEntreprise == "Entreprise individuelle (EI)" %}
+													<a href={{urlIdentity ~ client.identityProof}} target="_blank" title="Carte d'identité">Cin</a>
+													<a href={{urlRib ~ client.rib}} target="_blank" title="RIB">Rib</a>
+													<a href={{urlExtrait_rcs ~ client.extraitRCSname}} target="_blank" title="Extrait KBIS">Kbis</a>
+													<a href={{urlLiasseFiscal ~ client.liasseFiscale}} target="_blank" title="Liasse Fiscale">LF</a>
+												{% else %}
+													<a href={{urlIdentity ~ client.identityProof}} target="_blank" title="Carte d'identité">Cin</a>
+													<a href={{urlRib ~ client.rib}} target="_blank" title="RIB">Rib</a>
+													<a href={{urlExtrait_rcs ~ client.extraitRCSname}} target="_blank" title="Extrait KBIS">Kbis</a>
+													<a href={{urlLiasseFiscal ~ client.liasseFiscale}} target="_blank" title="Liasse Fiscale">LF</a>
+													<a href={{urlLegalStatus ~ client.legalStatus}} target="_blank" title="Legal Status">STA</a>	
+												{% endif %}
+											{% else %}
+												Pas de pièces jointes
+											{% endif %}
+										{% endif %}
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    
     <div class="mobile-ham" onclick="toggleSideMobile()">
         <div class="ham-line"></div>
         <div class="ham-line"></div>
@@ -35,3 +107,51 @@
     </script>
 
 {% endblock %}
+
+
+
+
+
+{# extends 'base.html.twig' %}
+
+.list-filter{
+  background-color: #203c7688;
+  padding: 1em;
+  width: max;
+  border-radius: 5px
+}
+
+.champ-filtre{
+  height: 2em;
+  border: none;
+  border-bottom: solid 1px;
+  color: white;
+}
+
+{% block title %}Hello AdminSubscriptionListAndFiltersController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/PHP/financer_et_moi/src/Controller/AdminSubscriptionListAndFiltersController.php'|file_link(0) }}">src/Controller/AdminSubscriptionListAndFiltersController.php</a></code></li>
+        <li>Your template at <code><a href="{{ 'C:/wamp64/www/PHP/financer_et_moi/templates/admin_subscription_list_and_filters/index.html.twig'|file_link(0) }}">templates/admin_subscription_list_and_filters/index.html.twig</a></code></li>
+    </ul>
+</div>
+
+<div>
+    {{ form_start(form) }}
+        {{ form_row(form.subscription) }}
+        {{ form_row(form.town) }}
+        {{ form_row(form.postalCode) }}
+        <button type="submit">Rechercher</button>
+    {{ form_end(form) }}
+</div>
+{% endblock #}

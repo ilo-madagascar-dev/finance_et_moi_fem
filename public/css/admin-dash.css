@@ -261,19 +261,21 @@ table.table tr:nth-child(2n){
 .form-container{
 display: grid;
 grid-template-columns: auto auto;
-width: 100%;
+grid-gap: 1em;
 }
 
 .list-filter{
 display: grid;
-grid-template-columns: auto auto auto; 
-width: 100%; 
+grid-template-columns: auto auto auto auto;  
+justify-items: center;
 }
 
+
 .champ-filtre{
-height: 2em;
-border: none;
-border-bottom: 1px solid;
+    height: 2em;
+    border: none;
+    border-bottom: 1px solid;
+    width: 10em;
 }
 
 .flex-line{

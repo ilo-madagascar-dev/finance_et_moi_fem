@@ -14,8 +14,9 @@
             <div class="dash-container sidebared">
                 {% include "admin/components/sidebarAdmin.html.twig" %} 
                 <div class="middle-content">
- 	                {# <h2 class="tête" f><img class="image" src={{ asset('images/icon/list-d.svg') }}>Liste des agences</h2> #}
+ 	                <h2 class="tête" f><img class="image" src={{ asset('images/icon/list-d.svg') }}>Liste des comptes inactifs</h2>
                     <div class="table-ext-wrapper" style="display: flex;flex-direction: column;">
+                        {% include "admin/components/filterForm.html.twig" %}
                         <div class="table-agences">
                             <table class="agence">
                                 <thead>
@@ -54,7 +55,9 @@
                                                 {{ client.abonnement.dateDebutAbonnement|date("d/m/Y") }}
                                             </td>
                                             <td>
-                                                {{ client.abonnement.dateFinAbonnement|date("d/m/Y")}}
+                                                {% if client.abonnement.dateFinAbonnement %}
+                                                    {{ client.abonnement.dateFinAbonnement|date("d/m/Y")}}
+                                                {% endif %}
                                             </td>
                                         </tr>
                                     {% endfor %}
