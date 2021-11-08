@@ -108,6 +108,11 @@ class AdminController extends AbstractController
         if($this->getUser()){
             $connUser=$this->getUser()->getEmail();
             $role=$this->getUser()->getRoles()[0];
+
+            if ($role == "ROLE_ADMIN") {
+                return $this->redirectToRoute("Sup-admin_val");
+            }
+
             $vdScompte='';
             if($this->getUser()->getAdmin()){
                 $conClient=$adminrepository->findOneBy(['email'=>$connUser]);

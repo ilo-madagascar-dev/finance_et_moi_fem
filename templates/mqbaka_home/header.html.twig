@@ -92,9 +92,15 @@
                             </div>
                             <div class="hoverable-content">
                                 {% if app.user %}
-                                <a href={{ path("dash") }}>
-                                    Tableau de bord
-                                </a>
+                                    {% if app.user.roles[0] == "ROLE_ADMIN" %}
+                                        <a href={{ path("Sup-admin_val") }}>
+                                            Dashboard admin
+                                        </a>
+                                    {% else %}
+                                        <a href={{ path("dash") }}>
+                                            Tableau de bord
+                                        </a>
+                                    {% endif %}
                                 <a href={{ path('app_logout') }}>
                                     Déconnexion
                                 </a>
