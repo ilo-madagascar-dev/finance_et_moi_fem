@@ -41,7 +41,8 @@ class AdminSubscriptionsListAndFiltersController extends AbstractController
         $form = $this->createForm(FormSearchType::class, $search);
         $form->handleRequest($request);
 
-        $everyClient = $this->clientRepository->findAll();
+        //$everyClient = $this->clientRepository->findAll();
+        $everyClient = $this->clientRepository->findBy([], ['id' => 'DESC']);
 
         if ($form->isSubmitted() && $form->isValid()){
             $everyClient = $this->clientRepository->findAllClientsResearched($search);

@@ -47,6 +47,14 @@ class FormSearchType extends AbstractType
                 ],
                 'widget' => 'single_text',
             ])
+            ->add('dateFinInterval', DateType::class, [
+                'required' => false,
+                'label' => false,
+                'attr' => [
+                    'placeholder' => "Fin interval"
+                ],
+                'widget' => 'single_text',
+            ])
         ;
     }
 
