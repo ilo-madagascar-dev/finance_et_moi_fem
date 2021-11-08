@@ -37,9 +37,9 @@ class SousCompteType extends AbstractType
             ->add('codePostal', TextType::class, ['attr' => array(
                 'placeholder' => 'Code postal'
             )])
-            ->add('addresse', TextType::class, ['attr' => array(
-                'placeholder' => 'Adresse'
-            )])
+            // ->add('addresse', TextType::class, ['attr' => array(
+            //     'placeholder' => 'Adresse'
+            // )])
             ->add('ville', TextType::class, ['attr' => array(
                 'placeholder' => 'Ville'
             )])
