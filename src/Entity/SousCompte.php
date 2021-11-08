@@ -35,7 +35,7 @@ class SousCompte
     private $telFixe;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $addresse;
 
