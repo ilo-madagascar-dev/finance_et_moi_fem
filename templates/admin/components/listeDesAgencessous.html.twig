@@ -32,7 +32,7 @@
 							<tbody>
 								{% for client in clients %}
 									<tr>
-										<td>{{ client.nom }}</td>
+										<td>{{ client.nomEntreprise }}</td>
 										<td>{{ client.town }}</td>
 										<td>
 											{# {% if client.abonnement.statutPaiement == 1 %}
@@ -90,6 +90,9 @@
         <div class="ham-line"></div>
         <div class="ham-line"></div>
     </div>
+
+	{% include "admin/components/switch-script.html.twig" %}
+
     <script title="for the sidebar to show and collapse">
 
         function toggleSide(){
