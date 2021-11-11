@@ -71,7 +71,8 @@ class AdminSystemController extends AbstractController
             $form = $this->createForm(FormSearchType::class, $search);
             $form->handleRequest($request);
             
-            $client=$clientrepository->findAll();
+            //$client=$clientrepository->findAll();
+            $client=$clientrepository->findBy([], ['id' => 'DESC']);
 
             if ($form->isSubmitted() && $form->isValid()){
                 $client = $clientrepository->findAllClientsResearched($search);
