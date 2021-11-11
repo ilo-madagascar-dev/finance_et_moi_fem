@@ -47,7 +47,7 @@
 											{% for sous in client.sousComptes %}
 												{% set i = i + 1 %}
 											{% endfor %}
-											{{ i }}
+											<a href={{ path('admin_sous_compte_list', { id: client.id, incomingController: "AminSubscrptionsListAndFilters" }) }}> {{ i }} </a>
 										</td>
 										<td>
 											{% include "admin/components/switch.html.twig" with { attr : client.id , act: client.actif } only %}
