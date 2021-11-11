@@ -463,7 +463,7 @@ class OneEuroController extends AbstractController
     }
 
     /**
-     * @Route("/ajouter-sous-compte", name="sajout")
+     * @Route("/ajouter-sous-compte", name="one_euro_sajout")
      */
     public function pageAjout(ClientRepository $clientrepository,UserRepository $userRepository, Request $request, SessionInterface $session): Response
     {
@@ -530,7 +530,7 @@ class OneEuroController extends AbstractController
 
     
     /**
-     * @Route("/souscompte/ajout/second/step", name="sous-compte_ajout_second_step")
+     * @Route("/souscompte/ajout/second/step", name="one_euro_sous-compte_ajout_second_step")
      */
     public function souscompteRegistrationSeconStep(SessionInterface $session)
     {
@@ -559,7 +559,7 @@ class OneEuroController extends AbstractController
     }
 
     /**
-     * @Route("/sous-compte/registration/payment", name="sous_compte_registration_payment") 
+     * @Route("/sous-compte/registration/payment", name="one_euro_sous_compte_registration_payment") 
      */
     public function sousCompteRegistrationPayment(SessionInterface $session):Response
     {
@@ -588,7 +588,7 @@ class OneEuroController extends AbstractController
     }
 
     /**
-     * @Route("/sous-compte/registration/payment/success", name="sous-compte_registration_payment_success")
+     * @Route("/sous-compte/registration/payment/success", name="one_euro_sous-compte_registration_payment_success")
      */
     public function sousCompteRegistrationPaymentSuccess(Request $request, SessionInterface $session, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, ApiService $apiService, MailerInterface $mailer, TypeAbonnementRepository $typeAbonnementRepository):Response
     {
@@ -776,7 +776,7 @@ class OneEuroController extends AbstractController
     }
 
     /**
-     * @Route("/sous-compte/registration/payment/failed", name="sous-compte_registration_payment_failed")
+     * @Route("/sous-compte/registration/payment/failed", name="one_euro_sous-compte_registration_payment_failed")
      */
     public function sousCompteRegistrationPaymentFailed():Response
     {

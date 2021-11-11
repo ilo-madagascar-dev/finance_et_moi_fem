@@ -72,7 +72,7 @@ class ModifClientController extends AbstractController
                 $em->persist($clients);
                 $em->flush();
             }
-            elseif($abonnement->getPriceID() === 'price_1JhVQ4Dd9O5GRESHdiPVy78a' || $abonnement->getPriceID() === 'price_1JhVVADd9O5GRESHmTYt6nzu')
+            elseif($abonnement->getPriceID() === $_ENV['ESSENTIEL_MENSUEL_PRICE_ID'] || $abonnement->getPriceID() === $_ENV['ESSENTIEL_ANNUEL_PRICE_ID'] )
             {
                 $mimeTypeAllowed = ['application/pdf', 'image/jpeg', 'image/png'];
                 if ($clients->getIdentityProofFile()) {
