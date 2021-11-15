@@ -57,7 +57,7 @@
 										{# {{ "http.." ~ client.om }} #}
 										{# {{ client.abonnement.typeAbonnement.label }} #}
 										{% if client.abonnement.typeAbonnement %}
-											{% if client.abonnement.typeAbonnement.priceID == "price_1JZs5tBW8SyIFHAgHT2LqoM7" %}
+											{% if client.abonnement.typeAbonnement.priceID == ESSENTIEL_MENSUEL_PRICE_ID or client.abonnement.typeAbonnement.priceID == ESSENTIEL_ANNUEL_PRICE_ID %}
 												{% if client.statutEntreprise == "Entreprise individuelle (EI)" %}
 													<a href={{urlIdentity ~ client.identityProof}} target="_blank" title="Carte d'identité">Cin</a>
 													<a href={{urlRib ~ client.rib}} target="_blank" title="RIB">Rib</a>
