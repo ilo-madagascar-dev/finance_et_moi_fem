@@ -83,7 +83,10 @@ class AdminSystemController extends AbstractController
             $urlextrait_rcs=$_ENV['DOWNLOAD_FILE'].'extrait_rcs/';
             $urlliasseFiscal=$_ENV['DOWNLOAD_FILE'].'liasseFiscale/';
             $urllegalStatus=$_ENV['DOWNLOAD_FILE'].'legalStatus/';
-            // dd($form->createView());
+            
+            //dd($client);
+
+            //dd($urlidentityProof, $urlrib, $urlextrait_rcs, $urlliasseFiscal, $urllegalStatus);
 
             return $this->render('admin\components\listeDesAgencessous.html.twig', [
                 'controller_name' => 'AdminSystemController',
