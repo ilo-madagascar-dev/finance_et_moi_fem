@@ -45,7 +45,7 @@ class AdminajoutController extends AbstractController
         $this->em->persist($admin);
         $this->em->flush();
 
-        return $this->redirectToRoute('Sup-admin',['id'=>$admin->getId()]);
+        return $this->redirectToRoute('app_login');
         }
 
         return $this->render('adminajout/index.html.twig', [
