@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Make your payment!{% endblock %}
+
+
+{% block stylesheets %}
+    {# <link href="stylesheets/fonts/stylesheet-01.css" rel="text/css"/> #}
+    <link href={{ asset('css/stylesheet.css') }} rel="stylesheet">
+    <link href={{ asset('css/colors.css') }} rel="stylesheet">
+    <link href={{ asset('css/full-height.css') }} rel="stylesheet">
+    {% block addstyle %}
+    {% endblock %}
+{% endblock %}
+
+{% block body %}
+
+    <section class="all-the">
+        <h1 class="sec-step-title">Finalisez l'inscription de la filiale</h1>
+        <p>
+            Afin de finaliser l'inscription de votre filiale, vous devez d'abord vous abonner !!!
+        </p>
+
+
+        <div class="details-thing">
+            <h3 class="details-title">Détails de l'abonnement</h3>
+            <div class="details-details">
+                <div class="details-label">Montant Hors Taxe</div>
+                <div class="details-value">{{ facture.montantHT }} €</div>
+                
+                <div class="details-label">Tva</div>
+                <div class="details-value">{{ facture.pourcentageTva }} %</div>
+                
+                <div class="details-label">Montant TTC</div>
+                <div class="details-value">{{ facture.montantTtcFacture }} €</div>
+
+                <div class="details-label">Paiement de la facture</div>
+                <div class="details-value">{{ facture.factureAcquitee == false ? 'Non achevée' : '' }}</div>
+            </div>
+        </div>
+
+        <form action="{{ path('one_euro_sous_compte_registration_payment') }}" method="POST" class="finale-form" target="_blank">
+            <button type="submit" class="">Payer l'abonnement de la filiale</button>
+        </form>
+    </section>
+    <div class="floatters">
+        <div class="floatter"></div>
+        <div class="floatter"></div>
+        <div class="floatter"></div>
+        <div class="floatter"></div>
+    </div>
+    <div class="floatters">
+        <div class="floatter"></div>
+        <div class="floatter"></div>
+        <div class="floatter"></div>
+        <div class="floatter"></div>
+    </div>
+
+{% endblock %}
