@@ -501,14 +501,14 @@ class OneEuroController extends AbstractController
     
                     $this->addFlash('danger', 'Cet e-mail est déjà relié à un utilisateur');
     
-                    return $this->redirectToRoute('sajout');
+                    return $this->redirectToRoute('one_euro_sajout');
                 }
     
                 $session->set('possibleNewSousCompte', $eventuallyNewSousCompte);
     
                 if ($session->get('possibleNewSousCompte')) 
                 {
-                    return $this->redirectToRoute('sous-compte_ajout_second_step');
+                    return $this->redirectToRoute('one_euro_sous-compte_ajout_second_step');
                 } else {
                     $this->addFlash('danger', 'Il y a eu un problème, veuillez ressoummettre le formulaire !!!');
                 }
@@ -553,7 +553,7 @@ class OneEuroController extends AbstractController
         $facture->setFactureAcquitee(false);
         $session->set('facturePotentielle', $facture);
 
-        return $this->render('sous-comptes/sous-compte-second-step-creation.html.twig', [
+        return $this->render('sous-comptes/one-euro-sous-compte-second-step-creation.html.twig', [
             'facture'=> $facture
         ]);
     }
