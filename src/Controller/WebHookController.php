@@ -8,6 +8,8 @@ use App\Entity\Facture;
 use App\Entity\Paiement;
 use App\Entity\StripeEvent;
 use App\Repository\AbonnementRepository;
+use App\Repository\ClientRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -21,11 +23,26 @@ use Symfony\Component\Mime\Address;
 
 class WebHookController extends AbstractController
 {
+    /**
+     * @var EntityManagerInterface
+     */
     private $em;
 
-    public function __construct(EntityManagerInterface $em)
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
+
+    /**
+     * @var UserRepository
+     */
+    private $clientRepository;
+
+    public function __construct(EntityManagerInterface $em, UserRepository $userRepository, ClientRepository $clientRepository)
     {
         $this->em = $em;    
+        $this->userRepository = $userRepository;    
+        $this->clientRepository = $clientRepository;    
     }
 
     /**
@@ -404,6 +421,89 @@ class WebHookController extends AbstractController
             $invoice = $event->data->object;
         case 'invoice.payment_failed':
             $invoice = $event->data->object;
+
+            $abonnement = $abonnementRepository->findOneBy(['stripe_subscription_id' => $payloadDecoded->data->object->subscription, 'stripe_cus_id' => $payloadDecoded->data->object->customer]);
+
+            if ($abonnement) 
+            {
+
+                /**
+                 * 
+                 * Si c'est l'abonnement de l'agence principale
+                 * 
+                 */
+                if ($abonnement->getClient()) 
+                {
+                    $client = $abonnement->getClient();
+                    $userInDatabase = $abonnement->getClient()->getUser();
+            
+                    \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET']);
+            
+                    $subscription = \Stripe\Subscription::retrieve($abonnement->getStripeSubscriptionId());
+            
+                    $subscription->cancel();
+                    
+                    $abonnement->setActif(false);
+                    $abonnement->setDateFinAbonnement(new DateTime());
+                    $userInDatabase->setActive(false);
+                    $this->em->persist($userInDatabase);
+                    
+                    $this->em->flush();
+                    
+                    //Désabonnement des sous-compte
+                    $sousComptesClient = $client->getSousComptes()->getValues();
+            
+                    foreach ($sousComptesClient as $uniqueSousCompteClient) {
+                        $sousComptesClientAbonnement = $uniqueSousCompteClient->getAbonnement();
+                        
+                        if ($uniqueSousCompteClient->getUser()->getActive() !== false) {
+                            //\Stripe\Stripe::setApiKey('sk_test_51JAyRkDd9O5GRESHwySMe7BscZHT8npvPTAnFRUUFzrUtxKsytTSetDABLsB74Np0ODjjhY26VpkZIJXiwvkxB7a00G4pDH3n1');
+            
+                            $sousCompteSubscription = \Stripe\Subscription::retrieve($sousComptesClientAbonnement->getStripeSubscriptionId());
+                            $sousCompteSubscription->cancel();
+                            $uniqueSousCompteClient->getUser()->setActive(false);
+                        }
+            
+                        $sousComptesClientAbonnement->setActif(false);
+                        $sousComptesClientAbonnement->setDateFinAbonnement(new DateTime());
+            
+                        $this->em->persist($sousComptesClientAbonnement);
+                        $this->em->persist($uniqueSousCompteClient);
+                        $this->em->flush();
+                    }
+
+                    return new Response("Le compte de l'agence a été désactivé faute de paiement !!!!");
+
+                }
+
+                /**
+                 * 
+                 * Si c'est un abonnement de sous-compte
+                 * 
+                 */
+                if ($abonnement->getSousCompte()) {
+                    //$sousCompte = $abonnement->getSousCompte();
+                    $userInDatabase = $abonnement->getSousCompte()->getUser();
+                    
+                    \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET']);
+
+                    $subscription = \Stripe\Subscription::retrieve($abonnement->getStripeSubscriptionId());
+                    $subscription->cancel();
+                    
+                    $abonnement->setActif(false);
+                    $abonnement->setDateFinAbonnement(new DateTime());
+                    $userInDatabase->setActive(false);
+
+                    $this->em->persist($userInDatabase);
+                    $this->em->flush();
+
+                    return new Response('Le sous-compte a été désabonné du fait du non paiement de la facture !!!!');
+
+                }
+            }
+
+            return new Response('Aucun abonnement correspondant !!!');
+
         case 'invoice.payment_succeeded':
             $invoice = $event->data->object;
 
