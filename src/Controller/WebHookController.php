@@ -422,8 +422,9 @@ class WebHookController extends AbstractController
         case 'invoice.payment_failed':
             $invoice = $event->data->object;
 
+            //L'abonnement est déjà persister avant le flush grâce à ce petit bout de code
             $abonnement = $abonnementRepository->findOneBy(['stripe_subscription_id' => $payloadDecoded->data->object->subscription, 'stripe_cus_id' => $payloadDecoded->data->object->customer]);
-
+             
             if ($abonnement) 
             {
 
@@ -446,8 +447,47 @@ class WebHookController extends AbstractController
                     $abonnement->setActif(false);
                     $abonnement->setDateFinAbonnement(new DateTime());
                     $userInDatabase->setActive(false);
-                    $this->em->persist($userInDatabase);
                     
+                    //Détermination du montant HT
+                    $montantHT = 59;
+
+                    if ($abonnement->getTypeAbonnement()->getPriceID() == $_ENV['STARTER_MENSUEL_PRICE_ID']) {
+                        $montantHT = 59;
+                    }elseif ($abonnement->getTypeAbonnement()->getPriceID() == $_ENV['ESSENTIEL_MENSUEL_PRICE_ID']) {
+                        $montantHT = 89;
+                    }elseif ($abonnement->getTypeAbonnement()->getPriceID() == $_ENV['STARTER_ANNUEL_PRICE_ID']) {
+                        $montantHT = 590;
+                    }elseif ($abonnement->getTypeAbonnement()->getPriceID() == $_ENV['ESSENTIEL_ANNUEL_PRICE_ID']) {
+                        $montantHT = 890;
+                    }elseif ($abonnement->getTypeAbonnement()->getPriceID() == $_ENV['SOUS_COMPTE_PRICE_ID']) {
+                        $montantHT = 49;
+                    }
+
+                    //Création de la facture non payée dû à un problème de liquidité !!!! :-) :-) ^_^ ^_^ ^_^ ^_^ ^_^
+                    $nouvelleFacturePotentielle = new Facture;
+                    $statutFacture = false;
+                    
+                    $nouvelleFacturePotentielle->setMontantHT($montantHT);
+                    $nouvelleFacturePotentielle->setDateEmissionFacture(new DateTime());
+                    $nouvelleFacturePotentielle->setFactureAcquitee($statutFacture);
+                    $nouvelleFacturePotentielle->setMontantTtcFacture($invoice->amount_paid/100);
+                    $nouvelleFacturePotentielle->setAbonnement($abonnement);
+                    $nouvelleFacturePotentielle->setPourcentageTva(20);
+                    
+                    $abonnement->addFacture($nouvelleFacturePotentielle);
+                    
+                    //Création du paiement relatif à l'abonnement (et donc à la facture)
+                    $paiement = new Paiement();
+                    $paiement->setMontantTtc($invoice->amount_paid/100);
+                    $paiement->setPaid($statutFacture);
+                    $paiement->setPaidAt(new DateTimeImmutable());
+                    $paiement->setFacture($nouvelleFacturePotentielle);
+        
+                    $nouvelleFacturePotentielle->addPaiement($paiement);
+        
+                    $this->em->persist($nouvelleFacturePotentielle);
+                    $this->em->persist($paiement);
+                    $this->em->persist($userInDatabase);                    
                     $this->em->flush();
                     
                     //Désabonnement des sous-compte
@@ -470,6 +510,8 @@ class WebHookController extends AbstractController
                         $this->em->persist($sousComptesClientAbonnement);
                         $this->em->persist($uniqueSousCompteClient);
                         $this->em->flush();
+
+                        
                     }
 
                     return new Response("Le compte de l'agence a été désactivé faute de paiement !!!!");
@@ -489,11 +531,57 @@ class WebHookController extends AbstractController
 
                     $subscription = \Stripe\Subscription::retrieve($abonnement->getStripeSubscriptionId());
                     $subscription->cancel();
+
+                    //Détermination du montant HT
+                    $montantHT = 59;
                     
+                    if ($abonnement->getTypeAbonnement()->getPriceID() == $_ENV['STARTER_MENSUEL_PRICE_ID']) {
+                        $montantHT = 59;
+                    }elseif ($abonnement->getTypeAbonnement()->getPriceID() == $_ENV['ESSENTIEL_MENSUEL_PRICE_ID']) {
+                        $montantHT = 89;
+                    }elseif ($abonnement->getTypeAbonnement()->getPriceID() == $_ENV['STARTER_ANNUEL_PRICE_ID']) {
+                        $montantHT = 590;
+                    }elseif ($abonnement->getTypeAbonnement()->getPriceID() == $_ENV['ESSENTIEL_ANNUEL_PRICE_ID']) {
+                        $montantHT = 890;
+                    }elseif ($abonnement->getTypeAbonnement()->getPriceID() == $_ENV['SOUS_COMPTE_PRICE_ID']) {
+                        $montantHT = 49;
+                    }
+
+                    //Création de la facture relative au réabonnement
+                    $nouvelleFacturePotentielle = new Facture;
+                    $statutFacture = false;
+                    
+                    $nouvelleFacturePotentielle->setMontantHT($montantHT);
+                    $nouvelleFacturePotentielle->setDateEmissionFacture(new DateTime());
+                    $nouvelleFacturePotentielle->setFactureAcquitee($statutFacture);
+                    $nouvelleFacturePotentielle->setMontantTtcFacture($invoice->amount_paid/100);
+                    $nouvelleFacturePotentielle->setAbonnement($abonnement);
+                    $nouvelleFacturePotentielle->setPourcentageTva(20);
+                    
+                    $abonnement->addFacture($nouvelleFacturePotentielle);
+                    
+                    //Création du paiement relatif à la facture de l'abonnement
+                    $paiement = new Paiement();
+                    $paiement->setMontantTtc($invoice->amount_paid/100);
+                    $paiement->setPaid($statutFacture);
+                    $paiement->setPaidAt(new DateTimeImmutable());
+                    $paiement->setFacture($nouvelleFacturePotentielle);
+        
+                    $nouvelleFacturePotentielle->addPaiement($paiement);
+        
+                    $this->em->persist($nouvelleFacturePotentielle);
+                    $this->em->persist($paiement);
+                    $this->em->persist($userInDatabase);                    
+                    $this->em->flush();
+
+                    //Modification de l'abonnement
                     $abonnement->setActif(false);
                     $abonnement->setDateFinAbonnement(new DateTime());
+                    
+                    //Modification de l'utilisateur
                     $userInDatabase->setActive(false);
 
+                    
                     $this->em->persist($userInDatabase);
                     $this->em->flush();
 
@@ -507,8 +595,8 @@ class WebHookController extends AbstractController
         case 'invoice.payment_succeeded':
             $invoice = $event->data->object;
 
+            //L'abonnement est déjà persister avant le flush grâce à ce petit bout de code
             $abonnement = $abonnementRepository->findOneBy(['stripe_subscription_id' => $payloadDecoded->data->object->subscription, 'stripe_cus_id' => $payloadDecoded->data->object->customer]);
-
             
             //Si un abonnement existe
             if ($abonnement) {
@@ -521,14 +609,7 @@ class WebHookController extends AbstractController
 
                 //Détermination du montant HT
                 $montantHT = 59;
-                
-                /**
-                 * STARTER_MENSUEL_PRICE_ID=price_1JhVMsDd9O5GRESHUkFY2u1b
-                 * ESSENTIEL_MENSUEL_PRICE_ID=price_1JhVQ4Dd9O5GRESHdiPVy78a
-                 * STARTER_ANNUEL_PRICE_ID=price_1JhVTyDd9O5GRESHV8J7fRE4
-                 * ESSENTIEL_ANNUEL_PRICE_ID=price_1JhVVADd9O5GRESHmTYt6nzu
-                 * SOUS_COMPTE_PRICE_ID=price_1JhVWhDd9O5GRESH5JElyqUy
-                 */
+
                 if ($abonnement->getTypeAbonnement()->getPriceID() == $_ENV['STARTER_MENSUEL_PRICE_ID']) {
                     $montantHT = 59;
                 }elseif ($abonnement->getTypeAbonnement()->getPriceID() == $_ENV['ESSENTIEL_MENSUEL_PRICE_ID']) {
@@ -541,7 +622,7 @@ class WebHookController extends AbstractController
                     $montantHT = 49;
                 }
 
-                //Création de la facture relative à l'abonnement
+                //Création de la facture relative au réabonnement
                  $nouvelleFacturePotentielle = new Facture;
                  //dd($invoice->paid);
                  $statutFacture = $invoice->paid;
@@ -568,9 +649,6 @@ class WebHookController extends AbstractController
                  $this->em->persist($paiement);
      
                  $this->em->flush();
-
-                 //dd($nouvelleFacturePotentielle);
-                 //http_response_code(200);
                  
 
                 define('DOMPDF_UNICODE_ENABLED', true);
