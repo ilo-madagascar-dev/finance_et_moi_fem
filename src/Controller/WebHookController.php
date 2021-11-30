@@ -446,6 +446,8 @@ class WebHookController extends AbstractController
                     
                     $abonnement->setActif(false);
                     $abonnement->setDateFinAbonnement(new DateTime());
+                    $abonnement->setRaisonDesabonnement("Facture impayée !!!!");
+
                     $userInDatabase->setActive(false);
                     
                     //Détermination du montant HT
@@ -506,7 +508,8 @@ class WebHookController extends AbstractController
             
                         $sousComptesClientAbonnement->setActif(false);
                         $sousComptesClientAbonnement->setDateFinAbonnement(new DateTime());
-            
+                        $sousComptesClientAbonnement->setRaisonDesabonnement("Facture de l'agence principale impayée !!!!");
+                        
                         $this->em->persist($sousComptesClientAbonnement);
                         $this->em->persist($uniqueSousCompteClient);
                         $this->em->flush();
@@ -577,6 +580,7 @@ class WebHookController extends AbstractController
                     //Modification de l'abonnement
                     $abonnement->setActif(false);
                     $abonnement->setDateFinAbonnement(new DateTime());
+                    $abonnement->setRaisonDesabonnement("Facture impayée !!!!");
                     
                     //Modification de l'utilisateur
                     $userInDatabase->setActive(false);
