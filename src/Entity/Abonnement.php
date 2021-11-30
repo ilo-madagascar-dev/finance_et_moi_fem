@@ -75,6 +75,11 @@ class Abonnement
      */
     private $typeAbonnement;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $raisonDesabonnement;
+
     public function __construct()
     {
         $this->factures = new ArrayCollection();
@@ -231,6 +236,18 @@ class Abonnement
     public function setTypeAbonnement(?TypeAbonnement $typeAbonnement): self
     {
         $this->typeAbonnement = $typeAbonnement;
+
+        return $this;
+    }
+
+    public function getRaisonDesabonnement(): ?string
+    {
+        return $this->raisonDesabonnement;
+    }
+
+    public function setRaisonDesabonnement(?string $raisonDesabonnement): self
+    {
+        $this->raisonDesabonnement = $raisonDesabonnement;
 
         return $this;
     }
