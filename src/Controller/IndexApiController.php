@@ -32,13 +32,14 @@ class IndexApiController extends AbstractController
         //$response = $httpClient->post($endpoint, [ 'body' => $content ]);
         $response = $httpClient->request('POST', $endpoint);
         
-        //dd($response);
+        dd($response);
 
         $status_code = $response->getStatusCode();
         
         return $this->render('index_api/index.html.twig', [
             'controller_name' => 'IndexApiController',
-            'status_code' => $status_code
+            'status_code' => $status_code,
+            'response' => $response
         ]);
     }
 }
