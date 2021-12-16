@@ -62,6 +62,8 @@ class IndexApiController extends AbstractController
         $status_code = $response->getStatusCode();
         $contents = $response->getBody()->getContents();
         
+        dd($contents);
+
         return $this->render('index_api/indexation_infos.html', [
             'controller_name' => 'IndexApiController',
             'status_code' => $status_code
