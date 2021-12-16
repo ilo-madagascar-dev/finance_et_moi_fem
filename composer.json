@@ -11,6 +11,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.1",
         "doctrine/orm": "^2.9",
         "dompdf/dompdf": "0.8.5",
+        "google/apiclient": "^2.12",
         "phpdocumentor/reflection-docblock": "^5.2",
         "sensio/framework-extra-bundle": "^5.1",
         "stripe/stripe-php": "^7.94",
