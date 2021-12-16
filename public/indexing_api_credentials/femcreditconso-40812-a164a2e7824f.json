@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "femcreditconso-40812",
+  "private_key_id": "a164a2e7824f8e144f1e33d92d8bcb9254aba851",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDKExyE8pKq+Yem\njuaJ/nOdxAUFe7poOLURT2pCqpzgpg28ZsdgCzdLPI91UJG5o8ySK+S8Upo9+TeC\nAJ3cLbv4lwMqdmxrKgUHbUSYdpPejm9sNIiRa1vt70Z14WVjO+3CrpGwejMk5fUR\nowBuf91og2L0gdnP5CfTojLIYYkpwbMEftITdhsrUPt4999bhCGw669lKZd6CMm0\nO6z2gdQOJnm0QXxazuHPG4sJdD148hdndTEWizDBJowkuFT2GIgmgWWmp6ilMt7u\n5Hn3MrzwRtGS5RRxsvdz6oJgh3GUAf++g6p6DardoLmMIA42EG37gOfwAkPsBn1R\naHNy0HpvAgMBAAECggEABmloDxlmEJWrFw3EorkLULXQiW93Dp+tY2yHRZ0tBoI7\n3c2nNk/xGg0JfX2FqFeVVb2xarAASLzQAnTVKvyg0MebuWpZS7V+xB/KwXrDj3DH\n2poV99uQ5shbDl8+a3imBB3nRkkULUhj3gxk1/VY+4Nt4TgSxs6YPxE3TKvpwWb8\n9SDlebFtgJwg3qDwnnK6jSWx/xAHmNi3+sH2zqzHLtpM5mqW1+LKCMkaAc7R4LcM\n8ITmBx1RrkfACPf/X2Zwnggs4pr9e2LpUCTagaLiN5p2JzC/JeimStPoafSHE+wB\nXcssHPmdy5shtbePntp3AdJzyI00E62+svxTUypIwQKBgQD6f8YoWXsAbM/hB65J\neuLr7Dx2Evp3ssFx/7PzvSlv+d7CDkN/SRHZQc1gSMZsmZMTK29GzKrmagHeENDn\nFUd/1W/DzwlB6iZBRflSK7JNJ40Q5owiMP79KqgnU4sy9czTl+fRmU4mUaGYPh7s\nJ2axCrHqqtWKy34qaEtEscTNjwKBgQDOgxxJr5XbSBwRDzF0PWuhHZEq7ZxHPswh\n0dFsr3BPevM/caEuDjHOo5cZ8ftPGO25JMtfBcOEga0oy4WBl8nrHqOEUEy2a8G1\nQIVPz6/N4idqbSEUW8FLyEEh+TgoGZv67C3ulXBW+B+ezx8mIpidXG8u+i8i6TZa\namAMnvbVIQKBgDLKRXtY6T+k0GFoFUaAzBHZzEiEgJRUgjSDDBGXgRdbKndePQFJ\n53yNgv7KwrCyUsfIPr+0L9KYG9jSwAian+yjcg3ZpJ7gwvDpJywp//T01/1dQXyN\nQqZCR+XxYn/qpqUgX7h3xQiv9HvR3KM1OfUbngdeq/2AVQx0KQ68nJKxAoGALFkn\nqANXEUJJFLjIjAfspyrsU+W3G+22dMTUTpzWZ5slxcgnLvbJZ3DmMCIxL+lQk+P8\n8KkSNdCLWSlrwErSh/WKdA2yi7JUZRI4Ds2xGWupv0c0RWT2+8lDg4I7txDY2GgD\n7SqWd3bNg5NDQzNGxvRkxBfiK4MdswkJG2y/4UECgYAHJ58h7xLmX10reforAIm+\n2QGl0yMyaiMLbDIEtXeCZtpZSZCmRTdEGR+BpWP1Jih2jLnnsg5VgYe9/c9kxsR3\nyeGDflzivCRDhfVJMk1kMdrkdbRvhmntl+ldUmmXSVFs+38UxvkFfRvxIb+mp8BR\nV9hJsBUm+B+ECbCfoeCv0A==\n-----END PRIVATE KEY-----\n",
+  "client_email": "fem-service@femcreditconso-40812.iam.gserviceaccount.com",
+  "client_id": "104298234520859802742",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/fem-service%40femcreditconso-40812.iam.gserviceaccount.com"
+}
