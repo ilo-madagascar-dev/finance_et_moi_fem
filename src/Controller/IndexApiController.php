@@ -65,7 +65,7 @@ class IndexApiController extends AbstractController
         return $this->render('index_api/indexation_infos.html', [
             'controller_name' => 'IndexApiController',
             'status_code' => $status_code,
-            'contents' => $contents
+            'contents' => json_decode($contents) 
         ]);
     }
 }
