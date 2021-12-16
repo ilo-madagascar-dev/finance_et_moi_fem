@@ -64,7 +64,7 @@ class IndexApiController extends AbstractController
         
         $decodedContent = json_decode($contents);
 
-        return $this->render('index_api/indexation_infos.html', [
+        return $this->render('index_api/indexation_infos.html.twig', [
             'controller_name' => 'IndexApiController',
             'status_code' => $status_code,
             'content' => $decodedContent
