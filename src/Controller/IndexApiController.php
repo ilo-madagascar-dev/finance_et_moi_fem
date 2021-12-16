@@ -30,9 +30,9 @@ class IndexApiController extends AbstractController
         //dd($httpClient);
 
         //$response = $httpClient->post($endpoint, [ 'body' => $content ]);
-        $response = $httpClient->request('POST', $endpoint);
+        $response = $httpClient->request('POST', $endpoint, [ 'body' => $content ]);
         
-        dd($response);
+        //dd($response);
 
         $status_code = $response->getStatusCode();
         
