@@ -44,7 +44,7 @@ class IndexApiController extends AbstractController
     }
 
     /**
-     * @Route("/index/api/get-infos", name="index_api_get_infos")
+     * @Route("/indexation/get-infos", name="index_api_get_infos")
      */
     public function getIndexationInfos()
     {
@@ -59,15 +59,13 @@ class IndexApiController extends AbstractController
         //dd($httpClient);
 
         $response = $httpClient->request('GET', $endpoint);
-        
-        dd($response);
-
         $status_code = $response->getStatusCode();
+        $contents = (string) $response->getBody();
         
         return $this->render('index_api/index.html.twig', [
             'controller_name' => 'IndexApiController',
             'status_code' => $status_code,
-            'response' => $response
+            'contents' => $contents
         ]);
     }
 }
