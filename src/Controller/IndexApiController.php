@@ -14,7 +14,6 @@ class IndexApiController extends AbstractController
      */
     public function index(): Response
     {
-        
         $client = new Google_Client();
         $client->setAuthConfig($_SERVER['DOCUMENT_ROOT'] . "/indexing_api_credentials/femcreditconso-40812-a164a2e7824f.json");
         $client->addScope('https://www.googleapis.com/auth/indexing');
@@ -27,12 +26,7 @@ class IndexApiController extends AbstractController
             "type": "URL_UPDATED"
           }';
           
-        //dd($httpClient);
-
-        //$response = $httpClient->post($endpoint, [ 'body' => $content ]);
         $response = $httpClient->request('POST', $endpoint, [ 'body' => $content ]);
-        
-        //dd($response);
 
         $status_code = $response->getStatusCode();
         
@@ -48,15 +42,12 @@ class IndexApiController extends AbstractController
      */
     public function getIndexationInfos()
     {
-        //https://indexing.googleapis.com/v3/urlNotifications/metadata?url=https%3A%2F%2Fcareers.google.com%2Fjobs%2Fgoogle%2Ftechnical-writer
         $client = new Google_Client();
         $client->setAuthConfig($_SERVER['DOCUMENT_ROOT'] . "/indexing_api_credentials/femcreditconso-40812-a164a2e7824f.json");
         $client->addScope('https://www.googleapis.com/auth/indexing');
         
         $httpClient = $client->authorize();
         $endpoint = 'https://indexing.googleapis.com/v3/urlNotifications/metadata?url=https%3A%2F%2Ffemcreditconso.fr';
-          
-        //dd($httpClient);
 
         $response = $httpClient->request('GET', $endpoint);
         $status_code = $response->getStatusCode();
