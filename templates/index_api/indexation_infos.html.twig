@@ -7,6 +7,7 @@
 <div class="example-wrapper">
     <h1>Indexation infos response</h1>
     <h1>{{ status_code }}</h1>
-    <h1>{{ contents }}</h1>
+    <h1>{{ contents.latest_update.type }}</h1>
+    <h1>{{ contents.latest_update.notify_time }}</h1>
 </div>
 {% endblock %}
